@@ -67,7 +67,6 @@
 	color: rgb(255, 255, 255);
 }
 #pushButton_login, #pushButton_registro{
-	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
 	background-color: rgb(41, 87, 113);
 	border-radius:6px;
 	border:1px solid #fff;
@@ -84,7 +83,6 @@
 	color: rgb(255, 255, 255);
 }
 QComboBox, #pushButton_especialidades, #pushButton__dirMedico, #pushButton_infoHospital{
-	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
 	background-color: rgb(41, 87, 113);
 	border-radius:6px;
 	color:#fff;
@@ -417,23 +415,7 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
       </widget>
       <widget class="QWidget" name="page_login">
        <property name="styleSheet">
-        <string notr="true">QPushButton{
-	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-	background-color: rgb(41, 87, 113);
-	border-radius:6px;
-	border:1px solid #fff;
-	color:#fff;
-	padding:6px;
-	text-decoration:none;
-}
-QPushButton:hover{
-	background: rgb(111, 157, 183);
-	color: rgb(0, 0, 0);
-}
-QPushButton:focus{
-	background: rgb(51, 97, 123);
-	color: rgb(255, 255, 255);
-}</string>
+        <string notr="true"/>
        </property>
        <layout class="QGridLayout" name="gridLayout_6">
         <item row="0" column="0">
@@ -443,6 +425,32 @@ QPushButton:focus{
             <width>401</width>
             <height>371</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#pushButton_iniciarSesion{
+	background-color: rgb(41, 87, 113);
+	border-radius:6px;
+	border:1px solid #fff;
+	color:#fff;
+	padding:6px;
+	text-decoration:none;
+}
+#pushButton_iniciarSesion:hover{
+	background: rgb(111, 157, 183);
+	color: rgb(0, 0, 0);
+}
+#pushButton_iniciarSesion:focus{
+	background: rgb(51, 97, 123);
+	color: rgb(255, 255, 255);
+}
+#pushButton_forgotPass{
+	border-radius:6px;
+	padding:6px;
+	text-decoration:none;
+}
+#pushButton_forgotPass:hover{
+	color: rgb(111, 157, 183);
+}</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
            <item row="0" column="0">
@@ -528,6 +536,13 @@ QPushButton:focus{
               </spacer>
              </item>
              <item>
+              <widget class="QPushButton" name="pushButton_forgotPass">
+               <property name="text">
+                <string>Olvidé mi contraseña</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="pushButton_iniciarSesion">
                <property name="minimumSize">
                 <size>
@@ -595,6 +610,22 @@ QPushButton:focus{
           <property name="styleSheet">
            <string notr="true">#label_imgPerfil{
 	border:1px solid rgb(0, 0, 0);
+}
+QPushButton{
+	background-color: rgb(41, 87, 113);
+	border-radius:6px;
+	border:1px solid #fff;
+	color:#fff;
+	padding:6px;
+	text-decoration:none;
+}
+QPushButton:hover{
+	background: rgb(111, 157, 183);
+	color: rgb(0, 0, 0);
+}
+QPushButton:focus{
+	background: rgb(51, 97, 123);
+	color: rgb(255, 255, 255);
 }</string>
           </property>
           <property name="currentIndex">
@@ -677,6 +708,224 @@ QPushButton:focus{
           </widget>
           <widget class="QWidget" name="page_registro">
            <layout class="QGridLayout" name="gridLayout_7">
+            <item row="3" column="2" rowspan="9">
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QLabel" name="label_imgPerfil">
+                <property name="minimumSize">
+                 <size>
+                  <width>91</width>
+                  <height>101</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>91</width>
+                  <height>101</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>      Foto Perfil</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_imgPerfil">
+                <property name="text">
+                 <string>Abrir imagen</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="8" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout_15">
+              <item>
+               <widget class="QLabel" name="label_especiDoc">
+                <property name="minimumSize">
+                 <size>
+                  <width>58</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Especialidad:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_especiDoc">
+                <item>
+                 <property name="text">
+                  <string>cirugia</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="11" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_17">
+              <item>
+               <widget class="QLabel" name="label_universidad">
+                <property name="minimumSize">
+                 <size>
+                  <width>60</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Universidad:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_universidad"/>
+              </item>
+             </layout>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <item>
+               <widget class="QLabel" name="label_apeMaterno">
+                <property name="text">
+                 <string>Apellido Materno:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_apeMaterno">
+                <property name="minimumSize">
+                 <size>
+                  <width>113</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>133</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="13" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
+              <item>
+               <widget class="QLabel" name="label_passwordRegistro1">
+                <property name="minimumSize">
+                 <size>
+                  <width>56</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Contraseña:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_password1">
+                <property name="minimumSize">
+                 <size>
+                  <width>133</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>133</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="14" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_13">
+              <item>
+               <widget class="QLabel" name="label_passwordRegistro2">
+                <property name="minimumSize">
+                 <size>
+                  <width>104</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Confirmar contraseña:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_passwordRegistro2">
+                <property name="minimumSize">
+                 <size>
+                  <width>133</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>133</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="15" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_14">
+              <item>
+               <spacer name="horizontalSpacer_10">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_registrarse">
+                <property name="minimumSize">
+                 <size>
+                  <width>72</width>
+                  <height>27</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>72</width>
+                  <height>27</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Registrarse</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_11">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
             <item row="0" column="1">
              <spacer name="verticalSpacer_8">
               <property name="orientation">
@@ -712,7 +961,7 @@ QPushButton:focus{
                </widget>
               </item>
               <item>
-               <widget class="QRadioButton" name="radioButton">
+               <widget class="QRadioButton" name="radioButton_doc">
                 <property name="minimumSize">
                  <size>
                   <width>55</width>
@@ -731,7 +980,7 @@ QPushButton:focus{
                </widget>
               </item>
               <item>
-               <widget class="QRadioButton" name="radioButton_2">
+               <widget class="QRadioButton" name="radioButton_paciente">
                 <property name="minimumSize">
                  <size>
                   <width>64</width>
@@ -750,7 +999,7 @@ QPushButton:focus{
                </widget>
               </item>
               <item>
-               <widget class="QRadioButton" name="radioButton_3">
+               <widget class="QRadioButton" name="radioButton_staff">
                 <property name="minimumSize">
                  <size>
                   <width>47</width>
@@ -803,119 +1052,28 @@ QPushButton:focus{
               </item>
              </layout>
             </item>
-            <item row="3" column="0" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item row="12" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_18">
               <item>
-               <widget class="QLabel" name="label_apeMaterno">
-                <property name="text">
-                 <string>Apellido Materno:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_apeMaterno">
+               <widget class="QLabel" name="label_puesto">
                 <property name="minimumSize">
                  <size>
-                  <width>113</width>
+                  <width>37</width>
                   <height>20</height>
                  </size>
                 </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="3" column="2" rowspan="8">
-             <layout class="QVBoxLayout" name="verticalLayout_3">
-              <item>
-               <widget class="QLabel" name="label_imgPerfil">
-                <property name="minimumSize">
-                 <size>
-                  <width>91</width>
-                  <height>101</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>91</width>
-                  <height>101</height>
-                 </size>
-                </property>
                 <property name="text">
-                 <string>      Foto Perfil</string>
+                 <string>Puesto:</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_imgPerfil">
-                <property name="text">
-                 <string>Abrir imagen</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="4" column="0" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_8">
-              <item>
-               <widget class="QLabel" name="label_apePaterno">
-                <property name="text">
-                 <string>Apellido Paterno:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_apePaterno">
-                <property name="minimumSize">
-                 <size>
-                  <width>113</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>135</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="5" column="0" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_9">
-              <item>
-               <widget class="QLabel" name="label_fNacimiento">
-                <property name="minimumSize">
-                 <size>
-                  <width>99</width>
-                  <height>18</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Fecha de Nacimiento:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QDateEdit" name="dateEdit_fNacimiento">
-                <property name="minimumSize">
-                 <size>
-                  <width>79</width>
-                  <height>18</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>79</width>
-                  <height>18</height>
-                 </size>
-                </property>
+               <widget class="QComboBox" name="comboBox_puesto">
+                <item>
+                 <property name="text">
+                  <string>Enfermeria</string>
+                 </property>
+                </item>
                </widget>
               </item>
              </layout>
@@ -994,6 +1152,33 @@ QPushButton:focus{
               </item>
              </layout>
             </item>
+            <item row="4" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <item>
+               <widget class="QLabel" name="label_apePaterno">
+                <property name="text">
+                 <string>Apellido Paterno:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_apePaterno">
+                <property name="minimumSize">
+                 <size>
+                  <width>113</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>135</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
             <item row="7" column="0" colspan="2">
              <layout class="QHBoxLayout" name="horizontalLayout_11">
               <item>
@@ -1027,36 +1212,56 @@ QPushButton:focus{
               </item>
              </layout>
             </item>
-            <item row="8" column="0">
-             <layout class="QHBoxLayout" name="horizontalLayout_15">
+            <item row="16" column="1">
+             <spacer name="verticalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>17</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="5" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
               <item>
-               <widget class="QLabel" name="label_especiDoc">
+               <widget class="QLabel" name="label_fNacimiento">
                 <property name="minimumSize">
                  <size>
-                  <width>58</width>
-                  <height>20</height>
+                  <width>99</width>
+                  <height>18</height>
                  </size>
                 </property>
                 <property name="text">
-                 <string>Especialidad:</string>
+                 <string>Fecha de Nacimiento:</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_especiDoc">
-                <item>
-                 <property name="text">
-                  <string>cirugia</string>
-                 </property>
-                </item>
+               <widget class="QDateEdit" name="dateEdit_fNacimiento">
+                <property name="minimumSize">
+                 <size>
+                  <width>79</width>
+                  <height>18</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>79</width>
+                  <height>18</height>
+                 </size>
+                </property>
                </widget>
               </item>
              </layout>
             </item>
-            <item row="9" column="0" colspan="2">
+            <item row="9" column="0">
              <layout class="QHBoxLayout" name="horizontalLayout_16">
               <item>
-               <widget class="QLabel" name="label">
+               <widget class="QLabel" name="label_cedula">
                 <property name="minimumSize">
                  <size>
                   <width>93</width>
@@ -1072,174 +1277,6 @@ QPushButton:focus{
                <widget class="QLineEdit" name="lineEdit_cedula"/>
               </item>
              </layout>
-            </item>
-            <item row="10" column="0" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_17">
-              <item>
-               <widget class="QLabel" name="label_2">
-                <property name="minimumSize">
-                 <size>
-                  <width>60</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Universidad:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_universidad"/>
-              </item>
-             </layout>
-            </item>
-            <item row="11" column="0" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_18">
-              <item>
-               <widget class="QLabel" name="label_3">
-                <property name="minimumSize">
-                 <size>
-                  <width>37</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Puesto:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_Puesto"/>
-              </item>
-             </layout>
-            </item>
-            <item row="12" column="0" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_12">
-              <item>
-               <widget class="QLabel" name="label_passwordRegistro1">
-                <property name="minimumSize">
-                 <size>
-                  <width>56</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Contraseña:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_password1">
-                <property name="minimumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="13" column="0" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_13">
-              <item>
-               <widget class="QLabel" name="label_passwordRegistro2">
-                <property name="minimumSize">
-                 <size>
-                  <width>104</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Confirmar contraseña:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_passwordRegistro2">
-                <property name="minimumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="14" column="0" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_14">
-              <item>
-               <spacer name="horizontalSpacer_10">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_registrarse">
-                <property name="minimumSize">
-                 <size>
-                  <width>72</width>
-                  <height>27</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>72</width>
-                  <height>27</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Registrarse</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_11">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-            <item row="15" column="1">
-             <spacer name="verticalSpacer_7">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>17</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
