@@ -66,7 +66,7 @@
 #label_telefono1, #label_telefono2{
 	color: rgb(255, 255, 255);
 }
-#pushButton_login, #pushButton_registro{
+#pushButton_login, #pushButton_registro, #pushButton_salir{
 	background-color: rgb(41, 87, 113);
 	border-radius:6px;
 	border:1px solid #fff;
@@ -74,7 +74,7 @@
 	padding:6px;
 	text-decoration:none;
 }
-#pushButton_login:hover, #pushButton_registro:hover{
+#pushButton_login:hover, #pushButton_registro:hover, #pushButton_salir:hover{
 	background: rgb(111, 157, 183);
 	color: rgb(0, 0, 0);
 }
@@ -275,6 +275,13 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_salir">
+           <property name="text">
+            <string>Salir</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item row="1" column="8">
@@ -387,7 +394,7 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">

@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //La primera pagina que mostramos es la principal
     ui->stackedWidget_principal->setCurrentIndex(0);
+    //Ocultamos el boton salir
+    ui->pushButton_salir->setHidden(true);
 }
 
 MainWindow::~MainWindow()
@@ -142,4 +144,13 @@ void MainWindow::on_radioButton_paciente_toggled(bool checked)
             ui->label_universidad->setVisible(false);
         }
     }
+}
+
+//Iniciar sesion
+void MainWindow::on_pushButton_iniciarSesion_clicked()
+{
+    //Pagina paciente
+    ui->stackedWidget_principal->setCurrentIndex(2);
+    ui->pushButton_login->setHidden(true);
+    ui->pushButton_registro->setHidden(true);
 }

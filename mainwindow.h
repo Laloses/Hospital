@@ -32,6 +32,8 @@ private slots:
 
     void on_radioButton_paciente_toggled(bool checked);
 
+    void on_pushButton_iniciarSesion_clicked();
+
 private:
     QSqlDatabase database;
     QString id_usuario;
