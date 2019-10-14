@@ -29,27 +29,9 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-//Cuando da clic en el boton para mostrar los datos de registro
-void MainWindow::on_pushButton_verRegistros_clicked()
-{
-    //Página con los datos de registro
-    ui->stackedWidget_registros->setCurrentIndex(1);
-    //Marcamos el radio button de paciente por default
-    ui->radioButton_paciente->setChecked(true);
-
-    //Quitamos los datos de doc
-    ui->comboBox_especiDoc->setVisible(false);
-    ui->label_especiDoc->setVisible(false);
-    ui->lineEdit_cedula->setVisible(false);
-    ui->label_cedula->setVisible(false);
-    ui->lineEdit_universidad->setVisible(false);
-    ui->label_universidad->setVisible(false);
-
-    //Quitamos los datos del staff
-    ui->comboBox_puesto->setVisible(false);
-    ui->label_puesto->setVisible(false);
-}
+//********************** SPRINT 1 ***************************
+//********************** SPRINT 1 ***************************
+//********************** SPRINT 1 ***************************
 
 //Cuando da clic en el logo lo manda a la principal
 void MainWindow::on_pushButton_logo_clicked()
@@ -65,6 +47,8 @@ void MainWindow::on_pushButton_login_clicked()
     ui->stackedWidget_principal->setCurrentIndex(1);
     //No ver lo de registros
     ui->stackedWidget_registros->setCurrentIndex(0);
+    //Que ya este seleccionado para meter info
+    ui->lineEdit_idUsuario->setFocus();
 }
 
 //Cuando da clic en el boton de registro
@@ -74,6 +58,29 @@ void MainWindow::on_pushButton_registro_clicked()
     ui->stackedWidget_principal->setCurrentIndex(1);
     //Ver lo de registros
     on_pushButton_verRegistros_clicked();
+    ui->lineEdit_nombre->setFocus();
+}
+
+//Cuando da clic en el boton para mostrar los datos de registro
+void MainWindow::on_pushButton_verRegistros_clicked()
+{
+    //Página con los datos de registro
+    ui->stackedWidget_registros->setCurrentIndex(1);
+    //Marcamos el radio button de paciente por default
+    ui->lineEdit_nombre->setFocus();
+    ui->radioButton_paciente->setChecked(true);
+
+    //Quitamos los datos de doc
+    ui->comboBox_especiDoc->setVisible(false);
+    ui->label_especiDoc->setVisible(false);
+    ui->lineEdit_cedula->setVisible(false);
+    ui->label_cedula->setVisible(false);
+    ui->lineEdit_universidad->setVisible(false);
+    ui->label_universidad->setVisible(false);
+
+    //Quitamos los datos del staff
+    ui->comboBox_puesto->setVisible(false);
+    ui->label_puesto->setVisible(false);
 }
 
 //Cuando da click en el radio button para registrarse como doctor
