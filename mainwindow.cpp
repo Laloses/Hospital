@@ -149,8 +149,23 @@ void MainWindow::on_radioButton_paciente_toggled(bool checked)
 //Iniciar sesion
 void MainWindow::on_pushButton_iniciarSesion_clicked()
 {
+    //Mostrar boton salir
+    ui->pushButton_salir->setHidden(false);
     //Pagina paciente
     ui->stackedWidget_principal->setCurrentIndex(2);
     ui->pushButton_login->setHidden(true);
     ui->pushButton_registro->setHidden(true);
+}
+
+//Salir
+void MainWindow::on_pushButton_salir_clicked()
+{
+    id_usuario=id_staff=id_doctor=id_paciente="0";
+    //Pagina principal
+    ui->stackedWidget_principal->setCurrentIndex(0);
+    //ocultar boton salir
+    ui->pushButton_salir->setHidden(true);
+    //Mostrar botones de login y registrar
+    ui->pushButton_login->setHidden(false);
+    ui->pushButton_registro->setHidden(false);
 }

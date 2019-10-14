@@ -34,6 +34,8 @@ private slots:
 
     void on_pushButton_iniciarSesion_clicked();
 
+    void on_pushButton_salir_clicked();
+
 private:
     QSqlDatabase database;
     QString id_usuario;

@@ -100,9 +100,12 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
           <widget class="QPushButton" name="pushButton_logo">
            <property name="minimumSize">
             <size>
-             <width>61</width>
-             <height>61</height>
+             <width>100</width>
+             <height>60</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/logoFinal.png);</string>
            </property>
            <property name="text">
             <string>LogoApp</string>
@@ -114,9 +117,12 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>40</width>
+             <width>200</width>
              <height>20</height>
             </size>
            </property>
@@ -394,7 +400,7 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -1256,6 +1262,26 @@ QPushButton:focus{
                   <width>79</width>
                   <height>18</height>
                  </size>
+                </property>
+                <property name="dateTime">
+                 <datetime>
+                  <hour>0</hour>
+                  <minute>0</minute>
+                  <second>0</second>
+                  <year>1990</year>
+                  <month>1</month>
+                  <day>1</day>
+                 </datetime>
+                </property>
+                <property name="maximumDate">
+                 <date>
+                  <year>2001</year>
+                  <month>12</month>
+                  <day>31</day>
+                 </date>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
