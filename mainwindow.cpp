@@ -166,3 +166,10 @@ void MainWindow::on_pushButton_salir_clicked()
     ui->pushButton_login->setHidden(false);
     ui->pushButton_registro->setHidden(false);
 }
+
+void MainWindow::on_pushButton_registrarse_clicked()
+{
+    if(ui->radioButton_staff->isChecked()){
+
+    }
+}
