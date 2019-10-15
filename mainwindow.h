@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtSql/QSqlDatabase>
 
 namespace Ui {
 class MainWindow;
@@ -34,8 +35,12 @@ private slots:
 
     void on_pushButton_salir_clicked();
 
+    void on_pushButton_registrarse_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QSqlDatabase database;
+    QString id_usuario,id_staff,id_doctor,id_paciente;
 };
 
 #endif // MAINWINDOW_H
