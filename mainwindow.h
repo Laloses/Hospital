@@ -37,10 +37,16 @@ private slots:
 
     void on_pushButton_registrarse_clicked();
 
+    void on_pushButton_imgPerfil_clicked();
+
 private:
     Ui::MainWindow *ui;
     QSqlDatabase database;
     QString id_usuario,id_staff,id_doctor,id_paciente;
+    QByteArray foto;
+    bool verificarPasswordRegistro();
+    QString calcularEdad(QString);
+    bool verificarDatosRegistro();
 };
 
 #endif // MAINWINDOW_H

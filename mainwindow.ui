@@ -1,15 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>854</width>
+    <height>479</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
@@ -862,7 +863,7 @@ QPushButton:focus{
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_passwordRegistro2">
+               <widget class="QLineEdit" name="lineEdit_password2">
                 <property name="minimumSize">
                  <size>
                   <width>133</width>
@@ -1070,13 +1071,7 @@ QPushButton:focus{
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_puesto">
-                <item>
-                 <property name="text">
-                  <string>Enfermeria</string>
-                 </property>
-                </item>
-               </widget>
+               <widget class="QComboBox" name="comboBox_puesto"/>
               </item>
              </layout>
             </item>
@@ -1356,8 +1351,7 @@ QPushButton:focus{
    </layout>
   </widget>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>

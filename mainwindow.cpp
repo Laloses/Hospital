@@ -1,7 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QtSql/QSqlError"
-#include "QtDebug"
+#include <QtSql/QSqlError>
+#include <QtDebug>
+#include <QFile>
+#include <QFileDialog>
+#include "registrostaff.h"
+#include <QtSql/QSqlQueryModel>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -60,6 +65,12 @@ void MainWindow::on_pushButton_registro_clicked()
     //Ver lo de registros
     on_pushButton_verRegistros_clicked();
     ui->lineEdit_nombre->setFocus();
+
+    //Cargar de la base de datos los puestos
+    QSqlQueryModel *queryPuestos;
+    queryPuestos= new QSqlQueryModel;
+    queryPuestos->setQuery("SELECT nombre FROM puesto");
+    ui->comboBox_puesto->setModel(queryPuestos);
 }
 
 //Cuando da clic en el boton para mostrar los datos de registro
@@ -109,6 +120,12 @@ void MainWindow::on_radioButton_staff_toggled(bool checked)
         //Mostramos los datos del staff
         ui->comboBox_puesto->setVisible(true);
         ui->label_puesto->setVisible(true);
+
+        //Cargar de la base de datos los puestos
+        QSqlQueryModel *queryPuestos;
+        queryPuestos= new QSqlQueryModel;
+        queryPuestos->setQuery("SELECT nombre FROM puesto");
+        ui->comboBox_puesto->setModel(queryPuestos);
 
         //Si estaba marcado el radio button de doctor
         if(ui->comboBox_especiDoc->isVisible()){
@@ -169,9 +186,146 @@ void MainWindow::on_pushButton_salir_clicked()
     ui->pushButton_registro->setHidden(false);
 }
 
+//Cuando le da a agregar imagen
+void MainWindow::on_pushButton_imgPerfil_clicked()
+{
+    //Abrimos el dialogo para obtener la ruta
+    QString imgRoute = QFileDialog::getOpenFileName(this, "Seleccionar Imagen ", "c://","Image Files (*.png *.jpg )");
+    QFile file(imgRoute);
+    file.open(QIODevice::ReadOnly);
+
+    //Guardamos los datos de la foto en la variable
+    foto = file.readAll();
+
+    //Cargamos la foto al label
+    QPixmap pix;
+    pix.loadFromData(foto);
+    int w=ui->label_imgPerfil->width();
+    int h=ui->label_imgPerfil->height();
+    ui->label_imgPerfil->setPixmap(pix.scaled(w,h,Qt::AspectRatioMode::KeepAspectRatio));
+}
+
+//Para verificar contraseñas iguales
+bool MainWindow::verificarPasswordRegistro(){
+    if(ui->lineEdit_password1->text() == ui->lineEdit_password2->text() && !ui->lineEdit_password1->text().isEmpty() ){
+        return true;
+    }
+    QMessageBox::warning(this, "Contraseñas incorrectas", "Las contraseñas no coinciden.");
+    return false;
+}
+
+bool MainWindow::verificarDatosRegistro(){
+    bool flag=false;;
+    QString estiloBueno, estiloMalo;
+    estiloMalo="background-color: rgb(255,0,0);";
+    estiloBueno="background-color: rgb(255,255,255);";
+    QRegExp re("[a-zZ-A]");
+
+    //Que el nombre y apellidos y contenga solo letras
+   if( ui->lineEdit_nombre->text().contains(re) && ui->lineEdit_apePaterno->text().contains(re) &&
+           ui->lineEdit_apeMaterno->text().contains(re) ){
+       ui->lineEdit_nombre->setStyleSheet(estiloBueno);
+       ui->lineEdit_apePaterno->setStyleSheet(estiloBueno);
+       ui->lineEdit_apeMaterno->setStyleSheet(estiloBueno);
+           if( !ui->lineEdit_email->text().isEmpty() ){
+               ui->lineEdit_email->setStyleSheet(estiloBueno);
+               if( !ui->lineEdit_telefono->text().isEmpty() ){
+                   ui->lineEdit_telefono->setStyleSheet(estiloBueno);
+                   if ( !foto.isEmpty() ){
+                       ui->label_imgPerfil->setStyleSheet(estiloBueno);
+                       flag= true;
+                   }
+                   //Si no ha puesto la foto
+                   else{
+                       ui->label_imgPerfil->setStyleSheet(estiloMalo);
+                   }
+               }
+               //Si no puso el telefono
+               else{
+                   ui->lineEdit_telefono->setStyleSheet(estiloMalo);
+               }
+           }
+           //Si no puso el email
+           else{
+               ui->lineEdit_email->setStyleSheet(estiloMalo);
+           }
+   //En caso de que el nombre o apellido esté vacío
+   }
+   else{
+       ui->lineEdit_nombre->setStyleSheet(estiloMalo);
+       ui->lineEdit_apePaterno->setStyleSheet(estiloMalo);
+       ui->lineEdit_apeMaterno->setStyleSheet(estiloMalo);
+   }
+
+
+    //Revision para los datos de doctor
+    if(ui->radioButton_doc->isChecked()){
+        if( !ui->lineEdit_cedula->text().isEmpty() ){
+            ui->lineEdit_cedula->setStyleSheet(estiloBueno);
+            if( !ui->lineEdit_universidad->text().isEmpty() ){
+                ui->lineEdit_universidad->setStyleSheet(estiloBueno);
+                flag= true;
+            }
+            //Si no puso universidad
+            else{
+                ui->lineEdit_universidad->setStyleSheet(estiloMalo);
+            }
+        }
+        //Si no puso cedula
+        else{
+            ui->lineEdit_cedula->setStyleSheet(estiloMalo);
+        }
+    }
+
+    if(!flag) QMessageBox::warning(this,"Faltan campos","Por favor complete todos los campos.");
+    return flag;
+}
+
+//Para calcular la edad de un usuario que se registra
+QString MainWindow::calcularEdad(QString fechaN){
+    QString edad="0";
+    QSqlQuery fechaActual;
+    //Restamos los años, pero comparamos si ya paso el mes de su fecha de nacimiento
+    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d'), 0 , -1 )") ){
+        edad=fechaActual.value(0).toString();
+        return edad;
+    }
+    //Si no entra devuelve 0
+    //Quitar este messageBox si funciona bien
+    QMessageBox::warning(this,"","No se pudo calcular la edad, devolviendo 0");
+    return edad;
+}
+
+//Cuando le da a registrarse depues de llenar los datos
 void MainWindow::on_pushButton_registrarse_clicked()
 {
     if(ui->radioButton_staff->isChecked()){
-
+        if(verificarDatosRegistro() && verificarPasswordRegistro()){
+            registroStaff regStaff;
+            QString correcto;
+            //Guardamos la matricula que genere el metodo registrar
+            correcto = regStaff.registrar(
+                               //El index es el id de puesto
+                               QString::number( ui->comboBox_puesto->currentIndex() ),
+                                //Cualquiera de las password funciona
+                               ui->lineEdit_password1->text(),
+                               ui->lineEdit_nombre->text(),
+                               ui->lineEdit_apePaterno->text(),
+                               ui->lineEdit_apeMaterno->text(),
+                               ui->dateEdit_fNacimiento->text(),
+                                //La edad
+                               calcularEdad(ui->dateEdit_fNacimiento->text()),
+                                //Juntamos el correo que ingresó
+                               ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
+                               ui->lineEdit_telefono->text(),
+                               foto);
+            //Si el registro si se completó
+            if(correcto != "0"){
+                QMessageBox::information(this,"","Registrado con exito. Tu id de usuario es: "+correcto+".\n No pierdas esa información.");
+            }
+            else {
+                QMessageBox::critical(this,"No se Registro", "Hay un error en el servidor, intente más tarde.");
+            }
+        }
     }
 }
