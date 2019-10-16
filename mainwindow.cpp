@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include "registrostaff.h"
+#include "registropaciente.h"
 #include <QtSql/QSqlQueryModel>
 #include <QMessageBox>
 
@@ -219,7 +220,7 @@ bool MainWindow::verificarPasswordRegistro(){
 
 //Verifica datos para todos los tipos de usuario
 bool MainWindow::verificarDatosRegistro(){
-    bool flag=false;;
+    bool flag=false;
     QString estiloBueno, estiloMalo;
     estiloMalo="background-color: rgb(255,0,0);";
     estiloBueno="background-color: rgb(255,255,255);";
@@ -318,6 +319,7 @@ void MainWindow::on_pushButton_registrarse_clicked()
 void MainWindow::on_pushButton_respuesta_clicked()
 {
     registroStaff regStaff;
+    registropaciente regPaciente;
     QString correcto;
     QString idPuesto=QString::number( ui->comboBox_puesto->currentIndex()+1);
     QString idPregunta= QString::number(ui->comboBox_pregunta->currentIndex()+1);
@@ -328,25 +330,48 @@ void MainWindow::on_pushButton_respuesta_clicked()
         //el return es para que no entre al siguiente pedazo de codigo
         return;
     }
+       if(ui->radioButton_staff->isChecked()){
+           //Guardamos la matricula que genere el metodo registrar
+           correcto = regStaff.registrar(
+                              //El index es el id de puesto
+                               idPuesto,
+                               //Cualquiera de las password funciona
+                              ui->lineEdit_password1->text(),
+                              ui->lineEdit_nombre->text(),
+                              ui->lineEdit_apePaterno->text(),
+                              ui->lineEdit_apeMaterno->text(),
+                              ui->dateEdit_fNacimiento->text(),
+                               //La edad
+                              calcularEdad(ui->dateEdit_fNacimiento->text()),
+                               //Juntamos el correo que ingresó
+                              ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
+                              ui->lineEdit_telefono->text(),
+                              imgRoute,
+                             idPregunta,
+                              ui->lineEdit_respuesta->text());
+       }
 
-    //Guardamos la matricula que genere el metodo registrar
-    correcto = regStaff.registrar(
-                       //El index es el id de puesto
-                        idPuesto,
-                        //Cualquiera de las password funciona
-                       ui->lineEdit_password1->text(),
-                       ui->lineEdit_nombre->text(),
-                       ui->lineEdit_apePaterno->text(),
-                       ui->lineEdit_apeMaterno->text(),
-                       ui->dateEdit_fNacimiento->text(),
-                        //La edad
-                       calcularEdad(ui->dateEdit_fNacimiento->text()),
-                        //Juntamos el correo que ingresó
-                       ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
-                       ui->lineEdit_telefono->text(),
-                       imgRoute,
-                      idPregunta,
-                       ui->lineEdit_respuesta->text());
+       if(ui->radioButton_paciente->isChecked()){
+           correcto = regPaciente.registroPaciente(
+
+                               //Cualquiera de las password funciona
+
+                              ui->lineEdit_password1->text(),
+                              ui->lineEdit_nombre->text(),
+                              ui->lineEdit_apePaterno->text(),
+                              ui->lineEdit_apeMaterno->text(),
+                              ui->dateEdit_fNacimiento->text(),
+                               //La edad
+                              calcularEdad(ui->dateEdit_fNacimiento->text()),
+                               //Juntamos el correo que ingresó
+                              ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
+                              ui->lineEdit_telefono->text(),
+                              imgRoute,
+                             idPregunta,
+                              ui->lineEdit_respuesta->text());
+       }
+
+
     //Si el registro si se completó
     if(correcto != "0"){
         QMessageBox::information(this,"","Registrado con exito. Tu id de usuario es: "+correcto+".\n No pierdas esa información.");

@@ -5,6 +5,7 @@
 #include <QtSql>
 
 registroStaff::registroStaff(){
+    database=QSqlDatabase::database();
 }
 QString registroStaff::generarMatricula(){
     QString matri;

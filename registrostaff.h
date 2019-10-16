@@ -23,6 +23,7 @@ public:
                       QString respuesta);
 private:
     QSqlQuery queryRegistro,queryYear;
+    QSqlDatabase database;
     QString generarMatricula();
     //comentario
 };

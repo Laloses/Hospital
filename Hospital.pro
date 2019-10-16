@@ -27,10 +27,14 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
+        registrodoctor.cpp \
+        registropaciente.cpp \
         registrostaff.cpp
 
 HEADERS += \
         mainwindow.h \
+        registrodoctor.h \
+        registropaciente.h \
         registrostaff.h
 
 FORMS += \
