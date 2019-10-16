@@ -46,6 +46,7 @@ private:
     QSqlDatabase database;
     QString id_usuario,id_staff,id_doctor,id_paciente;
     QByteArray foto;
+    QString imgRoute;
     bool verificarPasswordRegistro();
     QString calcularEdad(QString);
     bool verificarDatosRegistro();

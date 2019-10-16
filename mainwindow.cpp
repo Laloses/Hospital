@@ -15,9 +15,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //Conexion a la base de datos
-    database = QSqlDatabase::addDatabase("QODBC");
-    database.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=lobohospital;");
+    database= QSqlDatabase::addDatabase("QMYSQL");
+    database.setHostName("localhost");
+    database.setPort(3306);
+    database.setDatabaseName("lobohospital");
     database.setUserName("root");
+    database.setPassword("");
     if(!database.open()){
         qDebug()<<database.lastError().text();
     }
@@ -190,7 +193,7 @@ void MainWindow::on_pushButton_salir_clicked()
 void MainWindow::on_pushButton_imgPerfil_clicked()
 {
     //Abrimos el dialogo para obtener la ruta
-    QString imgRoute = QFileDialog::getOpenFileName(this, "Seleccionar Imagen ", "c://","Image Files (*.png *.jpg )");
+     imgRoute = QFileDialog::getOpenFileName(this, "Seleccionar Imagen ", "c://","Image Files (*.png *.jpg )");
     QFile file(imgRoute);
     file.open(QIODevice::ReadOnly);
 
@@ -287,7 +290,7 @@ QString MainWindow::calcularEdad(QString fechaN){
     QString edad="0";
     QSqlQuery fechaActual;
     //Restamos los años, pero comparamos si ya paso el mes de su fecha de nacimiento
-    if( fechaActual.exec("YEAR(CURDATE())-YEAR("+fechaN+") + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d'), 0 , -1 )") ){
+    if( fechaActual.exec("select YEAR(CURDATE())-YEAR("+fechaN+") + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d'), 0 , -1 )") ){
         edad=fechaActual.value(0).toString();
         return edad;
     }
@@ -316,6 +319,8 @@ void MainWindow::on_pushButton_respuesta_clicked()
 {
     registroStaff regStaff;
     QString correcto;
+    QString idPuesto=QString::number( ui->comboBox_puesto->currentIndex()+1);
+    QString idPregunta= QString::number(ui->comboBox_pregunta->currentIndex()+1);
 
     //si no ha escrito una respuesta
     if( ui->lineEdit_respuesta->text().isEmpty() ){
@@ -327,7 +332,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
     //Guardamos la matricula que genere el metodo registrar
     correcto = regStaff.registrar(
                        //El index es el id de puesto
-                       QString::number( ui->comboBox_puesto->currentIndex() ),
+                        idPuesto,
                         //Cualquiera de las password funciona
                        ui->lineEdit_password1->text(),
                        ui->lineEdit_nombre->text(),
@@ -339,8 +344,8 @@ void MainWindow::on_pushButton_respuesta_clicked()
                         //Juntamos el correo que ingresó
                        ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
                        ui->lineEdit_telefono->text(),
-                       foto,
-                       QString::number(ui->comboBox_pregunta->currentIndex()),
+                       imgRoute,
+                      idPregunta,
                        ui->lineEdit_respuesta->text());
     //Si el registro si se completó
     if(correcto != "0"){

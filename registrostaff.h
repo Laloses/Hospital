@@ -18,7 +18,7 @@ public:
                       QString edad,
                       QString email,
                       QString telefono,
-                      QByteArray fotop,
+                      QString fotop,
                       QString idpregunta,
                       QString respuesta);
 private:
