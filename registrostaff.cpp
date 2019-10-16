@@ -24,6 +24,7 @@ QString registroStaff::generarMatricula(){
         generarMatricula();
     //Si no hay una matricula, entonces guardamos esa
     return matri;
+    //comentario
 }
 QString registroStaff::registrar(QString idPuesto,
                                  QString clave,

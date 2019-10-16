@@ -24,6 +24,7 @@ public:
 private:
     QSqlQuery queryRegistro,queryYear;
     QString generarMatricula();
+    //comentario
 };
 
 #endif // REGISTROSTAFF_H
