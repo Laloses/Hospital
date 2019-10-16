@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
+#include <QtSql/QSqlError>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget_principal->setCurrentIndex(0);
     //Ocultamos el boton salir
     ui->pushButton_salir->setHidden(true);
+    id_staff=id_doctor=id_usuario=id_paciente="0";
 }
 
 MainWindow::~MainWindow()
