@@ -214,6 +214,7 @@ bool MainWindow::verificarPasswordRegistro(){
     return false;
 }
 
+//Verifica datos para todos los tipos de usuario
 bool MainWindow::verificarDatosRegistro(){
     bool flag=false;;
     QString estiloBueno, estiloMalo;
@@ -299,33 +300,53 @@ QString MainWindow::calcularEdad(QString fechaN){
 //Cuando le da a registrarse depues de llenar los datos
 void MainWindow::on_pushButton_registrarse_clicked()
 {
-    if(ui->radioButton_staff->isChecked()){
-        if(verificarDatosRegistro() && verificarPasswordRegistro()){
-            registroStaff regStaff;
-            QString correcto;
-            //Guardamos la matricula que genere el metodo registrar
-            correcto = regStaff.registrar(
-                               //El index es el id de puesto
-                               QString::number( ui->comboBox_puesto->currentIndex() ),
-                                //Cualquiera de las password funciona
-                               ui->lineEdit_password1->text(),
-                               ui->lineEdit_nombre->text(),
-                               ui->lineEdit_apePaterno->text(),
-                               ui->lineEdit_apeMaterno->text(),
-                               ui->dateEdit_fNacimiento->text(),
-                                //La edad
-                               calcularEdad(ui->dateEdit_fNacimiento->text()),
-                                //Juntamos el correo que ingresó
-                               ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
-                               ui->lineEdit_telefono->text(),
-                               foto);
-            //Si el registro si se completó
-            if(correcto != "0"){
-                QMessageBox::information(this,"","Registrado con exito. Tu id de usuario es: "+correcto+".\n No pierdas esa información.");
-            }
-            else {
-                QMessageBox::critical(this,"No se Registro", "Hay un error en el servidor, intente más tarde.");
-            }
-        }
+   if(verificarDatosRegistro() && verificarPasswordRegistro()){
+            //Pasamos a la pagina de preguntas
+            ui->stackedWidget_registros->setCurrentIndex(2);
+            //Cargamos las preguntas
+            QSqlQueryModel *queryPreguntas;
+            queryPreguntas = new QSqlQueryModel;
+            queryPreguntas->setQuery("SELECT pregunta FROM pregunta");
+            ui->comboBox_pregunta->setModel(queryPreguntas);
+   }
+}
+
+//Cuando se elige una pregunta
+void MainWindow::on_pushButton_respuesta_clicked()
+{
+    registroStaff regStaff;
+    QString correcto;
+
+    //si no ha escrito una respuesta
+    if( ui->lineEdit_respuesta->text().isEmpty() ){
+        QMessageBox::warning(this,"Completa el campo.", "Por favor escriba una respuesta.");
+        //el return es para que no entre al siguiente pedazo de codigo
+        return;
+    }
+
+    //Guardamos la matricula que genere el metodo registrar
+    correcto = regStaff.registrar(
+                       //El index es el id de puesto
+                       QString::number( ui->comboBox_puesto->currentIndex() ),
+                        //Cualquiera de las password funciona
+                       ui->lineEdit_password1->text(),
+                       ui->lineEdit_nombre->text(),
+                       ui->lineEdit_apePaterno->text(),
+                       ui->lineEdit_apeMaterno->text(),
+                       ui->dateEdit_fNacimiento->text(),
+                        //La edad
+                       calcularEdad(ui->dateEdit_fNacimiento->text()),
+                        //Juntamos el correo que ingresó
+                       ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
+                       ui->lineEdit_telefono->text(),
+                       foto,
+                       QString::number(ui->comboBox_pregunta->currentIndex()),
+                       ui->lineEdit_respuesta->text());
+    //Si el registro si se completó
+    if(correcto != "0"){
+        QMessageBox::information(this,"","Registrado con exito. Tu id de usuario es: "+correcto+".\n No pierdas esa información.");
+    }
+    else {
+        QMessageBox::critical(this,"No se Registro", "Hay un error en el servidor, intente más tarde.");
     }
 }

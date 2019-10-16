@@ -18,9 +18,12 @@ public:
                       QString edad,
                       QString email,
                       QString telefono,
-                      QByteArray fotop);
+                      QByteArray fotop,
+                      QString idpregunta,
+                      QString respuesta);
 private:
-    QSqlQuery queryRegistro;
+    QSqlQuery queryRegistro,queryYear;
+    QString generarMatricula();
 };
 
 #endif // REGISTROSTAFF_H

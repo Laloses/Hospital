@@ -39,6 +39,8 @@ private slots:
 
     void on_pushButton_imgPerfil_clicked();
 
+    void on_pushButton_respuesta_clicked();
+
 private:
     Ui::MainWindow *ui;
     QSqlDatabase database;
