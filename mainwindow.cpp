@@ -220,7 +220,7 @@ bool MainWindow::verificarDatosRegistro(){
     QString estiloBueno, estiloMalo;
     estiloMalo="background-color: rgb(255,0,0);";
     estiloBueno="background-color: rgb(255,255,255);";
-    QRegExp re("[a-zZ-A]");
+    QRegExp re("[a-zZ-A]"), re2("[0-9]");
 
     //Que el nombre y apellidos y contenga solo letras
    if( ui->lineEdit_nombre->text().contains(re) && ui->lineEdit_apePaterno->text().contains(re) &&
@@ -230,7 +230,7 @@ bool MainWindow::verificarDatosRegistro(){
        ui->lineEdit_apeMaterno->setStyleSheet(estiloBueno);
            if( !ui->lineEdit_email->text().isEmpty() ){
                ui->lineEdit_email->setStyleSheet(estiloBueno);
-               if( !ui->lineEdit_telefono->text().isEmpty() ){
+               if( ui->lineEdit_telefono->text().contains(re2) ){
                    ui->lineEdit_telefono->setStyleSheet(estiloBueno);
                    if ( !foto.isEmpty() ){
                        ui->label_imgPerfil->setStyleSheet(estiloBueno);
