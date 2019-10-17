@@ -51,7 +51,7 @@ QString registroStaff::registrar(QString idPuesto,
 
         //No se ponen explicitamente todos los valores en la parte de "usuario(Valores)" porque sql acepta eso cuando se insertan TODOS los valores
         //Usamos prepare para poder añadir la foto
-        queryRegistro.prepare("INSERT INTO usuario()""VALUE ("+sql+")");
+        queryRegistro.prepare("INSERT INTO usuario() VALUE ("+sql+")");
 
         if(queryRegistro.exec()){
             //Si se creo correctamente, agregamos a la tabla staff
