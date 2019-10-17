@@ -1,15 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>854</width>
+    <height>479</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
@@ -393,7 +394,7 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -1336,7 +1337,7 @@ QPushButton:focus{
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="page">
+      <widget class="QWidget" name="page_staff">
        <widget class="QLabel" name="label_pagPersonal">
         <property name="geometry">
          <rect>
@@ -1351,13 +1352,23 @@ QPushButton:focus{
         </property>
        </widget>
       </widget>
+      <widget class="QWidget" name="page_admin">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Pagina admin</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>

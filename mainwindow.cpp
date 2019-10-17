@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QtSql/QSqlError>
+#include "login.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -152,9 +153,49 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
     //Mostrar boton salir
     ui->pushButton_salir->setHidden(false);
     //Pagina paciente
-    ui->stackedWidget_principal->setCurrentIndex(2);
+    
     ui->pushButton_login->setHidden(true);
     ui->pushButton_registro->setHidden(true);
+
+    
+    QString user=ui->lineEdit_idUsuario->text();
+    QString clave=ui->lineEdit_passwordLogin->text();
+    login lo;
+    int tipo=lo.ingresar(user,clave,database);
+
+    if(tipo==5)
+    {
+     qDebug()<<"es un admi";
+     //Lo mandamos a su pagina
+     ui->stackedWidget_principal->setCurrentIndex(5);
+    }
+    else if(tipo==0)
+    {
+        qDebug()<<"no exite el usuario";
+    }
+    else if(tipo==1)
+    {
+        qDebug()<<"tienes tu clave incorrecta";
+    }
+    else if(tipo==2)
+    {
+        qDebug()<<"eres un paciente";
+        ui->stackedWidget_principal->setCurrentIndex(2);
+    }
+    else if(tipo==3)
+    {
+        qDebug()<<"eres un doctor";
+        ui->stackedWidget_principal->setCurrentIndex(3);
+    }
+    else if(tipo==4)
+    {
+        qDebug()<<"eres de staff";
+        ui->stackedWidget_principal->setCurrentIndex(4);
+    }
+
+ui->lineEdit_idUsuario->clear();
+ui->lineEdit_passwordLogin->clear();
+
 }
 
 //Salir
