@@ -423,7 +423,6 @@ void MainWindow::on_pushButton_respuesta_clicked()
             QDate date;
             date.setDate(2009,9,9);
             ui->dateEdit_fNacimiento->setDate(date);
-             //Juntamos el correo que ingresó
             ui->lineEdit_email->setText("");
             ui->comboBox_email->setCurrentIndex(0);
             ui->lineEdit_telefono->setText("");
@@ -432,6 +431,11 @@ void MainWindow::on_pushButton_respuesta_clicked()
             ui->comboBox_pregunta->setCurrentIndex(0);
             ui->lineEdit_respuesta->setText("");
             ui->comboBox_puesto->setCurrentIndex(0);
+            ui->comboBox_especiDoc->setCurrentIndex(0);
+            ui->lineEdit_cedula->setText("");
+            ui->lineEdit_universidad->setText("");
+            ui->lineEdit_password2->setText("");
+            ui->lineEdit_password1->setText("");
 
         //movemos al usuario al inicio
         on_pushButton_logo_clicked();
