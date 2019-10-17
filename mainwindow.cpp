@@ -16,10 +16,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //Conexion a la base de datos
-    database= QSqlDatabase::addDatabase("QMYSQL");
+    database = QSqlDatabase::addDatabase("QODBC");
+    database.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=rentaFacil;");
+    /*database= QSqlDatabase::addDatabase("MYSQL");
     database.setHostName("localhost");
     database.setPort(3306);
-    database.setDatabaseName("lobohospital");
+    database.setDatabaseName("lobohospital");*/
     database.setUserName("root");
     database.setPassword("");
     if(!database.open()){
@@ -227,41 +229,49 @@ bool MainWindow::verificarDatosRegistro(){
     QRegExp re("[a-zZ-A]"), re2("[0-9]");
 
     //Que el nombre y apellidos y contenga solo letras
-   if( ui->lineEdit_nombre->text().contains(re) && ui->lineEdit_apePaterno->text().contains(re) &&
-           ui->lineEdit_apeMaterno->text().contains(re) ){
-       ui->lineEdit_nombre->setStyleSheet(estiloBueno);
-       ui->lineEdit_apePaterno->setStyleSheet(estiloBueno);
-       ui->lineEdit_apeMaterno->setStyleSheet(estiloBueno);
-           if( !ui->lineEdit_email->text().isEmpty() ){
-               ui->lineEdit_email->setStyleSheet(estiloBueno);
-               if( ui->lineEdit_telefono->text().contains(re2) ){
-                   ui->lineEdit_telefono->setStyleSheet(estiloBueno);
-                   if ( !foto.isEmpty() ){
-                       ui->label_imgPerfil->setStyleSheet(estiloBueno);
-                       flag= true;
+   if( ui->lineEdit_nombre->text().contains(re) ){
+           ui->lineEdit_nombre->setStyleSheet(estiloBueno);
+           if( ui->lineEdit_apePaterno->text().contains(re) ){
+                ui->lineEdit_apePaterno->setStyleSheet(estiloBueno);
+                if( ui->lineEdit_apeMaterno->text().contains(re) ){
+                    ui->lineEdit_apeMaterno->setStyleSheet(estiloBueno);
+                    if( !ui->lineEdit_email->text().isEmpty() ){
+                        ui->lineEdit_email->setStyleSheet(estiloBueno);
+                        if( ui->lineEdit_telefono->text().contains(re2) ){
+                            ui->lineEdit_telefono->setStyleSheet(estiloBueno);
+                            if ( !foto.isEmpty() ){
+                               ui->label_imgPerfil->setStyleSheet(estiloBueno);
+                               flag= true;
+                            }
+                           //Si no ha puesto la foto
+                           else{
+                               ui->label_imgPerfil->setStyleSheet(estiloMalo);
+                           }
+                       }
+                       //Si no puso el telefono
+                       else{
+                           ui->lineEdit_telefono->setStyleSheet(estiloMalo);
+                       }
                    }
-                   //Si no ha puesto la foto
+                   //Si no puso el email
                    else{
-                       ui->label_imgPerfil->setStyleSheet(estiloMalo);
+                       ui->lineEdit_email->setStyleSheet(estiloMalo);
                    }
-               }
-               //Si no puso el telefono
-               else{
-                   ui->lineEdit_telefono->setStyleSheet(estiloMalo);
-               }
+           //En caso de que el apellido paterno
            }
-           //Si no puso el email
            else{
-               ui->lineEdit_email->setStyleSheet(estiloMalo);
+               ui->lineEdit_apePaterno->setStyleSheet(estiloMalo);
            }
-   //En caso de que el nombre o apellido esté vacío
-   }
-   else{
-       ui->lineEdit_nombre->setStyleSheet(estiloMalo);
-       ui->lineEdit_apePaterno->setStyleSheet(estiloMalo);
-       ui->lineEdit_apeMaterno->setStyleSheet(estiloMalo);
-   }
-
+        //En caso de que el apellido materno este mal
+        }
+        else{
+            ui->lineEdit_apeMaterno->setStyleSheet(estiloMalo);
+        }
+    //En caso de que esta mal el nombre
+    }
+    else{
+        ui->lineEdit_nombre->setStyleSheet(estiloMalo);
+    }
 
     //Revision para los datos de doctor
     if(ui->radioButton_doc->isChecked()){
@@ -290,9 +300,12 @@ bool MainWindow::verificarDatosRegistro(){
 QString MainWindow::calcularEdad(QString fechaN){
     QString edad="0";
     QSqlQuery fechaActual;
+    qDebug()<<"fecha: "+fechaN;
     //Restamos los años, pero comparamos si ya paso el mes de su fecha de nacimiento
-    if( fechaActual.exec("select YEAR(CURDATE())-YEAR("+fechaN+") + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d'), 0 , -1 )") ){
+    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d'), 0 , -1 )") ){
+        fechaActual.next();
         edad=fechaActual.value(0).toString();
+        qDebug()<<"Edad: "+edad;
         return edad;
     }
     //Si no entra devuelve 0
@@ -323,6 +336,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
     QString correcto;
     QString idPuesto=QString::number( ui->comboBox_puesto->currentIndex()+1);
     QString idPregunta= QString::number(ui->comboBox_pregunta->currentIndex()+1);
+    QString edad= calcularEdad(ui->dateEdit_fNacimiento->text());
 
     //si no ha escrito una respuesta
     if( ui->lineEdit_respuesta->text().isEmpty() ){
@@ -342,7 +356,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
                               ui->lineEdit_apeMaterno->text(),
                               ui->dateEdit_fNacimiento->text(),
                                //La edad
-                              calcularEdad(ui->dateEdit_fNacimiento->text()),
+                              edad,
                                //Juntamos el correo que ingresó
                               ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
                               ui->lineEdit_telefono->text(),
@@ -375,6 +389,26 @@ void MainWindow::on_pushButton_respuesta_clicked()
     //Si el registro si se completó
     if(correcto != "0"){
         QMessageBox::information(this,"","Registrado con exito. Tu id de usuario es: "+correcto+".\n No pierdas esa información.");
+        //Vaciamos las variables
+            ui->lineEdit_password1->setText("");
+            ui->lineEdit_nombre->setText("");
+            ui->lineEdit_apePaterno->setText("");
+            ui->lineEdit_apeMaterno->setText("");
+            QDate date;
+            date.setDate(2009,9,9);
+            ui->dateEdit_fNacimiento->setDate(date);
+             //Juntamos el correo que ingresó
+            ui->lineEdit_email->setText("");
+            ui->comboBox_email->setCurrentIndex(0);
+            ui->lineEdit_telefono->setText("");
+            ui->label_imgPerfil->setText("Imagen perfil");
+            ui->label_imgPerfil->setPixmap(QPixmap());
+            ui->comboBox_pregunta->setCurrentIndex(0);
+            ui->lineEdit_respuesta->setText("");
+            ui->comboBox_puesto->setCurrentIndex(0);
+
+        //movemos al usuario al inicio
+        on_pushButton_logo_clicked();
     }
     else {
         QMessageBox::critical(this,"No se Registro", "Hay un error en el servidor, intente más tarde.");

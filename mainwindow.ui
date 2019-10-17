@@ -1320,6 +1320,9 @@ QPushButton:focus{
                   <day>31</day>
                  </date>
                 </property>
+                <property name="displayFormat">
+                 <string>dd/MM/yyyy</string>
+                </property>
                 <property name="calendarPopup">
                  <bool>true</bool>
                 </property>
