@@ -7,6 +7,7 @@
 registroStaff::registroStaff(){
     database=QSqlDatabase::database();
 }
+
 QString registroStaff::generarMatricula(){
     QString matri;
     queryYear.exec("SELECT YEAR(CURDATE())");
@@ -27,6 +28,7 @@ QString registroStaff::generarMatricula(){
     return matri;
     //comentario
 }
+
 QString registroStaff::registrar(QString idPuesto,
                                  QString clave,
                                  QString nombre,

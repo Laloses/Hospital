@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QtSql/QSqlDatabase>
+#include "registrodoctor.h"
 
 namespace Ui {
 class MainWindow;

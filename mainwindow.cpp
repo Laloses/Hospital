@@ -262,7 +262,6 @@ bool MainWindow::verificarDatosRegistro(){
        ui->lineEdit_apeMaterno->setStyleSheet(estiloMalo);
    }
 
-
     //Revision para los datos de doctor
     if(ui->radioButton_doc->isChecked()){
         if( !ui->lineEdit_cedula->text().isEmpty() ){
@@ -286,12 +285,14 @@ bool MainWindow::verificarDatosRegistro(){
     return flag;
 }
 
+
 //Para calcular la edad de un usuario que se registra
 QString MainWindow::calcularEdad(QString fechaN){
     QString edad="0";
     QSqlQuery fechaActual;
     //Restamos los años, pero comparamos si ya paso el mes de su fecha de nacimiento
     if( fechaActual.exec("select YEAR(CURDATE())-YEAR("+fechaN+") + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d'), 0 , -1 )") ){
+        fechaActual.next();
         edad=fechaActual.value(0).toString();
         return edad;
     }
@@ -320,6 +321,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
 {
     registroStaff regStaff;
     registropaciente regPaciente;
+    registroDoctor regDoctor;
     QString correcto;
     QString idPuesto=QString::number( ui->comboBox_puesto->currentIndex()+1);
     QString idPregunta= QString::number(ui->comboBox_pregunta->currentIndex()+1);
@@ -355,7 +357,6 @@ void MainWindow::on_pushButton_respuesta_clicked()
            correcto = regPaciente.registroPaciente(
 
                                //Cualquiera de las password funciona
-
                               ui->lineEdit_password1->text(),
                               ui->lineEdit_nombre->text(),
                               ui->lineEdit_apePaterno->text(),
@@ -370,8 +371,24 @@ void MainWindow::on_pushButton_respuesta_clicked()
                              idPregunta,
                               ui->lineEdit_respuesta->text());
        }
+       if(ui->radioButton_doc->isChecked()){
+           correcto = regDoctor.registroDoc(
+                       ui->lineEdit_nombre->text(),
+                       ui->lineEdit_apePaterno->text(),
+                       ui->lineEdit_apeMaterno->text(),
+                       ui->dateEdit_fNacimiento->text(),
+                        ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
+                       ui->lineEdit_telefono->text(),
+                       ui->comboBox_especiDoc->currentText(),
+                       ui->lineEdit_cedula->text(),
+                       ui->lineEdit_universidad->text(),
+                       ui->lineEdit_password2->text(),
+                       imgRoute,
+                       calcularEdad(ui->dateEdit_fNacimiento->text()),
+                       idPregunta,
+                        ui->lineEdit_respuesta->text());
 
-
+       }
     //Si el registro si se completó
     if(correcto != "0"){
         QMessageBox::information(this,"","Registrado con exito. Tu id de usuario es: "+correcto+".\n No pierdas esa información.");
@@ -379,4 +396,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
     else {
         QMessageBox::critical(this,"No se Registro", "Hay un error en el servidor, intente más tarde.");
     }
+
+
+
 }
