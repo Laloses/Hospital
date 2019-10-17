@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QtSql/QSqlDatabase>
+#include "registrodoctor.h"
 
 namespace Ui {
 class MainWindow;
@@ -35,13 +36,21 @@ private slots:
 
     void on_pushButton_salir_clicked();
 
+    void on_pushButton_registrarse_clicked();
+
+    void on_pushButton_imgPerfil_clicked();
+
+    void on_pushButton_respuesta_clicked();
+
 private:
     Ui::MainWindow *ui;
     QSqlDatabase database;
-    QString id_usuario;
-    QString id_staff;
-    QString id_doctor;
-    QString id_paciente;
+    QString id_usuario,id_staff,id_doctor,id_paciente;
+    QByteArray foto;
+    QString imgRoute;
+    bool verificarPasswordRegistro();
+    QString calcularEdad(QString);
+    bool verificarDatosRegistro();
 };
 
 #endif // MAINWINDOW_H
