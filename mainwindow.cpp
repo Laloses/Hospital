@@ -332,7 +332,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
     QString idPuesto=QString::number( ui->comboBox_puesto->currentIndex()+1);
     QString idPregunta= QString::number(ui->comboBox_pregunta->currentIndex()+1);
     QString edad =calcularEdad(ui->dateEdit_fNacimiento->text());
-    QString idEspecialidad = QString::number(ui->comboBox_especiDoc->currentIndex());
+    QString idEspecialidad = QString::number(ui->comboBox_especiDoc->currentIndex()+1);
 
     //si no ha escrito una respuesta
     if( ui->lineEdit_respuesta->text().isEmpty() ){
