@@ -185,14 +185,22 @@ QMessageBox informacion;
     else if(tipo==0)
     {
         qDebug()<<"no exite el usuario";
-        QMessageBox messageBox(QMessageBox::Warning,tr("Critical Error"),tr("Tu cuennta no existe"),QMessageBox::Yes);
-        messageBox.setButtonText(QMessageBox::Yes,tr("Aceptar"));
+        informacion.setWindowTitle("Informacion");
+        informacion.setText ("cuenta no existente");
+        informacion.setStandardButtons( QMessageBox::Ok) ;
+        informacion.setDefaultButton (QMessageBox ::Ok ) ;
+        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+        informacion.exec();
     }
     else if(tipo==1)
     {
         qDebug()<<"tienes tu clave incorrecta";
-        QMessageBox messageBox(QMessageBox::Warning,tr("Critical Error"),tr("Tu cuenta o contraseña es incorrecta"),QMessageBox::Yes);
-        messageBox.setButtonText(QMessageBox::Yes,tr("Aceptar"));
+        informacion.setWindowTitle("Informacion");
+        informacion.setText ("Usuario o clave incorrectos, intente de nuevo");
+        informacion.setStandardButtons( QMessageBox::Ok) ;
+        informacion.setDefaultButton (QMessageBox ::Ok ) ;
+        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+        informacion.exec();
     }
     else if(tipo==2)
     {
@@ -207,7 +215,7 @@ QMessageBox informacion;
     else if(tipo==3)
     {
         ui->pushButton_salir->setHidden(false);
-        //Pagina paciente
+
 
         ui->pushButton_login->setHidden(true);
         ui->pushButton_registro->setHidden(true);
@@ -217,7 +225,7 @@ QMessageBox informacion;
     else if(tipo==4)
     {
         ui->pushButton_salir->setHidden(false);
-        //Pagina paciente
+
 
         ui->pushButton_login->setHidden(true);
         ui->pushButton_registro->setHidden(true);
@@ -227,8 +235,12 @@ QMessageBox informacion;
     else if(tipo==6)
     {
         qDebug()<<"no estas activado";
-        QMessageBox messageBox(QMessageBox::Warning,tr("Critical Error"),tr("Tu cuenta aun no esta activa"),QMessageBox::Yes);
-        messageBox.setButtonText(QMessageBox::Yes,tr("Aceptar"));
+        informacion.setWindowTitle("Informacion");
+        informacion.setText ("Tu cuenta aun no esta activada");
+        informacion.setStandardButtons( QMessageBox::Ok) ;
+        informacion.setDefaultButton (QMessageBox ::Ok ) ;
+        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+        informacion.exec();
     }
 
     }
