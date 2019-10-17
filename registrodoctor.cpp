@@ -40,24 +40,24 @@ QString registroDoctor::registroDoc(QString nombre,QString apeMaterno,QString ap
                                QString cedula,QString universidad,QString passwordRegistro2,QString foto,QString edad, QString idpregunta,QString respuesta){
 
     QString matricula,horario,idconsultorio;
-    horario="Despertino";
+    horario="Vespertino";
     idconsultorio="1";
     //metodo para generar la matricula
     matricula=generarMatricula();
     if(registrodoc.exec("insert into usuario(matricula,clave,nombre,appaterno,apmaterno,fechaN,edad,email,telefono,fotop,idpregunta,respuesta)values('"+ matricula+"','"+passwordRegistro2+"','"+nombre+"','"+apeMaterno+"','"+apePaterno+"','"+fecha+"','"+edad+"','"+email+"','"+telefono+"',LOAD_FILE('"+foto+"'),'"+idpregunta+"','"+respuesta+"')")){
        //Si se creo correctamente, agregamos a la tabla doctor
             registrodoc.next();
-        if(registrodoc.exec("insert into doctor(idUser,idEspecialidad,horario,idpuesto,cedulapro,universidad,idconsultorio,estado)values('"+matricula+"''"+especiDoc+"','"+horario+"','0','"+cedula+"','"+universidad+"','"+idconsultorio+"','0')")){
+        if(registrodoc.exec("insert into doctor(iddoctor,idUser,idEspecialidad,horario,idpuesto,cedulapro,universidad,idconsultorio,estado)values(NULL,'"+matricula+"','"+especiDoc+"','"+horario+"','1','"+cedula+"','"+universidad+"','"+idconsultorio+"','0')")){
                 registrodoc.next();
             return matricula;
 
             }
-                else qDebug()<<"1: "<<queryError.lastError().text();
+                else qDebug()<<"1: "+registrodoc.lastError().text();
 
         }
-             else qDebug()<<"2: "<<queryError.lastError().text();
+             else qDebug()<<"2: "+registrodoc.lastError().text();
      //en caso de que no haya entrado a la sentencia correcta o errores de consultas.
-   return  0;
+   return  "0";
 
 }
 

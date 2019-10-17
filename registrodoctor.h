@@ -12,7 +12,7 @@ public:
     registroDoctor(QString ,int,QString,QString,QString);
     QString generarMatricula();
 private:
-     QSqlQuery registrodoc,queryYear,queryError;
+     QSqlQuery registrodoc,queryYear;
      QSqlDatabase database;
 
 };

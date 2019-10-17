@@ -111,6 +111,12 @@ void MainWindow::on_radioButton_doc_toggled(bool checked)
         ui->lineEdit_universidad->setVisible(true);
         ui->label_universidad->setVisible(true);
 
+        //Cargar de la base de datos los puestos
+        QSqlQueryModel *queryEspecialidades;
+        queryEspecialidades= new QSqlQueryModel;
+        queryEspecialidades->setQuery("SELECT nombre FROM especialidad");
+        ui->comboBox_especiDoc->setModel(queryEspecialidades);
+
         //Quitamos los datos del staff
         ui->comboBox_puesto->setVisible(false);
         ui->label_puesto->setVisible(false);
@@ -264,9 +270,9 @@ bool MainWindow::verificarDatosRegistro(){
 
     //Revision para los datos de doctor
     if(ui->radioButton_doc->isChecked()){
-        if( !ui->lineEdit_cedula->text().isEmpty() ){
+        if( ui->lineEdit_cedula->text().contains(re2) ){
             ui->lineEdit_cedula->setStyleSheet(estiloBueno);
-            if( !ui->lineEdit_universidad->text().isEmpty() ){
+            if( ui->lineEdit_universidad->text().contains(re) ){
                 ui->lineEdit_universidad->setStyleSheet(estiloBueno);
                 flag= true;
             }
@@ -325,6 +331,8 @@ void MainWindow::on_pushButton_respuesta_clicked()
     QString correcto;
     QString idPuesto=QString::number( ui->comboBox_puesto->currentIndex()+1);
     QString idPregunta= QString::number(ui->comboBox_pregunta->currentIndex()+1);
+    QString edad =calcularEdad(ui->dateEdit_fNacimiento->text());
+    QString idEspecialidad = QString::number(ui->comboBox_especiDoc->currentIndex());
 
     //si no ha escrito una respuesta
     if( ui->lineEdit_respuesta->text().isEmpty() ){
@@ -344,7 +352,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
                               ui->lineEdit_apeMaterno->text(),
                               ui->dateEdit_fNacimiento->text(),
                                //La edad
-                              calcularEdad(ui->dateEdit_fNacimiento->text()),
+                              edad,
                                //Juntamos el correo que ingresó
                               ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
                               ui->lineEdit_telefono->text(),
@@ -363,7 +371,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
                               ui->lineEdit_apeMaterno->text(),
                               ui->dateEdit_fNacimiento->text(),
                                //La edad
-                              calcularEdad(ui->dateEdit_fNacimiento->text()),
+                              edad,
                                //Juntamos el correo que ingresó
                               ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
                               ui->lineEdit_telefono->text(),
@@ -379,12 +387,12 @@ void MainWindow::on_pushButton_respuesta_clicked()
                        ui->dateEdit_fNacimiento->text(),
                         ui->lineEdit_email->text()+ui->comboBox_email->currentText(),
                        ui->lineEdit_telefono->text(),
-                       ui->comboBox_especiDoc->currentText(),
+                       idEspecialidad,
                        ui->lineEdit_cedula->text(),
                        ui->lineEdit_universidad->text(),
                        ui->lineEdit_password2->text(),
                        imgRoute,
-                       calcularEdad(ui->dateEdit_fNacimiento->text()),
+                       edad,
                        idPregunta,
                         ui->lineEdit_respuesta->text());
 

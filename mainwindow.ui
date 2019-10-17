@@ -809,13 +809,7 @@ QPushButton:focus{
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_especiDoc">
-                <item>
-                 <property name="text">
-                  <string>cirugia</string>
-                 </property>
-                </item>
-               </widget>
+               <widget class="QComboBox" name="comboBox_especiDoc"/>
               </item>
              </layout>
             </item>
