@@ -684,7 +684,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="page_oculto">
            <layout class="QGridLayout" name="gridLayout_5">
@@ -1432,7 +1432,14 @@ QPushButton:focus{
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_pregunta"/>
+               <widget class="QComboBox" name="comboBox_pregunta">
+                <property name="minimumSize">
+                 <size>
+                  <width>82</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>
@@ -1454,6 +1461,19 @@ QPushButton:focus{
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_19">
                 <item>
+                 <spacer name="horizontalSpacer_19">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
                  <widget class="QLabel" name="label_respuesta">
                   <property name="minimumSize">
                    <size>
@@ -1473,7 +1493,27 @@ QPushButton:focus{
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="lineEdit_respuesta"/>
+                 <widget class="QLineEdit" name="lineEdit_respuesta">
+                  <property name="maximumSize">
+                   <size>
+                    <width>147</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_23">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </item>
