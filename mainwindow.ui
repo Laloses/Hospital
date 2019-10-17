@@ -1630,7 +1630,7 @@ QPushButton:focus{
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="page">
+      <widget class="QWidget" name="page_staff">
        <widget class="QLabel" name="label_pagPersonal">
         <property name="geometry">
          <rect>
@@ -1644,6 +1644,17 @@ QPushButton:focus{
          <string>página staff</string>
         </property>
        </widget>
+      </widget>
+      <widget class="QWidget" name="page_admin">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Pagina admin</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>

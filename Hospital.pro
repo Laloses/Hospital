@@ -29,13 +29,15 @@ SOURCES += \
         mainwindow.cpp \
         registrodoctor.cpp \
         registropaciente.cpp \
-        registrostaff.cpp
+        registrostaff.cpp \
+        login.cpp
 
 HEADERS += \
         mainwindow.h \
         registrodoctor.h \
         registropaciente.h \
-        registrostaff.h
+        registrostaff.h \
+    login.h
 
 FORMS += \
         mainwindow.ui

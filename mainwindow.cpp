@@ -7,6 +7,7 @@
 #include "registrostaff.h"
 #include "registropaciente.h"
 #include <QtSql/QSqlQueryModel>
+#include "login.h"
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -177,11 +178,98 @@ void MainWindow::on_radioButton_paciente_toggled(bool checked)
 void MainWindow::on_pushButton_iniciarSesion_clicked()
 {
     //Mostrar boton salir
-    ui->pushButton_salir->setHidden(false);
-    //Pagina paciente
-    ui->stackedWidget_principal->setCurrentIndex(2);
-    ui->pushButton_login->setHidden(true);
-    ui->pushButton_registro->setHidden(true);
+
+QMessageBox informacion;
+    int tipo;
+    QString user=ui->lineEdit_idUsuario->text();
+    QString clave=ui->lineEdit_passwordLogin->text();
+
+    if(user==""||clave=="")
+    {
+        qDebug()<<"entre por que no escribi nada";
+        informacion.setWindowTitle("Informacion");
+        informacion.setText ("Usuario o clave incorrectos, intente de nuevo");
+        informacion.setStandardButtons( QMessageBox::Ok) ;
+        informacion.setDefaultButton (QMessageBox ::Ok ) ;
+        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+        informacion.exec();
+    }else {
+
+    qDebug()<<"entre por que no escribi nada 2";
+    login lo;
+    tipo=lo.ingresar(user,clave,database);
+
+    if(tipo==5)
+    {
+     qDebug()<<"es un admi";
+     //Lo mandamos a su pagina
+     ui->stackedWidget_principal->setCurrentIndex(5);
+    }
+    else if(tipo==0)
+    {
+        qDebug()<<"no exite el usuario";
+        informacion.setWindowTitle("Informacion");
+        informacion.setText ("cuenta no existente");
+        informacion.setStandardButtons( QMessageBox::Ok) ;
+        informacion.setDefaultButton (QMessageBox ::Ok ) ;
+        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+        informacion.exec();
+    }
+    else if(tipo==1)
+    {
+        qDebug()<<"tienes tu clave incorrecta";
+        informacion.setWindowTitle("Informacion");
+        informacion.setText ("Usuario o clave incorrectos, intente de nuevo");
+        informacion.setStandardButtons( QMessageBox::Ok) ;
+        informacion.setDefaultButton (QMessageBox ::Ok ) ;
+        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+        informacion.exec();
+    }
+    else if(tipo==2)
+    {
+        ui->pushButton_salir->setHidden(false);
+        //Pagina paciente
+
+        ui->pushButton_login->setHidden(true);
+        ui->pushButton_registro->setHidden(true);
+        qDebug()<<"eres un paciente";
+        ui->stackedWidget_principal->setCurrentIndex(2);
+    }
+    else if(tipo==3)
+    {
+        ui->pushButton_salir->setHidden(false);
+
+
+        ui->pushButton_login->setHidden(true);
+        ui->pushButton_registro->setHidden(true);
+        qDebug()<<"eres un doctor";
+        ui->stackedWidget_principal->setCurrentIndex(3);
+    }
+    else if(tipo==4)
+    {
+        ui->pushButton_salir->setHidden(false);
+
+
+        ui->pushButton_login->setHidden(true);
+        ui->pushButton_registro->setHidden(true);
+        qDebug()<<"eres de staff";
+        ui->stackedWidget_principal->setCurrentIndex(4);
+    }
+    else if(tipo==6)
+    {
+        qDebug()<<"no estas activado";
+        informacion.setWindowTitle("Informacion");
+        informacion.setText ("Tu cuenta aun no esta activada");
+        informacion.setStandardButtons( QMessageBox::Ok) ;
+        informacion.setDefaultButton (QMessageBox ::Ok ) ;
+        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+        informacion.exec();
+    }
+
+    }
+ui->lineEdit_idUsuario->clear();
+ui->lineEdit_passwordLogin->clear();
+
 }
 
 //Salir
