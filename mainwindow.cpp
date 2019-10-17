@@ -213,7 +213,7 @@ void MainWindow::on_pushButton_imgPerfil_clicked()
     pix.loadFromData(foto);
     int w=ui->label_imgPerfil->width();
     int h=ui->label_imgPerfil->height();
-    ui->label_imgPerfil->setPixmap(pix.scaled(w,h,Qt::AspectRatioMode::KeepAspectRatio));
+    ui->label_imgPerfil->setPixmap(pix.scaled(w,h,Qt::AspectRatioMode::IgnoreAspectRatio));
 }
 
 //Para verificar contraseñas iguales
