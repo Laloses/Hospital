@@ -16,6 +16,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
     //1 es que la clave es incorrecta
     //2 es que es un paciente
     //3 es que es un doctor
+    //6 doctor o staff sin permiso
     //4 es que es staff
     //5 es un administrador
     recurso=base;
@@ -31,8 +32,8 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
     QString userval,claveval;
 
     //aqui hare los querys para encontrar el tipo de usuario
-    doctor1="select iddoctor,idUser from doctor where idUser='"+user+"'; ";
-    staff1="select idstaff,idUser from staff where idUser='"+user+"'; ";
+    doctor1="select iddoctor,idUser,estado from doctor where idUser='"+user+"'; ";
+    staff1="select idstaff,idUser,estado from staff where idUser='"+user+"'; ";
     paciente1="select idpaciente,idUser from paciente where idUser='"+user+"'; ";
 
     doctor.exec(doctor1);
@@ -43,6 +44,10 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
     //pasamos los valores donde se encuentre un usuario
     userval=usuarios.value(0).toString();
     claveval=usuarios.value(1).toString();
+
+    QString est1,est2;
+
+
 
     admi2.exec(admi1);
     admi2.next();
@@ -78,8 +83,18 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                     aux=doctor.value(1).toString();
                     if(user==aux)
                     {
-                        tipo=false;
-                        return 3;
+                        est1=doctor.value(2).toString();
+
+                        if(est1=="1")
+                        {
+                            tipo=false;
+                            return 3;
+                        }
+                        else {
+                            tipo=false;
+                            return 6;
+                        }
+
                     }
                 }
                 else
@@ -100,8 +115,16 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                             aux=staff.value(1).toString();
                             if(user==aux)
                             {
-                                tipo=false;
-                                return 4;
+                                est2=staff.value(2).toString();
+                                if(est2=="1")
+                                {
+                                    tipo=false;
+                                    return 3;
+                        }
+                                else {
+                                    tipo=false;
+                                    return 6;
+                        }
                             }
                         }
                     }
@@ -111,7 +134,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
         }
         else
         {
-            return 1;
+            return 0;
         }
     }
     return 0;
