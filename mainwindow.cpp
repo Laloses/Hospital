@@ -359,6 +359,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
                               imgRoute,
                              idPregunta,
                               ui->lineEdit_respuesta->text());
+
        }
 
        if(ui->radioButton_paciente->isChecked()){
@@ -378,6 +379,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
                               imgRoute,
                              idPregunta,
                               ui->lineEdit_respuesta->text());
+
        }
        if(ui->radioButton_doc->isChecked()){
            correcto = regDoctor.registroDoc(
