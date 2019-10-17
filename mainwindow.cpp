@@ -11,9 +11,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //Conexion a la base de datos
-    database = QSqlDatabase::addDatabase("QODBC");
-    database.setDatabaseName("Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=lobohospital;");
+    database= QSqlDatabase::addDatabase("QMYSQL");
+    database.setHostName("localhost");
+    database.setPort(3306);
+    database.setDatabaseName("lobohospital");
     database.setUserName("root");
+    database.setPassword("");
     if(!database.open()){
         qDebug()<<database.lastError().text();
     }
