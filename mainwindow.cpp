@@ -289,8 +289,9 @@ void MainWindow::on_pushButton_salir_clicked()
     id_usuario=id_staff=id_doctor=id_paciente="0";
     //Pagina principal
     ui->stackedWidget_principal->setCurrentIndex(0);
-    //ocultar boton salir
+    //ocultar boton salir y mi perfil
     ui->pushButton_salir->setHidden(true);
+    ui->pushButton_miPerfil->setHidden(true);
     //Mostrar botones de login y registrar
     ui->pushButton_login->setHidden(false);
     ui->pushButton_registro->setHidden(false);
