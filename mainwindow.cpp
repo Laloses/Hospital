@@ -407,15 +407,16 @@ QString MainWindow::calcularEdad(QString fechaN){
     QSqlQuery fechaActual;
     qDebug()<<"fecha: "+fechaN;
     //Restamos los años, pero comparamos si ya paso el mes de su fecha de nacimiento
-    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF( DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d') , 0, -1);") ){
-        fechaActual.next();
-        edad=fechaActual.value(0).toString();
-        qDebug()<<"Edad: "+edad;
-        return edad;
+    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF( DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d') , 0, -1)") ){
+        if(fechaActual.next()){
+            edad=fechaActual.value(0).toString();
+            qDebug()<<"Edad: "+edad;
+            return edad;
+        }
+        //Si no entra devuelve 0
+        //Quitar este messageBox si funciona bien
+        QMessageBox::warning(this,"","No se pudo calcular la edad.");
     }
-    //Si no entra devuelve 0
-    //Quitar este messageBox si funciona bien
-    QMessageBox::warning(this,"","No se pudo calcular la edad, devolviendo 0");
     return edad;
 }
 
