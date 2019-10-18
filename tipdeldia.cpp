@@ -29,7 +29,9 @@ int tipdeldia::randon(){
 }
 
 void tipdeldia::mostrarTip(){
+
     QString mostra,nombretip,descripcion,link,foto,ran;
+    //srand(time(nullptr));
     int rando=randon();
     ran=QString::number(rando);
     QSqlQuery query;
@@ -44,5 +46,13 @@ void tipdeldia::mostrarTip(){
     qDebug()<<"Descirpcion"<<descripcion;
     qDebug()<<"Link"<<link;
     query.lastError().text();
+    ui->label_nombretip->setText(nombretip);
+    ui->textBrowser_descripcion->setText(descripcion);
+    ui->label_link->setText(link);
 
+}
+
+void tipdeldia::on_pushButton_cerrar_clicked()
+{
+    close();
 }

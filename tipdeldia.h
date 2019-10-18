@@ -5,7 +5,7 @@
 #include <QtSql/QSqlQuery>
 #include <QtDebug>
 #include <QtSql/QSqlError>
-
+#include <time.h>
 namespace Ui {
 class tipdeldia;
 }
@@ -19,6 +19,9 @@ public:
     ~tipdeldia();
     int randon();
     void mostrarTip();
+
+private slots:
+    void on_pushButton_cerrar_clicked();
 
 private:
     Ui::tipdeldia *ui;
