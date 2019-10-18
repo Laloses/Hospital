@@ -27,7 +27,7 @@ int tipdeldia::randon(){
       qDebug()<<"Randon: "<<numero;
       return  numero.toInt();
 }
-
+//metodo para mostra los datos del tip
 void tipdeldia::mostrarTip(){
 
     QString mostra,nombretip,descripcion,link,foto,ran;
