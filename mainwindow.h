@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QtSql/QSqlDatabase>
 #include "registrodoctor.h"
-
+#include "tipdeldia.h"
 namespace Ui {
 class MainWindow;
 }

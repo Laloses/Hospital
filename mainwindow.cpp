@@ -407,7 +407,7 @@ QString MainWindow::calcularEdad(QString fechaN){
     QSqlQuery fechaActual;
     qDebug()<<"fecha: "+fechaN;
     //Restamos los años, pero comparamos si ya paso el mes de su fecha de nacimiento
-    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF( DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d') , 0, -1);") ){
+    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF( DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d'),0, -1)") ){
         fechaActual.next();
         edad=fechaActual.value(0).toString();
         qDebug()<<"Edad: "+edad;
@@ -546,11 +546,6 @@ void MainWindow::on_pushButton_respuesta_clicked()
 
 }
 
-//Cuando el usuario le da clic para ver su tip del día
-void MainWindow::on_pushButton_tip_clicked()
-{
-
-}
 
 //Cuando el usuario ya inicio sesión y quiere ver si perfil
 void MainWindow::on_pushButton_miPerfil_clicked()
@@ -570,4 +565,12 @@ void MainWindow::on_pushButton_miPerfil_clicked()
         //Pagina de doctor
         ui->stackedWidget_principal->setCurrentIndex(3);
     }
+}
+
+//Cuando el usuario le da clic para ver su tip del día
+void MainWindow::on_pushButton_tip_clicked()
+{
+      tipdeldia tip;
+      tip.mostrarTip();
+
 }
