@@ -88,16 +88,16 @@ void MainWindow::on_pushButton_verRegistros_clicked()
     ui->radioButton_paciente->setChecked(true);
 
     //Quitamos los datos de doc
-    ui->comboBox_especiDoc->setVisible(false);
-    ui->label_especiDoc->setVisible(false);
-    ui->lineEdit_cedula->setVisible(false);
-    ui->label_cedula->setVisible(false);
-    ui->lineEdit_universidad->setVisible(false);
-    ui->label_universidad->setVisible(false);
+    ui->comboBox_especiDoc->setHidden(true);
+    ui->label_especiDoc->setHidden(true);
+    ui->lineEdit_cedula->setHidden(true);
+    ui->label_cedula->setHidden(true);
+    ui->lineEdit_universidad->setHidden(true);
+    ui->label_universidad->setHidden(true);
 
     //Quitamos los datos del staff
-    ui->comboBox_puesto->setVisible(false);
-    ui->label_puesto->setVisible(false);
+    ui->comboBox_puesto->setHidden(true);
+    ui->label_puesto->setHidden(true);
 }
 
 //Cuando da click en el radio button para registrarse como doctor
@@ -105,12 +105,12 @@ void MainWindow::on_radioButton_doc_toggled(bool checked)
 {
     if(checked){
         //Mostramos los datos de doc
-        ui->comboBox_especiDoc->setVisible(true);
-        ui->label_especiDoc->setVisible(true);
-        ui->lineEdit_cedula->setVisible(true);
-        ui->label_cedula->setVisible(true);
-        ui->lineEdit_universidad->setVisible(true);
-        ui->label_universidad->setVisible(true);
+        ui->comboBox_especiDoc->setHidden(false);
+        ui->label_especiDoc->setHidden(false);
+        ui->lineEdit_cedula->setHidden(false);
+        ui->label_cedula->setHidden(false);
+        ui->lineEdit_universidad->setHidden(false);
+        ui->label_universidad->setHidden(false);
 
         //Cargar de la base de datos los puestos
         QSqlQueryModel *queryEspecialidades;
@@ -119,8 +119,8 @@ void MainWindow::on_radioButton_doc_toggled(bool checked)
         ui->comboBox_especiDoc->setModel(queryEspecialidades);
 
         //Quitamos los datos del staff
-        ui->comboBox_puesto->setVisible(false);
-        ui->label_puesto->setVisible(false);
+        ui->comboBox_puesto->setHidden(true);
+        ui->label_puesto->setHidden(true);
     }
 }
 
@@ -129,8 +129,8 @@ void MainWindow::on_radioButton_staff_toggled(bool checked)
 {
     if(checked){
         //Mostramos los datos del staff
-        ui->comboBox_puesto->setVisible(true);
-        ui->label_puesto->setVisible(true);
+        ui->comboBox_puesto->setHidden(false);
+        ui->label_puesto->setHidden(false);
 
         //Cargar de la base de datos los puestos
         QSqlQueryModel *queryPuestos;
@@ -141,12 +141,12 @@ void MainWindow::on_radioButton_staff_toggled(bool checked)
         //Si estaba marcado el radio button de doctor
         if(ui->comboBox_especiDoc->isVisible()){
             //Quitamos los datos de doc
-            ui->comboBox_especiDoc->setVisible(false);
-            ui->label_especiDoc->setVisible(false);
-            ui->lineEdit_cedula->setVisible(false);
-            ui->label_cedula->setVisible(false);
-            ui->lineEdit_universidad->setVisible(false);
-            ui->label_universidad->setVisible(false);
+            ui->comboBox_especiDoc->setHidden(true);
+            ui->label_especiDoc->setHidden(true);
+            ui->lineEdit_cedula->setHidden(true);
+            ui->label_cedula->setHidden(true);
+            ui->lineEdit_universidad->setHidden(true);
+            ui->label_universidad->setHidden(true);
         }
     }
 }
@@ -157,18 +157,18 @@ void MainWindow::on_radioButton_paciente_toggled(bool checked)
     if(checked){
         //Quitamos los datos que no sean de paciente
         //Quitamos los datos del staff
-        ui->comboBox_puesto->setVisible(false);
-        ui->label_puesto->setVisible(false);
+        ui->comboBox_puesto->setHidden(true);
+        ui->label_puesto->setHidden(true);
 
         //Si estaba marcado el radio button de doctor
         if(ui->comboBox_especiDoc->isVisible()){
             //Quitamos los datos de doc
-            ui->comboBox_especiDoc->setVisible(false);
-            ui->label_especiDoc->setVisible(false);
-            ui->lineEdit_cedula->setVisible(false);
-            ui->label_cedula->setVisible(false);
-            ui->lineEdit_universidad->setVisible(false);
-            ui->label_universidad->setVisible(false);
+            ui->comboBox_especiDoc->setHidden(true);
+            ui->label_especiDoc->setHidden(true);
+            ui->lineEdit_cedula->setHidden(true);
+            ui->label_cedula->setHidden(true);
+            ui->lineEdit_universidad->setHidden(true);
+            ui->label_universidad->setHidden(true);
         }
     }
 }
@@ -229,8 +229,8 @@ bool MainWindow::verificarPasswordRegistro(){
 bool MainWindow::verificarDatosRegistro(){
     bool flag=false;
     QString estiloBueno, estiloMalo;
-    estiloMalo="background-color: rgb(255,0,0);";
-    estiloBueno="background-color: rgb(255,255,255);";
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
     QRegExp re("[a-zZ-A]"), re2("[0-9]");
 
     //Que el nombre y apellidos y contenga solo letras
@@ -297,7 +297,7 @@ bool MainWindow::verificarDatosRegistro(){
         }
     }
 
-    if(!flag) QMessageBox::warning(this,"Faltan campos","Por favor complete todos los campos.");
+    if(!flag) QMessageBox::warning(this,"Faltan campos","Por favor verifique los campos.");
     return flag;
 }
 
@@ -308,7 +308,7 @@ QString MainWindow::calcularEdad(QString fechaN){
     QSqlQuery fechaActual;
     qDebug()<<"fecha: "+fechaN;
     //Restamos los años, pero comparamos si ya paso el mes de su fecha de nacimiento
-    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d'), 0 , -1 )") ){
+    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF( DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d') , 0, -1);") ){
         fechaActual.next();
         edad=fechaActual.value(0).toString();
         qDebug()<<"Edad: "+edad;
