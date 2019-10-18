@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget_principal->setCurrentIndex(0);
     //Ocultamos el boton salir
     ui->pushButton_salir->setHidden(true);
+    ui->pushButton_miPerfil->setHidden(true);
     id_staff=id_doctor=id_usuario=id_paciente="0";
 }
 
@@ -204,6 +205,9 @@ QMessageBox informacion;
      qDebug()<<"es un admi";
      //Lo mandamos a su pagina
      ui->stackedWidget_principal->setCurrentIndex(5);
+     ui->pushButton_salir->setHidden(false);
+     ui->pushButton_login->setHidden(true);
+     ui->pushButton_registro->setHidden(true);
     }
     else if(tipo==0)
     {
@@ -229,31 +233,38 @@ QMessageBox informacion;
     {
         ui->pushButton_salir->setHidden(false);
         //Pagina paciente
-
         ui->pushButton_login->setHidden(true);
         ui->pushButton_registro->setHidden(true);
         qDebug()<<"eres un paciente";
         ui->stackedWidget_principal->setCurrentIndex(2);
+        //Mostramos boton perfil
+        ui->pushButton_miPerfil->setHidden(false);
+
+        id_usuario=lo.getIdUser();
     }
     else if(tipo==3)
     {
         ui->pushButton_salir->setHidden(false);
-
-
         ui->pushButton_login->setHidden(true);
         ui->pushButton_registro->setHidden(true);
         qDebug()<<"eres un doctor";
         ui->stackedWidget_principal->setCurrentIndex(3);
+        //Mostramos boton perfil
+        ui->pushButton_miPerfil->setHidden(false);
+
+        id_usuario=lo.getIdUser();
     }
     else if(tipo==4)
     {
         ui->pushButton_salir->setHidden(false);
-
-
         ui->pushButton_login->setHidden(true);
         ui->pushButton_registro->setHidden(true);
         qDebug()<<"eres de staff";
         ui->stackedWidget_principal->setCurrentIndex(4);
+        //Mostramos boton perfil
+        ui->pushButton_miPerfil->setHidden(false);
+
+        id_usuario=lo.getIdUser();
     }
     else if(tipo==6)
     {

@@ -10,7 +10,9 @@ class login
 public:
     login();
     int ingresar(QString,QString,QSqlDatabase);
+    QString getIdUser();
     QSqlDatabase recurso;
+    QString id;
 };
 
 #endif // LOGIN_H

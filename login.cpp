@@ -70,7 +70,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
         qDebug()<<"tienes la clave incorrecta";
         return 1;
     }
-    else if(userval!=" ")
+    else if(userval!="")
     {
         if(userval==user && claveval==clave)
         {
@@ -88,6 +88,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                         if(est1=="1")
                         {
                             tipo=false;
+                            id=userval;
                             return 3;
                         }
                         else {
@@ -105,6 +106,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                         if(user==aux)
                         {
                             tipo=false;
+                            id=userval;
                             return 2;
                         }
                     }
@@ -119,6 +121,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                                 if(est2=="1")
                                 {
                                     tipo=false;
+                                    id=userval;
                                     return 3;
                         }
                                 else {
@@ -139,3 +142,8 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
     }
     return 0;
 }
+
+QString login::getIdUser(){
+    return id;
+}
+
