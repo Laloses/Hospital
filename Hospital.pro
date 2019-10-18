@@ -29,16 +29,19 @@ SOURCES += \
         mainwindow.cpp \
         registrodoctor.cpp \
         registropaciente.cpp \
-        registrostaff.cpp
+        registrostaff.cpp \
+        tipdeldia.cpp
 
 HEADERS += \
         mainwindow.h \
         registrodoctor.h \
         registropaciente.h \
-        registrostaff.h
+        registrostaff.h \
+        tipdeldia.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        tipdeldia.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

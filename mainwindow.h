@@ -42,6 +42,10 @@ private slots:
 
     void on_pushButton_respuesta_clicked();
 
+    void on_pushButton_tip_clicked();
+
+    void on_pushButton_miPerfil_clicked();
+
 private:
     Ui::MainWindow *ui;
     QSqlDatabase database;

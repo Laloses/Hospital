@@ -446,3 +446,29 @@ void MainWindow::on_pushButton_respuesta_clicked()
 
 
 }
+
+//Cuando el usuario le da clic para ver su tip del día
+void MainWindow::on_pushButton_tip_clicked()
+{
+
+}
+
+//Cuando el usuario ya inicio sesión y quiere ver si perfil
+void MainWindow::on_pushButton_miPerfil_clicked()
+{
+    //Si ya inicio sesión
+    if(id_paciente!="0"){
+        //Pagina de paciente
+        ui->stackedWidget_principal->setCurrentIndex(2);
+        //Pagina de sus datos
+        ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
+    }
+    if(id_staff!="0"){
+        //Pagina de staff
+        ui->stackedWidget_principal->setCurrentIndex(2);
+    }
+    if(id_doctor!="0"){
+        //Pagina de doctor
+        ui->stackedWidget_principal->setCurrentIndex(3);
+    }
+}
