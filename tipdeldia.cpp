@@ -30,7 +30,7 @@ int tipdeldia::randon(){
 //metodo para mostra los datos del tip
 void tipdeldia::mostrarTip(){
 
-    QString mostra,nombretip,descripcion,link,foto,ran;
+    QString mostra,nombretip,descripcion,foto,ran;
     //srand(time(nullptr));
     int rando=randon();
     ran=QString::number(rando);
@@ -47,12 +47,10 @@ void tipdeldia::mostrarTip(){
     qDebug()<<"Link"<<link;
     query.lastError().text();
     ui->label_nombretip->setText(nombretip);
-    ui->textBrowser_descripcion->setText(descripcion);
-    ui->label_link->setText(link);
-
+    ui->label_descripcion->setText(descripcion);
 }
 
-void tipdeldia::on_pushButton_cerrar_clicked()
+void tipdeldia::on_pushButton_link_clicked()
 {
-    close();
+    QDesktopServices::openUrl(QUrl(link));
 }

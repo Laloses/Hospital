@@ -5,7 +5,9 @@
 #include <QtSql/QSqlQuery>
 #include <QtDebug>
 #include <QtSql/QSqlError>
+#include <QDesktopServices>
 #include <time.h>
+#include <QUrl>
 namespace Ui {
 class tipdeldia;
 }
@@ -21,11 +23,13 @@ public:
     void mostrarTip();
 
 private slots:
-    void on_pushButton_cerrar_clicked();
+
+    void on_pushButton_link_clicked();
 
 private:
     Ui::tipdeldia *ui;
     QSqlDatabase database;
+    QString link;
 
 };
 
