@@ -15,7 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    //titulo de la pagina principal del programa
+    setWindowTitle("LOBO HOSPITAL");
     //Conexion a la base de datos
     database= QSqlDatabase::addDatabase("QMYSQL");
     database.setHostName("localhost");
@@ -289,8 +290,9 @@ void MainWindow::on_pushButton_salir_clicked()
     id_usuario=id_staff=id_doctor=id_paciente="0";
     //Pagina principal
     ui->stackedWidget_principal->setCurrentIndex(0);
-    //ocultar boton salir
+    //ocultar boton salir y mi perfil
     ui->pushButton_salir->setHidden(true);
+    ui->pushButton_miPerfil->setHidden(true);
     //Mostrar botones de login y registrar
     ui->pushButton_login->setHidden(false);
     ui->pushButton_registro->setHidden(false);
@@ -407,15 +409,11 @@ QString MainWindow::calcularEdad(QString fechaN){
     QSqlQuery fechaActual;
     qDebug()<<"fecha: "+fechaN;
     //Restamos los años, pero comparamos si ya paso el mes de su fecha de nacimiento
-    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF( DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d') , 0, -1)") ){
-        if(fechaActual.next()){
-            edad=fechaActual.value(0).toString();
-            qDebug()<<"Edad: "+edad;
-            return edad;
-        }
-        //Si no entra devuelve 0
-        //Quitar este messageBox si funciona bien
-        QMessageBox::warning(this,"","No se pudo calcular la edad.");
+    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF( DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d'),0, -1)") ){
+        fechaActual.next();
+        edad=fechaActual.value(0).toString();
+        qDebug()<<"Edad: "+edad;
+        return edad;
     }
     return edad;
 }
@@ -547,11 +545,6 @@ void MainWindow::on_pushButton_respuesta_clicked()
 
 }
 
-//Cuando el usuario le da clic para ver su tip del día
-void MainWindow::on_pushButton_tip_clicked()
-{
-
-}
 
 //Cuando el usuario ya inicio sesión y quiere ver si perfil
 void MainWindow::on_pushButton_miPerfil_clicked()
@@ -571,4 +564,13 @@ void MainWindow::on_pushButton_miPerfil_clicked()
         //Pagina de doctor
         ui->stackedWidget_principal->setCurrentIndex(3);
     }
+}
+
+//Cuando el usuario le da clic para ver su tip del día
+void MainWindow::on_pushButton_tip_clicked()
+{
+      static tipdeldia tip;
+      tip.mostrarTip();
+      tip.show();
+
 }
