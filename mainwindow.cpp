@@ -15,7 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    //titulo de la pagina principal del programa
+    setWindowTitle("LOBO HOSPITAL");
     //Conexion a la base de datos
     database= QSqlDatabase::addDatabase("QMYSQL");
     database.setHostName("localhost");
@@ -571,7 +572,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
 //Cuando el usuario le da clic para ver su tip del día
 void MainWindow::on_pushButton_tip_clicked()
 {
-      static tipdeldia tip(nullptr);
+      static tipdeldia tip;
       tip.mostrarTip();
       tip.show();
 

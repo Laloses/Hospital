@@ -8,6 +8,7 @@
 #include <QDesktopServices>
 #include <time.h>
 #include <QUrl>
+
 namespace Ui {
 class tipdeldia;
 }
@@ -30,6 +31,7 @@ private:
     Ui::tipdeldia *ui;
     QSqlDatabase database;
     QString link;
+    int rando;
 
 };
 

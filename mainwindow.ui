@@ -99,10 +99,10 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border-image: url(:/logoFinal.png);</string>
+            <string notr="true">border-image: url(:/logofinal1.png);</string>
            </property>
            <property name="text">
-            <string>LogoApp</string>
+            <string> </string>
            </property>
           </widget>
          </item>
@@ -565,6 +565,9 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
                  <width>133</width>
                  <height>20</height>
                 </size>
+               </property>
+               <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
                </property>
               </widget>
              </item>
