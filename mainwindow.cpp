@@ -37,6 +37,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_salir->setHidden(true);
     ui->pushButton_miPerfil->setHidden(true);
     id_staff=id_doctor=id_usuario=id_paciente="0";
+
+    //Modo de contraseñas
+    ui->lineEdit_password1->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_password2->setEchoMode(QLineEdit::Password);
+    ui->lineEdit_passwordLogin->setEchoMode(QLineEdit::Password);
 }
 
 MainWindow::~MainWindow()
@@ -319,9 +324,16 @@ void MainWindow::on_pushButton_imgPerfil_clicked()
 
 //Para verificar contraseñas iguales
 bool MainWindow::verificarPasswordRegistro(){
+    QString estiloBueno,estiloMalo;
+    estiloBueno="border:1px black; border-style:solid";
+    estiloMalo="border:2px red; border-style:solid";
     if(ui->lineEdit_password1->text() == ui->lineEdit_password2->text() && !ui->lineEdit_password1->text().isEmpty() ){
+        ui->lineEdit_password1->setStyleSheet(estiloBueno);
+        ui->lineEdit_password2->setStyleSheet(estiloBueno);
         return true;
     }
+    ui->lineEdit_password1->setStyleSheet(estiloMalo);
+    ui->lineEdit_password2->setStyleSheet(estiloMalo);
     QMessageBox::warning(this, "Contraseñas incorrectas", "Las contraseñas no coinciden.");
     return false;
 }
@@ -330,20 +342,21 @@ bool MainWindow::verificarPasswordRegistro(){
 bool MainWindow::verificarDatosRegistro(){
     bool flag=false;
     QString estiloBueno, estiloMalo;
+    int tamMax=8;
     estiloMalo="border:2px red; border-style:solid";
     estiloBueno="border:1px black; border-style:solid";
-    QRegExp re("[a-zZ-A]"), re2("[0-9]");
+    QRegExp re("^[a-zZ-A]*$"), re2("^[0-9]*$");
 
     //Que el nombre y apellidos y contenga solo letras
    if( ui->lineEdit_nombre->text().contains(re) ){
            ui->lineEdit_nombre->setStyleSheet(estiloBueno);
-           if( ui->lineEdit_apePaterno->text().contains(re) ){
+           if( ui->lineEdit_apePaterno->text().contains(re)){
                 ui->lineEdit_apePaterno->setStyleSheet(estiloBueno);
                 if( ui->lineEdit_apeMaterno->text().contains(re) ){
                     ui->lineEdit_apeMaterno->setStyleSheet(estiloBueno);
                     if( !ui->lineEdit_email->text().isEmpty() ){
                         ui->lineEdit_email->setStyleSheet(estiloBueno);
-                        if( ui->lineEdit_telefono->text().contains(re2) ){
+                        if( ui->lineEdit_telefono->text().contains(re2) && ui->lineEdit_telefono->text().size()<=tamMax+2){
                             ui->lineEdit_telefono->setStyleSheet(estiloBueno);
                             if ( !foto.isEmpty() ){
                                ui->label_imgPerfil->setStyleSheet(estiloBueno);
@@ -366,12 +379,12 @@ bool MainWindow::verificarDatosRegistro(){
            //En caso de que el apellido paterno
            }
            else{
-               ui->lineEdit_apePaterno->setStyleSheet(estiloMalo);
+               ui->lineEdit_apeMaterno->setStyleSheet(estiloMalo);
            }
         //En caso de que el apellido materno este mal
         }
         else{
-            ui->lineEdit_apeMaterno->setStyleSheet(estiloMalo);
+            ui->lineEdit_apePaterno->setStyleSheet(estiloMalo);
         }
     //En caso de que esta mal el nombre
     }
@@ -381,7 +394,7 @@ bool MainWindow::verificarDatosRegistro(){
 
     //Revision para los datos de doctor
     if(ui->radioButton_doc->isChecked()){
-        if( ui->lineEdit_cedula->text().contains(re2) ){
+        if( ui->lineEdit_cedula->text().contains(re2) && ui->lineEdit_cedula->text().size()<=tamMax ){
             ui->lineEdit_cedula->setStyleSheet(estiloBueno);
             if( ui->lineEdit_universidad->text().contains(re) ){
                 ui->lineEdit_universidad->setStyleSheet(estiloBueno);
@@ -550,19 +563,33 @@ void MainWindow::on_pushButton_respuesta_clicked()
 void MainWindow::on_pushButton_miPerfil_clicked()
 {
     //Si ya inicio sesión
-    if(id_paciente!="0"){
-        //Pagina de paciente
-        ui->stackedWidget_principal->setCurrentIndex(2);
-        //Pagina de sus datos
-        ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
-    }
-    if(id_staff!="0"){
-        //Pagina de staff
-        ui->stackedWidget_principal->setCurrentIndex(2);
-    }
-    if(id_doctor!="0"){
-        //Pagina de doctor
-        ui->stackedWidget_principal->setCurrentIndex(3);
+    if(id_usuario!="0"){
+        QSqlQuery q1,q2,q3;
+        q1.exec("SELECT idpaciente FROM paciente WHERE idUser='"+id_usuario+"'");
+        q2.exec("SELECT idstaff FROM staff WHERE idUser='"+id_usuario+"'");
+        q3.exec("SELECT iddoctor FROM doctor WHERE idUser='"+id_usuario+"'");
+        while(true){
+            if(q1.next()){
+                id_paciente=q1.value(0).toString();
+                //Pagina de paciente
+                ui->stackedWidget_principal->setCurrentIndex(2);
+                //Pagina de sus datos
+                ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
+                break;
+            }
+            if(q2.next()){
+                id_staff=q2.value(0).toString();
+                //Pagina de staff
+                ui->stackedWidget_principal->setCurrentIndex(4);
+                break;
+            }
+            if(q3.next()){
+                id_doctor=q3.value(0).toString();
+                //Pagina de doctor
+                ui->stackedWidget_principal->setCurrentIndex(3);
+                break;
+            }
+        }
     }
 }
 
