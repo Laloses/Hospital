@@ -214,6 +214,8 @@ QMessageBox informacion;
      ui->pushButton_salir->setHidden(false);
      ui->pushButton_login->setHidden(true);
      ui->pushButton_registro->setHidden(true);
+     //Ocultamos cosas del menu de arriba
+     ocultarMenuP();
     }
     else if(tipo==0)
     {
@@ -257,6 +259,8 @@ QMessageBox informacion;
         ui->stackedWidget_principal->setCurrentIndex(3);
         //Mostramos boton perfil
         ui->pushButton_miPerfil->setHidden(false);
+        //Ocultamos cosas del menu de arriba
+        ocultarMenuP();
 
         id_usuario=lo.getIdUser();
     }
@@ -269,6 +273,9 @@ QMessageBox informacion;
         ui->stackedWidget_principal->setCurrentIndex(4);
         //Mostramos boton perfil
         ui->pushButton_miPerfil->setHidden(false);
+        //Ocultamos cosas del menu de arriba
+        ocultarMenuP();
+
 
         id_usuario=lo.getIdUser();
     }
@@ -289,6 +296,24 @@ ui->lineEdit_passwordLogin->clear();
 
 }
 
+void MainWindow::ocultarMenuP(){
+    ui->comboBox_servicios->setHidden(true);
+    ui->pushButton_especialidades->setHidden(true);
+    ui->pushButton_infoHospital->setHidden(true);
+    ui->line->setHidden(true);
+    ui->line_2->setHidden(true);
+    ui->line_3->setHidden(true);
+}
+
+void MainWindow::mostrarMenuP(){
+    ui->comboBox_servicios->setHidden(false);
+    ui->pushButton_especialidades->setHidden(false);
+    ui->pushButton_infoHospital->setHidden(false);
+    ui->line->setHidden(false);
+    ui->line_2->setHidden(false);
+    ui->line_3->setHidden(false);
+}
+
 //Salir
 void MainWindow::on_pushButton_salir_clicked()
 {
@@ -301,6 +326,9 @@ void MainWindow::on_pushButton_salir_clicked()
     //Mostrar botones de login y registrar
     ui->pushButton_login->setHidden(false);
     ui->pushButton_registro->setHidden(false);
+
+    //mostramos cosas del menu de arriba
+    mostrarMenuP();
 }
 
 //Cuando le da a agregar imagen

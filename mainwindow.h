@@ -55,6 +55,7 @@ private:
     bool verificarPasswordRegistro();
     QString calcularEdad(QString);
     bool verificarDatosRegistro();
+    void ocultarMenuP();
 };
 
 #endif // MAINWINDOW_H
