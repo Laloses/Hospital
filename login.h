@@ -11,8 +11,11 @@ public:
     login();
     int ingresar(QString,QString,QSqlDatabase);
     QString getIdUser();
+    QString getIdStaff();
+    QString getIdPaciente();
+    QString getIdDoctor();
     QSqlDatabase recurso;
-    QString id;
+    QString idUser, idStaff, idPaciente, idDoctor;
 };
 
 #endif // LOGIN_H

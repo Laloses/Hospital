@@ -25,16 +25,16 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
     QSqlQuery admi2,doctor,staff,paciente,usuarios;
     QString admi1,doctor1,staff1,paciente1,usuarios1;
 
-    admi1="select matricula,clave from admi where matricula='"+user+"'; ";
-    usuarios1="select matricula,clave from usuario where matricula='"+user+"';";
+    admi1="select matricula,clave from admin where matricula='"+user+"'";
+    usuarios1="select matricula,clave from usuario where matricula="+user;
     usuarios.exec(usuarios1);
     usuarios.next();
     QString userval,claveval;
 
     //aqui hare los querys para encontrar el tipo de usuario
-    doctor1="select iddoctor,idUser,estado from doctor where idUser='"+user+"'; ";
-    staff1="select idstaff,idUser,estado from staff where idUser='"+user+"'; ";
-    paciente1="select idpaciente,idUser from paciente where idUser='"+user+"'; ";
+    doctor1="select iddoctor,idUser,estado from doctor where idUser="+user;
+    staff1="select idstaff,idUser,estado from staff where idUser="+user;
+    paciente1="select idpaciente,idUser from paciente where idUser="+user;
 
     doctor.exec(doctor1);
     staff.exec(staff1);
@@ -46,9 +46,6 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
     claveval=usuarios.value(1).toString();
 
     QString est1,est2;
-
-
-
     admi2.exec(admi1);
     admi2.next();
 
@@ -88,7 +85,8 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                         if(est1=="1")
                         {
                             tipo=false;
-                            id=userval;
+                            idDoctor=doctor.value(1).toString();
+                            idUser=userval;
                             return 3;
                         }
                         else {
@@ -106,7 +104,8 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                         if(user==aux)
                         {
                             tipo=false;
-                            id=userval;
+                            idPaciente=paciente.value(1).toString();
+                            idUser=userval;
                             return 2;
                         }
                     }
@@ -121,7 +120,8 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                                 if(est2=="1")
                                 {
                                     tipo=false;
-                                    id=userval;
+                                    idStaff=staff.value(1).toString();
+                                    idUser=userval;
                                     return 3;
                         }
                                 else {
@@ -144,6 +144,20 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
 }
 
 QString login::getIdUser(){
-    return id;
+    return idUser;
 }
+
+QString login::getIdStaff(){
+    return idStaff;
+}
+
+QString login::getIdPaciente(){
+    return idPaciente;
+}
+
+QString login::getIdDoctor(){
+    return idDoctor;
+}
+
+
 

@@ -50,7 +50,7 @@
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>90</height>
+        <height>65</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -88,6 +88,12 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
 }</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
+       <property name="topMargin">
+        <number>1</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>0</number>
+       </property>
        <item row="0" column="0" colspan="9">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
@@ -124,6 +130,9 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
          </item>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QLabel" name="label_informacion">
              <property name="minimumSize">
@@ -195,6 +204,9 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
          </item>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="spacing">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QLabel" name="label_urgencias">
              <property name="minimumSize">
@@ -511,7 +523,7 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
                 </size>
                </property>
                <property name="maxLength">
-                <number>8</number>
+                <number>9</number>
                </property>
               </widget>
              </item>
@@ -1699,26 +1711,6 @@ QPushButton:focus{
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_pagPaciente">
-          <property name="text">
-           <string>pagina de paciente</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <spacer name="horizontalSpacer_28">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>599</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="0" column="2" rowspan="2">
          <widget class="QWidget" name="widget_opcionesPerfilPaciente" native="true">
           <property name="minimumSize">
@@ -1728,7 +1720,7 @@ QPushButton:focus{
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">#pushButton_tip{
+           <string notr="true">QPushButton{
 	background-color: rgb(41, 87, 113);
 	border-radius:6px;
 	border:1px solid #fff;
@@ -1736,16 +1728,35 @@ QPushButton:focus{
 	padding:6px;
 	text-decoration:none;
 }
-#pushButton_tip:hoverr{
+QPushButton:hover{
 	background: rgb(111, 157, 183);
 	color: rgb(0, 0, 0);
 }
-#pushButton_tip:focus{
+QPushButton:focus{
 	background: rgb(51, 97, 123);
 	color: rgb(255, 255, 255);
 }</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_imgPerfilPaciente">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Foto perfil paciente</string>
+             </property>
+            </widget>
+           </item>
            <item>
             <spacer name="verticalSpacer_11">
              <property name="orientation">
@@ -1802,25 +1813,161 @@ QPushButton:focus{
             <height>371</height>
            </size>
           </property>
-          <widget class="QWidget" name="page_miPerfil"/>
+          <widget class="QWidget" name="page_miPerfilPac"/>
          </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_pagPaciente">
+          <property name="text">
+           <string>pagina de paciente</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <spacer name="horizontalSpacer_28">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>599</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="page_doctor">
-       <widget class="QLabel" name="label_pagDoc">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>180</y>
-          <width>71</width>
-          <height>16</height>
-         </rect>
+       <property name="styleSheet">
+        <string notr="true">#widget_opcionesPerfilDoctor{
+	background-color: rgb(41, 87, 113);
+}</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_9">
+        <property name="topMargin">
+         <number>0</number>
         </property>
-        <property name="text">
-         <string>pagina doctor</string>
+        <property name="rightMargin">
+         <number>0</number>
         </property>
-       </widget>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_pagDoc">
+          <property name="text">
+           <string>pagina doctor</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <spacer name="horizontalSpacer_29">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>686</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="2" rowspan="2">
+         <widget class="QWidget" name="widget_opcionesPerfilDoctor" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>110</width>
+            <height>412</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+	background-color: rgb(41, 87, 113);
+	border-radius:6px;
+	border:1px solid #fff;
+	color:#fff;
+	padding:6px;
+	text-decoration:none;
+}
+QPushButton:hover{
+	background: rgb(111, 157, 183);
+	color: rgb(0, 0, 0);
+}
+QPushButton:focus{
+	background: rgb(51, 97, 123);
+	color: rgb(255, 255, 255);
+}</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_imgPerfilDoctor">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Foto perfil doctor</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_13">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>184</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_citasDoc">
+             <property name="text">
+              <string>Mis citas</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_14">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>183</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QStackedWidget" name="stackedWidget_perfilDoctor">
+          <property name="minimumSize">
+           <size>
+            <width>731</width>
+            <height>371</height>
+           </size>
+          </property>
+          <widget class="QWidget" name="page_miPerfilDoc"/>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="page_staff">
        <widget class="QLabel" name="label_pagPersonal">

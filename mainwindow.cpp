@@ -30,7 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
     else {
         qDebug()<<"Base de datos conectada";
     }
-
+    datosPac = new QSqlQuery;
+    datosDoc = new QSqlQuery;
+    datosStaff = new QSqlQuery;
+    datosUser = new QSqlQuery;
     //La primera pagina que mostramos es la principal
     ui->stackedWidget_principal->setCurrentIndex(0);
     //Ocultamos el boton salir
@@ -42,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit_password1->setEchoMode(QLineEdit::Password);
     ui->lineEdit_password2->setEchoMode(QLineEdit::Password);
     ui->lineEdit_passwordLogin->setEchoMode(QLineEdit::Password);
+    id_usuario=id_staff=id_doctor=id_paciente="0";
 }
 
 MainWindow::~MainWindow()
@@ -184,9 +188,7 @@ void MainWindow::on_radioButton_paciente_toggled(bool checked)
 //Iniciar sesion
 void MainWindow::on_pushButton_iniciarSesion_clicked()
 {
-    //Mostrar boton salir
-
-QMessageBox informacion;
+    QMessageBox informacion;
     int tipo;
     QString user=ui->lineEdit_idUsuario->text();
     QString clave=ui->lineEdit_passwordLogin->text();
@@ -202,104 +204,111 @@ QMessageBox informacion;
         informacion.exec();
     }else {
 
-    qDebug()<<"entre por que no escribi nada 2";
-    login lo;
-    tipo=lo.ingresar(user,clave,database);
+        qDebug()<<"entre por que no escribi nada 2";
+        login lo;
+        tipo=lo.ingresar(user,clave,database);
 
-    if(tipo==5)
-    {
-     qDebug()<<"es un admi";
-     //Lo mandamos a su pagina
-     ui->stackedWidget_principal->setCurrentIndex(5);
-     ui->pushButton_salir->setHidden(false);
-     ui->pushButton_login->setHidden(true);
-     ui->pushButton_registro->setHidden(true);
-     //Ocultamos cosas del menu de arriba
-     ocultarMenuP();
-    }
-    else if(tipo==0)
-    {
-        qDebug()<<"no exite el usuario";
-        informacion.setWindowTitle("Informacion");
-        informacion.setText ("cuenta no existente");
-        informacion.setStandardButtons( QMessageBox::Ok) ;
-        informacion.setDefaultButton (QMessageBox ::Ok ) ;
-        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
-        informacion.exec();
-    }
-    else if(tipo==1)
-    {
-        qDebug()<<"tienes tu clave incorrecta";
-        informacion.setWindowTitle("Informacion");
-        informacion.setText ("Usuario o clave incorrectos, intente de nuevo");
-        informacion.setStandardButtons( QMessageBox::Ok) ;
-        informacion.setDefaultButton (QMessageBox ::Ok ) ;
-        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
-        informacion.exec();
-    }
-    else if(tipo==2)
-    {
-        ui->pushButton_salir->setHidden(false);
-        //Pagina paciente
-        ui->pushButton_login->setHidden(true);
-        ui->pushButton_registro->setHidden(true);
-        qDebug()<<"eres un paciente";
-        ui->stackedWidget_principal->setCurrentIndex(2);
-        //Mostramos boton perfil
-        ui->pushButton_miPerfil->setHidden(false);
+        if(tipo==5)
+        {
+         qDebug()<<"es un admi";
+         //Lo mandamos a su pagina
+         ui->stackedWidget_principal->setCurrentIndex(5);
+         ui->pushButton_salir->setHidden(false);
+         ui->pushButton_login->setHidden(true);
+         ui->pushButton_registro->setHidden(true);
+         //Ocultamos cosas del menu de arriba
+         ocultarMenuP();
+         ui->lineEdit_idUsuario->clear();
+         ui->lineEdit_passwordLogin->clear();
+        }
+        else if(tipo==0)
+        {
+            qDebug()<<"no exite el usuario";
+            informacion.setWindowTitle("Informacion");
+            informacion.setText ("No existe la cuenta");
+            informacion.setStandardButtons( QMessageBox::Ok) ;
+            informacion.setDefaultButton (QMessageBox ::Ok ) ;
+            informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+            informacion.exec();
+        }
+        else if(tipo==1)
+        {
+            qDebug()<<"tienes tu clave incorrecta";
+            informacion.setWindowTitle("Informacion");
+            informacion.setText ("Usuario o clave incorrectos, intente de nuevo");
+            informacion.setStandardButtons( QMessageBox::Ok) ;
+            informacion.setDefaultButton (QMessageBox ::Ok ) ;
+            informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+            informacion.exec();
+        }
+        else if(tipo==2)
+        {
+            qDebug()<<"eres un paciente";
+            ui->pushButton_salir->setHidden(false);
+            ui->pushButton_login->setHidden(true);
+            ui->pushButton_registro->setHidden(true);
+            //Mostramos boton perfil
+            ui->pushButton_miPerfil->setHidden(false);
+            ui->lineEdit_idUsuario->clear();
+            ui->lineEdit_passwordLogin->clear();
 
-        id_usuario=lo.getIdUser();
-    }
-    else if(tipo==3)
-    {
-        ui->pushButton_salir->setHidden(false);
-        ui->pushButton_login->setHidden(true);
-        ui->pushButton_registro->setHidden(true);
-        qDebug()<<"eres un doctor";
-        ui->stackedWidget_principal->setCurrentIndex(3);
-        //Mostramos boton perfil
-        ui->pushButton_miPerfil->setHidden(false);
-        //Ocultamos cosas del menu de arriba
-        ocultarMenuP();
+            id_paciente=lo.getIdPaciente();
+            id_usuario=lo.getIdUser();
+            on_pushButton_miPerfil_clicked();
+        }
+        else if(tipo==3)
+        {
+            qDebug()<<"eres un doctor";
+            ui->pushButton_salir->setHidden(false);
+            ui->pushButton_login->setHidden(true);
+            ui->pushButton_registro->setHidden(true);
+            //Mostramos boton perfil
+            ui->pushButton_miPerfil->setHidden(false);
+            ui->lineEdit_idUsuario->clear();
+            ui->lineEdit_passwordLogin->clear();
+            //Ocultamos cosas del menu de arriba
+            ocultarMenuP();
 
-        id_usuario=lo.getIdUser();
-    }
-    else if(tipo==4)
-    {
-        ui->pushButton_salir->setHidden(false);
-        ui->pushButton_login->setHidden(true);
-        ui->pushButton_registro->setHidden(true);
-        qDebug()<<"eres de staff";
-        ui->stackedWidget_principal->setCurrentIndex(4);
-        //Mostramos boton perfil
-        ui->pushButton_miPerfil->setHidden(false);
-        //Ocultamos cosas del menu de arriba
-        ocultarMenuP();
+            id_doctor=lo.getIdDoctor();
+            id_usuario=lo.getIdUser();
+            on_pushButton_miPerfil_clicked();
+        }
+        else if(tipo==4)
+        {
+            qDebug()<<"eres de staff";
+            ui->pushButton_salir->setHidden(false);
+            ui->pushButton_login->setHidden(true);
+            ui->pushButton_registro->setHidden(true);
+            //Mostramos boton perfil
+            ui->pushButton_miPerfil->setHidden(false);
+            ui->lineEdit_idUsuario->clear();
+            ui->lineEdit_passwordLogin->clear();
+            //Ocultamos cosas del menu de arriba
+            ocultarMenuP();
 
+            id_staff=lo.getIdStaff();
+            id_usuario=lo.getIdUser();
+            on_pushButton_miPerfil_clicked();
+        }
+        else if(tipo==6)
+        {
+            qDebug()<<"no estas activado";
+            informacion.setWindowTitle("Informacion");
+            informacion.setText ("Tu cuenta aun no esta activada");
+            informacion.setStandardButtons( QMessageBox::Ok) ;
+            informacion.setDefaultButton (QMessageBox ::Ok ) ;
+            informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+            informacion.exec();
+        }
 
-        id_usuario=lo.getIdUser();
     }
-    else if(tipo==6)
-    {
-        qDebug()<<"no estas activado";
-        informacion.setWindowTitle("Informacion");
-        informacion.setText ("Tu cuenta aun no esta activada");
-        informacion.setStandardButtons( QMessageBox::Ok) ;
-        informacion.setDefaultButton (QMessageBox ::Ok ) ;
-        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
-        informacion.exec();
-    }
-
-    }
-ui->lineEdit_idUsuario->clear();
-ui->lineEdit_passwordLogin->clear();
-
 }
 
 void MainWindow::ocultarMenuP(){
     ui->comboBox_servicios->setHidden(true);
     ui->pushButton_especialidades->setHidden(true);
     ui->pushButton_infoHospital->setHidden(true);
+    ui->pushButton__dirMedico->setHidden(true);
     ui->line->setHidden(true);
     ui->line_2->setHidden(true);
     ui->line_3->setHidden(true);
@@ -309,6 +318,7 @@ void MainWindow::mostrarMenuP(){
     ui->comboBox_servicios->setHidden(false);
     ui->pushButton_especialidades->setHidden(false);
     ui->pushButton_infoHospital->setHidden(false);
+    ui->pushButton__dirMedico->setHidden(false);
     ui->line->setHidden(false);
     ui->line_2->setHidden(false);
     ui->line_3->setHidden(false);
@@ -347,7 +357,7 @@ void MainWindow::on_pushButton_imgPerfil_clicked()
     pix.loadFromData(foto);
     int w=ui->label_imgPerfil->width();
     int h=ui->label_imgPerfil->height();
-    ui->label_imgPerfil->setPixmap(pix.scaled(w,h,Qt::AspectRatioMode::IgnoreAspectRatio));
+    ui->label_imgPerfil->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatioByExpanding));
 }
 
 //Para verificar contraseñas iguales
@@ -592,32 +602,31 @@ void MainWindow::on_pushButton_miPerfil_clicked()
 {
     //Si ya inicio sesión
     if(id_usuario!="0"){
-        QSqlQuery q1,q2,q3;
-        q1.exec("SELECT idpaciente FROM paciente WHERE idUser='"+id_usuario+"'");
-        q2.exec("SELECT idstaff FROM staff WHERE idUser='"+id_usuario+"'");
-        q3.exec("SELECT iddoctor FROM doctor WHERE idUser='"+id_usuario+"'");
-        while(true){
-            if(q1.next()){
-                id_paciente=q1.value(0).toString();
+        datosUser->exec("SELECT * FROM usuario WHERE matricula="+id_usuario);
+        datosUser->next();
+        datosPac->exec("SELECT * FROM paciente WHERE idUser="+id_usuario);
+        datosStaff->exec("SELECT * FROM staff WHERE idUser="+id_usuario);
+        datosDoc->exec("SELECT * FROM doctor WHERE idUser="+id_usuario);
+            if(datosPac->next()){
+                cargarDatosUsuarios();
                 //Pagina de paciente
                 ui->stackedWidget_principal->setCurrentIndex(2);
                 //Pagina de sus datos
                 ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
-                break;
+                id_paciente=datosPac->value(1).toString();
             }
-            if(q2.next()){
-                id_staff=q2.value(0).toString();
+            if(datosStaff->next()){
+                cargarDatosUsuarios();
+                id_staff=datosStaff->value(1).toString();
                 //Pagina de staff
                 ui->stackedWidget_principal->setCurrentIndex(4);
-                break;
             }
-            if(q3.next()){
-                id_doctor=q3.value(0).toString();
+            if(datosDoc->next()){
+                cargarDatosUsuarios();
+                id_doctor=datosDoc->value(1).toString();
                 //Pagina de doctor
                 ui->stackedWidget_principal->setCurrentIndex(3);
-                break;
             }
-        }
     }
 }
 
@@ -628,4 +637,35 @@ void MainWindow::on_pushButton_tip_clicked()
       tip.mostrarTip();
       tip.show();
 
+}
+
+//Funcion para cargar los datos en el perfil del usuario
+void MainWindow::cargarDatosUsuarios(){
+        if(id_paciente!="0"){
+            QPixmap img;
+            //Ponemos su imagen
+            img.loadFromData(datosUser->value(9).toByteArray());
+            //Imagen
+            img.scaled(ui->label_imgPerfilPaciente->width(),ui->label_imgPerfilPaciente->height(),Qt::KeepAspectRatio);
+            ui->label_imgPerfilPaciente->setPixmap(img);
+            //Nombre
+            ui->label_pagPaciente->setText(datosUser->value(2).toString()+" "+datosUser->value(3).toString()+" "+datosUser->value(4).toString());
+        }
+        if(id_doctor!="0"){
+            //datosUser.value()
+            //datosDoc.value()
+            //Nombre
+            ui->label_pagDoc->setText(datosUser->value(2).toString()+" "+datosUser->value(3).toString()+" "+datosUser->value(4).toString());
+        }
+        if(id_staff!="0"){
+            //datosUser.value()
+            //datosStaff.value()
+            //Nombre
+            ui->label_pagPersonal->setText(datosUser->value(2).toString()+" "+datosUser->value(3).toString()+" "+datosUser->value(4).toString());
+        }
+}
+
+void MainWindow::on_lineEdit_passwordLogin_returnPressed()
+{
+    on_pushButton_iniciarSesion_clicked();
 }

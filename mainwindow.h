@@ -13,9 +13,19 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+private:
+    Ui::MainWindow *ui;
+    QSqlDatabase database;
+    QString id_usuario,id_staff,id_doctor,id_paciente;
+    QByteArray foto;
+    QString imgRoute;
+    QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser;
+    bool verificarPasswordRegistro();
+    QString calcularEdad(QString);
+    bool verificarDatosRegistro();
+    void ocultarMenuP();
+    void mostrarMenuP();
+    void cargarDatosUsuarios();
 
 private slots:
     void on_pushButton_verRegistros_clicked();
@@ -46,17 +56,12 @@ private slots:
 
     void on_pushButton_miPerfil_clicked();
 
-private:
-    Ui::MainWindow *ui;
-    QSqlDatabase database;
-    QString id_usuario,id_staff,id_doctor,id_paciente;
-    QByteArray foto;
-    QString imgRoute;
-    bool verificarPasswordRegistro();
-    QString calcularEdad(QString);
-    bool verificarDatosRegistro();
-    void ocultarMenuP();
-    void mostrarMenuP();
+    void on_lineEdit_passwordLogin_returnPressed();
+
+public:
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+
 };
 
 #endif // MAINWINDOW_H
