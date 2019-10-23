@@ -213,6 +213,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
          qDebug()<<"es un admi";
          //Lo mandamos a su pagina
          ui->stackedWidget_principal->setCurrentIndex(5);
+         ui->stackedWidget_admin->setCurrentIndex(0);
          ui->pushButton_salir->setHidden(false);
          ui->pushButton_login->setHidden(true);
          ui->pushButton_registro->setHidden(true);
@@ -686,4 +687,200 @@ void MainWindow::on_pushButton_datosPaciente_clicked()
 {
     //Sus datos
     ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
+}
+
+void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
+{
+int cont=0;
+    QString consultaDoc,consultaStaff;
+    QSqlQuery queryDoc,queryStaff;
+     consultaDoc="select *from Doctores";
+     queryDoc.exec(consultaDoc);
+     consultaStaff="select *from Staffs";
+     queryStaff.exec(consultaStaff);
+
+ui->stackedWidget_admin->setCurrentIndex(1);
+
+    bool band1,band2,band3;
+    band1=true;
+    band2=true;
+    band3=true;
+
+while(band3)
+{
+
+if(band1==true||band2==true)
+{
+    if(queryDoc.next())
+    {
+        QString nombre,espec,espera,matricula;
+        nombre=queryDoc.value(0).toString();
+        espec=queryDoc.value(4).toString();
+        espera="en espera";
+
+        matricula=queryDoc.value(3).toString();
+
+        QPushButton *b=new QPushButton();
+            b->setText("Ver Solicitud");
+            QLabel *l=new QLabel;
+            l->setText(nombre);
+            b->setFixedSize(QSize(120,40));
+            QSignalMapper *mapper=new QSignalMapper(this);
+             connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+            mapper->setMapping(b,matricula);
+            connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
+        QLabel *espacio=new QLabel();
+        QLabel *esp=new QLabel();
+        esp->setText(espec);
+            QLabel *estado=new QLabel();
+            estado->setText(espera);
+            ui->lista->addWidget(b,cont,0,1,1);
+            ui->lista->addWidget(l,cont,1,1,1);
+
+            ui->lista->addWidget(esp,cont,2,1,1);
+            ui->lista->addWidget(estado,cont,3,1,1);
+            //   ui->lista->addWidget(esp,cont,3,1,1);
+          // ui->lista->addWidget(m,cont,4,1,1);
+           // ui->gridLayout.add;
+           cont++;
+
+    }
+    else {
+        band1=false;
+    }
+    if(queryStaff.next())
+    {
+        QString nombre,espec,espera,matricula;
+        nombre=queryStaff.value(0).toString();
+        espec=queryStaff.value(4).toString();
+        espera="en espera";
+
+matricula=queryStaff.value(3).toString();
+
+        QPushButton *b=new QPushButton();
+            b->setText("Ver Solicitud");
+            QLabel *l=new QLabel;
+            l->setText(nombre);
+            b->setFixedSize(QSize(120,40));
+            QSignalMapper *mapper=new QSignalMapper(this);
+             connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+            mapper->setMapping(b,matricula);
+            connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
+
+        QLabel *espacio=new QLabel();
+        QLabel *esp=new QLabel();
+        esp->setText(espec);
+            QLabel *estado=new QLabel();
+            estado->setText(espera);
+            ui->lista->addWidget(b,cont,0,1,1);
+            ui->lista->addWidget(l,cont,1,1,1);
+
+            ui->lista->addWidget(esp,cont,2,1,1);
+            ui->lista->addWidget(estado,cont,3,1,1);
+            //   ui->lista->addWidget(esp,cont,3,1,1);
+          // ui->lista->addWidget(m,cont,4,1,1);
+           // ui->gridLayout.add;
+           cont++;
+
+
+
+    }
+    else {
+        band2=false;
+    }
+
+
+
+}
+else {
+    band3=false;
+}
+
+}
+
+
+
+}
+
+
+
+void MainWindow::PonerInfo(QString matri)
+{
+    ui->label_solicitud->clear();
+    ui->lineEdit_nombre_solicitud->clear();
+    ui->lineEdit_cedula_solicitud->clear();
+    ui->lineEdit_Univercida_solicitud->clear();
+    ui->lineEdit_especialidad_solicitud->clear();
+
+    ui->label_solicitud->show();
+    ui->lineEdit_nombre_solicitud->show();
+    ui->lineEdit_cedula_solicitud->show();
+    ui->lineEdit_Univercida_solicitud->show();
+    ui->lineEdit_especialidad_solicitud->show();
+
+
+
+
+
+    QString doc,staff,usua,imagen;
+    doc="select tipoUser from doctor where idUser='"+matri+"'; ";
+    staff="select tipoUser from staff where idUser='"+matri+"'; ";
+    QSqlQuery doc1,staff1,usuario;
+     QPixmap pix;
+    doc1.exec(doc);
+    staff1.exec(staff);
+
+    usua="select nombre,fotop from usuario where matricula='"+matri+"'; ";
+    usuario.exec(usua);
+    usuario.next();
+    imagen=pix.loadFromData(usuario.value(1).toByteArray());
+    int w=ui->label_solicitud->width();
+    int h=ui->label_solicitud->height();
+     ui->label_solicitud->setPixmap(pix.scaled(w,h,Qt::AspectRatioMode::IgnoreAspectRatio));
+     QString nsol;
+     nsol=usuario.value(0).toString();
+     ui->lineEdit_nombre_solicitud->setText(nsol);
+
+
+
+
+
+    if(doc1.next())
+    {
+       QString doc2,especialidad,nombreEsp,nombreFEsp;
+       doc2="select idEspecialidad,cedulapro,universidad from doctor where idUser='"+matri+"'; ";
+       QSqlQuery datos,datos2;
+       datos.exec(doc2);
+       datos.next();
+       especialidad=datos.value(0).toString();
+       nombreEsp="select nombre from especialidad where idEsp='"+especialidad+"'; ";
+       datos2.exec(nombreEsp);
+       datos2.next();
+       nombreFEsp=datos2.value(0).toString();
+       ui->lineEdit_especialidad_solicitud->setText(nombreFEsp);
+       ui->lineEdit_cedula_solicitud->setText(datos.value(1).toString());
+       ui->lineEdit_Univercida_solicitud->setText(datos.value(2).toString());
+
+
+    }
+    else if (staff1.next()) {
+        QString doc2;
+        doc2="select idpuesto from staff where idUser='"+matri+"'; ";
+        QSqlQuery datos,datos2;
+        datos.exec(doc2);
+        datos.next();
+        QString puesto,puestonombre;
+        puesto=datos.value(0).toString();
+        QString puesto1;
+        puesto1="select nombre from puesto where idpuesto='"+puesto+"'; ";
+        datos2.exec(puesto1);
+        datos2.next();
+        puestonombre=datos2.value(0).toString();
+         ui->lineEdit_especialidad_solicitud->setText(puestonombre);
+         ui->lineEdit_cedula_solicitud->hide();
+         ui->lineEdit_Univercida_solicitud->hide();
+
+    }
+
+
 }

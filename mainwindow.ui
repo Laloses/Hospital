@@ -445,7 +445,7 @@ border-image: url(:/imgs/logofinal.png);</string>
          <rect>
           <x>390</x>
           <y>150</y>
-          <width>61</width>
+          <width>71</width>
           <height>16</height>
          </rect>
         </property>
@@ -1986,7 +1986,7 @@ QPushButton:focus{
            <string notr="true"/>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <widget class="QLabel" name="label_imgPerfilDoctor">
@@ -1994,8 +1994,8 @@ QPushButton:focus{
              <rect>
               <x>30</x>
               <y>30</y>
-              <width>83</width>
-              <height>43</height>
+              <width>98</width>
+              <height>16</height>
              </rect>
             </property>
             <property name="minimumSize">
@@ -2067,8 +2067,8 @@ background -color: red;
              <rect>
               <x>320</x>
               <y>70</y>
-              <width>47</width>
-              <height>13</height>
+              <width>62</width>
+              <height>16</height>
              </rect>
             </property>
             <property name="text">
@@ -2189,7 +2189,7 @@ QPushButton:focus{
          </item>
         </layout>
        </widget>
-       <widget class="QStackedWidget" name="stackedWidget">
+       <widget class="QStackedWidget" name="stackedWidget_admin">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -2198,22 +2198,137 @@ QPushButton:focus{
           <height>381</height>
          </rect>
         </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
         <widget class="QWidget" name="page_2">
          <widget class="QLabel" name="label_pageAdmin">
           <property name="geometry">
            <rect>
-            <x>40</x>
-            <y>130</y>
-            <width>77</width>
+            <x>130</x>
+            <y>60</y>
+            <width>204</width>
             <height>16</height>
            </rect>
           </property>
           <property name="text">
-           <string>Pagina admin</string>
+           <string>Pagina admin menu principal admin</string>
           </property>
          </widget>
         </widget>
-        <widget class="QWidget" name="page_3"/>
+        <widget class="QWidget" name="page_3">
+         <widget class="QWidget" name="widget" native="true">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>510</width>
+            <height>370</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_12">
+           <item row="0" column="0">
+            <widget class="QScrollArea" name="scrollArea">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>486</width>
+                <height>346</height>
+               </rect>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_14">
+               <item row="0" column="0">
+                <layout class="QGridLayout" name="lista"/>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_especialidad_solicitud">
+          <property name="geometry">
+           <rect>
+            <x>700</x>
+            <y>190</y>
+            <width>130</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="placeholderText">
+           <string>Especialidad o puesto</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_nombre_solicitud">
+          <property name="geometry">
+           <rect>
+            <x>550</x>
+            <y>190</y>
+            <width>130</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="placeholderText">
+           <string>Nombre</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_solicitud">
+          <property name="geometry">
+           <rect>
+            <x>540</x>
+            <y>10</y>
+            <width>121</width>
+            <height>91</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>foto del solicitante</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_cedula_solicitud">
+          <property name="geometry">
+           <rect>
+            <x>550</x>
+            <y>240</y>
+            <width>130</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="placeholderText">
+           <string>Cedula</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_Univercida_solicitud">
+          <property name="geometry">
+           <rect>
+            <x>700</x>
+            <y>240</y>
+            <width>130</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="placeholderText">
+           <string>Univercidad</string>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </widget>
      </widget>

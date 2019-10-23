@@ -64,9 +64,14 @@ private slots:
 
     void on_pushButton_datosPaciente_clicked();
 
+    void on_pushButton_SolicitudesUsuarios_clicked();
+    void PonerInfo(QString);
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+
 
 };
 
