@@ -58,6 +58,12 @@ private slots:
 
     void on_lineEdit_passwordLogin_returnPressed();
 
+    void on_pushButton_citasDoc_clicked();
+
+    void on_pushButton_horarioDoc_clicked();
+
+    void on_pushButton_datosPaciente_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

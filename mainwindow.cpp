@@ -669,3 +669,21 @@ void MainWindow::on_lineEdit_passwordLogin_returnPressed()
 {
     on_pushButton_iniciarSesion_clicked();
 }
+
+void MainWindow::on_pushButton_citasDoc_clicked()
+{
+    //pag citas doc
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(2);
+}
+
+void MainWindow::on_pushButton_horarioDoc_clicked()
+{
+    //Mostrar su horario
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(1);
+}
+
+void MainWindow::on_pushButton_datosPaciente_clicked()
+{
+    //Sus datos
+    ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
+}
