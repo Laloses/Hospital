@@ -434,7 +434,7 @@ border-image: url(:/imgs/logofinal.png);</string>
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -1986,7 +1986,7 @@ QPushButton:focus{
            <string notr="true"/>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <widget class="QLabel" name="label_imgPerfilDoctor">
@@ -2023,7 +2023,7 @@ background -color: red;
            </property>
            <layout class="QGridLayout" name="gridLayout_2">
             <item row="0" column="0" colspan="3">
-             <widget class="QTableWidget" name="tableWidget">
+             <widget class="QTableWidget" name="tableHorario">
               <property name="minimumSize">
                <size>
                 <width>851</width>

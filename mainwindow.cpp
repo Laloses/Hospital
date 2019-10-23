@@ -272,6 +272,34 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             id_doctor=lo.getIdDoctor();
             id_usuario=lo.getIdUser();
             on_pushButton_miPerfil_clicked();
+            //-------------------------------------- TABLA ----------------------------------
+                        //prueba tablaHorario
+                        ui->tableHorario->setColumnCount(6);
+                        ui->tableHorario->setRowCount(9);
+                        ui->tableHorario->setHorizontalHeaderLabels(QStringList() << "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado");
+                        ui->tableHorario->setVerticalHeaderLabels(QStringList() << "08:00" << "09:00" << "10:00" << "11:00" << "12:00" << "13:00" << "14:00" << "15:00" << "16:00" << "17:00");
+                        ui->tableHorario->setRowCount(ui->tableHorario->rowCount()+1);
+
+                        //insertamos en la tabla (fila, columna, elemento a insertar)
+                        for(int i = 0; i < 2; i++){
+                            QLabel *prueba = new QLabel();
+                            prueba->setAlignment(Qt::AlignCenter);
+                            prueba->setStyleSheet("color:white;");
+                            prueba->setText("PRUEBA");
+
+                            QWidget *waux = new QWidget();
+
+                            QVBoxLayout *layout1 = new QVBoxLayout(waux);
+                            layout1->addWidget(prueba);
+
+                            waux->setLayout(layout1);
+                            waux = new QWidget();
+                            waux->setLayout(layout1);
+                            ui->tableHorario->setCellWidget(i+2, 0, waux);
+                            ui->tableHorario->setItem(i+2, 0, new QTableWidgetItem);
+                            ui->tableHorario->item(i+2, 0)->setBackground(Qt::red);
+                        }
+            //------------------------------------------------------------------------------
         }
         else if(tipo==4)
         {
