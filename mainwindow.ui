@@ -1986,7 +1986,7 @@ QPushButton:focus{
            <string notr="true"/>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <widget class="QLabel" name="label_imgPerfilDoctor">
@@ -2086,7 +2086,7 @@ background -color: red;
          <rect>
           <x>320</x>
           <y>180</y>
-          <width>61</width>
+          <width>80</width>
           <height>16</height>
          </rect>
         </property>
@@ -2103,19 +2103,6 @@ background -color: red;
 	border-bottom: 2px solid #f7f8f9 ;
 }</string>
        </property>
-       <widget class="QLabel" name="label_pageAdmin">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>50</y>
-          <width>63</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Pagina admin</string>
-        </property>
-       </widget>
        <widget class="QWidget" name="widget_opcionesPerfAdmin" native="true">
         <property name="geometry">
          <rect>
@@ -2201,6 +2188,32 @@ QPushButton:focus{
           </spacer>
          </item>
         </layout>
+       </widget>
+       <widget class="QStackedWidget" name="stackedWidget">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>50</y>
+          <width>861</width>
+          <height>381</height>
+         </rect>
+        </property>
+        <widget class="QWidget" name="page_2">
+         <widget class="QLabel" name="label_pageAdmin">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>130</y>
+            <width>77</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Pagina admin</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page_3"/>
        </widget>
       </widget>
      </widget>
