@@ -9,6 +9,7 @@
 #include <QtSql/QSqlQueryModel>
 #include "login.h"
 #include <QMessageBox>
+#include "agregaractividaddoctor.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -272,34 +273,6 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             id_doctor=lo.getIdDoctor();
             id_usuario=lo.getIdUser();
             on_pushButton_miPerfil_clicked();
-            //-------------------------------------- TABLA ----------------------------------
-                        //prueba tablaHorario
-                        ui->tableHorario->setColumnCount(6);
-                        ui->tableHorario->setRowCount(9);
-                        ui->tableHorario->setHorizontalHeaderLabels(QStringList() << "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado");
-                        ui->tableHorario->setVerticalHeaderLabels(QStringList() << "08:00" << "09:00" << "10:00" << "11:00" << "12:00" << "13:00" << "14:00" << "15:00" << "16:00" << "17:00");
-                        ui->tableHorario->setRowCount(ui->tableHorario->rowCount()+1);
-
-                        //insertamos en la tabla (fila, columna, elemento a insertar)
-                        for(int i = 0; i < 2; i++){
-                            QLabel *prueba = new QLabel();
-                            prueba->setAlignment(Qt::AlignCenter);
-                            prueba->setStyleSheet("color:white;");
-                            prueba->setText("PRUEBA");
-
-                            QWidget *waux = new QWidget();
-
-                            QVBoxLayout *layout1 = new QVBoxLayout(waux);
-                            layout1->addWidget(prueba);
-
-                            waux->setLayout(layout1);
-                            waux = new QWidget();
-                            waux->setLayout(layout1);
-                            ui->tableHorario->setCellWidget(i+2, 0, waux);
-                            ui->tableHorario->setItem(i+2, 0, new QTableWidgetItem);
-                            ui->tableHorario->item(i+2, 0)->setBackground(Qt::red);
-                        }
-            //------------------------------------------------------------------------------
         }
         else if(tipo==4)
         {
@@ -620,8 +593,6 @@ void MainWindow::on_pushButton_respuesta_clicked()
         QMessageBox::critical(this,"No se Registro", "Hay un error en el servidor, intente más tarde.");
     }
 
-
-
 }
 
 
@@ -651,6 +622,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
             }
             if(datosDoc->next()){
                 cargarDatosUsuarios();
+                cargarHorarioDoc();
                 id_doctor=datosDoc->value(1).toString();
                 //Pagina de doctor
                 ui->stackedWidget_principal->setCurrentIndex(3);
@@ -661,10 +633,9 @@ void MainWindow::on_pushButton_miPerfil_clicked()
 //Cuando el usuario le da clic para ver su tip del día
 void MainWindow::on_pushButton_tip_clicked()
 {
-      static tipdeldia tip;
+      tipdeldia tip(this);
       tip.mostrarTip();
       tip.show();
-
 }
 
 //Funcion para cargar los datos en el perfil del usuario
@@ -708,10 +679,51 @@ void MainWindow::on_pushButton_horarioDoc_clicked()
 {
     //Mostrar su horario
     ui->stackedWidget_perfilDoctor->setCurrentIndex(1);
+    cargarHorarioDoc();
 }
 
 void MainWindow::on_pushButton_datosPaciente_clicked()
 {
     //Sus datos
     ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
+}
+
+void MainWindow::on_pb_agregarActividadDoc_clicked()
+{
+    //Mostramos el dialog de actividades
+    agregarActividadDoctor *agreAct = new agregarActividadDoctor(this,id_doctor);
+    agreAct->show();
+    if(!agreAct->isVisible()) on_pushButton_horarioDoc_clicked();
+}
+
+void MainWindow::cargarHorarioDoc(){
+    //-------------------------------------- TABLA ----------------------------------
+                //prueba tablaHorario
+                ui->tableHorario->setColumnCount(6);
+                ui->tableHorario->setRowCount(10);
+                ui->tableHorario->setHorizontalHeaderLabels(QStringList()<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado");
+                ui->tableHorario->setVerticalHeaderLabels(QStringList() << "08:00" << "09:00" << "10:00" << "11:00" << "12:00" << "13:00" << "14:00" << "15:00" << "16:00" << "17:00");
+                //ui->tableHorario->setRowCount(ui->tableHorario->rowCount());
+
+                //insertamos en la tabla (fila, columna, elemento a insertar)
+                for(int i = 0; i < 2; i++){
+                    QLabel *prueba = new QLabel();
+                    prueba->setAlignment(Qt::AlignCenter);
+                    prueba->setStyleSheet("color:white;");
+                    prueba->setText("PRUEBA");
+
+                    QWidget *waux = new QWidget();
+
+                    QVBoxLayout *layout1 = new QVBoxLayout(waux);
+                    layout1->addWidget(prueba);
+
+                    waux->setLayout(layout1);
+                    waux = new QWidget();
+                    waux->setLayout(layout1);
+                    ui->tableHorario->setCellWidget(i+2, 0, waux);
+                    ui->tableHorario->setItem(i+2, 0, new QTableWidgetItem);
+                    ui->tableHorario->item(i+2, 0)->setBackground(Qt::red);
+                    ui->tableHorario->setEditTriggers(QAbstractItemView::NoEditTriggers);
+                }
+    //------------------------------------------------------------------------------
 }

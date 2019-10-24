@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        agregaractividaddoctor.cpp \
         main.cpp \
         mainwindow.cpp \
         registrodoctor.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
         tipdeldia.cpp
 
 HEADERS += \
+        agregaractividaddoctor.h \
         mainwindow.h \
         registrodoctor.h \
         registropaciente.h \
@@ -42,6 +44,7 @@ HEADERS += \
         tipdeldia.h
 
 FORMS += \
+        agregaractividaddoctor.ui \
         mainwindow.ui \
         tipdeldia.ui
 

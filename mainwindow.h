@@ -26,6 +26,7 @@ private:
     void ocultarMenuP();
     void mostrarMenuP();
     void cargarDatosUsuarios();
+    void cargarHorarioDoc();
 
 private slots:
     void on_pushButton_verRegistros_clicked();
@@ -63,6 +64,8 @@ private slots:
     void on_pushButton_horarioDoc_clicked();
 
     void on_pushButton_datosPaciente_clicked();
+
+    void on_pb_agregarActividadDoc_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

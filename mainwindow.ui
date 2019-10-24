@@ -479,6 +479,7 @@ border-image: url(:/imgs/logofinal.png);</string>
 #pushButton_iniciarSesion:hover{
 	background: rgb(111, 157, 183);
 	color: rgb(0, 0, 0);
+	margin-top: 1px;
 }
 #pushButton_iniciarSesion:focus{
 	background: rgb(51, 97, 123);
@@ -649,12 +650,6 @@ border-image: url(:/imgs/logofinal.png);</string>
                  <height>23</height>
                 </size>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>78</width>
-                 <height>23</height>
-                </size>
-               </property>
                <property name="text">
                 <string>Iniciar Sesión</string>
                </property>
@@ -721,6 +716,7 @@ QPushButton{
 QPushButton:hover{
 	background: rgb(111, 157, 183);
 	color: rgb(0, 0, 0);
+	margin-top: 1px;
 }
 QPushButton:focus{
 	background: rgb(51, 97, 123);
@@ -728,7 +724,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="page_oculto">
            <layout class="QGridLayout" name="gridLayout_5">
@@ -761,12 +757,6 @@ QPushButton:focus{
             <item row="1" column="1">
              <widget class="QPushButton" name="pushButton_verRegistros">
               <property name="minimumSize">
-               <size>
-                <width>75</width>
-                <height>27</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>75</width>
                 <height>27</height>
@@ -1056,12 +1046,6 @@ QPushButton:focus{
                 <item>
                  <widget class="QPushButton" name="pushButton_imgPerfil">
                   <property name="minimumSize">
-                   <size>
-                    <width>91</width>
-                    <height>27</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
                    <size>
                     <width>91</width>
                     <height>27</height>
@@ -1421,12 +1405,6 @@ QPushButton:focus{
                   <height>27</height>
                  </size>
                 </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>72</width>
-                  <height>27</height>
-                 </size>
-                </property>
                 <property name="text">
                  <string>Registrarse</string>
                 </property>
@@ -1656,12 +1634,6 @@ QPushButton:focus{
                     <height>23</height>
                    </size>
                   </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>75</width>
-                    <height>23</height>
-                   </size>
-                  </property>
                   <property name="text">
                    <string>Confirmar</string>
                   </property>
@@ -1878,6 +1850,21 @@ QPushButton:focus{
 	background-color: #acbdd3;
 	border-top: 2px double blue;
 	border-bottom: 2px solid #f7f8f9 ;
+}
+QPushButton{
+	background: #cbc6c3;
+	border-radius:6px;
+	color: black;
+	padding:6px;
+	text-decoration:none;
+}
+QPushButton:hover{
+	background: #acbdd3;
+	margin-top: 1px;
+}
+QPushButton:focus{
+	background: rgb(111, 157, 183);
+	color:white;
 }</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_9">
@@ -2027,9 +2014,53 @@ background -color: red;
               <property name="minimumSize">
                <size>
                 <width>851</width>
-                <height>361</height>
+                <height>352</height>
                </size>
               </property>
+              <property name="rowCount">
+               <number>8</number>
+              </property>
+              <property name="columnCount">
+               <number>6</number>
+              </property>
+              <attribute name="horizontalHeaderVisible">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="horizontalHeaderCascadingSectionResizes">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderDefaultSectionSize">
+               <number>130</number>
+              </attribute>
+              <attribute name="horizontalHeaderMinimumSectionSize">
+               <number>39</number>
+              </attribute>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="verticalHeaderCascadingSectionResizes">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="verticalHeaderDefaultSectionSize">
+               <number>32</number>
+              </attribute>
+              <attribute name="verticalHeaderStretchLastSection">
+               <bool>true</bool>
+              </attribute>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
              </widget>
             </item>
             <item row="1" column="0">
@@ -2053,9 +2084,9 @@ background -color: red;
              </spacer>
             </item>
             <item row="1" column="2">
-             <widget class="QPushButton" name="pushButton_2">
+             <widget class="QPushButton" name="pb_agregarActividadDoc">
               <property name="text">
-               <string>Mis Actividades</string>
+               <string>Agregar actividad</string>
               </property>
              </widget>
             </item>
