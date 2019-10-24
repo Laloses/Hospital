@@ -434,7 +434,7 @@ border-image: url(:/imgs/logofinal.png);</string>
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -2477,7 +2477,7 @@ background:transparent;
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QPushButton" name="pushButton_AceptarSoli">
                <property name="minimumSize">
                 <size>
                  <width>100</width>

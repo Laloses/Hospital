@@ -136,7 +136,7 @@ void MainWindow::on_radioButton_doc_toggled(bool checked)
     }
 }
 
-//Cuando da click en el radio button para registrarse como staff
+//Cuando da click en el radio button para registrarse como Doctor
 void MainWindow::on_radioButton_staff_toggled(bool checked)
 {
     if(checked){
@@ -881,4 +881,11 @@ void MainWindow::PonerInfo(QString matri)
     }
 
 
+}
+
+void MainWindow::on_pushButton_AceptarSoli_clicked()
+{
+    static aceptarSolicitud c;
+    c.mostrarZonas();
+    c.show();
 }

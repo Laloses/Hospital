@@ -5,6 +5,7 @@
 #include <QtSql/QSqlDatabase>
 #include "registrodoctor.h"
 #include "tipdeldia.h"
+#include "aceptarsolicitud.h"
 namespace Ui {
 class MainWindow;
 }
@@ -67,6 +68,8 @@ private slots:
 
     void on_pushButton_SolicitudesUsuarios_clicked();
     void PonerInfo(QString);
+
+    void on_pushButton_AceptarSoli_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

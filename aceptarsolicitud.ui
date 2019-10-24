@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>440</y>
+     <y>430</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -60,94 +60,6 @@
      <height>31</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>Urgencias</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Cirugía general y Digestiva</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Anestesiologia</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Cuidados Intensivos</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Rehabilitación</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Hematologia</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Neumologia</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Nefrología</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Dermatologia</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Ginecología y Obstetricia</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Urologia</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Oftalmología</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Laboratorio Clínico</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>RadioDiagnóstico</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Medicina Preventiva</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_numConsultorio">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>230</y>
-     <width>113</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>consultorio</string>
-   </property>
   </widget>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
@@ -169,8 +81,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>466</width>
-         <height>326</height>
+         <width>470</width>
+         <height>330</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_14">
@@ -179,6 +91,73 @@
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>210</y>
+     <width>83</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Datos consultorio</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>230</y>
+     <width>190</width>
+     <height>74</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Area:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="2">
+     <widget class="QLineEdit" name="lineEdit_numConsultorio">
+      <property name="placeholderText">
+       <string>consultorio</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Piso:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" colspan="2">
+     <widget class="QLineEdit" name="lineEdit_numConsultorio_2">
+      <property name="placeholderText">
+       <string>Piso</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Numero consultorio:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLineEdit" name="lineEdit_numConsultorio_3">
+      <property name="placeholderText">
+       <string>consultorio</string>
+      </property>
      </widget>
     </item>
    </layout>
