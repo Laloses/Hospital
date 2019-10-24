@@ -2251,8 +2251,8 @@ background:transparent;
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>490</width>
-                <height>350</height>
+                <width>486</width>
+                <height>346</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_14">
@@ -2265,7 +2265,7 @@ background:transparent;
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>530</x>

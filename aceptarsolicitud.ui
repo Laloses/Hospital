@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>aceptarSolicitud</class>
+ <widget class="QDialog" name="aceptarSolicitud">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>720</width>
+    <height>488</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_guardar">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>440</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Guardar</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_turno">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>50</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Despertino</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Matutino</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Nocturno</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="comboBox_area">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>140</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Urgencias</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Cirugía general y Digestiva</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Anestesiologia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Cuidados Intensivos</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Rehabilitación</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Hematologia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Neumologia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Nefrología</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Dermatologia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Ginecología y Obstetricia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Urologia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Oftalmología</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Laboratorio Clínico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>RadioDiagnóstico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Medicina Preventiva</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_numConsultorio">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>230</y>
+     <width>113</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>consultorio</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>40</y>
+     <width>490</width>
+     <height>350</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_12">
+    <item row="0" column="0">
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>466</width>
+         <height>326</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_14">
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="lista"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

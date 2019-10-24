@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        aceptarsolicitud.cpp \
         main.cpp \
         mainwindow.cpp \
         registrodoctor.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
         tipdeldia.cpp
 
 HEADERS += \
+        aceptarsolicitud.h \
         mainwindow.h \
         registrodoctor.h \
         registropaciente.h \
@@ -42,6 +44,7 @@ HEADERS += \
         tipdeldia.h
 
 FORMS += \
+        aceptarsolicitud.ui \
         mainwindow.ui \
         tipdeldia.ui
 
