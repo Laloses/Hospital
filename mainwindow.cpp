@@ -8,7 +8,8 @@
 #include "registropaciente.h"
 #include <QtSql/QSqlQueryModel>
 #include "login.h"
-#include <QMessageBox>
+
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -46,6 +47,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit_password2->setEchoMode(QLineEdit::Password);
     ui->lineEdit_passwordLogin->setEchoMode(QLineEdit::Password);
     id_usuario=id_staff=id_doctor=id_paciente="0";
+    matric="";
+    UserTipo=0;
+
+
 }
 
 MainWindow::~MainWindow()
@@ -162,6 +167,21 @@ void MainWindow::on_radioButton_staff_toggled(bool checked)
         }
     }
 }
+
+void clearLayout(QLayout *layout) {
+    QLayoutItem *item;
+    while((item = layout->takeAt(0))) {
+        if (item->layout()) {
+            clearLayout(item->layout());
+            delete item->layout();
+        }
+        if (item->widget()) {
+            delete item->widget();
+        }
+        delete item;
+    }
+}
+
 
 //Cuando da click en el radio button para registrarse como paciente
 void MainWindow::on_radioButton_paciente_toggled(bool checked)
@@ -691,13 +711,17 @@ void MainWindow::on_pushButton_datosPaciente_clicked()
 
 void MainWindow::solicitUsuarios(){
 
+    clearLayout(ui->lista);
+
     int cont=0;
-    QString consultaDoc,consultaStaff,nombre,espec,espera,matricula;
-    QSqlQuery queryDoc,queryStaff;
+    QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
+    QSqlQuery queryDoc,queryStaff,userEst;
     consultaDoc="select *from Doctores";
     queryDoc.exec(consultaDoc);
     consultaStaff="select *from Staffs";
     queryStaff.exec(consultaStaff);
+
+
 
     ui->stackedWidget_admin->setCurrentIndex(1);
 
@@ -713,6 +737,13 @@ void MainWindow::solicitUsuarios(){
         {
             if(queryDoc.next())
             {
+                if(queryDoc.value(5).toString()=="1")
+                {
+
+                }
+                else {
+
+
                 nombre=queryDoc.value(0).toString();
                 espec=queryDoc.value(4).toString();
                 espera="en espera";
@@ -738,17 +769,22 @@ void MainWindow::solicitUsuarios(){
 
                 ui->lista->addWidget(esp,cont,2,1,1);
                 ui->lista->addWidget(estado,cont,3,1,1);
-                //   ui->lista->addWidget(esp,cont,3,1,1);
-                // ui->lista->addWidget(m,cont,4,1,1);
-                // ui->gridLayout.add;
-                cont++;
 
+                cont++;
+                }
             }
             else {
                 band1=false;
             }
             if(queryStaff.next())
             {
+                if(queryStaff.value(5).toString()=="1")
+                {
+
+                }
+                else {
+
+
                 //QString nombre,espec,espera,matricula;
                 nombre=queryStaff.value(0).toString();
                 espec=queryStaff.value(4).toString();
@@ -765,7 +801,6 @@ void MainWindow::solicitUsuarios(){
                 connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
                 mapper->setMapping(b,matricula);
                 connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
-
                 QLabel *espacio=new QLabel();
                 QLabel *esp=new QLabel();
                 esp->setText(espec);
@@ -781,7 +816,7 @@ void MainWindow::solicitUsuarios(){
                 // ui->gridLayout.add;
                 cont++;
 
-
+                }
 
             }
             else {
@@ -828,10 +863,8 @@ void MainWindow::PonerInfo(QString matri)
     QPixmap pix;
     doc="select tipoUser from doctor where idUser='"+matri+"'; ";
     staff="select tipoUser from staff where idUser='"+matri+"'; ";
-
     doc1.exec(doc);
     staff1.exec(staff);
-
     usua="select nombre,fotop from usuario where matricula='"+matri+"'; ";
     usuario.exec(usua);
     usuario.next();
@@ -839,7 +872,6 @@ void MainWindow::PonerInfo(QString matri)
     int w=ui->label_solicitud->width();
     int h=ui->label_solicitud->height();
      ui->label_solicitud->setPixmap(pix.scaled(w,h,Qt::AspectRatioMode::IgnoreAspectRatio));
-
      nsol=usuario.value(0).toString();
      ui->lineEdit_nombre_solicitud->setText(nsol);
 
@@ -855,6 +887,8 @@ void MainWindow::PonerInfo(QString matri)
        datos2.exec(nombreEsp);
        datos2.next();
        nombreFEsp=datos2.value(0).toString();
+       matric=matri;
+       UserTipo=1;
        ui->lineEdit_especialidad_solicitud->setText(nombreFEsp);
        ui->lineEdit_cedula_solicitud->setText(datos.value(1).toString());
        ui->lineEdit_Univercida_solicitud->setText(datos.value(2).toString());
@@ -870,6 +904,8 @@ void MainWindow::PonerInfo(QString matri)
         QString puesto,puestonombre;
         puesto=datos.value(0).toString();
         QString puesto1;
+        matric=matri;
+        UserTipo=2;
         puesto1="select nombre from puesto where idpuesto='"+puesto+"'; ";
         datos2.exec(puesto1);
         datos2.next();
@@ -885,7 +921,119 @@ void MainWindow::PonerInfo(QString matri)
 
 void MainWindow::on_pushButton_AceptarSoli_clicked()
 {
-    static aceptarSolicitud c;
-    c.mostrarZonas();
-    c.show();
+     mostrarZonas();
+    ui->stackedWidget_admin->setCurrentIndex(2);
+}
+
+//----------------------------------------------------------------------------
+void MainWindow::mostrarZonas(){
+
+    QSqlQueryModel *queryPuestos;
+    queryPuestos= new QSqlQueryModel;
+    queryPuestos->setQuery("SELECT nombreArea FROM areah");
+    ui->comboBox_area->setModel(queryPuestos);
+
+
+}
+
+
+void MainWindow::infoConsultorio(QString idConsultorio){
+
+    qDebug()<<"hola:"<<idConsultorio;
+    QString consulta,nAre,numPiso,numConsultorio;
+    QSqlQuery query;
+    consulta="select are.idarea,are.nombreArea,con.idConsultorio,con.numConsultorio,con.ocupado,are.ubicacion as piso"
+               " from areah as are inner join consultorio as con on are.idarea=con.idarea where idConsultorio='"+idConsultorio+"'";
+    query.exec(consulta);
+    query.next();
+    nAre=query.value(1).toString();
+    numPiso=query.value(2).toString();
+    numConsultorio=query.value(3).toString();
+    ui->lineEdit_area->setText(nAre);
+    ui->lineEdit_piso->setText(numPiso);
+    ui->lineEdit_numconsultorio->setText(numConsultorio);
+
+}
+
+
+void MainWindow::mostrasConsultorios(){
+
+    QString areConsultorio,consulta,numconsultorio,idconsultorio,ocupado;
+    QSqlQuery query;
+    ocupado="false";
+    areConsultorio=ui->comboBox_area->currentText();
+    qDebug()<<areConsultorio;
+    consulta="select are.idarea,are.nombreArea,con.idConsultorio,con.numConsultorio,con.ocupado"
+               " from areah as are inner join consultorio as con on are.idarea=con.idarea where are.nombreArea='"+areConsultorio+"' and con.ocupado='"+ocupado+"'";
+    qDebug()<<consulta;
+    query.exec(consulta);
+
+    int contF=0;
+    int contC=0;
+    while(query.next())
+    {
+        idconsultorio=query.value(2).toString();
+        numconsultorio=query.value(3).toString();
+        QPushButton *s=new QPushButton();
+        s->setAccessibleName(idconsultorio);
+        s->setText(numconsultorio);
+        ui->lista2->addWidget(s,contF,contC,1,1);
+        QSignalMapper *mapper=new QSignalMapper(this);
+        connect(s,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(s,idconsultorio);
+        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(infoConsultorio(QString)));
+        s->setFixedSize(50,40);
+        if(contC==2)
+        {
+            contF++;
+            contC=0;
+        }
+        contC++;
+
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+void MainWindow::on_pushButton_regresarSolicitudes_clicked()
+{
+    ui->stackedWidget_admin->setCurrentIndex(1);
+}
+
+void MainWindow::on_comboBox_area_currentTextChanged(const QString &arg1)
+{
+    mostrasConsultorios();
+}
+
+void MainWindow::on_pushButton_guardar_clicked()
+{
+    // update de doctor
+    QString actualizacion,turno,numConsul,area,estado;
+    QSqlQuery actual;
+    estado="1";
+    turno=ui->comboBox_turno->currentText();
+    numConsul=ui->lineEdit_numconsultorio->text();
+    if(userTipo==1){
+        actualizacion="update doctor set horario='"+turno+"',idconsultorio='"+numConsul+"',estado='"+estado+"'where idUser='"+mactri+"'";
+        actual.exec(actualizacion);
+    }
+    else if (userTipo==2) {
+        //update de staff
+        area=ui->lineEdit_area->text();
+        actualizacion="update staff set estado='"+estado+"',idArea='"+area+"',turno='"+turno+"' where idUser='"+mactri+"'";
+        actual.exec(actualizacion);
+    }
+
+
+    close();
 }

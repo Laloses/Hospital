@@ -2561,6 +2561,194 @@ color: #5d80b6;</string>
           </layout>
          </widget>
         </widget>
+        <widget class="QWidget" name="page_4">
+         <widget class="QLabel" name="label">
+          <property name="geometry">
+           <rect>
+            <x>129</x>
+            <y>189</y>
+            <width>83</width>
+            <height>13</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Datos consultorio</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="comboBox_turno">
+          <property name="geometry">
+           <rect>
+            <x>79</x>
+            <y>49</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <item>
+           <property name="text">
+            <string>Despertino</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Matutino</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Nocturno</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="label_piso">
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>234</y>
+            <width>45</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Piso:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_area">
+          <property name="geometry">
+           <rect>
+            <x>121</x>
+            <y>208</y>
+            <width>137</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="placeholderText">
+           <string>consultorio</string>
+          </property>
+         </widget>
+         <widget class="QWidget" name="widget_2" native="true">
+          <property name="geometry">
+           <rect>
+            <x>289</x>
+            <y>19</y>
+            <width>490</width>
+            <height>350</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_13">
+           <item row="0" column="0">
+            <widget class="QScrollArea" name="scrollArea_2">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_2">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>470</width>
+                <height>330</height>
+               </rect>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_15">
+               <item row="0" column="0">
+                <layout class="QGridLayout" name="lista2"/>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QComboBox" name="comboBox_area">
+          <property name="geometry">
+           <rect>
+            <x>79</x>
+            <y>119</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_guardar">
+          <property name="geometry">
+           <rect>
+            <x>119</x>
+            <y>299</y>
+            <width>93</width>
+            <height>28</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Guardar</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_area">
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>208</y>
+            <width>45</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Area:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_numconsultorio">
+          <property name="geometry">
+           <rect>
+            <x>172</x>
+            <y>260</y>
+            <width>86</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="placeholderText">
+           <string>consultorio</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_piso">
+          <property name="geometry">
+           <rect>
+            <x>121</x>
+            <y>234</y>
+            <width>137</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="placeholderText">
+           <string>Piso</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_consultorio">
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>260</y>
+            <width>96</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Numero consultorio:</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_regresarSolicitudes">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>75</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Regresar</string>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </widget>
      </widget>

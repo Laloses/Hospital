@@ -5,7 +5,7 @@
 #include <QtSql/QSqlDatabase>
 #include "registrodoctor.h"
 #include "tipdeldia.h"
-#include "aceptarsolicitud.h"
+ #include <QMessageBox>
 namespace Ui {
 class MainWindow;
 }
@@ -19,15 +19,16 @@ private:
     QSqlDatabase database;
     QString id_usuario,id_staff,id_doctor,id_paciente;
     QByteArray foto;
-    QString imgRoute;
+    QString imgRoute,matric;
     QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser;
+    int UserTipo;
     bool verificarPasswordRegistro();
     QString calcularEdad(QString);
     bool verificarDatosRegistro();
     void ocultarMenuP();
     void mostrarMenuP();
     void cargarDatosUsuarios();
-    void solicitUsuarios();
+
 
 private slots:
     void on_pushButton_verRegistros_clicked();
@@ -67,15 +68,25 @@ private slots:
     void on_pushButton_datosPaciente_clicked();
 
     void on_pushButton_SolicitudesUsuarios_clicked();
-    void PonerInfo(QString);
 
     void on_pushButton_AceptarSoli_clicked();
+
+    void on_pushButton_regresarSolicitudes_clicked();
+
+    void on_comboBox_area_currentTextChanged(const QString &arg1);
+
+    void on_pushButton_guardar_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-
+    void PonerInfo(QString);
+    void infoConsultorio(QString);
+    void solicitUsuarios();
+    QString mactri;
+    int userTipo;
+   void mostrarZonas();
+   void mostrasConsultorios();
 
 };
 
