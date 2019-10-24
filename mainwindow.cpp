@@ -136,7 +136,7 @@ void MainWindow::on_radioButton_doc_toggled(bool checked)
     }
 }
 
-//Cuando da click en el radio button para registrarse como doctor
+//Cuando da click en el radio button para registrarse como staff
 void MainWindow::on_radioButton_staff_toggled(bool checked)
 {
     if(checked){
@@ -688,10 +688,11 @@ void MainWindow::on_pushButton_datosPaciente_clicked()
     //Sus datos
     ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
 }
+
 void MainWindow::solicitUsuarios(){
 
     int cont=0;
-    QString consultaDoc,consultaStaff;
+    QString consultaDoc,consultaStaff,nombre,espec,espera,matricula;
     QSqlQuery queryDoc,queryStaff;
     consultaDoc="select *from Doctores";
     queryDoc.exec(consultaDoc);
@@ -712,7 +713,6 @@ void MainWindow::solicitUsuarios(){
         {
             if(queryDoc.next())
             {
-                QString nombre,espec,espera,matricula;
                 nombre=queryDoc.value(0).toString();
                 espec=queryDoc.value(4).toString();
                 espera="en espera";
@@ -749,7 +749,7 @@ void MainWindow::solicitUsuarios(){
             }
             if(queryStaff.next())
             {
-                QString nombre,espec,espera,matricula;
+                //QString nombre,espec,espera,matricula;
                 nombre=queryStaff.value(0).toString();
                 espec=queryStaff.value(4).toString();
                 espera="en espera";
@@ -823,15 +823,12 @@ void MainWindow::PonerInfo(QString matri)
     ui->lineEdit_Univercida_solicitud->show();
     ui->lineEdit_especialidad_solicitud->show();
 
-
-
-
-
-    QString doc,staff,usua,imagen;
+    QString doc,staff,usua,imagen,nsol;
+    QSqlQuery doc1,staff1,usuario;
+    QPixmap pix;
     doc="select tipoUser from doctor where idUser='"+matri+"'; ";
     staff="select tipoUser from staff where idUser='"+matri+"'; ";
-    QSqlQuery doc1,staff1,usuario;
-     QPixmap pix;
+
     doc1.exec(doc);
     staff1.exec(staff);
 
@@ -842,13 +839,9 @@ void MainWindow::PonerInfo(QString matri)
     int w=ui->label_solicitud->width();
     int h=ui->label_solicitud->height();
      ui->label_solicitud->setPixmap(pix.scaled(w,h,Qt::AspectRatioMode::IgnoreAspectRatio));
-     QString nsol;
+
      nsol=usuario.value(0).toString();
      ui->lineEdit_nombre_solicitud->setText(nsol);
-
-
-
-
 
     if(doc1.next())
     {
@@ -869,10 +862,10 @@ void MainWindow::PonerInfo(QString matri)
 
     }
     else if (staff1.next()) {
-        QString doc2;
-        doc2="select idpuesto from staff where idUser='"+matri+"'; ";
+        QString staff2;
+        staff2="select idpuesto from staff where idUser='"+matri+"'; ";
         QSqlQuery datos,datos2;
-        datos.exec(doc2);
+        datos.exec(staff2);
         datos.next();
         QString puesto,puestonombre;
         puesto=datos.value(0).toString();

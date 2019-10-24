@@ -434,7 +434,7 @@ border-image: url(:/imgs/logofinal.png);</string>
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -2251,8 +2251,8 @@ background:transparent;
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>486</width>
-                <height>346</height>
+                <width>490</width>
+                <height>350</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_14">
