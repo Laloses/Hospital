@@ -26,6 +26,7 @@ private:
     void ocultarMenuP();
     void mostrarMenuP();
     void cargarDatosUsuarios();
+    void solicitUsuarios();
 
 private slots:
     void on_pushButton_verRegistros_clicked();

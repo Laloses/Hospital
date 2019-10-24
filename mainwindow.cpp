@@ -688,118 +688,123 @@ void MainWindow::on_pushButton_datosPaciente_clicked()
     //Sus datos
     ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
 }
+void MainWindow::solicitUsuarios(){
 
-void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
-{
-int cont=0;
+    int cont=0;
     QString consultaDoc,consultaStaff;
     QSqlQuery queryDoc,queryStaff;
-     consultaDoc="select *from Doctores";
-     queryDoc.exec(consultaDoc);
-     consultaStaff="select *from Staffs";
-     queryStaff.exec(consultaStaff);
+    consultaDoc="select *from Doctores";
+    queryDoc.exec(consultaDoc);
+    consultaStaff="select *from Staffs";
+    queryStaff.exec(consultaStaff);
 
-ui->stackedWidget_admin->setCurrentIndex(1);
+    ui->stackedWidget_admin->setCurrentIndex(1);
 
     bool band1,band2,band3;
     band1=true;
     band2=true;
     band3=true;
 
-while(band3)
-{
-
-if(band1==true||band2==true)
-{
-    if(queryDoc.next())
+    while(band3)
     {
-        QString nombre,espec,espera,matricula;
-        nombre=queryDoc.value(0).toString();
-        espec=queryDoc.value(4).toString();
-        espera="en espera";
 
-        matricula=queryDoc.value(3).toString();
+        if(band1==true||band2==true)
+        {
+            if(queryDoc.next())
+            {
+                QString nombre,espec,espera,matricula;
+                nombre=queryDoc.value(0).toString();
+                espec=queryDoc.value(4).toString();
+                espera="en espera";
 
-        QPushButton *b=new QPushButton();
-            b->setText("Ver Solicitud");
-            QLabel *l=new QLabel;
-            l->setText(nombre);
-            b->setFixedSize(QSize(120,40));
-            QSignalMapper *mapper=new QSignalMapper(this);
-             connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
-            mapper->setMapping(b,matricula);
-            connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
-        QLabel *espacio=new QLabel();
-        QLabel *esp=new QLabel();
-        esp->setText(espec);
-            QLabel *estado=new QLabel();
-            estado->setText(espera);
-            ui->lista->addWidget(b,cont,0,1,1);
-            ui->lista->addWidget(l,cont,1,1,1);
+                matricula=queryDoc.value(3).toString();
 
-            ui->lista->addWidget(esp,cont,2,1,1);
-            ui->lista->addWidget(estado,cont,3,1,1);
-            //   ui->lista->addWidget(esp,cont,3,1,1);
-          // ui->lista->addWidget(m,cont,4,1,1);
-           // ui->gridLayout.add;
-           cont++;
+                QPushButton *b=new QPushButton();
+                b->setText("Ver Solicitud");
+                QLabel *l=new QLabel;
+                l->setText(nombre);
+                b->setFixedSize(QSize(120,40));
+                QSignalMapper *mapper=new QSignalMapper(this);
+                connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+                mapper->setMapping(b,matricula);
+                connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
+                QLabel *espacio=new QLabel();
+                QLabel *esp=new QLabel();
+                esp->setText(espec);
+                QLabel *estado=new QLabel();
+                estado->setText(espera);
+                ui->lista->addWidget(b,cont,0,1,1);
+                ui->lista->addWidget(l,cont,1,1,1);
+
+                ui->lista->addWidget(esp,cont,2,1,1);
+                ui->lista->addWidget(estado,cont,3,1,1);
+                //   ui->lista->addWidget(esp,cont,3,1,1);
+                // ui->lista->addWidget(m,cont,4,1,1);
+                // ui->gridLayout.add;
+                cont++;
+
+            }
+            else {
+                band1=false;
+            }
+            if(queryStaff.next())
+            {
+                QString nombre,espec,espera,matricula;
+                nombre=queryStaff.value(0).toString();
+                espec=queryStaff.value(4).toString();
+                espera="en espera";
+
+                matricula=queryStaff.value(3).toString();
+
+                QPushButton *b=new QPushButton();
+                b->setText("Ver Solicitud");
+                QLabel *l=new QLabel;
+                l->setText(nombre);
+                b->setFixedSize(QSize(120,40));
+                QSignalMapper *mapper=new QSignalMapper(this);
+                connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+                mapper->setMapping(b,matricula);
+                connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
+
+                QLabel *espacio=new QLabel();
+                QLabel *esp=new QLabel();
+                esp->setText(espec);
+                QLabel *estado=new QLabel();
+                estado->setText(espera);
+                ui->lista->addWidget(b,cont,0,1,1);
+                ui->lista->addWidget(l,cont,1,1,1);
+
+                ui->lista->addWidget(esp,cont,2,1,1);
+                ui->lista->addWidget(estado,cont,3,1,1);
+                //   ui->lista->addWidget(esp,cont,3,1,1);
+                // ui->lista->addWidget(m,cont,4,1,1);
+                // ui->gridLayout.add;
+                cont++;
+
+
+
+            }
+            else {
+                band2=false;
+            }
+
+
+
+        }
+        else {
+            band3=false;
+        }
 
     }
-    else {
-        band1=false;
-    }
-    if(queryStaff.next())
-    {
-        QString nombre,espec,espera,matricula;
-        nombre=queryStaff.value(0).toString();
-        espec=queryStaff.value(4).toString();
-        espera="en espera";
-
-matricula=queryStaff.value(3).toString();
-
-        QPushButton *b=new QPushButton();
-            b->setText("Ver Solicitud");
-            QLabel *l=new QLabel;
-            l->setText(nombre);
-            b->setFixedSize(QSize(120,40));
-            QSignalMapper *mapper=new QSignalMapper(this);
-             connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
-            mapper->setMapping(b,matricula);
-            connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
-
-        QLabel *espacio=new QLabel();
-        QLabel *esp=new QLabel();
-        esp->setText(espec);
-            QLabel *estado=new QLabel();
-            estado->setText(espera);
-            ui->lista->addWidget(b,cont,0,1,1);
-            ui->lista->addWidget(l,cont,1,1,1);
-
-            ui->lista->addWidget(esp,cont,2,1,1);
-            ui->lista->addWidget(estado,cont,3,1,1);
-            //   ui->lista->addWidget(esp,cont,3,1,1);
-          // ui->lista->addWidget(m,cont,4,1,1);
-           // ui->gridLayout.add;
-           cont++;
 
 
-
-    }
-    else {
-        band2=false;
-    }
 
 
 
 }
-else {
-    band3=false;
-}
-
-}
-
-
-
+void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
+{
+    solicitUsuarios();
 }
 
 
