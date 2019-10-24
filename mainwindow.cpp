@@ -80,20 +80,7 @@ void MainWindow::on_pushButton_registro_clicked()
 {
     //Página de login
     ui->stackedWidget_principal->setCurrentIndex(1);
-    //Ver lo de registros
-    on_pushButton_verRegistros_clicked();
-    ui->lineEdit_nombre->setFocus();
 
-    //Cargar de la base de datos los puestos
-    QSqlQueryModel *queryPuestos;
-    queryPuestos= new QSqlQueryModel;
-    queryPuestos->setQuery("SELECT nombre FROM puesto");
-    ui->comboBox_puesto->setModel(queryPuestos);
-}
-
-//Cuando da clic en el boton para mostrar los datos de registro
-void MainWindow::on_pushButton_verRegistros_clicked()
-{
     //Página con los datos de registro
     ui->stackedWidget_registros->setCurrentIndex(1);
     //Marcamos el radio button de paciente por default
@@ -111,6 +98,12 @@ void MainWindow::on_pushButton_verRegistros_clicked()
     //Quitamos los datos del staff
     ui->comboBox_puesto->setHidden(true);
     ui->label_puesto->setHidden(true);
+
+    //Cargar de la base de datos los puestos
+    QSqlQueryModel *queryPuestos;
+    queryPuestos= new QSqlQueryModel;
+    queryPuestos->setQuery("SELECT nombre FROM puesto");
+    ui->comboBox_puesto->setModel(queryPuestos);
 }
 
 //Cuando da click en el radio button para registrarse como doctor
@@ -273,6 +266,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             id_doctor=lo.getIdDoctor();
             id_usuario=lo.getIdUser();
             on_pushButton_miPerfil_clicked();
+            cargarHorarioDoc();
         }
         else if(tipo==4)
         {
@@ -692,38 +686,102 @@ void MainWindow::on_pb_agregarActividadDoc_clicked()
 {
     //Mostramos el dialog de actividades
     agregarActividadDoctor *agreAct = new agregarActividadDoctor(this,id_doctor);
-    agreAct->show();
-    if(!agreAct->isVisible()) on_pushButton_horarioDoc_clicked();
+    agreAct->exec();
+    on_pushButton_horarioDoc_clicked();
 }
 
 void MainWindow::cargarHorarioDoc(){
-    //-------------------------------------- TABLA ----------------------------------
-                //prueba tablaHorario
-                ui->tableHorario->setColumnCount(6);
-                ui->tableHorario->setRowCount(10);
-                ui->tableHorario->setHorizontalHeaderLabels(QStringList()<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado");
-                ui->tableHorario->setVerticalHeaderLabels(QStringList() << "08:00" << "09:00" << "10:00" << "11:00" << "12:00" << "13:00" << "14:00" << "15:00" << "16:00" << "17:00");
-                //ui->tableHorario->setRowCount(ui->tableHorario->rowCount());
+    QString turno;
+    QStringList dias, horas;
+    turno=datosDoc->value(3).toString();
+    int wTable = ui->tableHorario->width();
+    int hTable = ui->tableHorario->height();
+    ui->tableHorario->setColumnWidth(0,(wTable -ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(1,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(2,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(3,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(4,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(5,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(6,(wTable-ui->tableHorario->verticalHeader()->width())/7);
 
-                //insertamos en la tabla (fila, columna, elemento a insertar)
-                for(int i = 0; i < 2; i++){
-                    QLabel *prueba = new QLabel();
-                    prueba->setAlignment(Qt::AlignCenter);
-                    prueba->setStyleSheet("color:white;");
-                    prueba->setText("PRUEBA");
+    ui->tableHorario->setRowHeight(0,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(1,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(2,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(3,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(4,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(5,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(6,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(7,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    dias<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado" << "Domingo";
+    ui->tableHorario->setColumnCount(7);
+    ui->tableHorario->setRowCount(9);
+    //-------------------------------------- MATUTINO ----------------------------------
+    if(turno=="Matutino"){
+        //prueba tablaHorario
+        horas<< "05:00" << "06:00" << "07:00" << "08:00" << "09:00" << "10:00" << "11:00" << "12:00" << "13:00";
+        ui->tableHorario->setHorizontalHeaderLabels(dias);
+        ui->tableHorario->setVerticalHeaderLabels(horas);
+    }
+    //-------------------------------------- Vespertino ----------------------------------
+    else if(turno=="Vespertino"){
+        //prueba tablaHorario
+        horas<< "13:00" << "14:00" << "15:00" << "16:00" << "17:00" << "18:00" << "19:00" << "20:00" << "21:00";
+        ui->tableHorario->setHorizontalHeaderLabels(dias);
+        ui->tableHorario->setVerticalHeaderLabels(horas);
+    }
+    //-------------------------------------- Nocturno ----------------------------------
+    else if(turno=="Nocturno"){
+        //prueba tablaHorario
+        horas<< "21:00" << "22:00" << "23:00" << "00:00" << "01:00" << "02:00" << "03:00" << "04:00" << "05:00";
+        ui->tableHorario->setHorizontalHeaderLabels(dias);
+        ui->tableHorario->setVerticalHeaderLabels(horas);
+    }
+    QSqlQuery q;
+    int i=0;
+    q.exec("SELECT nombreAct,hora,dia FROM horarioDoc WHERE idDoc="+id_doctor);
+        //insertamos en la tabla (fila, columna, elemento a insertar)
+        while(q.next()){
+            QLabel *prueba = new QLabel();
+            prueba->setAlignment(Qt::AlignCenter);
+            prueba->setStyleSheet("color:white;");
+            prueba->setText(q.value(0).toString());
 
-                    QWidget *waux = new QWidget();
+            QWidget *waux = new QWidget();
 
-                    QVBoxLayout *layout1 = new QVBoxLayout(waux);
-                    layout1->addWidget(prueba);
+            QVBoxLayout *layout1 = new QVBoxLayout(waux);
+            layout1->addWidget(prueba);
+            waux->setLayout(layout1);
 
-                    waux->setLayout(layout1);
-                    waux = new QWidget();
-                    waux->setLayout(layout1);
-                    ui->tableHorario->setCellWidget(i+2, 0, waux);
-                    ui->tableHorario->setItem(i+2, 0, new QTableWidgetItem);
-                    ui->tableHorario->item(i+2, 0)->setBackground(Qt::red);
-                    ui->tableHorario->setEditTriggers(QAbstractItemView::NoEditTriggers);
+            //hora
+            int col=0,fil=0;
+            for(int j=0; j<8; j++){
+                if (horas.at(j) == q.value(1).toString()){
+                    fil=j;
+                    break;
                 }
-    //------------------------------------------------------------------------------
+            }
+            //dia
+            for(int j=0; j<7; j++){
+                if (dias.at(j) == q.value(2).toString()){
+                    col=j;
+                    break;
+                }
+            }
+
+            ui->tableHorario->setCellWidget(fil, col, waux);
+            ui->tableHorario->setItem(fil, col, new QTableWidgetItem);
+
+            if(q.value(0).toString()=="Consulta"){
+                ui->tableHorario->item(fil, col)->setBackground(Qt::blue);
+            }
+            else
+            if(q.value(0).toString()=="Descanso"){
+                ui->tableHorario->item(fil, col)->setBackground(Qt::green);
+            }
+            else{
+                ui->tableHorario->item(fil, col)->setBackground(Qt::red);
+            }
+            ui->tableHorario->setEditTriggers(QAbstractItemView::NoEditTriggers);
+            i++;
+        }
 }

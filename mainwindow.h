@@ -29,7 +29,6 @@ private:
     void cargarHorarioDoc();
 
 private slots:
-    void on_pushButton_verRegistros_clicked();
 
     void on_pushButton_logo_clicked();
 

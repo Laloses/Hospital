@@ -24,7 +24,9 @@ private slots:
 
     void on_buttonBox_rejected();
 
-    void on_timeEdit_timeChanged(const QTime &time);
+    void on_aceptar_clicked();
+
+    void on_close_clicked();
 
 private:
     Ui::agregarActividadDoctor *ui;
