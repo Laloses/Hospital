@@ -1729,6 +1729,13 @@ QPushButton:focus{
             </widget>
            </item>
            <item>
+            <widget class="Line" name="line_5">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="pushButton_tip">
              <property name="minimumSize">
               <size>
@@ -1744,6 +1751,20 @@ QPushButton:focus{
              </property>
              <property name="text">
               <string>Tip del día</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line_6">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string>Citas</string>
              </property>
             </widget>
            </item>
@@ -1780,6 +1801,9 @@ background-color:transparent;
 
 </string>
           </property>
+          <property name="currentIndex">
+           <number>1</number>
+          </property>
           <widget class="QWidget" name="page_miPerfilPac">
            <layout class="QGridLayout" name="gridLayout">
             <item row="1" column="0">
@@ -1811,7 +1835,7 @@ background-color:transparent;
            </layout>
           </widget>
           <widget class="QWidget" name="paginaCitas">
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>10</x>
@@ -2102,7 +2126,7 @@ background-color:transparent;
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_39">
                    <item>
-                    <widget class="QLabel" name="label_9">
+                    <widget class="QLabel" name="lb_tel">
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -2149,7 +2173,7 @@ background-color:transparent;
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_38">
                    <item>
-                    <widget class="QLabel" name="label_8">
+                    <widget class="QLabel" name="label_emailCitas">
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -2197,7 +2221,7 @@ background-color:transparent;
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_37">
                    <item>
-                    <widget class="QLabel" name="label_7">
+                    <widget class="QLabel" name="lb_FCitas">
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -2228,7 +2252,7 @@ background-color:transparent;
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QLabel" name="label_6">
+                    <widget class="QLabel" name="label_horaCitas">
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -2263,7 +2287,7 @@ background-color:transparent;
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_32">
                    <item>
-                    <widget class="QLabel" name="label_2">
+                    <widget class="QLabel" name="label_docCitas">
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -2343,7 +2367,7 @@ background-color:transparent;
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_35">
                    <item>
-                    <widget class="QLabel" name="label_5">
+                    <widget class="QLabel" name="lb_sintomasCitas">
                      <property name="font">
                       <font>
                        <pointsize>11</pointsize>
@@ -2370,7 +2394,7 @@ background-color:transparent;
                   </layout>
                  </item>
                  <item>
-                  <widget class="QTextEdit" name="textEdit">
+                  <widget class="QTextEdit" name="sintomasCitas">
                    <property name="minimumSize">
                     <size>
                      <width>400</width>
@@ -2433,7 +2457,7 @@ background-color:transparent;
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>11</pointsize>
+                     <pointsize>10</pointsize>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -2479,7 +2503,7 @@ color: #5d80b6;</string>
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>11</pointsize>
+                     <pointsize>10</pointsize>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -2496,6 +2520,9 @@ color: white;</string>
                 </layout>
                </item>
               </layout>
+             </item>
+             <item>
+              <widget class="QTableView" name="tv_listaDocCitas"/>
              </item>
              <item>
               <spacer name="horizontalSpacer_49">
