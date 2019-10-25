@@ -5,16 +5,6 @@
 #include <QtSql/QSqlDatabase>
 #include "registrodoctor.h"
 #include "tipdeldia.h"
- #include <QMessageBox>
-#include <QtSql/QSqlError>
-#include <QtDebug>
-#include <QFile>
-#include <QFileDialog>
-#include "registrostaff.h"
-#include "registropaciente.h"
-#include <QtSql/QSqlQueryModel>
-#include "login.h"
-
 namespace Ui {
 class MainWindow;
 }
@@ -28,9 +18,8 @@ private:
     QSqlDatabase database;
     QString id_usuario,id_staff,id_doctor,id_paciente;
     QByteArray foto;
-    QString imgRoute,matric;
+    QString imgRoute;
     QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser;
-    int UserTipo;
     bool verificarPasswordRegistro();
     QString calcularEdad(QString);
     bool verificarDatosRegistro();
@@ -38,7 +27,6 @@ private:
     void mostrarMenuP();
     void cargarDatosUsuarios();
     void cargarHorarioDoc();
-
 
 private slots:
 
@@ -77,38 +65,10 @@ private slots:
     void on_pushButton_datosPaciente_clicked();
 
     void on_pb_agregarActividadDoc_clicked();
-    void on_pushButton_SolicitudesUsuarios_clicked();
-
-    void on_pushButton_AceptarSoli_clicked();
-
-    void on_pushButton_regresarSolicitudes_clicked();
-
-    void on_comboBox_area_currentTextChanged(const QString &arg1);
-
-    void on_pushButton_guardar_clicked();
-
-    void PonerInfo(QString);
-
-    void infoConsultorio(QString);
-
-
-    void on_pushButton_rechazarsoli_clicked();
-
-    void on_radioButton_doctors_clicked();
-
-    void on_radioButton_staffs_clicked();
-
-    void on_pushButton_menu_Pincipal_Adm_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-    void solicitUsuarios();
-    QString mactri;
-    int userTipo;
-   void mostrarZonas();
-   void mostrasConsultorios();
 
 };
 
