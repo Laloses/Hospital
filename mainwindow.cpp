@@ -785,3 +785,23 @@ void MainWindow::cargarHorarioDoc(){
             i++;
         }
 }
+
+void MainWindow::on_radioCitaPersonal_clicked()
+{
+    ui->labelNombreComp->setHidden(true);
+    ui->lineNombreCompleto->setHidden(true);
+    ui->labelOrigen->setHidden(true);
+    ui->lineOrigen->setHidden(true);
+    ui->labelEdad->setHidden(true);
+    ui->lineEdad->setHidden(true);
+}
+
+void MainWindow::on_radioCitaExterna_clicked()
+{
+    ui->labelNombreComp->setHidden(false);
+    ui->lineNombreCompleto->setHidden(false);
+    ui->labelOrigen->setHidden(false);
+    ui->lineOrigen->setHidden(false);
+    ui->labelEdad->setHidden(false);
+    ui->lineEdad->setHidden(false);
+}

@@ -66,6 +66,12 @@ private slots:
 
     void on_pb_agregarActividadDoc_clicked();
 
+    void on_radioButton_clicked();
+
+    void on_radioCitaPersonal_clicked();
+
+    void on_radioCitaExterna_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
