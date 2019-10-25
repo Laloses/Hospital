@@ -1,15 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QtSql/QSqlError>
-#include <QtDebug>
-#include <QFile>
-#include <QFileDialog>
-#include "registrostaff.h"
-#include "registropaciente.h"
-#include <QtSql/QSqlQueryModel>
-#include "login.h"
-#include <QMessageBox>
-#include "agregaractividaddoctor.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -47,6 +37,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit_password2->setEchoMode(QLineEdit::Password);
     ui->lineEdit_passwordLogin->setEchoMode(QLineEdit::Password);
     id_usuario=id_staff=id_doctor=id_paciente="0";
+    matric="";
+    UserTipo=0;
+
+
 }
 
 MainWindow::~MainWindow()
@@ -130,7 +124,7 @@ void MainWindow::on_radioButton_doc_toggled(bool checked)
     }
 }
 
-//Cuando da click en el radio button para registrarse como doctor
+//Cuando da click en el radio button para registrarse como Doctor
 void MainWindow::on_radioButton_staff_toggled(bool checked)
 {
     if(checked){
@@ -156,6 +150,21 @@ void MainWindow::on_radioButton_staff_toggled(bool checked)
         }
     }
 }
+
+void clearLayout(QLayout *layout) {
+    QLayoutItem *item;
+    while((item = layout->takeAt(0))) {
+        if (item->layout()) {
+            clearLayout(item->layout());
+            delete item->layout();
+        }
+        if (item->widget()) {
+            delete item->widget();
+        }
+        delete item;
+    }
+}
+
 
 //Cuando da click en el radio button para registrarse como paciente
 void MainWindow::on_radioButton_paciente_toggled(bool checked)
@@ -207,6 +216,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
          qDebug()<<"es un admi";
          //Lo mandamos a su pagina
          ui->stackedWidget_principal->setCurrentIndex(5);
+         ui->stackedWidget_admin->setCurrentIndex(0);
          ui->pushButton_salir->setHidden(false);
          ui->pushButton_login->setHidden(true);
          ui->pushButton_registro->setHidden(true);
@@ -784,4 +794,424 @@ void MainWindow::cargarHorarioDoc(){
             ui->tableHorario->setEditTriggers(QAbstractItemView::NoEditTriggers);
             i++;
         }
+
+
+void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
+{
+    ui->stackedWidget_admin->setCurrentIndex(1);
+    ui->pushButton_SolicitudesUsuarios->hide();
+}
+
+
+
+void MainWindow::PonerInfo(QString matri)
+{
+    ui->label_solicitud->clear();
+    ui->lineEdit_nombre_solicitud->clear();
+    ui->lineEdit_cedula_solicitud->clear();
+    ui->lineEdit_Univercida_solicitud->clear();
+    ui->lineEdit_especialidad_solicitud->clear();
+
+    ui->label_solicitud->show();
+    ui->lineEdit_nombre_solicitud->show();
+    ui->lineEdit_cedula_solicitud->show();
+    ui->lineEdit_Univercida_solicitud->show();
+    ui->lineEdit_especialidad_solicitud->show();
+
+    QString doc,staff,usua,imagen,nsol;
+    QSqlQuery doc1,staff1,usuario;
+    QPixmap pix;
+    doc="select tipoUser from doctor where idUser='"+matri+"'; ";
+    staff="select tipoUser from staff where idUser='"+matri+"'; ";
+    doc1.exec(doc);
+    staff1.exec(staff);
+    usua="select nombre,fotop from usuario where matricula='"+matri+"'; ";
+    usuario.exec(usua);
+    usuario.next();
+    imagen=pix.loadFromData(usuario.value(1).toByteArray());
+    int w=ui->label_solicitud->width();
+    int h=ui->label_solicitud->height();
+     ui->label_solicitud->setPixmap(pix.scaled(w,h,Qt::AspectRatioMode::IgnoreAspectRatio));
+     nsol=usuario.value(0).toString();
+     ui->lineEdit_nombre_solicitud->setText(nsol);
+
+    if(doc1.next())
+    {
+       QString doc2,especialidad,nombreEsp,nombreFEsp;
+       doc2="select idEspecialidad,cedulapro,universidad from doctor where idUser='"+matri+"'; ";
+       QSqlQuery datos,datos2;
+       datos.exec(doc2);
+       datos.next();
+       especialidad=datos.value(0).toString();
+       nombreEsp="select nombre from especialidad where idEsp='"+especialidad+"'; ";
+       datos2.exec(nombreEsp);
+       datos2.next();
+       nombreFEsp=datos2.value(0).toString();
+       matric=matri;
+       UserTipo=1;
+       ui->lineEdit_especialidad_solicitud->setText(nombreFEsp);
+       ui->lineEdit_cedula_solicitud->setText(datos.value(1).toString());
+       ui->lineEdit_Univercida_solicitud->setText(datos.value(2).toString());
+
+
+    }
+    else if (staff1.next()) {
+        QString staff2;
+        staff2="select idpuesto from staff where idUser='"+matri+"'; ";
+        QSqlQuery datos,datos2;
+        datos.exec(staff2);
+        datos.next();
+        QString puesto,puestonombre;
+        puesto=datos.value(0).toString();
+        QString puesto1;
+        matric=matri;
+        UserTipo=2;
+       //bloque de line edit
+        ui->lineEdit_piso->hide();
+        ui->lineEdit_numconsultorio->hide();
+        ui->label_piso->hide();
+        ui->label_consultorio->hide();
+        puesto1="select nombre from puesto where idpuesto='"+puesto+"'; ";
+        datos2.exec(puesto1);
+        datos2.next();
+        puestonombre=datos2.value(0).toString();
+         ui->lineEdit_especialidad_solicitud->setText(puestonombre);
+         ui->lineEdit_cedula_solicitud->hide();
+         ui->lineEdit_Univercida_solicitud->hide();
+
+    }
+
+
+}
+
+
+void MainWindow::on_pushButton_AceptarSoli_clicked()
+{
+   if(ui->radioButton_doctors->isChecked()){
+       ui->lineEdit_numconsultorio->show();
+       ui->lineEdit_piso->show();
+       ui->label_piso->show();
+       ui->label_consultorio->show();
+   }else if(ui->radioButton_staffs->isChecked()){
+       ui->lineEdit_numconsultorio->hide();
+       ui->lineEdit_piso->hide();
+       ui->label_piso->hide();
+       ui->label_consultorio->hide();
+}
+
+    if(ui->lineEdit_nombre_solicitud->text()=="" && ui->lineEdit_especialidad_solicitud->text()==""){
+        QMessageBox messageBox(QMessageBox::Warning,
+                                         tr("Warning"), tr("Por favor,selecione algun candito."), QMessageBox::Yes);
+                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                 if (messageBox.exec() == QMessageBox::Yes){
+                  }
+            }
+       else { if (ui->lineEdit_nombre_solicitud->text()!="" && ui->lineEdit_especialidad_solicitud->text()!="") {
+        mostrarZonas();
+        ui->stackedWidget_admin->setCurrentIndex(2);
+
+        }
+    }
+}
+
+//----------------------------------------------------------------------------
+void MainWindow::mostrarZonas(){
+
+    QSqlQueryModel *queryPuestos;
+    queryPuestos= new QSqlQueryModel;
+    queryPuestos->setQuery("SELECT nombreArea FROM areah");
+    ui->comboBox_area->setModel(queryPuestos);
+
+
+}
+
+
+void MainWindow::infoConsultorio(QString idConsultorio){
+
+    qDebug()<<"hola:"<<idConsultorio;
+    QString consulta,nAre,numPiso,numConsultorio;
+    QSqlQuery query;
+    consulta="select are.idarea,are.nombreArea,con.idConsultorio,con.numConsultorio,con.ocupado,are.ubicacion as piso"
+               " from areah as are inner join consultorio as con on are.idarea=con.idarea where idConsultorio='"+idConsultorio+"'";
+    query.exec(consulta);
+    query.next();
+    nAre=query.value(1).toString();
+    numPiso=query.value(2).toString();
+    numConsultorio=query.value(3).toString();
+    ui->lineEdit_area->setText(nAre);
+    ui->lineEdit_piso->setText(numPiso);
+    ui->lineEdit_numconsultorio->setText(numConsultorio);
+
+}
+
+void MainWindow::mostrasConsultorios(){
+
+    QString areConsultorio,consulta,numconsultorio,idconsultorio,ocupado;
+    QSqlQuery query;
+    ocupado="false";
+    areConsultorio=ui->comboBox_area->currentText();
+    qDebug()<<areConsultorio;
+    consulta="select are.idarea,are.nombreArea,con.idConsultorio,con.numConsultorio,con.ocupado"
+               " from areah as are inner join consultorio as con on are.idarea=con.idarea where are.nombreArea='"+areConsultorio+"' and con.ocupado='"+ocupado+"'";
+    query.exec(consulta);
+
+    int contF=0;
+    int contC=0;
+    while(query.next())
+    {
+        idconsultorio=query.value(2).toString();
+        numconsultorio=query.value(3).toString();
+        QPushButton *s=new QPushButton();
+        s->setAccessibleName(idconsultorio);
+        s->setText(numconsultorio);
+        ui->lista2->addWidget(s,contF,contC,1,1);
+        QSignalMapper *mapper=new QSignalMapper(this);
+        connect(s,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(s,idconsultorio);
+        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(infoConsultorio(QString)));
+        s->setFixedSize(50,40);
+        if(contC==2)
+        {
+            contF++;
+            contC=0;
+        }
+        contC++;
+    }
+
+
+}
+
+
+void MainWindow::on_pushButton_regresarSolicitudes_clicked()
+{
+    ui->stackedWidget_admin->setCurrentIndex(1);
+}
+
+void MainWindow::on_comboBox_area_currentTextChanged(const QString &arg1)
+{
+    ui->lineEdit_area->clear();
+    ui->lineEdit_piso->clear();
+    ui->lineEdit_numconsultorio->clear();
+    mostrasConsultorios();
+}
+
+void MainWindow::on_pushButton_guardar_clicked()
+{
+    // update de doctor
+    QString actualizacion,turno,numConsul,area,estado,buscaId,idCondultorio,idarea,areas,idareas;
+    QSqlQuery actual;
+    estado="1";
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de asignar la area.?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+    turno=ui->comboBox_turno->currentText();
+    numConsul=ui->lineEdit_numconsultorio->text();
+    buscaId="select idconsultorio from consultorio where numConsultorio='"+numConsul+"'";
+    actual.exec(buscaId);
+    actual.next();
+    idCondultorio=actual.value(0).toString();
+
+    if(ui->lineEdit_area->text()==""){
+        QMessageBox messageBox(QMessageBox::Warning,
+                                         tr("Warning"), tr("Por favor,Asigne una area."), QMessageBox::Yes);
+                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                 if (messageBox.exec() == QMessageBox::Yes){
+
+                  }
+    }else{
+
+    if(UserTipo==1){
+        if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"entre update doctor";
+        actualizacion="update doctor set horario='"+turno+"',idconsultorio='"+idCondultorio+"',estado='"+estado+"'where idUser='"+matric+"'";
+        qDebug()<<actualizacion;
+        actual.exec(actualizacion);
+        qDebug()<<"Actualizando datos del doctor";
+         clearLayout(ui->lista);
+        ui->stackedWidget_admin->setCurrentIndex(1);
+        }
+    }
+        else if (UserTipo==2){
+        if (message.exec() == QMessageBox::Yes){
+            areas=ui->lineEdit_area->text();
+            idarea="select idarea from areah where nombreArea='"+areas+"'";
+            idareas=actual.value(0).toString();
+        //update de staff
+         area=ui->lineEdit_area->text();
+         qDebug()<<"Actualizando datos del staff";
+        actualizacion="update staff set estado='"+estado+"',idArea='"+idareas+"',turno='"+turno+"' where idUser='"+matric+"'";
+        actual.exec(actualizacion);
+         clearLayout(ui->lista);
+        ui->stackedWidget_admin->setCurrentIndex(1);
+             }
+        }
+    }
+
+}
+
+
+//rechazar solicitudes
+void MainWindow::on_pushButton_rechazarsoli_clicked()
+{
+    QString consulta,matri;
+    QSqlQuery query;
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de rechazar solicitud?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+    if(ui->lineEdit_nombre_solicitud->text()=="" && ui->lineEdit_especialidad_solicitud->text()==""){
+        QMessageBox messageBox(QMessageBox::Warning,
+                                         tr("Warning"), tr("Por favor,selecione algun candito."), QMessageBox::Yes);
+                 messageBox.setButtonText(QMessageBox::Yes, tr("Actividad"));
+                 if (messageBox.exec() == QMessageBox::Yes){
+
+                  }
+
+    }else  if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"matricula:"<<matric;
+        qDebug()<<"tipo:"<<UserTipo;
+    if(UserTipo==1){
+        consulta=" delete from doctor where idUser='"+matric+"'";
+        query.exec(consulta);
+        consulta="delete from usuario where matricula='"+matric+"'";
+        query.exec(consulta);
+    }
+        else{
+        if (UserTipo==2) {
+            qDebug()<<"entre staff";
+          consulta=" delete from staff where idUser='"+matric+"'";
+          query.exec(consulta);
+          consulta="delete from usuario where matricula='"+matric+"'";
+          query.exec(consulta);
+          clearLayout(ui->lista);
+        }
+      }
+    }
+
+}
+//cunsulta solo muetras doctores
+void MainWindow::on_radioButton_doctors_clicked()
+{
+    qDebug()<<"entre:";
+
+    ui->lineEdit_especialidad_solicitud->clear();
+    ui->lineEdit_nombre_solicitud->clear();
+    ui->lineEdit_cedula_solicitud->clear();
+    ui->lineEdit_Univercida_solicitud->clear();
+    ui->lineEdit_Univercida_solicitud->show();
+    ui->lineEdit_cedula_solicitud->show();
+    ui->label_solicitud->setText(" ");
+
+    clearLayout(ui->lista);
+    int cont=0;
+    QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
+    QSqlQuery queryDoc,queryStaff,userEst;
+    consultaDoc="select *from Doctores";
+    queryDoc.exec(consultaDoc);
+            while(queryDoc.next())
+            {
+                if(queryDoc.value(5).toString()=="1")
+                {
+
+                }
+                else {
+                nombre=queryDoc.value(0).toString();
+                espec=queryDoc.value(4).toString();
+                espera="en espera";
+
+                matricula=queryDoc.value(3).toString();
+
+                QPushButton *b=new QPushButton();
+                b->setText("Ver Solicitud");
+                QLabel *l=new QLabel;
+                l->setText(nombre);
+                b->setFixedSize(QSize(120,40));
+                QSignalMapper *mapper=new QSignalMapper(this);
+                connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+                mapper->setMapping(b,matricula);
+                connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
+                QLabel *espacio=new QLabel();
+                QLabel *esp=new QLabel();
+                esp->setText(espec);
+                QLabel *estado=new QLabel();
+                estado->setText(espera);
+                ui->lista->addWidget(b,cont,0,1,1);
+                ui->lista->addWidget(l,cont,1,1,1);
+                ui->lista->addWidget(esp,cont,2,1,1);
+                ui->lista->addWidget(estado,cont,3,1,1);
+
+                cont++;
+                }
+            }
+
+}
+
+void MainWindow::on_radioButton_staffs_clicked()
+{
+    clearLayout(ui->lista);
+    ui->lineEdit_especialidad_solicitud->clear();
+    ui->lineEdit_nombre_solicitud->clear();
+    ui->lineEdit_Univercida_solicitud->clear();
+    ui->lineEdit_Univercida_solicitud->hide();
+    ui->lineEdit_cedula_solicitud->hide();
+    ui->lineEdit_cedula_solicitud->clear();
+    ui->label_solicitud->setText(" ");
+    int cont=0;
+    QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
+    QSqlQuery queryDoc,queryStaff,userEst;
+    consultaStaff="select *from Staffs";
+    queryStaff.exec(consultaStaff);
+
+    while(queryStaff.next())
+    {
+        if(queryStaff.value(5).toString()=="1")
+        {
+
+        }
+        else {
+
+
+        //QString nombre,espec,espera,matricula;
+        nombre=queryStaff.value(0).toString();
+        espec=queryStaff.value(4).toString();
+        espera="En espera.";
+
+        matricula=queryStaff.value(3).toString();
+
+        QPushButton *b=new QPushButton();
+        b->setText("Ver Solicitud");
+        QLabel *l=new QLabel;
+        l->setText(nombre);
+        b->setFixedSize(QSize(120,40));
+        QSignalMapper *mapper=new QSignalMapper(this);
+        connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(b,matricula);
+        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
+        QLabel *espacio=new QLabel();
+        QLabel *esp=new QLabel();
+        esp->setText(espec);
+        QLabel *estado=new QLabel();
+        estado->setText(espera);
+        ui->lista->addWidget(b,cont,0,1,1);
+        ui->lista->addWidget(l,cont,1,1,1);
+
+        ui->lista->addWidget(esp,cont,2,1,1);
+        ui->lista->addWidget(estado,cont,3,1,1);
+        //   ui->lista->addWidget(esp,cont,3,1,1);
+        // ui->lista->addWidget(m,cont,4,1,1);
+        // ui->gridLayout.add;
+        cont++;
+
+        }
+    }
+
+}
+
+void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
+{
+    ui->pushButton_SolicitudesUsuarios->show();
+    ui->stackedWidget_admin->setCurrentIndex(0);
 }
