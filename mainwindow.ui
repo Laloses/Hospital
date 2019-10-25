@@ -497,7 +497,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="page_oculto">
            <layout class="QGridLayout" name="gridLayout_5">
@@ -2284,7 +2284,7 @@ background-color:transparent;
                     </widget>
                    </item>
                    <item>
-                    <widget class="QTimeEdit" name="horaCita"/>
+                    <widget class="QComboBox" name="horaCita"/>
                    </item>
                   </layout>
                  </item>
@@ -2768,11 +2768,11 @@ background -color: red;
               <attribute name="horizontalHeaderCascadingSectionResizes">
                <bool>false</bool>
               </attribute>
-              <attribute name="horizontalHeaderDefaultSectionSize">
-               <number>119</number>
-              </attribute>
               <attribute name="horizontalHeaderMinimumSectionSize">
                <number>30</number>
+              </attribute>
+              <attribute name="horizontalHeaderDefaultSectionSize">
+               <number>119</number>
               </attribute>
               <attribute name="horizontalHeaderStretchLastSection">
                <bool>true</bool>

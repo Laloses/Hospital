@@ -10,6 +10,7 @@
 #include "login.h"
 #include <QMessageBox>
 #include "agregaractividaddoctor.h"
+#include "agregarcitaspaciente.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     else {
         qDebug()<<"Base de datos conectada";
     }
+    model = new QSqlQueryModel;
     datosPac = new QSqlQuery;
     datosDoc = new QSqlQuery;
     datosStaff = new QSqlQuery;
@@ -821,6 +823,13 @@ void MainWindow::on_pushButton_clicked()
     dia= f.at(2).toInt();
 
     ui->fechaCita->setMinimumDate(QDate(anio,mes,dia));
+
+    QStringList horas;
+    horas<<  "05:00" << "06:00" << "07:00" << "08:00" << "09:00" << "10:00" << "11:00" << "12:00" << "13:00"
+    << "14:00" << "15:00" << "16:00" << "17:00" << "18:00" << "19:00" << "20:00" << "21:00"
+    << "22:00" << "23:00" << "00:00" << "01:00" << "02:00" << "03:00" << "04:00" << "05:00";
+
+    ui->horaCita->addItems(horas);
     ui->tv_listaDocCitas->setHidden(true);
     on_radioCitaPersonal_clicked();
 }
@@ -832,22 +841,24 @@ void MainWindow::on_btnBuscarDoctor_clicked()
     QString hora,fecha;
     int diaNum, idDoc;
     diaNum = ui->fechaCita->date().dayOfWeek();
-    hora = ui->horaCita->dateTime().time().toString("hh:mm");
+    hora = ui->horaCita->currentText();
 
     QStringList dias;
     dias<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado" << "Domingo";
 
-    horarios.exec("SELECT idDoc FROM hoariodoc WHERE hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"'");
+    horarios.exec("SELECT idDoc FROM horariodoc WHERE hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"'");
     if(!horarios.next()){
         QMessageBox::warning(this,"Error","No hay doctores disponibles.");
     }
     else{
         idDoc=horarios.value(0).toInt();
-        model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) AS Nombre, e.nombre as Especialidad , d.idUser"
+
+        model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
                       "FROM doctor as d , especialidad as e , usuario as u "
                       "WHERE d.iddoctor = "+QString::number((idDoc))+" "
-                      "AND u.matricula = d.idUser"
-                      "AND d.idEspecialidad=e.idEsp");
+                      "AND u.matricula = d.idUser "
+                      "AND d.idEspecialidad = e.idEsp");
+        qDebug()<<idDoc;
         ui->tv_listaDocCitas->setModel(model);
         ui->tv_listaDocCitas->setHidden(false);
         ui->tv_listaDocCitas->hideColumn(2);
@@ -862,19 +873,93 @@ void MainWindow::on_btnAgendarCita_clicked()
     estiloBueno="border:1px black; border-style:solid";
     if (ui->radioCitaPersonal){
         if(id_doctor!="0"){
-            ui->tableHorario->setStyleSheet(estiloBueno);
+            ui->tv_listaDocCitas->setStyleSheet(estiloBueno);
+           if(ui->lineContacto->text().contains(letras)){
+               ui->lineContacto->setStyleSheet(estiloBueno);
+               if(ui->lineMail->text().contains(letras)){
+                   ui->lineMail->setStyleSheet(estiloBueno);
+                   if(ui->lineEdit_2->text().contains("@") && (ui->lineEdit_2->text().contains("letras") || ui->lineEdit_2->text().contains("numeros"))){
+                       ui->lineEdit_2->setStyleSheet(estiloBueno);
+                       if(ui->sintomasCitas->toPlainText().isEmpty()){
+                           ui->sintomasCitas->setStyleSheet(estiloBueno);
+                           agregarCitasPaciente cita;
+                           cita.citasPaciente(id_usuario,ui->fechaCita->date().toString(),ui->horaCita->currentText(),ui->lineEdit_2->text(),ui->sintomasCitas->toPlainText(),"0");
+                       }else{
+                           ui->sintomasCitas->setStyleSheet(estiloMalo);
+                       }
+
+                   }
+                   else{
+                         ui->lineEdit_2->setStyleSheet(estiloMalo);
+                   }
+               }
+               else{
+                     ui->lineMail->setStyleSheet(estiloMalo);
+               }
+           }
+           else{
+                 ui->lineContacto->setStyleSheet(estiloMalo);
+           }
         }
         else{
-            ui->tableHorario->setStyleSheet(estiloMalo);
+            ui->tv_listaDocCitas->setStyleSheet(estiloMalo);
         }
         //insert
     }
+
     if(ui->radioCitaExterna->isChecked()){
         if(id_doctor!="0"){
+            ui->tv_listaDocCitas->setStyleSheet(estiloBueno);
+           if(ui->lineNombreCompleto->text().contains(letras)){
+               ui->lineNombreCompleto->setStyleSheet(estiloBueno);
+               if(ui->lineOrigen->text().contains(letras)){
+                   ui->lineOrigen->setStyleSheet(estiloBueno);
+                   if(ui->lineEdad->text().contains(numeros)){
+                       ui->lineEdad->setStyleSheet(estiloBueno);
+                       if(ui->lineContacto->text().contains(letras)){
+                           ui->lineContacto->setStyleSheet(estiloBueno);
+                           if(ui->lineMail->text().contains(letras)){
+                               ui->lineMail->setStyleSheet(estiloBueno);
+                               if(ui->lineEdit_2->text().contains("@") && (ui->lineEdit_2->text().contains("letras") || ui->lineEdit_2->text().contains("numeros"))){
+                                   ui->lineEdit_2->setStyleSheet(estiloBueno);
+                                   if(ui->sintomasCitas->toPlainText().isEmpty()){
+                                       ui->sintomasCitas->setStyleSheet(estiloBueno);
+                                       agregarCitasPaciente cita;
+                                       cita.citasExternas(ui->lineNombreCompleto->text(),ui->lineOrigen->text(),ui->lineEdad->text(),ui->lineContacto->text(),ui->lineMail->text(),ui->fechaCita->date().toString(),ui->horaCita->currentText(),ui->lineEdit_2->text(),ui->sintomasCitas->toPlainText());
+                                   }else{
+                                       ui->sintomasCitas->setStyleSheet(estiloMalo);
+                                   }
+
+                               }
+                               else{ ui->lineEdit_2->setStyleSheet(estiloMalo);}
+
+
+                                   }
+                                    else{ ui->lineMail->setStyleSheet(estiloMalo);}
+
+
+                                    }
+                                    else{ ui->lineContacto->setStyleSheet(estiloMalo);}
+
+                                   }
+                                       else{
+                                             ui->lineEdad->setStyleSheet(estiloMalo);
+                                       }
+                                           }
+                                           else{
+                                                 ui->lineOrigen->setStyleSheet(estiloMalo);
+                                           }
+                                                   }
+                                                   else{
+                                                         ui->lineNombreCompleto->setStyleSheet(estiloMalo);
+                                                   }
+
+
+
 
         }
         else{
-
+              ui->tv_listaDocCitas->setStyleSheet(estiloMalo);
         }
         //insert
     }
