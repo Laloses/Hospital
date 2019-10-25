@@ -6,6 +6,14 @@
 #include "registrodoctor.h"
 #include "tipdeldia.h"
  #include <QMessageBox>
+#include <QtSql/QSqlError>
+#include <QtDebug>
+#include <QFile>
+#include <QFileDialog>
+#include "registrostaff.h"
+#include "registropaciente.h"
+#include <QtSql/QSqlQueryModel>
+#include "login.h"
 namespace Ui {
 class MainWindow;
 }

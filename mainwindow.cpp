@@ -1,14 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QtSql/QSqlError>
-#include <QtDebug>
-#include <QFile>
-#include <QFileDialog>
-#include "registrostaff.h"
-#include "registropaciente.h"
-#include <QtSql/QSqlQueryModel>
-#include "login.h"
-
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -1057,8 +1048,5 @@ void MainWindow::on_pushButton_rechazarsoli_clicked()
       query.exec(consulta);
       solicitUsuarios();
     }
-
-
-
 
 }

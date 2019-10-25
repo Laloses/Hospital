@@ -434,7 +434,7 @@ border-image: url(:/imgs/logofinal.png);</string>
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -728,7 +728,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="page_oculto">
            <layout class="QGridLayout" name="gridLayout_5">
@@ -2251,8 +2251,8 @@ background:transparent;
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>490</width>
-                <height>350</height>
+                <width>486</width>
+                <height>346</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_14">
@@ -2607,8 +2607,8 @@ color: #5d80b6;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>500</width>
-                <height>350</height>
+                <width>496</width>
+                <height>346</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_15">
@@ -2649,8 +2649,8 @@ color: #5d80b6;</string>
            <rect>
             <x>20</x>
             <y>50</y>
-            <width>94</width>
-            <height>13</height>
+            <width>113</width>
+            <height>16</height>
            </rect>
           </property>
           <property name="text">
@@ -2662,21 +2662,21 @@ color: #5d80b6;</string>
            <rect>
             <x>190</x>
             <y>50</y>
-            <width>80</width>
-            <height>13</height>
+            <width>95</width>
+            <height>16</height>
            </rect>
           </property>
           <property name="text">
            <string>Area de trabajo:</string>
           </property>
          </widget>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>60</x>
             <y>160</y>
-            <width>212</width>
-            <height>119</height>
+            <width>216</width>
+            <height>146</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_16">
