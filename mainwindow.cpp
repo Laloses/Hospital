@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //titulo de la pagina principal del programa
+    //titulo de la pagina principal del programa1
     setWindowTitle("LOBO HOSPITAL");
     //Conexion a la base de datos
     database= QSqlDatabase::addDatabase("QMYSQL");
@@ -804,4 +804,83 @@ void MainWindow::on_radioCitaExterna_clicked()
     ui->lineOrigen->setHidden(false);
     ui->labelEdad->setHidden(false);
     ui->lineEdad->setHidden(false);
+}
+
+//Boton citas
+void MainWindow::on_pushButton_clicked()
+{
+    ui->stackedWidget_perfilPaciente->setCurrentIndex(1);
+    QSqlQuery fecha;
+    QStringList f;
+    int anio, mes, dia;
+    fecha.exec("SELECT CURDATE()");
+    fecha.next();
+    f = fecha.value(0).toString().split("-");
+    anio = f.at(0).toInt();
+    mes = f.at(1).toInt();
+    dia= f.at(2).toInt();
+
+    ui->fechaCita->setMinimumDate(QDate(anio,mes,dia));
+    ui->tv_listaDocCitas->setHidden(true);
+    on_radioCitaPersonal_clicked();
+}
+
+//Buscar doctor
+void MainWindow::on_btnBuscarDoctor_clicked()
+{
+    QSqlQuery horarios, doc;
+    QString hora,fecha;
+    int diaNum, idDoc;
+    diaNum = ui->fechaCita->date().dayOfWeek();
+    hora = ui->horaCita->dateTime().time().toString("hh:mm");
+
+    QStringList dias;
+    dias<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado" << "Domingo";
+
+    horarios.exec("SELECT idDoc FROM hoariodoc WHERE hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"'");
+    if(!horarios.next()){
+        QMessageBox::warning(this,"Error","No hay doctores disponibles.");
+    }
+    else{
+        idDoc=horarios.value(0).toInt();
+        model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) AS Nombre, e.nombre as Especialidad , d.idUser"
+                      "FROM doctor as d , especialidad as e , usuario as u "
+                      "WHERE d.iddoctor = "+QString::number((idDoc))+" "
+                      "AND u.matricula = d.idUser"
+                      "AND d.idEspecialidad=e.idEsp");
+        ui->tv_listaDocCitas->setModel(model);
+        ui->tv_listaDocCitas->setHidden(false);
+        ui->tv_listaDocCitas->hideColumn(2);
+    }
+}
+
+void MainWindow::on_btnAgendarCita_clicked()
+{
+    QRegExp letras("^[a-zZ-A]*$"), numeros("^[0-9]*$");
+    QString estiloMalo, estiloBueno;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+    if (ui->radioCitaPersonal){
+        if(id_doctor!="0"){
+            ui->tableHorario->setStyleSheet(estiloBueno);
+        }
+        else{
+            ui->tableHorario->setStyleSheet(estiloMalo);
+        }
+        //insert
+    }
+    if(ui->radioCitaExterna->isChecked()){
+        if(id_doctor!="0"){
+
+        }
+        else{
+
+        }
+        //insert
+    }
+}
+
+void MainWindow::on_tv_listaDocCitas_clicked(const QModelIndex &index)
+{
+    id_doctor = model->index(index.row(),index.column()).data().toString();
 }
