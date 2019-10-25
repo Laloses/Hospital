@@ -998,7 +998,7 @@ void MainWindow::on_pushButton_rechazarsoli_clicked()
     }
 
 }
-
+//cunsulta solo muetras doctores
 void MainWindow::on_radioButton_doctors_clicked()
 {
     qDebug()<<"entre:";
