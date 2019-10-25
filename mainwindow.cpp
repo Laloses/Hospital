@@ -813,19 +813,12 @@ void MainWindow::solicitUsuarios(){
             else {
                 band2=false;
             }
-
-
-
         }
         else {
             band3=false;
         }
 
     }
-
-
-
-
 
 }
 void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
