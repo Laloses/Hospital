@@ -794,6 +794,7 @@ void MainWindow::cargarHorarioDoc(){
             ui->tableHorario->setEditTriggers(QAbstractItemView::NoEditTriggers);
             i++;
         }
+}
 
 
 void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
@@ -1215,3 +1216,5 @@ void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
     ui->pushButton_SolicitudesUsuarios->show();
     ui->stackedWidget_admin->setCurrentIndex(0);
 }
+
+
