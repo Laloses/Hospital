@@ -904,7 +904,7 @@ void MainWindow::on_comboBox_area_currentTextChanged(const QString &arg1)
 void MainWindow::on_pushButton_guardar_clicked()
 {
     // update de doctor
-    QString actualizacion,turno,numConsul,area,estado;
+    QString actualizacion,turno,numConsul,area,estado,buscaId,idCondultorio,idarea,areas,idareas;
     QSqlQuery actual;
     estado="1";
     QMessageBox message(QMessageBox::Question,
@@ -914,6 +914,11 @@ void MainWindow::on_pushButton_guardar_clicked()
 
     turno=ui->comboBox_turno->currentText();
     numConsul=ui->lineEdit_numconsultorio->text();
+    buscaId="select idconsultorio from consultorio where numConsultorio='"+numConsul+"'";
+    actual.exec(buscaId);
+    actual.next();
+    idCondultorio=actual.value(0).toString();
+
     if(ui->lineEdit_area->text()==""){
         QMessageBox messageBox(QMessageBox::Warning,
                                          tr("Warning"), tr("Por favor,Asigne una area."), QMessageBox::Yes);
@@ -922,28 +927,38 @@ void MainWindow::on_pushButton_guardar_clicked()
 
                   }
     }else{
+
+    if(UserTipo==1){
         if (message.exec() == QMessageBox::Yes){
-    if(userTipo==1){
-        actualizacion="update doctor set horario='"+turno+"',idconsultorio='"+numConsul+"',estado='"+estado+"'where idUser='"+matric+"'";
+        qDebug()<<"entre update doctor";
+        actualizacion="update doctor set horario='"+turno+"',idconsultorio='"+idCondultorio+"',estado='"+estado+"'where idUser='"+matric+"'";
+        qDebug()<<actualizacion;
         actual.exec(actualizacion);
         qDebug()<<"Actualizando datos del doctor";
+         clearLayout(ui->lista);
         ui->stackedWidget_admin->setCurrentIndex(1);
         }
     }
-        else if (userTipo==2){
+        else if (UserTipo==2){
+        if (message.exec() == QMessageBox::Yes){
+            areas=ui->lineEdit_area->text();
+            idarea="select idarea from areah where nombreArea='"+areas+"'";
+            idareas=actual.value(0).toString();
         //update de staff
          area=ui->lineEdit_area->text();
-        actualizacion="update staff set estado='"+estado+"',idArea='"+area+"',turno='"+turno+"' where idUser='"+matric+"'";
+         qDebug()<<"Actualizando datos del staff";
+        actualizacion="update staff set estado='"+estado+"',idArea='"+idareas+"',turno='"+turno+"' where idUser='"+matric+"'";
         actual.exec(actualizacion);
-        qDebug()<<"Actualizando datos del staff";
+         clearLayout(ui->lista);
         ui->stackedWidget_admin->setCurrentIndex(1);
+             }
         }
     }
 
 }
 
 
-
+//rechazar solicitudes
 void MainWindow::on_pushButton_rechazarsoli_clicked()
 {
     QString consulta,matri;
@@ -963,14 +978,16 @@ void MainWindow::on_pushButton_rechazarsoli_clicked()
 
     }else  if (message.exec() == QMessageBox::Yes){
         qDebug()<<"matricula:"<<matric;
-    if(userTipo==1){
+        qDebug()<<"tipo:"<<UserTipo;
+    if(UserTipo==1){
         consulta=" delete from doctor where idUser='"+matric+"'";
         query.exec(consulta);
         consulta="delete from usuario where matricula='"+matric+"'";
         query.exec(consulta);
     }
         else{
-        if (userTipo==2) {
+        if (UserTipo==2) {
+            qDebug()<<"entre staff";
           consulta=" delete from staff where idUser='"+matric+"'";
           query.exec(consulta);
           consulta="delete from usuario where matricula='"+matric+"'";
