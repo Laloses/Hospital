@@ -906,6 +906,11 @@ void MainWindow::PonerInfo(QString matri)
         QString puesto1;
         matric=matri;
         UserTipo=2;
+       //bloque de line edit
+        ui->lineEdit_piso->hide();
+        ui->lineEdit_numconsultorio->hide();
+        ui->label_piso->hide();
+        ui->label_consultorio->hide();
         puesto1="select nombre from puesto where idpuesto='"+puesto+"'; ";
         datos2.exec(puesto1);
         datos2.next();
@@ -955,7 +960,6 @@ void MainWindow::infoConsultorio(QString idConsultorio){
 
 }
 
-
 void MainWindow::mostrasConsultorios(){
 
     QString areConsultorio,consulta,numconsultorio,idconsultorio,ocupado;
@@ -989,24 +993,15 @@ void MainWindow::mostrasConsultorios(){
             contC=0;
         }
         contC++;
-
-
-
-
     }
 
 
 }
 
 
-
-
-
-
-
-
 void MainWindow::on_pushButton_regresarSolicitudes_clicked()
 {
+    solicitUsuarios();
     ui->stackedWidget_admin->setCurrentIndex(1);
 }
 
@@ -1026,14 +1021,44 @@ void MainWindow::on_pushButton_guardar_clicked()
     if(userTipo==1){
         actualizacion="update doctor set horario='"+turno+"',idconsultorio='"+numConsul+"',estado='"+estado+"'where idUser='"+mactri+"'";
         actual.exec(actualizacion);
+        solicitUsuarios();
+        ui->stackedWidget_admin->setCurrentIndex(1);
     }
     else if (userTipo==2) {
         //update de staff
-        area=ui->lineEdit_area->text();
+         area=ui->lineEdit_area->text();
         actualizacion="update staff set estado='"+estado+"',idArea='"+area+"',turno='"+turno+"' where idUser='"+mactri+"'";
         actual.exec(actualizacion);
+        solicitUsuarios();
+        ui->stackedWidget_admin->setCurrentIndex(1);
+
+    }
+    close();
+}
+
+
+
+void MainWindow::on_pushButton_rechazarsoli_clicked()
+{
+    QString consulta,matri;
+    QSqlQuery query;
+    if(userTipo==1){
+        consulta=" delete from doctor where idUser='"+mactri+"'";
+        query.exec(consulta);
+        consulta="delete from usuario where matricula='"+mactri+"'";
+        query.exec(consulta);
+        solicitUsuarios();
+    }
+
+    else if (userTipo==2) {
+      consulta=" delete from staff where idUser='"+mactri+"'";
+      query.exec(consulta);
+      consulta="delete from usuario where matricula='"+mactri+"'";
+      query.exec(consulta);
+      solicitUsuarios();
     }
 
 
-    close();
+
+
 }

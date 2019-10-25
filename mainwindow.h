@@ -77,11 +77,17 @@ private slots:
 
     void on_pushButton_guardar_clicked();
 
+    void PonerInfo(QString);
+
+    void infoConsultorio(QString);
+
+
+    void on_pushButton_rechazarsoli_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void PonerInfo(QString);
-    void infoConsultorio(QString);
+
     void solicitUsuarios();
     QString mactri;
     int userTipo;
