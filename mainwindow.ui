@@ -434,7 +434,7 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -2675,8 +2675,8 @@ color: rgb(68, 94, 134);
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>496</width>
-                <height>346</height>
+                <width>98</width>
+                <height>28</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_15">

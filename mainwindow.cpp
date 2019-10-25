@@ -637,7 +637,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
 //Cuando el usuario le da clic para ver su tip del día
 void MainWindow::on_pushButton_tip_clicked()
 {
-      tipdeldia tip(this);
+    static tipdeldia tip(this);
       tip.mostrarTip();
       tip.show();
 }
