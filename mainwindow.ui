@@ -434,7 +434,7 @@ border-image: url(:/imgs/logofinal.png);</string>
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -728,7 +728,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_oculto">
            <layout class="QGridLayout" name="gridLayout_5">
@@ -2234,10 +2234,10 @@ background:transparent;
          <widget class="QWidget" name="widget" native="true">
           <property name="geometry">
            <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>510</width>
-            <height>370</height>
+            <x>10</x>
+            <y>80</y>
+            <width>480</width>
+            <height>290</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_12">
@@ -2251,8 +2251,8 @@ background:transparent;
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>486</width>
-                <height>346</height>
+                <width>456</width>
+                <height>266</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_14">
@@ -2302,7 +2302,7 @@ background:transparent;
                 <string notr="true">border:1px solid black;</string>
                </property>
                <property name="text">
-                <string>foto del solicitante</string>
+                <string> </string>
                </property>
               </widget>
              </item>
@@ -2560,6 +2560,45 @@ color: #5d80b6;</string>
            </item>
           </layout>
          </widget>
+         <widget class="QPushButton" name="pushButton_menu_Pincipal_Adm">
+          <property name="geometry">
+           <rect>
+            <x>400</x>
+            <y>20</y>
+            <width>93</width>
+            <height>28</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Menu principal</string>
+          </property>
+         </widget>
+         <widget class="QWidget" name="">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>30</y>
+            <width>290</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_17">
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="radioButton_doctors">
+             <property name="text">
+              <string> Solicitud doctores</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QRadioButton" name="radioButton_staffs">
+             <property name="text">
+              <string>Solicitud staff</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
         <widget class="QWidget" name="page_4">
          <widget class="QComboBox" name="comboBox_turno">
@@ -2697,7 +2736,7 @@ color: #5d80b6;</string>
            <item row="1" column="1" colspan="2">
             <widget class="QLineEdit" name="lineEdit_area">
              <property name="placeholderText">
-              <string>consultorio</string>
+              <string>Especialidad</string>
              </property>
             </widget>
            </item>

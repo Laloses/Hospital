@@ -14,6 +14,7 @@
 #include "registropaciente.h"
 #include <QtSql/QSqlQueryModel>
 #include "login.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -91,6 +92,12 @@ private slots:
 
 
     void on_pushButton_rechazarsoli_clicked();
+
+    void on_radioButton_doctors_clicked();
+
+    void on_radioButton_staffs_clicked();
+
+    void on_pushButton_menu_Pincipal_Adm_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

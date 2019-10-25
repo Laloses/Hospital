@@ -700,130 +700,12 @@ void MainWindow::on_pushButton_datosPaciente_clicked()
     ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
 }
 
-void MainWindow::solicitUsuarios(){
-
-    clearLayout(ui->lista);
-
-    int cont=0;
-    QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
-    QSqlQuery queryDoc,queryStaff,userEst;
-    consultaDoc="select *from Doctores";
-    queryDoc.exec(consultaDoc);
-    consultaStaff="select *from Staffs";
-    queryStaff.exec(consultaStaff);
 
 
-
-    ui->stackedWidget_admin->setCurrentIndex(1);
-
-    bool band1,band2,band3;
-    band1=true;
-    band2=true;
-    band3=true;
-
-    while(band3)
-    {
-
-        if(band1==true||band2==true)
-        {
-            if(queryDoc.next())
-            {
-                if(queryDoc.value(5).toString()=="1")
-                {
-
-                }
-                else {
-
-
-                nombre=queryDoc.value(0).toString();
-                espec=queryDoc.value(4).toString();
-                espera="en espera";
-
-                matricula=queryDoc.value(3).toString();
-
-                QPushButton *b=new QPushButton();
-                b->setText("Ver Solicitud");
-                QLabel *l=new QLabel;
-                l->setText(nombre);
-                b->setFixedSize(QSize(120,40));
-                QSignalMapper *mapper=new QSignalMapper(this);
-                connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
-                mapper->setMapping(b,matricula);
-                connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
-                QLabel *espacio=new QLabel();
-                QLabel *esp=new QLabel();
-                esp->setText(espec);
-                QLabel *estado=new QLabel();
-                estado->setText(espera);
-                ui->lista->addWidget(b,cont,0,1,1);
-                ui->lista->addWidget(l,cont,1,1,1);
-
-                ui->lista->addWidget(esp,cont,2,1,1);
-                ui->lista->addWidget(estado,cont,3,1,1);
-
-                cont++;
-                }
-            }
-            else {
-                band1=false;
-            }
-            if(queryStaff.next())
-            {
-                if(queryStaff.value(5).toString()=="1")
-                {
-
-                }
-                else {
-
-
-                //QString nombre,espec,espera,matricula;
-                nombre=queryStaff.value(0).toString();
-                espec=queryStaff.value(4).toString();
-                espera="en espera";
-
-                matricula=queryStaff.value(3).toString();
-
-                QPushButton *b=new QPushButton();
-                b->setText("Ver Solicitud");
-                QLabel *l=new QLabel;
-                l->setText(nombre);
-                b->setFixedSize(QSize(120,40));
-                QSignalMapper *mapper=new QSignalMapper(this);
-                connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
-                mapper->setMapping(b,matricula);
-                connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
-                QLabel *espacio=new QLabel();
-                QLabel *esp=new QLabel();
-                esp->setText(espec);
-                QLabel *estado=new QLabel();
-                estado->setText(espera);
-                ui->lista->addWidget(b,cont,0,1,1);
-                ui->lista->addWidget(l,cont,1,1,1);
-
-                ui->lista->addWidget(esp,cont,2,1,1);
-                ui->lista->addWidget(estado,cont,3,1,1);
-                //   ui->lista->addWidget(esp,cont,3,1,1);
-                // ui->lista->addWidget(m,cont,4,1,1);
-                // ui->gridLayout.add;
-                cont++;
-
-                }
-
-            }
-            else {
-                band2=false;
-            }
-        }
-        else {
-            band3=false;
-        }
-
-    }
-
-}
 void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
 {
-    solicitUsuarios();
+    ui->stackedWidget_admin->setCurrentIndex(1);
+    ui->pushButton_SolicitudesUsuarios->hide();
 }
 
 
@@ -908,10 +790,34 @@ void MainWindow::PonerInfo(QString matri)
 
 }
 
+
 void MainWindow::on_pushButton_AceptarSoli_clicked()
 {
-     mostrarZonas();
-    ui->stackedWidget_admin->setCurrentIndex(2);
+   if(ui->radioButton_doctors->isChecked()){
+       ui->lineEdit_numconsultorio->show();
+       ui->lineEdit_piso->show();
+       ui->label_piso->show();
+       ui->label_consultorio->show();
+   }else if(ui->radioButton_staffs->isChecked()){
+       ui->lineEdit_numconsultorio->hide();
+       ui->lineEdit_piso->hide();
+       ui->label_piso->hide();
+       ui->label_consultorio->hide();
+}
+
+    if(ui->lineEdit_nombre_solicitud->text()=="" && ui->lineEdit_especialidad_solicitud->text()==""){
+        QMessageBox messageBox(QMessageBox::Warning,
+                                         tr("Warning"), tr("Por favor,selecione algun candito."), QMessageBox::Yes);
+                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                 if (messageBox.exec() == QMessageBox::Yes){
+                  }
+            }
+       else { if (ui->lineEdit_nombre_solicitud->text()!="" && ui->lineEdit_especialidad_solicitud->text()!="") {
+        mostrarZonas();
+        ui->stackedWidget_admin->setCurrentIndex(2);
+
+        }
+    }
 }
 
 //----------------------------------------------------------------------------
@@ -953,7 +859,6 @@ void MainWindow::mostrasConsultorios(){
     qDebug()<<areConsultorio;
     consulta="select are.idarea,are.nombreArea,con.idConsultorio,con.numConsultorio,con.ocupado"
                " from areah as are inner join consultorio as con on are.idarea=con.idarea where are.nombreArea='"+areConsultorio+"' and con.ocupado='"+ocupado+"'";
-    qDebug()<<consulta;
     query.exec(consulta);
 
     int contF=0;
@@ -985,12 +890,14 @@ void MainWindow::mostrasConsultorios(){
 
 void MainWindow::on_pushButton_regresarSolicitudes_clicked()
 {
-    solicitUsuarios();
     ui->stackedWidget_admin->setCurrentIndex(1);
 }
 
 void MainWindow::on_comboBox_area_currentTextChanged(const QString &arg1)
 {
+    ui->lineEdit_area->clear();
+    ui->lineEdit_piso->clear();
+    ui->lineEdit_numconsultorio->clear();
     mostrasConsultorios();
 }
 
@@ -1000,24 +907,39 @@ void MainWindow::on_pushButton_guardar_clicked()
     QString actualizacion,turno,numConsul,area,estado;
     QSqlQuery actual;
     estado="1";
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de asignar la area.?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
     turno=ui->comboBox_turno->currentText();
     numConsul=ui->lineEdit_numconsultorio->text();
+    if(ui->lineEdit_area->text()==""){
+        QMessageBox messageBox(QMessageBox::Warning,
+                                         tr("Warning"), tr("Por favor,Asigne una area."), QMessageBox::Yes);
+                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                 if (messageBox.exec() == QMessageBox::Yes){
+
+                  }
+    }else{
+        if (message.exec() == QMessageBox::Yes){
     if(userTipo==1){
-        actualizacion="update doctor set horario='"+turno+"',idconsultorio='"+numConsul+"',estado='"+estado+"'where idUser='"+mactri+"'";
+        actualizacion="update doctor set horario='"+turno+"',idconsultorio='"+numConsul+"',estado='"+estado+"'where idUser='"+matric+"'";
         actual.exec(actualizacion);
-        solicitUsuarios();
+        qDebug()<<"Actualizando datos del doctor";
         ui->stackedWidget_admin->setCurrentIndex(1);
+        }
     }
-    else if (userTipo==2) {
+        else if (userTipo==2){
         //update de staff
          area=ui->lineEdit_area->text();
-        actualizacion="update staff set estado='"+estado+"',idArea='"+area+"',turno='"+turno+"' where idUser='"+mactri+"'";
+        actualizacion="update staff set estado='"+estado+"',idArea='"+area+"',turno='"+turno+"' where idUser='"+matric+"'";
         actual.exec(actualizacion);
-        solicitUsuarios();
+        qDebug()<<"Actualizando datos del staff";
         ui->stackedWidget_admin->setCurrentIndex(1);
-
+        }
     }
-    close();
+
 }
 
 
@@ -1026,20 +948,159 @@ void MainWindow::on_pushButton_rechazarsoli_clicked()
 {
     QString consulta,matri;
     QSqlQuery query;
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de rechazar solicitud?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+    if(ui->lineEdit_nombre_solicitud->text()=="" && ui->lineEdit_especialidad_solicitud->text()==""){
+        QMessageBox messageBox(QMessageBox::Warning,
+                                         tr("Warning"), tr("Por favor,selecione algun candito."), QMessageBox::Yes);
+                 messageBox.setButtonText(QMessageBox::Yes, tr("Actividad"));
+                 if (messageBox.exec() == QMessageBox::Yes){
+
+                  }
+
+    }else  if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"matricula:"<<matric;
     if(userTipo==1){
-        consulta=" delete from doctor where idUser='"+mactri+"'";
+        consulta=" delete from doctor where idUser='"+matric+"'";
         query.exec(consulta);
-        consulta="delete from usuario where matricula='"+mactri+"'";
+        consulta="delete from usuario where matricula='"+matric+"'";
         query.exec(consulta);
-        solicitUsuarios();
+    }
+        else{
+        if (userTipo==2) {
+          consulta=" delete from staff where idUser='"+matric+"'";
+          query.exec(consulta);
+          consulta="delete from usuario where matricula='"+matric+"'";
+          query.exec(consulta);
+          clearLayout(ui->lista);
+        }
+      }
     }
 
-    else if (userTipo==2) {
-      consulta=" delete from staff where idUser='"+mactri+"'";
-      query.exec(consulta);
-      consulta="delete from usuario where matricula='"+mactri+"'";
-      query.exec(consulta);
-      solicitUsuarios();
+}
+
+void MainWindow::on_radioButton_doctors_clicked()
+{
+    qDebug()<<"entre:";
+
+    ui->lineEdit_especialidad_solicitud->clear();
+    ui->lineEdit_nombre_solicitud->clear();
+    ui->lineEdit_cedula_solicitud->clear();
+    ui->lineEdit_Univercida_solicitud->clear();
+    ui->lineEdit_Univercida_solicitud->show();
+    ui->lineEdit_cedula_solicitud->show();
+    ui->label_solicitud->setText(" ");
+
+    clearLayout(ui->lista);
+    int cont=0;
+    QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
+    QSqlQuery queryDoc,queryStaff,userEst;
+    consultaDoc="select *from Doctores";
+    queryDoc.exec(consultaDoc);
+            while(queryDoc.next())
+            {
+                if(queryDoc.value(5).toString()=="1")
+                {
+
+                }
+                else {
+                nombre=queryDoc.value(0).toString();
+                espec=queryDoc.value(4).toString();
+                espera="en espera";
+
+                matricula=queryDoc.value(3).toString();
+
+                QPushButton *b=new QPushButton();
+                b->setText("Ver Solicitud");
+                QLabel *l=new QLabel;
+                l->setText(nombre);
+                b->setFixedSize(QSize(120,40));
+                QSignalMapper *mapper=new QSignalMapper(this);
+                connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+                mapper->setMapping(b,matricula);
+                connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
+                QLabel *espacio=new QLabel();
+                QLabel *esp=new QLabel();
+                esp->setText(espec);
+                QLabel *estado=new QLabel();
+                estado->setText(espera);
+                ui->lista->addWidget(b,cont,0,1,1);
+                ui->lista->addWidget(l,cont,1,1,1);
+                ui->lista->addWidget(esp,cont,2,1,1);
+                ui->lista->addWidget(estado,cont,3,1,1);
+
+                cont++;
+                }
+            }
+
+}
+
+void MainWindow::on_radioButton_staffs_clicked()
+{
+    clearLayout(ui->lista);
+    ui->lineEdit_especialidad_solicitud->clear();
+    ui->lineEdit_nombre_solicitud->clear();
+    ui->lineEdit_Univercida_solicitud->clear();
+    ui->lineEdit_Univercida_solicitud->hide();
+    ui->lineEdit_cedula_solicitud->hide();
+    ui->lineEdit_cedula_solicitud->clear();
+    ui->label_solicitud->setText(" ");
+    int cont=0;
+    QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
+    QSqlQuery queryDoc,queryStaff,userEst;
+    consultaStaff="select *from Staffs";
+    queryStaff.exec(consultaStaff);
+
+    while(queryStaff.next())
+    {
+        if(queryStaff.value(5).toString()=="1")
+        {
+
+        }
+        else {
+
+
+        //QString nombre,espec,espera,matricula;
+        nombre=queryStaff.value(0).toString();
+        espec=queryStaff.value(4).toString();
+        espera="En espera.";
+
+        matricula=queryStaff.value(3).toString();
+
+        QPushButton *b=new QPushButton();
+        b->setText("Ver Solicitud");
+        QLabel *l=new QLabel;
+        l->setText(nombre);
+        b->setFixedSize(QSize(120,40));
+        QSignalMapper *mapper=new QSignalMapper(this);
+        connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(b,matricula);
+        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerInfo(QString)));
+        QLabel *espacio=new QLabel();
+        QLabel *esp=new QLabel();
+        esp->setText(espec);
+        QLabel *estado=new QLabel();
+        estado->setText(espera);
+        ui->lista->addWidget(b,cont,0,1,1);
+        ui->lista->addWidget(l,cont,1,1,1);
+
+        ui->lista->addWidget(esp,cont,2,1,1);
+        ui->lista->addWidget(estado,cont,3,1,1);
+        //   ui->lista->addWidget(esp,cont,3,1,1);
+        // ui->lista->addWidget(m,cont,4,1,1);
+        // ui->gridLayout.add;
+        cont++;
+
+        }
     }
 
+}
+
+void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
+{
+    ui->pushButton_SolicitudesUsuarios->show();
+    ui->stackedWidget_admin->setCurrentIndex(0);
 }
