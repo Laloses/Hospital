@@ -79,6 +79,12 @@ private slots:
 
     void on_tv_listaDocCitas_clicked(const QModelIndex &index);
 
+    void on_fechaCita_userDateChanged(const QDate &date);
+
+    void on_tv_listaDocCitas_doubleClicked(const QModelIndex &index);
+
+    void on_horaCita_activated(const QString &arg1);
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

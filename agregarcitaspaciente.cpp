@@ -19,25 +19,25 @@ agregarCitasPaciente::agregarCitasPaciente(QString hostName, int port, QString d
 
 bool agregarCitasPaciente::citasPaciente(QString matricula,QString fecha, QString hora, QString doctor, QString sintomas,QString idcitaExterna){
 
-
+    bool res=false;
     //query de insertado
     QSqlQuery insertar;
 
-        if(insertar.exec("insert into cita(matricula,fecha,hora,doctor,sintomas)values("+ matricula +",'"+ fecha +"','"+ hora +"',"+ doctor +",'"+ sintomas +"',"+ idcitaExterna +")") ){
-            return true;
+        if(insertar.exec("insert into cita(matricula,fecha,hora,doctor,sintomas,idcitaExterna)values("+ matricula +",'"+ fecha +"','"+ hora +"',"+ doctor +",'"+ sintomas +"',"+ idcitaExterna +")") ){
+            res= true;
         }
         else {
             qDebug()<<insertar.lastError().text();
-            return false;
          }
-
-    }
+    return res;
+}
 
 
 
 
 bool agregarCitasPaciente::citasExternas(QString matricula, QString nombreCompleto, QString lugarOrigen, QString edad, QString sexo, QString fecha, QString hora , QString doctor, QString sintomas)
 {
+    bool res=false;
     QSqlQuery insertar;
     if(insertar.exec("insert into citaExterna() values("+ matricula +",'"+ nombreCompleto +"','"+ lugarOrigen +"',"+ edad +",'"+ sexo +"','"+ fecha +"','"+ hora +"',"+ doctor +",'"+ sintomas +"')"))
     {
@@ -46,11 +46,9 @@ bool agregarCitasPaciente::citasExternas(QString matricula, QString nombreComple
         insertar.lastInsertId().toString();
 
         if(insertar.exec("insert into cita(matricula,fecha,hora,doctor,sintomas,idcitaExterna)values("+ matricula +",'"+ fecha +"','"+ hora +"',"+ doctor +",'"+ sintomas +"',"+ idcitaExterna +")") ){
-            return true;
-        }else
-        {
-
+            res=true;
         }
     }
+    return res;
 }
 
