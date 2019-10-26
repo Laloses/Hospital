@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QString>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -248,6 +250,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
         else if(tipo==2)
         {
             qDebug()<<"eres un paciente";
+
             ui->pushButton_salir->setHidden(false);
             ui->pushButton_login->setHidden(true);
             ui->pushButton_registro->setHidden(true);
@@ -258,11 +261,88 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 
             id_paciente=lo.getIdPaciente();
             id_usuario=lo.getIdUser();
+
+            //esto lo puse para habilitar las notificaciones
+            verNoti=1;
+            ui->nofi->hide();
+            QString busca;
+            busca="select *from notificacion where UserP='"+id_paciente+"'; ";
+            QSqlQuery buscarNoti;
+            buscarNoti.exec(busca);
+
+            int contadorNoti=0;
+            int filas=0;
+
+            while(buscarNoti.next())
+            {
+                QString nueva;
+                nueva=buscarNoti.value(4).toString();
+                qDebug()<<"ya se vio: "<<nueva;
+                if(nueva=="0")
+                {
+
+                    contadorNoti++;
+              }
+            }
+
+            while(buscarNoti.previous()){
+
+
+
+                if(buscarNoti.value(1).toString()=="1")
+                {
+                    QPlainTextEdit *b=new QPlainTextEdit();
+                   // QPushButton *b=new QPushButton();
+                    b->setPlainText(buscarNoti.value(2).toString());
+                    b->setFixedSize(QSize(200,50));
+                    b->setStyleSheet("background-color: rgb(151,240,104); ");
+                    ui->barraDeNoti->addWidget(b,filas,0,Qt::AlignTop);
+                    filas++;
+                }else
+                {
+
+                 QPlainTextEdit *b=new QPlainTextEdit();
+               //QPushButton *b=new QPushButton();
+                b->setPlainText(buscarNoti.value(2).toString());
+                b->setFixedSize(QSize(200,50));
+                b->setStyleSheet("background-color: rgb(243,173,106); ");
+                ui->barraDeNoti->addWidget(b,filas,0,Qt::AlignTop);
+                filas++;
+
+                }
+
+
+            }
+
+
             on_pushButton_miPerfil_clicked();
+
+            QString num=QString::number(contadorNoti);
+            qDebug()<<"este numero conte"<<num;
+            if(num=="0")
+            {
+                qDebug()<<"no encontre nada";
+            ui->notificacionL->hide();
+            }
+            else
+            {
+                qDebug()<<"encontre algo";
+                ui->notificacionL->setStyleSheet("background-color:rgb(243,173,106);");
+                ui->notificacionL->setText(num);
+                ui->notificacionL->show();
+            }
+
+
+
+
+
         }
         else if(tipo==3)
         {
             qDebug()<<"eres un doctor";
+
+
+
             ui->pushButton_salir->setHidden(false);
             ui->pushButton_login->setHidden(true);
             ui->pushButton_registro->setHidden(true);
@@ -275,8 +355,13 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 
             id_doctor=lo.getIdDoctor();
             id_usuario=lo.getIdUser();
-            on_pushButton_miPerfil_clicked();
-            cargarHorarioDoc();
+            ui->stackedWidget_principal->setCurrentIndex(3);
+            ui->stackedWidget_perfilDoctor->setCurrentIndex(0);
+
+
+            //esta funcion no debe ejecutarse ahi
+            //  on_pushButton_miPerfil_clicked();
+           // cargarHorarioDoc();
         }
         else if(tipo==4)
         {
@@ -677,6 +762,10 @@ void MainWindow::on_pushButton_citasDoc_clicked()
 {
     //pag citas doc
     ui->stackedWidget_perfilDoctor->setCurrentIndex(2);
+
+    SolicitudCitas();
+
+
 }
 
 void MainWindow::on_pushButton_horarioDoc_clicked()
@@ -1199,6 +1288,7 @@ void MainWindow::on_radioButton_staffs_clicked()
         ui->lista->addWidget(b,cont,0,1,1);
         ui->lista->addWidget(l,cont,1,1,1);
 
+
         ui->lista->addWidget(esp,cont,2,1,1);
         ui->lista->addWidget(estado,cont,3,1,1);
         //   ui->lista->addWidget(esp,cont,3,1,1);
@@ -1218,3 +1308,384 @@ void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
 }
 
 
+void MainWindow::SolicitudCitas()
+{
+    QString citas,est;
+    est="0";
+    citas="select *from cita where doctor='"+id_usuario+"' and estado='"+est+"'; ";
+    QSqlQuery citas1;
+    citas1.exec(citas);
+
+
+
+
+
+
+    int f=0;
+    int fi=0;
+    int ban=1;
+    QString r1,g1,b1;
+    r1="172,189,211";
+    QString r2,g2,b2;
+    r2="221,221,221";
+    QString rgb="";
+
+
+    QLabel *l=new QLabel;
+    l->setText("folio de Cita");
+    l->setFixedSize(QSize(100,25));
+    l->setStyleSheet("border: 1px solid rgb(9,9,9)");
+    ui->encabezadoCitas->addWidget(l,0,0,Qt::AlignLeft);
+
+    QLabel *l1=new QLabel;
+    l1->setText("Matricula");
+    l1->setFixedSize(QSize(100,25));
+    l1->setStyleSheet("border: 1px solid rgb(9,9,9)");
+    ui->encabezadoCitas->addWidget(l1,0,1,Qt::AlignLeft);
+
+    QLabel *l2=new QLabel;
+    l2->setText("Fecha");
+    l2->setFixedSize(QSize(100,25));
+    l2->setStyleSheet("border: 1px solid rgb(9,9,9)");
+    ui->encabezadoCitas->addWidget(l2,0,2,Qt::AlignLeft);
+
+    QLabel *l3=new QLabel;
+    l3->setText("Hora");
+    l3->setFixedSize(QSize(100,25));
+    l3->setStyleSheet("border: 1px solid rgb(9,9,9)");
+    ui->encabezadoCitas->addWidget(l3,0,3,Qt::AlignLeft);
+
+
+
+    QString folio,matricu,fecha,hora;
+    int i=0;
+
+    while(citas1.next())
+    {
+        folio=citas1.value(0).toString();
+        matricu=citas1.value(1).toString();
+        fecha=citas1.value(2).toString();
+        hora=citas1.value(3).toString();
+        if(ban==1)
+        {
+            rgb=r1;
+            ban=2;
+        }
+        else
+        {
+            rgb=r2;
+            ban=1;
+        }
+
+
+        QLabel *l=new QLabel;
+        l->setText(folio);
+        l->setFixedSize(QSize(100,25));
+        l->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->citasLay->addWidget(l,i,0,Qt::AlignTop);
+
+
+
+
+        QLabel *m=new QLabel;
+        m->setText(matricu);
+        m->setFixedSize(QSize(100,25));
+        m->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->citasLay->addWidget(m,i,1,Qt::AlignTop);
+
+
+
+
+
+        QLabel *r=new QLabel;
+        r->setText(fecha);
+        r->setStyleSheet("background-color: rgb("+rgb+")");
+        r->setFixedSize(QSize(100,25));
+        ui->citasLay->addWidget(r,i,2,Qt::AlignTop);
+
+
+
+
+        QLabel *h=new QLabel;
+        h->setText(hora);
+        h->setFixedSize(QSize(100,25));
+        h->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->citasLay->addWidget(h,i,3,Qt::AlignTop);
+
+        QLabel *ss=new QLabel;
+        ss->setText(" ");
+        ss->setFixedSize(QSize(40,25));
+       ui->citasLay->addWidget(ss,i,4,Qt::AlignTop);
+
+
+
+       QPushButton *b=new QPushButton();
+       b->setText("Revisar");
+       b->setFixedSize(QSize(100,25));
+       b->setStyleSheet("background-color: rgb(138,222,242);border: 1px solid rgb(60,200,234)");
+       QSignalMapper *mapper2=new QSignalMapper(this);
+       connect(b,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
+       mapper2->setMapping(b,folio);
+       connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(verCita(QString)));
+       ui->citasLay->addWidget(b,i,5,Qt::AlignTop);
+
+
+       QPushButton *s=new QPushButton();
+       s->setText("Aceptar");
+       s->setFixedSize(QSize(100,25));
+       s->setStyleSheet("background-color: rgb(60,160,234)");
+       QSignalMapper *mapper=new QSignalMapper(this);
+       connect(s,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+       mapper->setMapping(s,folio);
+       connect(mapper,SIGNAL(mapped(QString)),this,SLOT(aceptarCita(QString)));
+       ui->citasLay->addWidget(s,i,6,Qt::AlignTop);
+
+       QPushButton *q=new QPushButton();
+       q->setText("Rechazar");
+       q->setFixedSize(QSize(100,25));
+       q->setStyleSheet("background-color: rgb(138,198,242)");
+       QSignalMapper *mapper1=new QSignalMapper(this);
+       connect(q,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
+       mapper1->setMapping(q,folio);
+       connect(mapper1,SIGNAL(mapped(QString)),this,SLOT(rechazarCita(QString)));
+       ui->citasLay->addWidget(q,i,7,Qt::AlignTop);
+    i++;
+    }
+
+}
+
+void MainWindow::aceptarCita(QString folio)
+{
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("Deseas aceptar la solicitud?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+        QString update,valor;
+        valor="1";
+        update="update cita set estado='"+valor+"' where idCita='"+folio+"' ";
+        QSqlQuery aceptar;
+        qDebug()<<update;
+        aceptar.exec(update);
+
+
+        //aqui mando la notificacion:
+        QString fech,hor,tipo;
+        QString cita,user1;
+            cita="select *from  cita where idCita='"+folio+"';  ";
+            QSqlQuery cita1;
+            cita1.exec(cita);
+            cita1.next();
+            user1=cita1.value(1).toString();
+
+        fech=cita1.value(2).toString();
+        hor=cita1.value(3).toString();
+
+        QString mensaj;
+        mensaj="Se le informa que su cita para el dia: "+fech+" y con horario de: "+hor+" fue ACEPTADA.";
+        tipo="1";
+        QString notificacion;
+        notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+user1+"');";
+        QSqlQuery mandarNoti;
+        mandarNoti.exec(notificacion);
+
+
+
+
+        clearLayout(ui->citasLay);
+        SolicitudCitas();
+
+    }
+    else
+    {
+
+    }
+
+
+
+
+}
+
+void MainWindow::rechazarCita(QString folio)
+{
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de RECHAZAR la solicitud?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+
+
+
+
+        //aqui mando la notificacion:
+        QString fech,hor,tipo;
+        QString cita,user1;
+            cita="select *from  cita where idCita='"+folio+"';  ";
+            QSqlQuery cita1;
+            cita1.exec(cita);
+            cita1.next();
+            user1=cita1.value(1).toString();
+
+        fech=cita1.value(2).toString();
+        hor=cita1.value(3).toString();
+
+        QString mensaj;
+        mensaj="Se le informa que su cita para el dia: "+fech+" y con horario de: "+hor+" fue RECHAZADA.";
+        tipo="0";
+        QString notificacion;
+        notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+user1+"');";
+        QSqlQuery mandarNoti;
+        mandarNoti.exec(notificacion);
+
+        QString delete1;
+        delete1="delete from cita where idCita='"+folio+"' ";
+        QSqlQuery eliminar;
+        eliminar.exec(delete1);
+
+
+
+        clearLayout(ui->citasLay);
+        SolicitudCitas();
+
+
+    }
+    else
+    {
+
+    }
+
+
+
+}
+
+void MainWindow::verCita(QString folio)
+{
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(3);
+    ui->pushButton_horarioDoc->hide();
+    ui->pushButton_citasDoc->hide();
+
+    QString cita,user1;
+    cita="select *from  cita where idCita='"+folio+"';  ";
+    QSqlQuery cita1;
+    cita1.exec(cita);
+    cita1.next();
+    user1=cita1.value(1).toString();
+
+    QString CitaExtra,respons;
+    respons="select *from usuario where matricula='"+user1+"';  ";
+    QSqlQuery datos;
+    datos.exec(respons);
+    datos.next();
+
+    QString nombreU;
+    nombreU=datos.value(2).toString()+" "+datos.value(3).toString()+" "+datos.value(3).toString();
+
+    int actual=QDate::currentDate().year();
+    int yearUSuario=0;
+    int edad=0;
+    QString edad1;
+
+    CitaExtra=cita1.value(6).toString();
+    if(CitaExtra==""||CitaExtra=="0")
+    {
+        ui->tipoCita->setText("--Personal--");
+        ui->Responsable->hide();
+        ui->paciente->setText(nombreU);
+        ui->telelefono->setText(datos.value(8).toString());
+        ui->correo->setText(datos.value(7).toString());
+        yearUSuario=datos.value(5).toDate().year();
+        edad=actual-yearUSuario;
+        edad1=QString::number(edad);
+        ui->edad->setText(edad1);
+        ui->fecha->setText(cita1.value(2).toString());
+        ui->hora->setText(cita1.value(3).toString());
+        ui->lugar->hide();
+        ui->lugartext->hide();
+        ui->label_5->hide();
+        ui->sintomas->setPlainText(cita1.value(5).toString());
+
+
+
+    }
+    else
+    {
+        QString citaExterna,nombreU2;
+        citaExterna="select *from citaExterna where idcitaExterna='"+CitaExtra+"'; ";
+        QSqlQuery datosCita;
+        datosCita.exec(citaExterna);
+        datosCita.next();
+        nombreU2=datosCita.value(2).toString();
+
+
+
+        ui->tipoCita->setText("--Externa--");
+        ui->Responsable->setText(nombreU);
+        ui->paciente->setText(nombreU2);
+        ui->telelefono->setText(datos.value(8).toString());
+        ui->correo->setText(datos.value(7).toString());
+        ui->edad->setText(datosCita.value(4).toString());
+        ui->fecha->setText(cita1.value(2).toString());
+        ui->hora->setText(cita1.value(3).toString());
+        ui->lugar->setText(datosCita.value(3).toString());
+        ui->sintomas->setPlainText(cita1.value(5).toString());
+
+
+
+
+
+    }
+
+
+
+
+}
+
+void MainWindow::on_regresar_citasDoc_clicked()
+{
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(2);
+    ui->pushButton_horarioDoc->show();
+    ui->pushButton_citasDoc->show();
+}
+
+void MainWindow::on_butonNotifi_clicked()
+{
+
+    if(verNoti==1)
+    {
+        if(ui->notificacionL->text()!="")
+        {
+            ui->notificacionL->hide();
+
+        }
+
+        ui->nofi->show();
+        verNoti=0;
+
+    }
+    else
+    {
+      ui->nofi->hide();
+
+      QString idNoti,id,update1;
+      idNoti="select idNoti from notificacion;";
+      QSqlQuery upNoti,upNoti1;
+      upNoti.exec(idNoti);
+
+
+
+
+      while(upNoti.next())
+      {
+          id=upNoti.value(0).toString();
+          update1="update notificacion set vista=true where idNoti='"+id+"';";
+          upNoti1.exec(update1);
+
+      }
+
+
+
+
+      verNoti=1;
+    }
+
+}
