@@ -3083,7 +3083,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
            <string>Menu</string>
           </property>
          </widget>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>370</x>
@@ -3144,7 +3144,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
            </rect>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="page_7">
            <widget class="QLabel" name="label_6">
@@ -3349,7 +3349,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
              </rect>
             </property>
             <property name="text">
-             <string> </string>
+             <string/>
             </property>
            </widget>
            <widget class="QLabel" name="label__descipcion">
@@ -3391,7 +3391,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
              <string>Eliminar</string>
             </property>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>240</x>
@@ -3411,13 +3411,13 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
              <item row="0" column="1">
               <widget class="QLabel" name="label_nomRemedioEli">
                <property name="text">
-                <string> </string>
+                <string/>
                </property>
               </widget>
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>240</x>
@@ -3437,7 +3437,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
              <item row="0" column="1">
               <widget class="QLabel" name="label_CategoriaEli">
                <property name="text">
-                <string> </string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -3465,7 +3465,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
              </rect>
             </property>
            </widget>
-           <widget class="QLabel" name="label_7">
+           <widget class="QLabel" name="label_editNombre">
             <property name="geometry">
              <rect>
               <x>230</x>
@@ -3478,7 +3478,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
              <string>Nombre:</string>
             </property>
            </widget>
-           <widget class="QLabel" name="label_9">
+           <widget class="QLabel" name="label_editCategoria">
             <property name="geometry">
              <rect>
               <x>220</x>
@@ -3514,7 +3514,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
            <widget class="QPlainTextEdit" name="plainTextEdit_editProcedi">
             <property name="geometry">
              <rect>
-              <x>260</x>
+              <x>390</x>
               <y>300</y>
               <width>251</width>
               <height>71</height>
@@ -3524,37 +3524,63 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
            <widget class="QPlainTextEdit" name="plainTextEdit_editIngredi">
             <property name="geometry">
              <rect>
-              <x>250</x>
-              <y>180</y>
+              <x>340</x>
+              <y>200</y>
               <width>251</width>
               <height>71</height>
              </rect>
             </property>
            </widget>
-           <widget class="QPushButton" name="pushButton_imagEditar">
-            <property name="geometry">
-             <rect>
-              <x>550</x>
-              <y>140</y>
-              <width>100</width>
-              <height>30</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Editar imagen</string>
-            </property>
-           </widget>
            <widget class="QLabel" name="label_imagenEditar">
             <property name="geometry">
              <rect>
-              <x>530</x>
+              <x>520</x>
               <y>20</y>
-              <width>140</width>
-              <height>100</height>
+              <width>160</width>
+              <height>130</height>
              </rect>
             </property>
             <property name="text">
-             <string> </string>
+             <string/>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_editIngredi">
+            <property name="geometry">
+             <rect>
+              <x>200</x>
+              <y>200</y>
+              <width>119</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Ingredientes:</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_editprocedi">
+            <property name="geometry">
+             <rect>
+              <x>250</x>
+              <y>310</y>
+              <width>134</width>
+              <height>24</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Procedimiento:</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="pushButton_editarRemedio">
+            <property name="geometry">
+             <rect>
+              <x>50</x>
+              <y>330</y>
+              <width>93</width>
+              <height>28</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Editar remedio</string>
             </property>
            </widget>
           </widget>

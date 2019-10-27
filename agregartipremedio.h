@@ -13,6 +13,7 @@ class agregarTipRemedio
     agregarTipRemedio(QString ,int,QString,QString,QString);
     void agregaTip(QString,QString,QString,QString);
     void agregaRemedio(QString,QString,QString,QString,QString);
+    void editarRemedio(QString,QString,QString,QString,QString);
 
  private:
     QSqlDatabase database;

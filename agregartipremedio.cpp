@@ -28,3 +28,14 @@ void agregarTipRemedio::agregaRemedio(QString nomRemedio,QString ingredientes,QS
     query.next();
 
 }
+
+
+void agregarTipRemedio::editarRemedio(QString idremedio ,QString nomRemedio,QString ingredientes,QString procedimineto,QString categoria){
+
+    QSqlQuery query;
+    qDebug()<<"editar remedio casero";
+    //nombreRemedio,ingredientes,procedimiento,fotoRemedio,idcategoria
+    query.exec("update remedios set nombreRemedio='"+nomRemedio+"',ingredientes='"+ingredientes+"',procedimiento='"+procedimineto+"',idcategoria='"+categoria+"' where idremedio='"+idremedio+"'");
+    query.next();
+
+}

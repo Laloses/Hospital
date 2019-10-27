@@ -136,7 +136,7 @@ private slots:
 
     QString on_tableView_catalogoEdit_clicked(const QModelIndex &index);
 
-    void on_pushButton_imagEditar_clicked();
+    void on_pushButton_editarRemedio_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

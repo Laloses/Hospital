@@ -1371,6 +1371,11 @@ void MainWindow::on_pushButton_menu_admin_2_clicked()
     ui->label_CategoriaEli->clear();
     ui->label_nomRemedioEli->clear();
     ui->plainTextEdit_IngredientesEli->clear();
+    ui->plainTextEdit_editProcedi->clear();
+    ui->lineEdit_nombreEdit->clear();
+    ui->plainTextEdit_editIngredi->clear();
+    ui->label_imagenEditar->setPixmap(concolor);
+    ui->label_imagEli->setPixmap(concolor);
 }
 
 void MainWindow::on_pushButton_Imgremedio_clicked()
@@ -1476,6 +1481,10 @@ void MainWindow::on_pushButton_agergar_remedio_clicked()
     ui->plainTextEdit_IngredientesEli->clear();
     QString concolor =":/ /imgs/fondo.png";
     ui->label_imagEli->setPixmap(concolor);
+    ui->plainTextEdit_editProcedi->clear();
+    ui->lineEdit_nombreEdit->clear();
+    ui->plainTextEdit_editIngredi->clear();
+    ui->label_imagenEditar->setPixmap(concolor);
 }
 
 void MainWindow::mostarRemedio(){
@@ -1504,8 +1513,11 @@ void MainWindow::on_pushButton_eliminar_remedio_clicked()
     ui->label_CategoriaEli->clear();
     ui->label_nomRemedioEli->clear();
     ui->plainTextEdit_IngredientesEli->clear();
-    QString concolo =":/ /imgs/fondo.png";
     ui->label_imagEli->setPixmap(concolor);
+    ui->plainTextEdit_editProcedi->clear();
+    ui->lineEdit_nombreEdit->clear();
+    ui->plainTextEdit_editIngredi->clear();
+    ui->label_imagenEditar->setPixmap(concolor);
 }
 
 void MainWindow::on_pushButton_editar_remedio_clicked()
@@ -1521,8 +1533,11 @@ void MainWindow::on_pushButton_editar_remedio_clicked()
     ui->label_CategoriaEli->clear();
     ui->label_nomRemedioEli->clear();
     ui->plainTextEdit_IngredientesEli->clear();
-    QString concolo =":/ /imgs/fondo.png";
     ui->label_imagEli->setPixmap(concolor);
+    ui->plainTextEdit_editProcedi->clear();
+    ui->lineEdit_nombreEdit->clear();
+    ui->plainTextEdit_editIngredi->clear();
+    ui->label_imagenEditar->setPixmap(concolor);
 }
 
 void MainWindow::on_comboBox_eliminarREmedios_currentTextChanged(const QString &arg1)
@@ -1611,15 +1626,15 @@ void MainWindow::on_pushButton_eliminarRemedio_clicked()
 
 void MainWindow::on_comboBox_categoriaEdit_currentTextChanged(const QString &arg1)
 {
-    QSqlQueryModel *remedioCategori=new QSqlTableModel();
+    MostrarRemedios=new QSqlTableModel();
     QSqlQuery query;
     QString consulta;
     qDebug()<<"nombre remedio: "<<arg1;
     consulta.append("select rem.idremedio,rem.nombreRemedio from tipoCategoriaRem as tipo inner join remedios as rem  on rem.idcategoria=tipo.idcategoria where tipo.nombreCategoria='"+arg1+"'");
     query.prepare(consulta);
     query.exec();
-    remedioCategori->setQuery(query);
-    ui->tableView_catalogoEdit->setModel(remedioCategori);
+    MostrarRemedios->setQuery(query);
+    ui->tableView_catalogoEdit->setModel(MostrarRemedios);
     ui->tableView_catalogoEdit->hideColumn(0);
     ui->plainTextEdit_editProcedi->clear();
     ui->label_CategoriaEli->clear();
@@ -1662,19 +1677,68 @@ QString MainWindow::on_tableView_catalogoEdit_clicked(const QModelIndex &index)
     return idremedios;
 }
 
-void MainWindow::on_pushButton_imagEditar_clicked()
-{
-    //Abrimos el dialogo para obtener la ruta
-     imgRoute = QFileDialog::getOpenFileName(this, "Seleccionar Imagen ", "c://","Image Files (*.png *.jpg )");
-    QFile file(imgRoute);
-    file.open(QIODevice::ReadOnly);
 
-    //Guardamos los datos de la foto en la variable
-    foto = file.readAll();
-    //Cargamos la foto al label
-    QPixmap pix;
-    pix.loadFromData(foto);
-    int widWidth = this->ui->label_imagEli->width();
-    int widHeight = this->ui->label_imagEli->height();
-    ui->label_imagenEditar->setPixmap(pix.scaled(widWidth, widHeight, Qt::KeepAspectRatioByExpanding));
+void MainWindow::on_pushButton_editarRemedio_clicked()
+{
+
+    agregarTipRemedio editar;
+    QSqlQuery query;
+    QString nomRemedio,ingredientes,procedimineto,foto,categoria,buscCategori;
+    QString estiloBueno, estiloMalo;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+    //mensaje de aceptar
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de editar el remdio casero?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+    categoria=ui->comboBox_catEditar->currentText();
+    buscCategori=" select  idcategoria from tipoCategoriaRem where nombreCategoria='"+categoria+"'";
+    query.exec(buscCategori);
+    query.next();
+    categoria=query.value(0).toString();
+    procedimineto=ui->plainTextEdit_editProcedi->toPlainText();
+    nomRemedio=ui->lineEdit_nombreEdit->text();
+    ingredientes=ui->plainTextEdit_editIngredi->toPlainText();
+    //nombreRemedio,ingredientes,procedimiento,fotoRemedio,idcategoria
+    if(nomRemedio=="" || procedimineto=="" || ingredientes==""){
+    QMessageBox messageBox(QMessageBox::Warning,
+                                     tr("Warning"), tr("Por favor,ingrese los datos necesarios."), QMessageBox::Yes);
+             messageBox.setButtonText(QMessageBox::Yes, tr("Actividad"));
+             if (messageBox.exec() == QMessageBox::Yes){
+
+              }
+        }
+    if(nomRemedio==""){
+     ui->lineEdit_nombreEdit->setStyleSheet(estiloMalo);
+    }else {
+        ui->lineEdit_nombreEdit->setStyleSheet(estiloBueno);
+    }
+    if(procedimineto==""){
+
+        ui->plainTextEdit_editProcedi->setStyleSheet(estiloMalo);
+    }else {
+     ui->plainTextEdit_editProcedi->setStyleSheet(estiloBueno);
+    }
+
+    if(ingredientes==""){
+    ui->plainTextEdit_editIngredi->setStyleSheet(estiloMalo);
+
+    }else {
+    ui->plainTextEdit_editIngredi->setStyleSheet(estiloBueno);
+
+    }
+
+    if(nomRemedio!="" && procedimineto!=""&& ingredientes!=""){
+     if (message.exec() == QMessageBox::Yes){
+      editar.editarRemedio(idremedios,nomRemedio,ingredientes,procedimineto,categoria);
+      ui->plainTextEdit_editProcedi->clear();
+      ui->lineEdit_nombreEdit->clear();
+      ui->plainTextEdit_editIngredi->clear();
+      QString concolor =":/ /imgs/fondo.png";
+      ui->label_imagenEditar->setPixmap(concolor);
+      mostarRemedio();
+     }
+   }
 }
