@@ -30,9 +30,8 @@ private:
     QSqlDatabase database;
     QString id_usuario,id_staff,id_doctor,id_paciente;
     QByteArray foto;
-    QString imgRoute,matric,idremedios;
+    QString imgRoute,matric,idremedios,idtip;
     QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser;
-    QSqlQueryModel *MostrarRemedios;
     QString concolor;
     int UserTipo;
     bool verificarPasswordRegistro();
@@ -128,15 +127,27 @@ private slots:
 
     void on_comboBox_eliminarREmedios_currentTextChanged(const QString &arg1);
 
-    QString on_tableView_remedios_clicked(const QModelIndex &index);
-
     void on_pushButton_eliminarRemedio_clicked();
 
     void on_comboBox_categoriaEdit_currentTextChanged(const QString &arg1);
 
-    QString on_tableView_catalogoEdit_clicked(const QModelIndex &index);
-
     void on_pushButton_editarRemedio_clicked();
+
+    void on_pushButton_agregartips_clicked();
+
+    void on_pushButton_eliminarTips_clicked();
+
+    void on_pushButton_eliminartip_clicked();
+
+    void on_pushButton_editarTip_clicked();
+
+    void mostrarTipsEditar();
+    void mostrarTipsEliminar();
+    void mostrarRemedioEliminar();
+    void mostarrRemedioEditar();
+    void Ponertips(QString);
+    void PonerRemedios(QString);
+    void on_pushButton_editarTips_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
@@ -146,7 +157,7 @@ public:
     int userTipo;
    void mostrarZonas();
    void mostrasConsultorios();
-   void mostarRemedio();
+
 
 };
 

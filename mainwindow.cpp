@@ -1097,6 +1097,7 @@ void MainWindow::on_pushButton_rechazarsoli_clicked()
     }
 
 }
+
 //cunsulta solo muetras doctores
 void MainWindow::on_radioButton_doctors_clicked()
 {
@@ -1205,9 +1206,6 @@ void MainWindow::on_radioButton_staffs_clicked()
 
         ui->lista->addWidget(esp,cont,2,1,1);
         ui->lista->addWidget(estado,cont,3,1,1);
-        //   ui->lista->addWidget(esp,cont,3,1,1);
-        // ui->lista->addWidget(m,cont,4,1,1);
-        // ui->gridLayout.add;
         cont++;
 
         }
@@ -1247,6 +1245,7 @@ void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
 void MainWindow::on_pushButton_tip_2_clicked()
 {
     ui->stackedWidget_admin->setCurrentIndex(3);
+    ui->stackedWidget_tips->setCurrentIndex(0);
     ui->pushButton_SolicitudesUsuarios->hide();
     ui->pushButton_tip_2->hide();
     ui->pushButton_agregar_remedio->hide();
@@ -1282,18 +1281,21 @@ void MainWindow::on_pushButton_agregar_tip_clicked()
         ui->lineEdit_nombreTip->setStyleSheet(estiloMalo);
         } else {
       ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
+
       }
 
         if(link==""){
          ui->lineEdit_link->setStyleSheet(estiloMalo);
         }else{
         ui->lineEdit_link->setStyleSheet(estiloBueno);
+
         }
 
          if(texto==""){
           ui->plainTextEdit_descripcion->setStyleSheet(estiloMalo);
             }else {
            ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
+
           }
 
           if(foto==""){
@@ -1332,6 +1334,11 @@ void MainWindow::on_pushButton_menu_admin_clicked()
     QString concolor =":/ /imgs/fondo.png";
     QIcon color(concolor);
     ui->pushButton_agregarImagen->setIcon(color);
+    ui->lineEdit_nombretip->clear();
+    ui->lineEdit_links->clear();
+    ui->plainTextEdit_descritip->clear();
+    QPixmap c=concolor;
+    ui->label_imagenTip->setPixmap(c);
 }
 
 //-------------gregar remido casero
@@ -1487,21 +1494,10 @@ void MainWindow::on_pushButton_agergar_remedio_clicked()
     ui->label_imagenEditar->setPixmap(concolor);
 }
 
-void MainWindow::mostarRemedio(){
-    MostrarRemedios=new QSqlQueryModel();
-    QString  remedio;
-     remedio=ui->comboBox_eliminarREmedios->currentText();
-    MostrarRemedios->setQuery("select idremedio,nombreRemedio as 'Nombre' from remedios");
-    ui->tableView_remedios->setModel(MostrarRemedios);
-    ui->tableView_remedios->hideColumn(0);
-    ui->tableView_catalogoEdit->setModel(MostrarRemedios);
-    ui->tableView_catalogoEdit->hideColumn(0);
-}
-
 
 void MainWindow::on_pushButton_eliminar_remedio_clicked()
 {
-    mostarRemedio();
+    mostrarRemedioEliminar();
     ui->stackedWidget_remedio->setCurrentIndex(2);
     QString concolor =":/ /imgs/fondo.png";
     QIcon color(concolor);
@@ -1538,35 +1534,27 @@ void MainWindow::on_pushButton_editar_remedio_clicked()
     ui->lineEdit_nombreEdit->clear();
     ui->plainTextEdit_editIngredi->clear();
     ui->label_imagenEditar->setPixmap(concolor);
+    mostarrRemedioEditar();
 }
 
 void MainWindow::on_comboBox_eliminarREmedios_currentTextChanged(const QString &arg1)
 {
-    QSqlQueryModel *remedioCategori=new QSqlTableModel();
-    QSqlQuery query;
-    QString consulta;
-    qDebug()<<"nombre remedio: "<<arg1;
-    consulta.append("select rem.idremedio,rem.nombreRemedio from tipoCategoriaRem as tipo inner join remedios as rem  on rem.idcategoria=tipo.idcategoria where tipo.nombreCategoria='"+arg1+"'");
-    query.prepare(consulta);
-    query.exec();
-    remedioCategori->setQuery(query);
-    ui->tableView_remedios->setModel(remedioCategori);
-    ui->tableView_remedios->hideColumn(0);
     ui->plainTextEdit_procedimientoEli->clear();
     ui->label_CategoriaEli->clear();
     ui->label_nomRemedioEli->clear();
     ui->plainTextEdit_IngredientesEli->clear();
     QString concolor =":/ /imgs/fondo.png";
     ui->label_imagEli->setPixmap(concolor);
+    mostrarRemedioEliminar();
 }
 
-QString MainWindow::on_tableView_remedios_clicked(const QModelIndex &index)
+
+void MainWindow::PonerRemedios(QString idremedios)
 {
-    const QString id=MostrarRemedios->index(index.row(),0).data().toString();
-    qDebug()<<id<<"primero";
+
     QSqlQuery busqueda,query;
     QString nomRemedio,ingredientes,procedimineto,foto,categoria,nombreCategoria;
-    busqueda.exec("select rem.nombreRemedio,rem.ingredientes,rem.procedimiento,rem.fotoRemedio,rem.idcategoria,rem.fotoRemedio,rem.idremedio from tipoCategoriaRem as tipo inner join remedios as rem on rem.idcategoria=tipo.idcategoria where rem.idremedio='"+id+"'");
+    busqueda.exec("select rem.nombreRemedio,rem.ingredientes,rem.procedimiento,rem.fotoRemedio,rem.idcategoria,rem.fotoRemedio,rem.idremedio from tipoCategoriaRem as tipo inner join remedios as rem on rem.idcategoria=tipo.idcategoria where rem.idremedio='"+idremedios+"'");
     busqueda.next();
     //nombreRemedio,ingredientes,procedimiento,fotoRemedio,idcategoria
     nomRemedio=busqueda.value(0).toString();
@@ -1590,8 +1578,72 @@ QString MainWindow::on_tableView_remedios_clicked(const QModelIndex &index)
     ui->label_CategoriaEli->setText(nombreCategoria);
     ui->label_nomRemedioEli->setText(nomRemedio);
     ui->plainTextEdit_IngredientesEli->setPlainText(ingredientes);
-    return idremedios;
 
+    //editar
+    ui->plainTextEdit_editProcedi->setPlainText(procedimineto);
+    ui->comboBox_catEditar->setCurrentText(nombreCategoria);
+    ui->lineEdit_nombreEdit->setText(nomRemedio);
+    ui->plainTextEdit_editIngredi->setPlainText(ingredientes);
+    int w = this->ui->label_imagEli->width();
+    int wi = this->ui->label_imagEli->height();
+    ui->label_imagenEditar->setPixmap(pix.scaled(w, wi, Qt::KeepAspectRatioByExpanding));
+
+}
+
+void MainWindow::mostarrRemedioEditar(){
+    clearLayout(ui->listatips_2);
+    QString consultatips,nombre,remedioCatalogo;
+    QSqlQuery querytips;
+    int cont=0;
+    remedioCatalogo=ui->comboBox_categoriaEdit->currentText();
+    consultatips="select rem.idremedio,rem.nombreRemedio from tipoCategoriaRem as tipo inner join remedios as rem  on rem.idcategoria=tipo.idcategoria where tipo.nombreCategoria='"+remedioCatalogo+"'";
+    querytips.exec(consultatips);
+
+    while(querytips.next())
+    {
+        idtip=querytips.value(0).toString();
+        nombre=querytips.value(1).toString();
+        QPushButton *b=new QPushButton();
+        b->setText(nombre);
+        b->setFixedSize(QSize(200,40));
+        QSignalMapper *mapper=new QSignalMapper(this);
+        connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(b,idtip);
+        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerRemedios(QString)));
+        ui->listatips_2->addWidget(b,cont,0,1,1);
+        cont++;
+    }
+
+
+
+
+
+
+}
+void MainWindow::mostrarRemedioEliminar(){
+
+    clearLayout(ui->listatips_4);
+    QString consultatips,nombre,remedioCatalogo;
+    QSqlQuery querytips;
+    remedioCatalogo=ui->comboBox_eliminarREmedios->currentText();
+    int cont=0;
+    consultatips="select rem.idremedio,rem.nombreRemedio from tipoCategoriaRem as tipo inner join remedios as rem  on rem.idcategoria=tipo.idcategoria where tipo.nombreCategoria='"+remedioCatalogo+"'";
+    querytips.exec(consultatips);
+
+    while(querytips.next())
+    {
+        idtip=querytips.value(0).toString();
+        nombre=querytips.value(1).toString();
+        QPushButton *b=new QPushButton();
+        b->setText(nombre);
+        b->setFixedSize(QSize(200,40));
+        QSignalMapper *mapper=new QSignalMapper(this);
+        connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(b,idtip);
+        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerRemedios(QString)));
+        ui->listatips_4->addWidget(b,cont,0,1,1);
+        cont++;
+    }
 }
 
 void MainWindow::on_pushButton_eliminarRemedio_clicked()
@@ -1617,7 +1669,7 @@ void MainWindow::on_pushButton_eliminarRemedio_clicked()
     ui->plainTextEdit_IngredientesEli->clear();
     QString concolor =":/ /imgs/fondo.png";
     ui->label_imagEli->setPixmap(concolor);
-    mostarRemedio();
+    mostrarRemedioEliminar();
         }
     }
 
@@ -1626,55 +1678,15 @@ void MainWindow::on_pushButton_eliminarRemedio_clicked()
 
 void MainWindow::on_comboBox_categoriaEdit_currentTextChanged(const QString &arg1)
 {
-    MostrarRemedios=new QSqlTableModel();
-    QSqlQuery query;
-    QString consulta;
-    qDebug()<<"nombre remedio: "<<arg1;
-    consulta.append("select rem.idremedio,rem.nombreRemedio from tipoCategoriaRem as tipo inner join remedios as rem  on rem.idcategoria=tipo.idcategoria where tipo.nombreCategoria='"+arg1+"'");
-    query.prepare(consulta);
-    query.exec();
-    MostrarRemedios->setQuery(query);
-    ui->tableView_catalogoEdit->setModel(MostrarRemedios);
-    ui->tableView_catalogoEdit->hideColumn(0);
+
     ui->plainTextEdit_editProcedi->clear();
     ui->label_CategoriaEli->clear();
     ui->lineEdit_nombreEdit->clear();
     ui->plainTextEdit_editIngredi->clear();
-    //QString concolor =":/ /imgs/fondo.png";
-}
+    QString concolor =":/ /imgs/fondo.png";
+    ui->label_imagenEditar->setPixmap(concolor);
+    mostarrRemedioEditar();
 
-QString MainWindow::on_tableView_catalogoEdit_clicked(const QModelIndex &index)
-{
-    const QString id=MostrarRemedios->index(index.row(),0).data().toString();
-    qDebug()<<id<<"primero";
-    QSqlQuery busqueda,query;
-    QString nomRemedio,ingredientes,procedimineto,foto,categoria,nombreCategoria;
-    busqueda.exec("select rem.nombreRemedio,rem.ingredientes,rem.procedimiento,rem.fotoRemedio,rem.idcategoria,rem.fotoRemedio,rem.idremedio from tipoCategoriaRem as tipo inner join remedios as rem on rem.idcategoria=tipo.idcategoria where rem.idremedio='"+id+"'");
-    busqueda.next();
-    //nombreRemedio,ingredientes,procedimiento,fotoRemedio,idcategoria
-    nomRemedio=busqueda.value(0).toString();
-    ingredientes=busqueda.value(1).toString();
-    procedimineto=busqueda.value(2).toString();
-    categoria=busqueda.value(4).toString();
-    idremedios=busqueda.value(6).toString();
-    QPixmap pix;
-    if(!pix.loadFromData(busqueda.value(5).toByteArray())){
-        ui->label_imagenEditar->setText("<b>Error de imagen</b>");
-
-    }
-
-    int widWidth = this->ui->label_imagEli->width();
-    int widHeight = this->ui->label_imagEli->height();
-    ui->label_imagenEditar->setPixmap(pix.scaled(widWidth, widHeight, Qt::KeepAspectRatioByExpanding));
-
-    query.exec("select tipo.nombreCategoria from tipoCategoriaRem as tipo inner join remedios as rem  on rem.idcategoria=tipo.idcategoria where rem.idcategoria='"+categoria+"'");
-    query.next();
-    nombreCategoria=query.value(0).toString();
-    ui->plainTextEdit_editProcedi->setPlainText(procedimineto);
-    ui->comboBox_catEditar->setCurrentText(nombreCategoria);
-    ui->lineEdit_nombreEdit->setText(nomRemedio);
-    ui->plainTextEdit_editIngredi->setPlainText(ingredientes);
-    return idremedios;
 }
 
 
@@ -1738,7 +1750,174 @@ void MainWindow::on_pushButton_editarRemedio_clicked()
       ui->plainTextEdit_editIngredi->clear();
       QString concolor =":/ /imgs/fondo.png";
       ui->label_imagenEditar->setPixmap(concolor);
-      mostarRemedio();
      }
    }
+}
+
+void MainWindow::on_pushButton_agregartips_clicked()
+{
+    QString estiloBueno, estiloMalo;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+
+    ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
+    ui->lineEdit_link->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
+    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    QString concolor =":/ /imgs/fondo.png";
+    QIcon color(concolor);
+    ui->pushButton_agregarImagen->setIcon(color);
+    ui->stackedWidget_tips->setCurrentIndex(1);
+    ui->lineEdit_nombretip->clear();
+    ui->lineEdit_links->clear();
+    ui->plainTextEdit_descritip->clear();
+    QPixmap c=concolor;
+    ui->label_imagenTip->setPixmap(c);
+}
+
+void MainWindow::on_pushButton_eliminarTips_clicked()
+{
+    QString estiloBueno, estiloMalo;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+
+    ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
+    ui->lineEdit_link->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
+    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    QString concolor =":/ /imgs/fondo.png";
+    QIcon color(concolor);
+    ui->pushButton_agregarImagen->setIcon(color);
+    mostrarTipsEliminar();
+    ui->stackedWidget_tips->setCurrentIndex(2);
+}
+
+
+void MainWindow::on_pushButton_eliminartip_clicked()
+{
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de eliminar el tip del dia?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    qDebug()<<"entre:"<<idtip;
+     QSqlQuery query;
+     QMessageBox messageBox(QMessageBox::Warning,
+                                      tr("Warning"), tr("Por favor,seleccione tip a eliminar."), QMessageBox::Yes);
+              messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+              if(ui->lineEdit_nombretip->text()==""){
+              if (messageBox.exec() == QMessageBox::Yes){
+
+               }
+     }
+
+     if(ui->lineEdit_nombretip->text()!=""){
+     if (message.exec() == QMessageBox::Yes){
+     query.exec("delete from tip where idtip='"+idtip+"'");
+     query.next();
+     ui->lineEdit_nombretip->clear();
+     ui->lineEdit_links->clear();
+     ui->plainTextEdit_descritip->clear();
+     QString concolor =":/ /imgs/fondo.png";
+     QPixmap c=concolor;
+     ui->label_imagenTip->setPixmap(c);
+        }
+     }
+
+}
+
+void MainWindow::Ponertips(QString tips){
+    QString consultatips,nombre,idtip,descrip,link;
+    QSqlQuery querytips;
+    consultatips="select *from tip where idtip='"+tips+"'";
+    querytips.exec(consultatips);
+    querytips.next();
+    qDebug()<<consultatips;
+    nombre=querytips.value(1).toString();
+    descrip=querytips.value(2).toString();
+    link=querytips.value(3).toString();
+    QPixmap pix;
+    if(!pix.loadFromData(querytips.value(4).toByteArray())){
+        ui->label_imageneditartip->setText("<b>Error de imagen</b>");
+        ui->label_imagenTip->setText("<b>Error de imagen</b>");
+
+    }
+    int widWidth = this->ui->label_imageneditartip->width();
+    int widHeight = this->ui->label_imageneditartip->height();
+    ui->label_imageneditartip->setPixmap(pix.scaled(widWidth, widHeight, Qt::KeepAspectRatioByExpanding));
+    ui->lineEdit_nombretipEdit->setText(nombre);
+    ui->lineEdit_liksEdit->setText(link);
+    ui->plainTextEdit_descripEdit->setPlainText(descrip);
+
+    //eliminar
+    int w = this->ui->label_imagenTip->width();
+    int wi= this->ui->label_imagenTip->height();
+    ui->label_imagenTip->setPixmap(pix.scaled(w,wi, Qt::KeepAspectRatioByExpanding));
+    ui->lineEdit_nombretip->setText(nombre);
+    ui->lineEdit_links->setText(link);
+    ui->plainTextEdit_descritip->setPlainText(descrip);
+
+}
+
+void MainWindow::mostrarTipsEditar(){
+    clearLayout(ui->listatips);
+    QString consultatips,nombre;
+    QSqlQuery querytips;
+    int cont=0;
+    consultatips="select *from tip";
+    querytips.exec(consultatips);
+
+    while(querytips.next())
+    {
+        idtip=querytips.value(0).toString();
+        nombre=querytips.value(1).toString();
+        QPushButton *b=new QPushButton();
+        b->setText(nombre);
+        b->setFixedSize(QSize(200,40));
+        QSignalMapper *mapper=new QSignalMapper(this);
+        connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(b,idtip);
+        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(Ponertips(QString)));
+        ui->listatips->addWidget(b,cont,0,1,1);
+        cont++;
+    }
+
+}
+
+void MainWindow::mostrarTipsEliminar(){
+
+    clearLayout(ui->listatips_3);
+    QString consultatips,nombre;
+    QSqlQuery querytips;
+    int cont=0;
+    consultatips="select *from tip";
+    querytips.exec(consultatips);
+
+    while(querytips.next())
+    {
+        idtip=querytips.value(0).toString();
+        nombre=querytips.value(1).toString();
+        QPushButton *b=new QPushButton();
+        b->setText(nombre);
+        b->setFixedSize(QSize(200,40));
+        QSignalMapper *mapper=new QSignalMapper(this);
+        connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(b,idtip);
+        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(Ponertips(QString)));
+        ui->listatips_3->addWidget(b,cont,0,1,1);
+        cont++;
+    }
+
+
+}
+
+
+void MainWindow::on_pushButton_editarTip_clicked()
+{
+    mostrarTipsEditar();
+    ui->stackedWidget_tips->setCurrentIndex(3);
+}
+
+void MainWindow::on_pushButton_editarTips_clicked()
+{
+    //falta esto
 }
