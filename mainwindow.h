@@ -101,6 +101,16 @@ private slots:
 
     void on_pushButton_menu_Pincipal_Adm_clicked();
 
+    void on_btnEditarStaff_clicked();
+
+    void on_btnCancelarEditarStaff_clicked();
+
+    void on_btnGuardarEditarStaff_clicked();
+
+    void on_btnMostrarContrasena_clicked();
+
+    void on_btnMostrarContrasena_2_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -108,6 +118,8 @@ public:
     void solicitUsuarios();
     QString mactri;
     int userTipo;
+    int toggleVision;
+    int toggleVision1;
    void mostrarZonas();
    void mostrasConsultorios();
 
