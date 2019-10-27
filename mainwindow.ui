@@ -1839,20 +1839,7 @@ color:red;
           </widget>
           <widget class="QWidget" name="paginaCitas">
            <layout class="QGridLayout" name="gridLayout_12">
-            <item row="1" column="3">
-             <spacer name="horizontalSpacer_49">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="2">
+            <item row="1" column="2">
              <layout class="QVBoxLayout" name="verticalLayout_8">
               <item>
                <widget class="QLabel" name="lb_selDoc">
@@ -1873,9 +1860,9 @@ color:red;
               </item>
              </layout>
             </item>
-            <item row="0" column="1" rowspan="2">
-             <layout class="QVBoxLayout" name="verticalLayout_7">
-              <item>
+            <item row="1" column="1" rowspan="2">
+             <layout class="QGridLayout" name="gridLayout_13">
+              <item row="0" column="0">
                <spacer name="verticalSpacer_11">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -1888,7 +1875,7 @@ color:red;
                 </property>
                </spacer>
               </item>
-              <item>
+              <item row="1" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_33">
                 <item>
                  <spacer name="horizontalSpacer_43">
@@ -1943,7 +1930,7 @@ color:red;
                 </item>
                </layout>
               </item>
-              <item>
+              <item row="3" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_34">
                 <item>
                  <spacer name="horizontalSpacer_45">
@@ -2004,7 +1991,7 @@ color:red;
                 </item>
                </layout>
               </item>
-              <item>
+              <item row="4" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_36">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_30">
@@ -2099,7 +2086,7 @@ color:red;
                 </item>
                </layout>
               </item>
-              <item>
+              <item row="5" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_41">
                 <item>
                  <widget class="QLabel" name="labelEdad">
@@ -2135,6 +2122,32 @@ color:red;
                  </widget>
                 </item>
                 <item>
+                 <widget class="QLabel" name="lb_sexo">
+                  <property name="font">
+                   <font>
+                    <pointsize>11</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Sexo</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="cb_sexo">
+                  <item>
+                   <property name="text">
+                    <string>Masculino</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Femenino</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
                  <spacer name="horizontalSpacer_27">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
@@ -2149,102 +2162,17 @@ color:red;
                 </item>
                </layout>
               </item>
-              <item>
+              <item row="6" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_42">
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_39">
-                  <item>
-                   <widget class="QLabel" name="lb_tel">
-                    <property name="font">
-                     <font>
-                      <pointsize>11</pointsize>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Teléfono de contacto: </string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="lineContacto">
-                    <property name="minimumSize">
-                     <size>
-                      <width>15</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <pointsize>11</pointsize>
-                     </font>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
+                 <layout class="QHBoxLayout" name="horizontalLayout_39"/>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_40">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Minimum</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_38">
-                  <item>
-                   <widget class="QLabel" name="label_emailCitas">
-                    <property name="font">
-                     <font>
-                      <pointsize>11</pointsize>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Correo Electrónico: </string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="lineMail">
-                    <property name="minimumSize">
-                     <size>
-                      <width>15</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <pointsize>11</pointsize>
-                     </font>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_33">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
+                 <layout class="QHBoxLayout" name="horizontalLayout_38"/>
                 </item>
                </layout>
               </item>
-              <item>
+              <item row="7" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_43">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_37">
@@ -2397,7 +2325,7 @@ color:red;
                 </item>
                </layout>
               </item>
-              <item>
+              <item row="8" column="0">
                <widget class="QLabel" name="lb_noHayDocs">
                 <property name="font">
                  <font>
@@ -2410,7 +2338,7 @@ color:red;
                 </property>
                </widget>
               </item>
-              <item>
+              <item row="9" column="0">
                <layout class="QVBoxLayout" name="verticalLayout_6">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_35">
@@ -2477,21 +2405,21 @@ color:red;
                 </item>
                </layout>
               </item>
-              <item>
+              <item row="10" column="0">
                <widget class="QLabel" name="lb_charAct">
                 <property name="text">
                  <string>actual</string>
                 </property>
                </widget>
               </item>
-              <item>
+              <item row="11" column="0">
                <widget class="QLabel" name="lb_maxchar">
                 <property name="text">
                  <string>*Maximo 500 carácteres.</string>
                 </property>
                </widget>
               </item>
-              <item>
+              <item row="12" column="0">
                <spacer name="verticalSpacer_7">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -2507,7 +2435,7 @@ color:red;
                 </property>
                </spacer>
               </item>
-              <item>
+              <item row="13" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_44">
                 <item>
                  <spacer name="horizontalSpacer_47">
@@ -2596,7 +2524,46 @@ color: white;</string>
               </item>
              </layout>
             </item>
-            <item row="1" column="0">
+            <item row="3" column="1">
+             <spacer name="verticalSpacer_12">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="3">
+             <spacer name="horizontalSpacer_49">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="3">
+             <spacer name="horizontalSpacer_50">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="0">
              <spacer name="horizontalSpacer_48">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -2609,15 +2576,15 @@ color: white;</string>
               </property>
              </spacer>
             </item>
-            <item row="0" column="3">
-             <spacer name="horizontalSpacer_50">
+            <item row="0" column="1">
+             <spacer name="verticalSpacer_13">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>40</width>
-                <height>20</height>
+                <width>20</width>
+                <height>40</height>
                </size>
               </property>
              </spacer>

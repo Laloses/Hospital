@@ -797,6 +797,8 @@ void MainWindow::on_radioCitaPersonal_clicked()
     ui->lineOrigen->setHidden(true);
     ui->labelEdad->setHidden(true);
     ui->lineEdad->setHidden(true);
+    ui->lb_sexo->setHidden(true);
+    ui->cb_sexo->setHidden(true);
 }
 
 void MainWindow::on_radioCitaExterna_clicked()
@@ -807,6 +809,8 @@ void MainWindow::on_radioCitaExterna_clicked()
     ui->lineOrigen->setHidden(false);
     ui->labelEdad->setHidden(false);
     ui->lineEdad->setHidden(false);
+    ui->lb_sexo->setHidden(false);
+    ui->cb_sexo->setHidden(false);
 }
 
 //Boton citas perfil paciente
@@ -917,7 +921,7 @@ void MainWindow::on_btnBuscarDoctor_clicked()
 
 void MainWindow::on_btnAgendarCita_clicked()
 {
-    QRegExp letras("^[a-zZ-A]*$"), numeros("^[0-9]*$");
+    QRegExp letras("^[a-zZ-A ]*$"), numeros("^[0-9]*$");
     QString estiloMalo, estiloBueno;
     estiloMalo="border:2px red; border-style:solid";
     estiloBueno="border:1px black; border-style:solid";
@@ -926,10 +930,6 @@ void MainWindow::on_btnAgendarCita_clicked()
     if (ui->radioCitaPersonal->isChecked()){
         if(id_doctor!="0"){
             ui->tv_listaDocCitas->setStyleSheet(estiloBueno);
-           if(ui->lineContacto->text().contains(numeros) && !ui->lineContacto->text().isEmpty()){
-               ui->lineContacto->setStyleSheet(estiloBueno);
-               if(ui->lineMail->text().contains("@")){
-                   ui->lineMail->setStyleSheet(estiloBueno);
                    if(!ui->le_nombreDoc->text().isEmpty()){
                        ui->le_nombreDoc->setStyleSheet(estiloBueno);
                        if(!ui->sintomasCitas->toPlainText().isEmpty() && ui->sintomasCitas->toPlainText().size()<=500){
@@ -947,9 +947,6 @@ void MainWindow::on_btnAgendarCita_clicked()
                            ui->lb_selDoc->setHidden(true);
                            ui->tv_listaDocCitas->setModel(nullptr);
                            ui->tv_listaDocCitas->setHidden(true);
-                           ui->lineContacto->setText("");
-                           ui->lineContacto->setText("");
-                           ui->lineMail->setText("");
                            ui->le_nombreDoc->setText("");
                            ui->sintomasCitas->setText("");
                            id_doctor="0";
@@ -965,14 +962,6 @@ void MainWindow::on_btnAgendarCita_clicked()
                    else{
                          ui->le_nombreDoc->setStyleSheet(estiloMalo);
                    }
-               }
-               else{
-                     ui->lineMail->setStyleSheet(estiloMalo);
-               }
-           }
-           else{
-                 ui->lineContacto->setStyleSheet(estiloMalo);
-           }
         }
         else{
             ui->tv_listaDocCitas->setStyleSheet(estiloMalo);
@@ -989,17 +978,13 @@ void MainWindow::on_btnAgendarCita_clicked()
                    ui->lineOrigen->setStyleSheet(estiloBueno);
                    if(ui->lineEdad->text().contains(numeros) && ui->lineEdad->text().toInt()<18){
                        ui->lineEdad->setStyleSheet(estiloBueno);
-                       if(ui->lineContacto->text().contains(numeros)){
-                           ui->lineContacto->setStyleSheet(estiloBueno);
-                           if(ui->lineMail->text().contains("@")){
-                               ui->lineMail->setStyleSheet(estiloBueno);
                                if(!ui->le_nombreDoc->text().isEmpty()){
                                    ui->le_nombreDoc->setStyleSheet(estiloBueno);
                                    if(!ui->sintomasCitas->toPlainText().isEmpty()){
                                        ui->sintomasCitas->setStyleSheet(estiloBueno);
 
                                        agregarCitasPaciente cita;
-                                       if( cita.citasExternas(ui->lineNombreCompleto->text(),ui->lineOrigen->text(),ui->lineEdad->text(),ui->lineContacto->text(),ui->lineMail->text(),ui->fechaCita->date().toString("yyyy-MM-dd"),ui->horaCita->currentText(),id_doctor,ui->sintomasCitas->toPlainText()) ) {
+                                       if( cita.citasExternas(id_paciente, ui->lineNombreCompleto->text(),ui->lineOrigen->text(),ui->lineEdad->text(),ui->cb_sexo->currentText(),ui->fechaCita->date().toString("yyyy-MM-dd"),ui->horaCita->currentText(),id_doctor,ui->sintomasCitas->toPlainText() ) ) {
                                             QMessageBox::information(this,"Correcto", "Cita agendada correctamente");
                                        }else{
                                            QMessageBox::information(this,"Error", "Hubo un problema al agendar su cita, intente de nuevo más tarde.");
@@ -1008,9 +993,6 @@ void MainWindow::on_btnAgendarCita_clicked()
                                        ui->lb_selDoc->setHidden(true);
                                        ui->tv_listaDocCitas->setModel(nullptr);
                                        ui->tv_listaDocCitas->setHidden(true);
-                                       ui->lineContacto->setText("");
-                                       ui->lineContacto->setText("");
-                                       ui->lineMail->setText("");
                                        ui->le_nombreDoc->setText("");
                                        ui->sintomasCitas->setText("");
                                        id_doctor="0";
@@ -1022,13 +1004,6 @@ void MainWindow::on_btnAgendarCita_clicked()
                                }
                                else{ ui->le_nombreDoc->setStyleSheet(estiloMalo);}
 
-
-                                   }
-                                    else{ ui->lineMail->setStyleSheet(estiloMalo);}
-
-
-                                    }
-                                    else{ ui->lineContacto->setStyleSheet(estiloMalo);}
 
                                    }
                                        else{
