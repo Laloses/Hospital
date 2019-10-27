@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -224,6 +224,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
          ocultarMenuP();
          ui->lineEdit_idUsuario->clear();
          ui->lineEdit_passwordLogin->clear();
+         cargarCategoria();
         }
         else if(tipo==0)
         {
@@ -350,7 +351,7 @@ void MainWindow::on_pushButton_salir_clicked()
 void MainWindow::on_pushButton_imgPerfil_clicked()
 {
     //Abrimos el dialogo para obtener la ruta
-     imgRoute = QFileDialog::getOpenFileName(this, "Seleccionar Imagen ", "c://","Image Files (*.png *.jpg )");
+    imgRoute = QFileDialog::getOpenFileName(this, "Seleccionar Imagen ", "c://","Image Files (*.png *.jpg )");
     QFile file(imgRoute);
     file.open(QIODevice::ReadOnly);
 
@@ -363,6 +364,7 @@ void MainWindow::on_pushButton_imgPerfil_clicked()
     int w=ui->label_imgPerfil->width();
     int h=ui->label_imgPerfil->height();
     ui->label_imgPerfil->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatioByExpanding));
+
 }
 
 //Para verificar contraseñas iguales
@@ -801,6 +803,8 @@ void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
 {
     ui->stackedWidget_admin->setCurrentIndex(1);
     ui->pushButton_SolicitudesUsuarios->hide();
+    ui->pushButton_tip_2->hide();
+    ui->pushButton_agregar_remedio->hide();
 }
 
 
@@ -1066,7 +1070,7 @@ void MainWindow::on_pushButton_rechazarsoli_clicked()
     if(ui->lineEdit_nombre_solicitud->text()=="" && ui->lineEdit_especialidad_solicitud->text()==""){
         QMessageBox messageBox(QMessageBox::Warning,
                                          tr("Warning"), tr("Por favor,selecione algun candito."), QMessageBox::Yes);
-                 messageBox.setButtonText(QMessageBox::Yes, tr("Actividad"));
+                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
                  if (messageBox.exec() == QMessageBox::Yes){
 
                   }
@@ -1211,10 +1215,466 @@ void MainWindow::on_radioButton_staffs_clicked()
 
 }
 
+// agregar tip del dia
+void MainWindow::on_pushButton_agregarImagen_clicked()
+{
+    ui->pushButton_agregarImagen->setText("");
+    //Abrimos el dialogo para obtener la ruta
+     imgRoute = QFileDialog::getOpenFileName(this, "Seleccionar Imagen ", "c://","Image Files (*.png *.jpg )");
+    QFile file(imgRoute);
+    file.open(QIODevice::ReadOnly);
+
+    //Guardamos los datos de la foto en la variable
+    foto = file.readAll();
+    //Cargamos la foto al label
+    QPixmap pix;
+    pix.loadFromData(foto);
+
+    QIcon l(pix);
+    ui->pushButton_agregarImagen->setIcon(l);
+}
+
 void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
 {
     ui->pushButton_SolicitudesUsuarios->show();
+    ui->pushButton_agregar_remedio->show();
+    ui->pushButton_tip_2->show();
     ui->stackedWidget_admin->setCurrentIndex(0);
 }
 
 
+
+void MainWindow::on_pushButton_tip_2_clicked()
+{
+    ui->stackedWidget_admin->setCurrentIndex(3);
+    ui->pushButton_SolicitudesUsuarios->hide();
+    ui->pushButton_tip_2->hide();
+    ui->pushButton_agregar_remedio->hide();
+
+}
+
+void MainWindow::on_pushButton_agregar_tip_clicked()
+{
+    QString estiloBueno, estiloMalo;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+    QString texto,nomTip,link;
+    nomTip=ui->lineEdit_nombreTip->text();
+    link=ui->lineEdit_link->text();
+    texto=ui->plainTextEdit_descripcion->toPlainText();
+    agregarTipRemedio tip;
+
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de agregar el tip de salud?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+       if(nomTip==""|| link=="" || texto=="" || foto==""){
+           QMessageBox messageBox(QMessageBox::Warning,
+                                            tr("Warning"), tr("Por favor,ingrese los datos necesarios."), QMessageBox::Yes);
+                    messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                    if (messageBox.exec() == QMessageBox::Yes){
+
+                     }
+       }
+
+        if(nomTip==""){
+        ui->lineEdit_nombreTip->setStyleSheet(estiloMalo);
+        } else {
+      ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
+      }
+
+        if(link==""){
+         ui->lineEdit_link->setStyleSheet(estiloMalo);
+        }else{
+        ui->lineEdit_link->setStyleSheet(estiloBueno);
+        }
+
+         if(texto==""){
+          ui->plainTextEdit_descripcion->setStyleSheet(estiloMalo);
+            }else {
+           ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
+          }
+
+          if(foto==""){
+            qDebug()<<"mensaje de eerro";
+            ui->pushButton_agregarImagen->setStyleSheet(estiloMalo);
+          }else {
+            ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+         }
+
+
+      if(nomTip!=""&& link!=""&& texto!="" && foto!=""){
+          if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"mensaje de confirmacion";
+        tip.agregaTip(nomTip,texto,link,imgRoute);
+        ui->lineEdit_nombreTip->clear();
+        ui->lineEdit_link->clear();
+        ui->plainTextEdit_descripcion->clear();
+        QString concolor =":/ /imgs/fondo.png";
+        QIcon color(concolor);
+        ui->pushButton_agregarImagen->setIcon(color);
+          }
+      }
+}
+
+
+
+void MainWindow::on_pushButton_menu_admin_clicked()
+{
+    ui->stackedWidget_admin->setCurrentIndex(0);
+    ui->pushButton_SolicitudesUsuarios->show();
+    ui->pushButton_tip_2->show();
+    ui->pushButton_agregar_remedio->show();
+    ui->lineEdit_nombreTip->clear();
+    ui->lineEdit_link->clear();
+    ui->plainTextEdit_descripcion->clear();
+    QString concolor =":/ /imgs/fondo.png";
+    QIcon color(concolor);
+    ui->pushButton_agregarImagen->setIcon(color);
+}
+
+//-------------gregar remido casero
+
+void MainWindow::cargarCategoria(){
+    QSqlQueryModel *queryRemedios;
+    queryRemedios= new QSqlQueryModel;
+    queryRemedios->setQuery("SELECT  nombreCategoria FROM tipoCategoriaRem");
+    ui->comboBox_remedios->setModel(queryRemedios);
+    ui->comboBox_eliminarREmedios->setModel(queryRemedios);
+    ui->comboBox_categoriaEdit->setModel(queryRemedios);
+    ui->comboBox_catEditar->setModel(queryRemedios);
+}
+
+void MainWindow::on_pushButton_agregar_remedio_clicked()
+{
+    ui->stackedWidget_admin->setCurrentIndex(4);
+    ui->stackedWidget_remedio->setCurrentIndex(0);
+    ui->pushButton_SolicitudesUsuarios->hide();
+    ui->pushButton_tip_2->hide();
+    ui->pushButton_agregar_remedio->hide();
+}
+
+void MainWindow::on_pushButton_menu_admin_2_clicked()
+{
+    ui->stackedWidget_admin->setCurrentIndex(0);
+    ui->pushButton_SolicitudesUsuarios->show();
+    ui->pushButton_tip_2->show();
+    ui->pushButton_agregar_remedio->show();
+    QString concolor =":/ /imgs/fondo.png";
+    QIcon color(concolor);
+    ui->pushButton_Imgremedio->setIcon(color);
+    ui->lineEdit_nomRemedio->clear();
+    ui->plainTextEdit_procedimiento->clear();
+    ui->plainTextEdit_ingredientes->clear();
+    ui->plainTextEdit_procedimientoEli->clear();
+    ui->label_CategoriaEli->clear();
+    ui->label_nomRemedioEli->clear();
+    ui->plainTextEdit_IngredientesEli->clear();
+}
+
+void MainWindow::on_pushButton_Imgremedio_clicked()
+{
+    ui->pushButton_Imgremedio->setText("");
+    //Abrimos el dialogo para obtener la ruta
+     imgRoute = QFileDialog::getOpenFileName(this, "Seleccionar Imagen ", "c://","Image Files (*.png *.jpg )");
+    QFile file(imgRoute);
+    file.open(QIODevice::ReadOnly);
+
+    //Guardamos los datos de la foto en la variable
+    foto = file.readAll();
+    //Cargamos la foto al label
+    QPixmap pix;
+    pix.loadFromData(foto);
+
+    QIcon l(pix);
+    ui->pushButton_Imgremedio->setIcon(l);
+
+}
+
+void MainWindow::on_pushButton_agregar_remedio_2_clicked()
+{
+    //estilo de line edit
+    QString estiloBueno, estiloMalo;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+
+    //mensaje de aceptar
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de agregar el remdio casero?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+   agregarTipRemedio reme;
+   QString nomRemedio,proce,ingre,categoria,buscCategori;
+   QSqlQuery query;
+   nomRemedio=ui->lineEdit_nomRemedio->text();
+   proce=ui->plainTextEdit_procedimiento->toPlainText();
+   ingre=ui->plainTextEdit_ingredientes->toPlainText();
+   categoria=ui->comboBox_remedios->currentText();
+   buscCategori=" select  idcategoria from tipoCategoriaRem where nombreCategoria='"+categoria+"'";
+   query.exec(buscCategori);
+   query.next();
+   categoria=query.value(0).toString();
+   if(nomRemedio=="" || proce=="" || ingre=="" || foto==""){
+   QMessageBox messageBox(QMessageBox::Warning,
+                                    tr("Warning"), tr("Por favor,ingrese los datos necesarios."), QMessageBox::Yes);
+            messageBox.setButtonText(QMessageBox::Yes, tr("Actividad"));
+            if (messageBox.exec() == QMessageBox::Yes){
+
+             }
+       }
+
+        if(nomRemedio==""){
+         ui->lineEdit_nomRemedio->setStyleSheet(estiloMalo);
+        }else {
+            ui->lineEdit_nomRemedio->setStyleSheet(estiloBueno);
+        }
+        if(proce==""){
+
+            ui->plainTextEdit_procedimiento->setStyleSheet(estiloMalo);
+        }else {
+         ui->plainTextEdit_procedimiento->setStyleSheet(estiloBueno);
+        }
+
+        if(ingre==""){
+        ui->plainTextEdit_ingredientes->setStyleSheet(estiloMalo);
+
+        }else {
+        ui->plainTextEdit_ingredientes->setStyleSheet(estiloBueno);
+
+        }
+        if(foto==""){
+           ui->pushButton_Imgremedio->setStyleSheet(estiloMalo);
+
+        }else {
+        ui->pushButton_Imgremedio->setStyleSheet(estiloBueno);
+        }
+
+          if(nomRemedio!="" && proce!="" && ingre!="" && foto!="" ){
+           if (message.exec() == QMessageBox::Yes){
+               qDebug()<<"gregando remedio";
+           reme.agregaRemedio(nomRemedio,ingre,proce,imgRoute,categoria);
+           QString concolor =":/ /imgs/fondo.png";
+           QIcon color(concolor);
+           ui->pushButton_Imgremedio->setIcon(color);
+           ui->lineEdit_nomRemedio->clear();
+           ui->plainTextEdit_procedimiento->clear();
+           ui->plainTextEdit_ingredientes->clear();
+      }
+    }
+}
+
+
+
+void MainWindow::on_pushButton_agergar_remedio_clicked()
+{
+    ui->stackedWidget_remedio->setCurrentIndex(1);
+    ui->plainTextEdit_procedimientoEli->clear();
+    ui->label_CategoriaEli->clear();
+    ui->label_nomRemedioEli->clear();
+    ui->plainTextEdit_IngredientesEli->clear();
+    QString concolor =":/ /imgs/fondo.png";
+    ui->label_imagEli->setPixmap(concolor);
+}
+
+void MainWindow::mostarRemedio(){
+    MostrarRemedios=new QSqlQueryModel();
+    QString  remedio;
+     remedio=ui->comboBox_eliminarREmedios->currentText();
+    MostrarRemedios->setQuery("select idremedio,nombreRemedio as 'Nombre' from remedios");
+    ui->tableView_remedios->setModel(MostrarRemedios);
+    ui->tableView_remedios->hideColumn(0);
+    ui->tableView_catalogoEdit->setModel(MostrarRemedios);
+    ui->tableView_catalogoEdit->hideColumn(0);
+}
+
+
+void MainWindow::on_pushButton_eliminar_remedio_clicked()
+{
+    mostarRemedio();
+    ui->stackedWidget_remedio->setCurrentIndex(2);
+    QString concolor =":/ /imgs/fondo.png";
+    QIcon color(concolor);
+    ui->pushButton_Imgremedio->setIcon(color);
+    ui->lineEdit_nomRemedio->clear();
+    ui->plainTextEdit_procedimiento->clear();
+    ui->plainTextEdit_ingredientes->clear();
+    ui->plainTextEdit_procedimientoEli->clear();
+    ui->label_CategoriaEli->clear();
+    ui->label_nomRemedioEli->clear();
+    ui->plainTextEdit_IngredientesEli->clear();
+    QString concolo =":/ /imgs/fondo.png";
+    ui->label_imagEli->setPixmap(concolor);
+}
+
+void MainWindow::on_pushButton_editar_remedio_clicked()
+{
+    ui->stackedWidget_remedio->setCurrentIndex(3);
+    QString concolor =":/ /imgs/fondo.png";
+    QIcon color(concolor);
+    ui->pushButton_Imgremedio->setIcon(color);
+    ui->lineEdit_nomRemedio->clear();
+    ui->plainTextEdit_procedimiento->clear();
+    ui->plainTextEdit_ingredientes->clear();
+    ui->plainTextEdit_procedimientoEli->clear();
+    ui->label_CategoriaEli->clear();
+    ui->label_nomRemedioEli->clear();
+    ui->plainTextEdit_IngredientesEli->clear();
+    QString concolo =":/ /imgs/fondo.png";
+    ui->label_imagEli->setPixmap(concolor);
+}
+
+void MainWindow::on_comboBox_eliminarREmedios_currentTextChanged(const QString &arg1)
+{
+    QSqlQueryModel *remedioCategori=new QSqlTableModel();
+    QSqlQuery query;
+    QString consulta;
+    qDebug()<<"nombre remedio: "<<arg1;
+    consulta.append("select rem.idremedio,rem.nombreRemedio from tipoCategoriaRem as tipo inner join remedios as rem  on rem.idcategoria=tipo.idcategoria where tipo.nombreCategoria='"+arg1+"'");
+    query.prepare(consulta);
+    query.exec();
+    remedioCategori->setQuery(query);
+    ui->tableView_remedios->setModel(remedioCategori);
+    ui->tableView_remedios->hideColumn(0);
+    ui->plainTextEdit_procedimientoEli->clear();
+    ui->label_CategoriaEli->clear();
+    ui->label_nomRemedioEli->clear();
+    ui->plainTextEdit_IngredientesEli->clear();
+    QString concolor =":/ /imgs/fondo.png";
+    ui->label_imagEli->setPixmap(concolor);
+}
+
+QString MainWindow::on_tableView_remedios_clicked(const QModelIndex &index)
+{
+    const QString id=MostrarRemedios->index(index.row(),0).data().toString();
+    qDebug()<<id<<"primero";
+    QSqlQuery busqueda,query;
+    QString nomRemedio,ingredientes,procedimineto,foto,categoria,nombreCategoria;
+    busqueda.exec("select rem.nombreRemedio,rem.ingredientes,rem.procedimiento,rem.fotoRemedio,rem.idcategoria,rem.fotoRemedio,rem.idremedio from tipoCategoriaRem as tipo inner join remedios as rem on rem.idcategoria=tipo.idcategoria where rem.idremedio='"+id+"'");
+    busqueda.next();
+    //nombreRemedio,ingredientes,procedimiento,fotoRemedio,idcategoria
+    nomRemedio=busqueda.value(0).toString();
+    ingredientes=busqueda.value(1).toString();
+    procedimineto=busqueda.value(2).toString();
+    categoria=busqueda.value(4).toString();
+    idremedios=busqueda.value(6).toString();
+    QPixmap pix;
+    if(!pix.loadFromData(busqueda.value(5).toByteArray())){
+        ui->label_imagEli->setText("<b>Error de imagen</b>");
+
+    }
+
+    int widWidth = this->ui->label_imagEli->width();
+    int widHeight = this->ui->label_imagEli->height();
+    ui->label_imagEli->setPixmap(pix.scaled(widWidth, widHeight, Qt::KeepAspectRatioByExpanding));
+    query.exec("select tipo.nombreCategoria from tipoCategoriaRem as tipo inner join remedios as rem  on rem.idcategoria=tipo.idcategoria where rem.idcategoria='"+categoria+"'");
+    query.next();
+    nombreCategoria=query.value(0).toString();
+    ui->plainTextEdit_procedimientoEli->setPlainText(procedimineto);
+    ui->label_CategoriaEli->setText(nombreCategoria);
+    ui->label_nomRemedioEli->setText(nomRemedio);
+    ui->plainTextEdit_IngredientesEli->setPlainText(ingredientes);
+    return idremedios;
+
+}
+
+void MainWindow::on_pushButton_eliminarRemedio_clicked()
+{
+    QSqlQuery eliminar;QMessageBox message(QMessageBox::Question,
+    tr("Warning"), tr("¿Estas seguro de eliminar remedio casero?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if(ui->label_nomRemedioEli->text()==""){
+        QMessageBox messageBox(QMessageBox::Warning,
+                                         tr("Warning"), tr("Por favor,seleccione remedio a eliminar."), QMessageBox::Yes);
+                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                 if (messageBox.exec() == QMessageBox::Yes){
+
+                  }
+            }
+    if(ui->label_nomRemedioEli->text()!=""){
+    if (message.exec() == QMessageBox::Yes){
+    eliminar.exec("delete from remedios where idremedio='"+idremedios+"'");
+    ui->plainTextEdit_procedimientoEli->clear();
+    ui->label_CategoriaEli->clear();
+    ui->label_nomRemedioEli->clear();
+    ui->plainTextEdit_IngredientesEli->clear();
+    QString concolor =":/ /imgs/fondo.png";
+    ui->label_imagEli->setPixmap(concolor);
+    mostarRemedio();
+        }
+    }
+
+
+}
+
+void MainWindow::on_comboBox_categoriaEdit_currentTextChanged(const QString &arg1)
+{
+    QSqlQueryModel *remedioCategori=new QSqlTableModel();
+    QSqlQuery query;
+    QString consulta;
+    qDebug()<<"nombre remedio: "<<arg1;
+    consulta.append("select rem.idremedio,rem.nombreRemedio from tipoCategoriaRem as tipo inner join remedios as rem  on rem.idcategoria=tipo.idcategoria where tipo.nombreCategoria='"+arg1+"'");
+    query.prepare(consulta);
+    query.exec();
+    remedioCategori->setQuery(query);
+    ui->tableView_catalogoEdit->setModel(remedioCategori);
+    ui->tableView_catalogoEdit->hideColumn(0);
+    ui->plainTextEdit_editProcedi->clear();
+    ui->label_CategoriaEli->clear();
+    ui->lineEdit_nombreEdit->clear();
+    ui->plainTextEdit_editIngredi->clear();
+    //QString concolor =":/ /imgs/fondo.png";
+}
+
+QString MainWindow::on_tableView_catalogoEdit_clicked(const QModelIndex &index)
+{
+    const QString id=MostrarRemedios->index(index.row(),0).data().toString();
+    qDebug()<<id<<"primero";
+    QSqlQuery busqueda,query;
+    QString nomRemedio,ingredientes,procedimineto,foto,categoria,nombreCategoria;
+    busqueda.exec("select rem.nombreRemedio,rem.ingredientes,rem.procedimiento,rem.fotoRemedio,rem.idcategoria,rem.fotoRemedio,rem.idremedio from tipoCategoriaRem as tipo inner join remedios as rem on rem.idcategoria=tipo.idcategoria where rem.idremedio='"+id+"'");
+    busqueda.next();
+    //nombreRemedio,ingredientes,procedimiento,fotoRemedio,idcategoria
+    nomRemedio=busqueda.value(0).toString();
+    ingredientes=busqueda.value(1).toString();
+    procedimineto=busqueda.value(2).toString();
+    categoria=busqueda.value(4).toString();
+    idremedios=busqueda.value(6).toString();
+    QPixmap pix;
+    if(!pix.loadFromData(busqueda.value(5).toByteArray())){
+        ui->label_imagenEditar->setText("<b>Error de imagen</b>");
+
+    }
+
+    int widWidth = this->ui->label_imagEli->width();
+    int widHeight = this->ui->label_imagEli->height();
+    ui->label_imagenEditar->setPixmap(pix.scaled(widWidth, widHeight, Qt::KeepAspectRatioByExpanding));
+
+    query.exec("select tipo.nombreCategoria from tipoCategoriaRem as tipo inner join remedios as rem  on rem.idcategoria=tipo.idcategoria where rem.idcategoria='"+categoria+"'");
+    query.next();
+    nombreCategoria=query.value(0).toString();
+    ui->plainTextEdit_editProcedi->setPlainText(procedimineto);
+    ui->comboBox_catEditar->setCurrentText(nombreCategoria);
+    ui->lineEdit_nombreEdit->setText(nomRemedio);
+    ui->plainTextEdit_editIngredi->setPlainText(ingredientes);
+    return idremedios;
+}
+
+void MainWindow::on_pushButton_imagEditar_clicked()
+{
+    //Abrimos el dialogo para obtener la ruta
+     imgRoute = QFileDialog::getOpenFileName(this, "Seleccionar Imagen ", "c://","Image Files (*.png *.jpg )");
+    QFile file(imgRoute);
+    file.open(QIODevice::ReadOnly);
+
+    //Guardamos los datos de la foto en la variable
+    foto = file.readAll();
+    //Cargamos la foto al label
+    QPixmap pix;
+    pix.loadFromData(foto);
+    int widWidth = this->ui->label_imagEli->width();
+    int widHeight = this->ui->label_imagEli->height();
+    ui->label_imagenEditar->setPixmap(pix.scaled(widWidth, widHeight, Qt::KeepAspectRatioByExpanding));
+}

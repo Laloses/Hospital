@@ -15,6 +15,7 @@
 #include <QtSql/QSqlQueryModel>
 #include "login.h"
 #include "agregaractividaddoctor.h"
+#include "agregartipremedio.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,8 +30,10 @@ private:
     QSqlDatabase database;
     QString id_usuario,id_staff,id_doctor,id_paciente;
     QByteArray foto;
-    QString imgRoute,matric;
+    QString imgRoute,matric,idremedios;
     QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser;
+    QSqlQueryModel *MostrarRemedios;
+    QString concolor;
     int UserTipo;
     bool verificarPasswordRegistro();
     QString calcularEdad(QString);
@@ -39,7 +42,7 @@ private:
     void mostrarMenuP();
     void cargarDatosUsuarios();
     void cargarHorarioDoc();
-
+    void cargarCategoria();
 
 private slots:
 
@@ -101,15 +104,49 @@ private slots:
 
     void on_pushButton_menu_Pincipal_Adm_clicked();
 
+    void on_pushButton_tip_2_clicked();
+
+    void on_pushButton_agregar_tip_clicked();
+
+    void on_pushButton_agregarImagen_clicked();
+
+    void on_pushButton_menu_admin_clicked();
+
+    void on_pushButton_agregar_remedio_clicked();
+
+    void on_pushButton_menu_admin_2_clicked();
+
+    void on_pushButton_agregar_remedio_2_clicked();
+
+    void on_pushButton_Imgremedio_clicked();
+
+    void on_pushButton_agergar_remedio_clicked();
+
+    void on_pushButton_eliminar_remedio_clicked();
+
+    void on_pushButton_editar_remedio_clicked();
+
+    void on_comboBox_eliminarREmedios_currentTextChanged(const QString &arg1);
+
+    QString on_tableView_remedios_clicked(const QModelIndex &index);
+
+    void on_pushButton_eliminarRemedio_clicked();
+
+    void on_comboBox_categoriaEdit_currentTextChanged(const QString &arg1);
+
+    QString on_tableView_catalogoEdit_clicked(const QModelIndex &index);
+
+    void on_pushButton_imagEditar_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
     void solicitUsuarios();
     QString mactri;
     int userTipo;
    void mostrarZonas();
    void mostrasConsultorios();
+   void mostarRemedio();
 
 };
 
