@@ -808,7 +808,7 @@ void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
 }
 
 
-
+//metodo para asignar en el menu dinamico de solicitdes
 void MainWindow::PonerInfo(QString matri)
 {
     ui->label_solicitud->clear();
@@ -889,7 +889,7 @@ void MainWindow::PonerInfo(QString matri)
 
 }
 
-
+//
 void MainWindow::on_pushButton_AceptarSoli_clicked()
 {
    if(ui->radioButton_doctors->isChecked()){
@@ -920,6 +920,7 @@ void MainWindow::on_pushButton_AceptarSoli_clicked()
 }
 
 //----------------------------------------------------------------------------
+//metodo para mostrar arias de trabajo
 void MainWindow::mostrarZonas(){
 
     QSqlQueryModel *queryPuestos;
@@ -930,7 +931,7 @@ void MainWindow::mostrarZonas(){
 
 }
 
-
+// metodo para asignar en el menu dinamico de consultorios por area
 void MainWindow::infoConsultorio(QString idConsultorio){
 
     qDebug()<<"hola:"<<idConsultorio;
@@ -948,7 +949,7 @@ void MainWindow::infoConsultorio(QString idConsultorio){
     ui->lineEdit_numconsultorio->setText(numConsultorio);
 
 }
-
+//menu dinamico de mostrar consultorios para asignar un consultorio a un doctor nuevo
 void MainWindow::mostrasConsultorios(){
 
     QString areConsultorio,consulta,numconsultorio,idconsultorio,ocupado;
@@ -986,12 +987,13 @@ void MainWindow::mostrasConsultorios(){
 
 }
 
-
+//para regresas donde se encuentra las solicitudes de los doctores o staff en espera
 void MainWindow::on_pushButton_regresarSolicitudes_clicked()
 {
     ui->stackedWidget_admin->setCurrentIndex(1);
 }
 
+//metodo para hacer la busqueda por area a la hora de asignar un consultorio
 void MainWindow::on_comboBox_area_currentTextChanged(const QString &arg1)
 {
     ui->lineEdit_area->clear();
@@ -1000,6 +1002,7 @@ void MainWindow::on_comboBox_area_currentTextChanged(const QString &arg1)
     mostrasConsultorios();
 }
 
+//metodo para guardad los
 void MainWindow::on_pushButton_guardar_clicked()
 {
     // update de doctor
@@ -1154,7 +1157,7 @@ void MainWindow::on_radioButton_doctors_clicked()
             }
 
 }
-
+//solo mostamos solicitudes de staff en espera
 void MainWindow::on_radioButton_staffs_clicked()
 {
     clearLayout(ui->lista);
@@ -1212,8 +1215,11 @@ void MainWindow::on_radioButton_staffs_clicked()
     }
 
 }
+//-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-////////////////////////////////////PARTE DE TIPS DEL DIA /////////////////////////////////////////
+//-///////////////////////////////////ELIMINAR/////EDITAR/////////AGREGAR/////////////////////////////////////////////////
 
-// agregar tip del dia
+// metodo para guardar la imagen del tip
 void MainWindow::on_pushButton_agregarImagen_clicked()
 {
     ui->pushButton_agregarImagen->setText("");
@@ -1231,6 +1237,7 @@ void MainWindow::on_pushButton_agregarImagen_clicked()
     QIcon l(pix);
     ui->pushButton_agregarImagen->setIcon(l);
 }
+
 
 void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
 {
@@ -1251,7 +1258,7 @@ void MainWindow::on_pushButton_tip_2_clicked()
     ui->pushButton_agregar_remedio->hide();
 
 }
-
+//metodo paguardad el tip del dia
 void MainWindow::on_pushButton_agregar_tip_clicked()
 {
     QString estiloBueno, estiloMalo;
@@ -1303,6 +1310,7 @@ void MainWindow::on_pushButton_agregar_tip_clicked()
             ui->pushButton_agregarImagen->setStyleSheet(estiloMalo);
           }else {
             ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+
          }
 
 
@@ -1324,6 +1332,8 @@ void MainWindow::on_pushButton_agregar_tip_clicked()
 
 void MainWindow::on_pushButton_menu_admin_clicked()
 {
+    QString estiloBueno;
+    estiloBueno="border:1px black; border-style:solid";
     ui->stackedWidget_admin->setCurrentIndex(0);
     ui->pushButton_SolicitudesUsuarios->show();
     ui->pushButton_tip_2->show();
@@ -1332,17 +1342,357 @@ void MainWindow::on_pushButton_menu_admin_clicked()
     ui->lineEdit_link->clear();
     ui->plainTextEdit_descripcion->clear();
     QString concolor =":/ /imgs/fondo.png";
+    QPixmap c=concolor;
     QIcon color(concolor);
     ui->pushButton_agregarImagen->setIcon(color);
     ui->lineEdit_nombretip->clear();
     ui->lineEdit_links->clear();
     ui->plainTextEdit_descritip->clear();
+    ui->label_imagenTip->setPixmap(c);
+    //limpia si se queda en error los campos de agregar nuevo tip
+    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
+    ui->lineEdit_link->setStyleSheet(estiloBueno);
+    ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
+    //poner en colores normal los tips
+    ui->lineEdit_nombretip->setStyleSheet(estiloBueno);
+    ui->lineEdit_links->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descritip->setStyleSheet(estiloBueno);
+    ui->label_imagenTip->setPixmap(c);
+    //editar tips
+    ui->lineEdit_nombretipEdit->clear();
+    ui->lineEdit_liksEdit->clear();
+    ui->plainTextEdit_descripEdit->clear();
+    ui->lineEdit_nombretipEdit->setStyleSheet(estiloBueno);
+    ui->lineEdit_liksEdit->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descripEdit->setStyleSheet(estiloBueno);
+    ui->label_imageneditartip->setPixmap(c);
+}
+
+//METODO PARA AGREGAR TIP
+void MainWindow::on_pushButton_agregartips_clicked()
+{
+    QString estiloBueno, estiloMalo;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+
+    ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
+    ui->lineEdit_link->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
+    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    QString concolor =":/ /imgs/fondo.png";
+    QIcon color(concolor);
+    ui->pushButton_agregarImagen->setIcon(color);
+    ui->stackedWidget_tips->setCurrentIndex(1);
+    ui->lineEdit_nombretip->clear();
+    ui->lineEdit_links->clear();
+    ui->plainTextEdit_descritip->clear();
     QPixmap c=concolor;
+    ui->label_imagenTip->setPixmap(c);
+    //poner en colores normal los tips
+    ui->lineEdit_nombretip->setStyleSheet(estiloBueno);
+    ui->lineEdit_links->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descritip->setStyleSheet(estiloBueno);
+    ui->label_imagenTip->setPixmap(c);
+    //editar tips
+    ui->lineEdit_nombretipEdit->clear();
+    ui->lineEdit_liksEdit->clear();
+    ui->plainTextEdit_descripEdit->clear();
+    ui->lineEdit_nombretipEdit->setStyleSheet(estiloBueno);
+    ui->lineEdit_liksEdit->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descripEdit->setStyleSheet(estiloBueno);
+    ui->label_imageneditartip->setPixmap(c);
+
+}
+//BOTON QUE TE LLEVA AL MENU DE ELIMINAR TIPS
+void MainWindow::on_pushButton_eliminarTips_clicked()
+{
+    QString estiloBueno, estiloMalo;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+    QString concolor =":/ /imgs/fondo.png";
+    QPixmap c=concolor;
+
+    ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
+    ui->lineEdit_link->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
+    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    QIcon color(concolor);
+    ui->pushButton_agregarImagen->setIcon(color);
+    mostrarTipsEliminar();
+    ui->stackedWidget_tips->setCurrentIndex(2);
+
+    //limpia si se queda en error los campos de agregar nuevo tip
+    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
+    ui->lineEdit_link->setStyleSheet(estiloBueno);
+    ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
+
+    //editar tips
+    ui->lineEdit_nombretipEdit->clear();
+    ui->lineEdit_liksEdit->clear();
+    ui->plainTextEdit_descripEdit->clear();
+    ui->lineEdit_nombretipEdit->setStyleSheet(estiloBueno);
+    ui->lineEdit_liksEdit->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descripEdit->setStyleSheet(estiloBueno);
+    ui->label_imageneditartip->setPixmap(c);
+}
+
+//METODO PARA EDITAR EL TIP QUE ANTES YA SE HAYA SELECIONADO
+void MainWindow::on_pushButton_editarTips_clicked()
+{
+    qDebug()<<"idtip para editar:"<<idtipeditar;
+
+    QString nombre,link,descrip,image;
+    QString estiloBueno, estiloMalo;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+    nombre=ui->lineEdit_nombretipEdit->text();
+    link=ui->lineEdit_liksEdit->text();
+    descrip=ui->plainTextEdit_descripEdit->toPlainText();
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de editar el tip del dia?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+
+    if(nombre==""){
+    QMessageBox messageBox(QMessageBox::Warning,
+                                     tr("Warning"), tr("Por favor,seleccione tip a editar."), QMessageBox::Yes);
+             messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+             if (messageBox.exec() == QMessageBox::Yes){
+
+              }
+       }
+    if(nombre==""){
+        ui->lineEdit_nombretipEdit->setStyleSheet(estiloMalo);
+    }else {
+        ui->lineEdit_nombretipEdit->setStyleSheet(estiloBueno);
+    }
+    if(link==""){
+        ui->lineEdit_liksEdit->setStyleSheet(estiloMalo);
+    }else {
+       ui->lineEdit_liksEdit->setStyleSheet(estiloBueno);
+    }
+    if(descrip==""){
+        ui->plainTextEdit_descripEdit->setStyleSheet(estiloMalo);
+    }else {
+       ui->plainTextEdit_descripEdit->setStyleSheet(estiloBueno);
+    }
+    if(nombre!=""){
+if (message.exec() == QMessageBox::Yes){
+       agregarTipRemedio editarTip;
+       editarTip.editarTips(idtipeditar,nombre,descrip,link);
+       QString concolor =":/ /imgs/fondo.png";
+       ui->label_imageneditartip->setPixmap(concolor);
+        ui->lineEdit_nombretipEdit->clear();
+        ui->lineEdit_liksEdit->clear();
+        ui->plainTextEdit_descripEdit->clear();
+        ui->lineEdit_nombretipEdit->setStyleSheet(estiloBueno);
+        ui->lineEdit_liksEdit->setStyleSheet(estiloBueno);
+        ui->plainTextEdit_descripEdit->setStyleSheet(estiloBueno);
+        mostrarTipsEditar();
+       }
+    }
+
+}
+
+//METODO PARA ELIMINAR UN TIP SELECCIONADO
+void MainWindow::on_pushButton_eliminartip_clicked()
+{
+    QString estiloBueno, estiloMalo;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de eliminar el tip del dia?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    qDebug()<<"entre:"<<idtip;
+     QSqlQuery query;
+     QMessageBox messageBox(QMessageBox::Warning,
+                                      tr("Warning"), tr("Por favor,seleccione tip a eliminar."), QMessageBox::Yes);
+              messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+              if(ui->lineEdit_nombretip->text()==""){
+              if (messageBox.exec() == QMessageBox::Yes){
+
+               }
+     }
+
+      if(ui->lineEdit_nombretip->text()==""){
+          ui->lineEdit_nombretip->setStyleSheet(estiloMalo);
+      } else {
+        ui->lineEdit_nombretip->setStyleSheet(estiloBueno);
+
+      }
+
+      if(ui->lineEdit_links->text()==""){
+          ui->lineEdit_links->setStyleSheet(estiloMalo);
+      }else {
+          ui->lineEdit_links->setStyleSheet(estiloBueno);
+    }
+
+      if(ui->plainTextEdit_descritip->toPlainText()==""){
+          ui->plainTextEdit_descritip->setStyleSheet(estiloMalo);
+      }else {
+        ui->plainTextEdit_descritip->setStyleSheet(estiloBueno);
+       }
+
+
+
+     if(ui->lineEdit_nombretip->text()!=""){
+     if (message.exec() == QMessageBox::Yes){
+     query.exec("delete from tip where idtip='"+idtip+"'");
+     query.next();
+     ui->lineEdit_nombretip->clear();
+     ui->lineEdit_links->clear();
+     ui->plainTextEdit_descritip->clear();
+     QString concolor =":/ /imgs/fondo.png";
+     QPixmap c=concolor;
+     mostrarTipsEliminar();
+     ui->label_imagenTip->setPixmap(c);
+        }
+     }
+
+}
+//METODO PARA PONER LA INFORMACION EN CADA BOTON DEL MENU DINAMICO para editar
+void MainWindow::Ponertips(QString idtipedi){
+
+    QString consultatips,nombre,descrip,link;
+    QSqlQuery querytips;
+    consultatips="select *from tip where idtip='"+idtipedi+"'";
+    querytips.exec(consultatips);
+    querytips.next();
+    qDebug()<<"soy el idtip del metodo ponertips:"<<idtipedi;
+    idtipeditar=idtipedi;
+    nombre=querytips.value(1).toString();
+    descrip=querytips.value(2).toString();
+    link=querytips.value(3).toString();
+    QPixmap pix;
+    if(!pix.loadFromData(querytips.value(4).toByteArray())){
+        ui->label_imageneditartip->setText("<b>Error de imagen</b>");
+
+    }
+
+    int widWidth = this->ui->label_imageneditartip->width();
+    int widHeight = this->ui->label_imageneditartip->height();
+    ui->label_imageneditartip->setPixmap(pix.scaled(widWidth, widHeight, Qt::KeepAspectRatioByExpanding));
+    ui->lineEdit_nombretipEdit->setText(nombre);
+    ui->lineEdit_liksEdit->setText(link);
+    ui->plainTextEdit_descripEdit->setPlainText(descrip);
+
+
+}
+//METODO PARA PONER LA INFORMACION EN CADA BOTON DEL MENU DINAMICO PARA ELIMINAR TIP
+void MainWindow::ponerTipseliminar(QString idtip){
+
+    QString consultatips,nombre,descrip,link;
+    QSqlQuery querytips;
+    consultatips="select *from tip where idtip='"+idtip+"'";
+    querytips.exec(consultatips);
+    querytips.next();
+    qDebug()<<consultatips;
+    nombre=querytips.value(1).toString();
+    descrip=querytips.value(2).toString();
+    link=querytips.value(3).toString();
+    QPixmap pix;
+    if(!pix.loadFromData(querytips.value(4).toByteArray())){
+        ui->label_imagenTip->setText("<b>Error de imagen</b>");
+
+    }
+    //eliminar
+    int w = this->ui->label_imagenTip->width();
+    int wi= this->ui->label_imagenTip->height();
+    ui->label_imagenTip->setPixmap(pix.scaled(w,wi, Qt::KeepAspectRatioByExpanding));
+    ui->lineEdit_nombretip->setText(nombre);
+    ui->lineEdit_links->setText(link);
+    ui->plainTextEdit_descritip->setPlainText(descrip);
+
+}
+
+//MENU PARA MOSTRAR LOS TIPS PARA SU EDICION EN EL MENU DINAMICO
+void MainWindow::mostrarTipsEditar(){
+    clearLayout(ui->listatips);
+    QString consultatips,nombre;
+    QSqlQuery querytips;
+    int cont=0;
+    consultatips="select *from tip";
+    querytips.exec(consultatips);
+    while(querytips.next())
+    {
+        idtipeditar=querytips.value(0).toString();
+        qDebug()<<"sdfnfjb.kjdfbl_:"<<idtipeditar;
+        nombre=querytips.value(1).toString();
+        QPushButton *b=new QPushButton();
+        b->setText(nombre);
+        b->setFixedSize(QSize(200,40));
+        QSignalMapper *mapper=new QSignalMapper(this);
+        connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(b,idtipeditar);
+        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(Ponertips(QString)));
+        ui->listatips->addWidget(b,cont,0,1,1);
+        cont++;
+    }
+
+}
+
+//MENU DINAMICO QUE PONE LOS TIPS PARA PODER ELIMINAR
+void MainWindow::mostrarTipsEliminar(){
+
+    clearLayout(ui->listatips_3);
+    QString consultatips,nombre;
+    QSqlQuery querytips;
+    int cont=0;
+    consultatips="select *from tip";
+    querytips.exec(consultatips);
+
+    while(querytips.next())
+    {
+        idtip=querytips.value(0).toString();
+        nombre=querytips.value(1).toString();
+        QPushButton *b=new QPushButton();
+        b->setText(nombre);
+        b->setFixedSize(QSize(200,40));
+        QSignalMapper *mapper=new QSignalMapper(this);
+        connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(b,idtip);
+        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(ponerTipseliminar(QString)));
+        ui->listatips_3->addWidget(b,cont,0,1,1);
+        cont++;
+    }
+
+
+}
+
+//BOTON QUE TE MUEVE A LA INTERFAZ PARA EDITAR UN TIP
+void MainWindow::on_pushButton_editarTip_clicked()
+{
+    QString estiloBueno;
+    estiloBueno="border:1px black; border-style:solid";
+    QString concolor =":/ /imgs/fondo.png";
+    QPixmap c=concolor;
+    //limpia si se queda en error los campos de agregar nuevo tip
+    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
+    ui->lineEdit_link->setStyleSheet(estiloBueno);
+    ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
+    mostrarTipsEditar();
+    ui->stackedWidget_tips->setCurrentIndex(3);
+    //poner en colores normal los tips
+    ui->lineEdit_nombretip->setStyleSheet(estiloBueno);
+    ui->lineEdit_links->setStyleSheet(estiloBueno);
+    ui->plainTextEdit_descritip->setStyleSheet(estiloBueno);
     ui->label_imagenTip->setPixmap(c);
 }
 
-//-------------gregar remido casero
 
+
+
+//-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-////////////////////////////////////PARTE DE REMEDIOS CASEROS /////////////////////////////////////////
+//-///////////////////////////////////ELIMINAR/////EDITAR/////////AGREGAR/////////////////////////////////////////////////
+//-------------gregar remido casero
+//carga las categorias que existen en remedios caseros
 void MainWindow::cargarCategoria(){
     QSqlQueryModel *queryRemedios;
     queryRemedios= new QSqlQueryModel;
@@ -1353,6 +1703,7 @@ void MainWindow::cargarCategoria(){
     ui->comboBox_catEditar->setModel(queryRemedios);
 }
 
+//boton que te llava al apartodo del remedios caseros
 void MainWindow::on_pushButton_agregar_remedio_clicked()
 {
     ui->stackedWidget_admin->setCurrentIndex(4);
@@ -1384,7 +1735,7 @@ void MainWindow::on_pushButton_menu_admin_2_clicked()
     ui->label_imagenEditar->setPixmap(concolor);
     ui->label_imagEli->setPixmap(concolor);
 }
-
+//guardar la imagen del remedio casero
 void MainWindow::on_pushButton_Imgremedio_clicked()
 {
     ui->pushButton_Imgremedio->setText("");
@@ -1403,7 +1754,7 @@ void MainWindow::on_pushButton_Imgremedio_clicked()
     ui->pushButton_Imgremedio->setIcon(l);
 
 }
-
+//metodo para guadar remedio casero
 void MainWindow::on_pushButton_agregar_remedio_2_clicked()
 {
     //estilo de line edit
@@ -1494,7 +1845,7 @@ void MainWindow::on_pushButton_agergar_remedio_clicked()
     ui->label_imagenEditar->setPixmap(concolor);
 }
 
-
+//metodo para el apartado de eliminar remedio
 void MainWindow::on_pushButton_eliminar_remedio_clicked()
 {
     mostrarRemedioEliminar();
@@ -1515,7 +1866,7 @@ void MainWindow::on_pushButton_eliminar_remedio_clicked()
     ui->plainTextEdit_editIngredi->clear();
     ui->label_imagenEditar->setPixmap(concolor);
 }
-
+// boton para ir al apartado de editar remedio
 void MainWindow::on_pushButton_editar_remedio_clicked()
 {
     ui->stackedWidget_remedio->setCurrentIndex(3);
@@ -1537,6 +1888,7 @@ void MainWindow::on_pushButton_editar_remedio_clicked()
     mostarrRemedioEditar();
 }
 
+//con forme a lo que se encuentre en el comboBox hacemos la busqueda para mostrar en el menu dinamico
 void MainWindow::on_comboBox_eliminarREmedios_currentTextChanged(const QString &arg1)
 {
     ui->plainTextEdit_procedimientoEli->clear();
@@ -1548,10 +1900,9 @@ void MainWindow::on_comboBox_eliminarREmedios_currentTextChanged(const QString &
     mostrarRemedioEliminar();
 }
 
-
+//metodo para poner la informacion de los remedios
 void MainWindow::PonerRemedios(QString idremedios)
 {
-
     QSqlQuery busqueda,query;
     QString nomRemedio,ingredientes,procedimineto,foto,categoria,nombreCategoria;
     busqueda.exec("select rem.nombreRemedio,rem.ingredientes,rem.procedimiento,rem.fotoRemedio,rem.idcategoria,rem.fotoRemedio,rem.idremedio from tipoCategoriaRem as tipo inner join remedios as rem on rem.idcategoria=tipo.idcategoria where rem.idremedio='"+idremedios+"'");
@@ -1589,7 +1940,7 @@ void MainWindow::PonerRemedios(QString idremedios)
     ui->label_imagenEditar->setPixmap(pix.scaled(w, wi, Qt::KeepAspectRatioByExpanding));
 
 }
-
+//menu dinamico para mostra los remedios existentes que pueden ser editados
 void MainWindow::mostarrRemedioEditar(){
     clearLayout(ui->listatips_2);
     QString consultatips,nombre,remedioCatalogo;
@@ -1614,12 +1965,8 @@ void MainWindow::mostarrRemedioEditar(){
         cont++;
     }
 
-
-
-
-
-
 }
+//MENU DINAMICO PARA MOSTRAR LOS REMDIOS EXISTENTES QUE PUEDEN SER ELIMINADOS
 void MainWindow::mostrarRemedioEliminar(){
 
     clearLayout(ui->listatips_4);
@@ -1632,22 +1979,23 @@ void MainWindow::mostrarRemedioEliminar(){
 
     while(querytips.next())
     {
-        idtip=querytips.value(0).toString();
+        idremedios=querytips.value(0).toString();
         nombre=querytips.value(1).toString();
         QPushButton *b=new QPushButton();
         b->setText(nombre);
         b->setFixedSize(QSize(200,40));
         QSignalMapper *mapper=new QSignalMapper(this);
         connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
-        mapper->setMapping(b,idtip);
+        mapper->setMapping(b,idremedios);
         connect(mapper,SIGNAL(mapped(QString)),this,SLOT(PonerRemedios(QString)));
         ui->listatips_4->addWidget(b,cont,0,1,1);
         cont++;
     }
 }
-
+//METODO QUE ELIMINA EL REMEDIO SELECCIONADO PARA SER ELIMINADO
 void MainWindow::on_pushButton_eliminarRemedio_clicked()
 {
+    qDebug()<<"hola elimana:"<<idremedios;
     QSqlQuery eliminar;QMessageBox message(QMessageBox::Question,
     tr("Warning"), tr("¿Estas seguro de eliminar remedio casero?"), QMessageBox::Yes | QMessageBox::No);
     message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
@@ -1675,7 +2023,7 @@ void MainWindow::on_pushButton_eliminarRemedio_clicked()
 
 
 }
-
+//METODO QUE DEPENDIEDON LO QUE SELECIIONE SE MUESTRA EN EL MENU DINAMICO PARA EDITAR
 void MainWindow::on_comboBox_categoriaEdit_currentTextChanged(const QString &arg1)
 {
 
@@ -1689,10 +2037,9 @@ void MainWindow::on_comboBox_categoriaEdit_currentTextChanged(const QString &arg
 
 }
 
-
+//METODO PARA EDITAR EL REMEDIO QUE SE HAYA SELECCIONADO
 void MainWindow::on_pushButton_editarRemedio_clicked()
 {
-
     agregarTipRemedio editar;
     QSqlQuery query;
     QString nomRemedio,ingredientes,procedimineto,foto,categoria,buscCategori;
@@ -1745,6 +2092,7 @@ void MainWindow::on_pushButton_editarRemedio_clicked()
     if(nomRemedio!="" && procedimineto!=""&& ingredientes!=""){
      if (message.exec() == QMessageBox::Yes){
       editar.editarRemedio(idremedios,nomRemedio,ingredientes,procedimineto,categoria);
+      mostarrRemedioEditar();
       ui->plainTextEdit_editProcedi->clear();
       ui->lineEdit_nombreEdit->clear();
       ui->plainTextEdit_editIngredi->clear();
@@ -1752,172 +2100,4 @@ void MainWindow::on_pushButton_editarRemedio_clicked()
       ui->label_imagenEditar->setPixmap(concolor);
      }
    }
-}
-
-void MainWindow::on_pushButton_agregartips_clicked()
-{
-    QString estiloBueno, estiloMalo;
-    estiloMalo="border:2px red; border-style:solid";
-    estiloBueno="border:1px black; border-style:solid";
-
-    ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
-    ui->lineEdit_link->setStyleSheet(estiloBueno);
-    ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
-    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
-    QString concolor =":/ /imgs/fondo.png";
-    QIcon color(concolor);
-    ui->pushButton_agregarImagen->setIcon(color);
-    ui->stackedWidget_tips->setCurrentIndex(1);
-    ui->lineEdit_nombretip->clear();
-    ui->lineEdit_links->clear();
-    ui->plainTextEdit_descritip->clear();
-    QPixmap c=concolor;
-    ui->label_imagenTip->setPixmap(c);
-}
-
-void MainWindow::on_pushButton_eliminarTips_clicked()
-{
-    QString estiloBueno, estiloMalo;
-    estiloMalo="border:2px red; border-style:solid";
-    estiloBueno="border:1px black; border-style:solid";
-
-    ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
-    ui->lineEdit_link->setStyleSheet(estiloBueno);
-    ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
-    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
-    QString concolor =":/ /imgs/fondo.png";
-    QIcon color(concolor);
-    ui->pushButton_agregarImagen->setIcon(color);
-    mostrarTipsEliminar();
-    ui->stackedWidget_tips->setCurrentIndex(2);
-}
-
-
-void MainWindow::on_pushButton_eliminartip_clicked()
-{
-    QMessageBox message(QMessageBox::Question,
-     tr("Information"), tr("¿Estas seguro de eliminar el tip del dia?"), QMessageBox::Yes | QMessageBox::No);
-    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
-    message.setButtonText(QMessageBox::No, tr("Cancelar"));
-    qDebug()<<"entre:"<<idtip;
-     QSqlQuery query;
-     QMessageBox messageBox(QMessageBox::Warning,
-                                      tr("Warning"), tr("Por favor,seleccione tip a eliminar."), QMessageBox::Yes);
-              messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
-              if(ui->lineEdit_nombretip->text()==""){
-              if (messageBox.exec() == QMessageBox::Yes){
-
-               }
-     }
-
-     if(ui->lineEdit_nombretip->text()!=""){
-     if (message.exec() == QMessageBox::Yes){
-     query.exec("delete from tip where idtip='"+idtip+"'");
-     query.next();
-     ui->lineEdit_nombretip->clear();
-     ui->lineEdit_links->clear();
-     ui->plainTextEdit_descritip->clear();
-     QString concolor =":/ /imgs/fondo.png";
-     QPixmap c=concolor;
-     ui->label_imagenTip->setPixmap(c);
-        }
-     }
-
-}
-
-void MainWindow::Ponertips(QString tips){
-    QString consultatips,nombre,idtip,descrip,link;
-    QSqlQuery querytips;
-    consultatips="select *from tip where idtip='"+tips+"'";
-    querytips.exec(consultatips);
-    querytips.next();
-    qDebug()<<consultatips;
-    nombre=querytips.value(1).toString();
-    descrip=querytips.value(2).toString();
-    link=querytips.value(3).toString();
-    QPixmap pix;
-    if(!pix.loadFromData(querytips.value(4).toByteArray())){
-        ui->label_imageneditartip->setText("<b>Error de imagen</b>");
-        ui->label_imagenTip->setText("<b>Error de imagen</b>");
-
-    }
-    int widWidth = this->ui->label_imageneditartip->width();
-    int widHeight = this->ui->label_imageneditartip->height();
-    ui->label_imageneditartip->setPixmap(pix.scaled(widWidth, widHeight, Qt::KeepAspectRatioByExpanding));
-    ui->lineEdit_nombretipEdit->setText(nombre);
-    ui->lineEdit_liksEdit->setText(link);
-    ui->plainTextEdit_descripEdit->setPlainText(descrip);
-
-    //eliminar
-    int w = this->ui->label_imagenTip->width();
-    int wi= this->ui->label_imagenTip->height();
-    ui->label_imagenTip->setPixmap(pix.scaled(w,wi, Qt::KeepAspectRatioByExpanding));
-    ui->lineEdit_nombretip->setText(nombre);
-    ui->lineEdit_links->setText(link);
-    ui->plainTextEdit_descritip->setPlainText(descrip);
-
-}
-
-void MainWindow::mostrarTipsEditar(){
-    clearLayout(ui->listatips);
-    QString consultatips,nombre;
-    QSqlQuery querytips;
-    int cont=0;
-    consultatips="select *from tip";
-    querytips.exec(consultatips);
-
-    while(querytips.next())
-    {
-        idtip=querytips.value(0).toString();
-        nombre=querytips.value(1).toString();
-        QPushButton *b=new QPushButton();
-        b->setText(nombre);
-        b->setFixedSize(QSize(200,40));
-        QSignalMapper *mapper=new QSignalMapper(this);
-        connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
-        mapper->setMapping(b,idtip);
-        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(Ponertips(QString)));
-        ui->listatips->addWidget(b,cont,0,1,1);
-        cont++;
-    }
-
-}
-
-void MainWindow::mostrarTipsEliminar(){
-
-    clearLayout(ui->listatips_3);
-    QString consultatips,nombre;
-    QSqlQuery querytips;
-    int cont=0;
-    consultatips="select *from tip";
-    querytips.exec(consultatips);
-
-    while(querytips.next())
-    {
-        idtip=querytips.value(0).toString();
-        nombre=querytips.value(1).toString();
-        QPushButton *b=new QPushButton();
-        b->setText(nombre);
-        b->setFixedSize(QSize(200,40));
-        QSignalMapper *mapper=new QSignalMapper(this);
-        connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
-        mapper->setMapping(b,idtip);
-        connect(mapper,SIGNAL(mapped(QString)),this,SLOT(Ponertips(QString)));
-        ui->listatips_3->addWidget(b,cont,0,1,1);
-        cont++;
-    }
-
-
-}
-
-
-void MainWindow::on_pushButton_editarTip_clicked()
-{
-    mostrarTipsEditar();
-    ui->stackedWidget_tips->setCurrentIndex(3);
-}
-
-void MainWindow::on_pushButton_editarTips_clicked()
-{
-    //falta esto
 }

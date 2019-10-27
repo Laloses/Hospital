@@ -30,7 +30,7 @@ private:
     QSqlDatabase database;
     QString id_usuario,id_staff,id_doctor,id_paciente;
     QByteArray foto;
-    QString imgRoute,matric,idremedios,idtip;
+    QString imgRoute,matric,idremedios,idtip,idtipeditar;
     QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser;
     QString concolor;
     int UserTipo;
@@ -147,6 +147,7 @@ private slots:
     void mostarrRemedioEditar();
     void Ponertips(QString);
     void PonerRemedios(QString);
+    void ponerTipseliminar(QString);
     void on_pushButton_editarTips_clicked();
 
 public:
