@@ -5,5 +5,12 @@
         <file>backArrow.png</file>
         <file>home.png</file>
         <file>search.png</file>
+        <file>email.png</file>
+        <file>phone.png</file>
+        <file>calendar.png</file>
+        <file>password.png</file>
+        <file>passwordConf.png</file>
+        <file>NoView.png</file>
+        <file>view.png</file>
     </qresource>
 </RCC>
