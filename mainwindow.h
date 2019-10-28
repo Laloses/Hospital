@@ -16,6 +16,7 @@
 #include "login.h"
 #include "agregaractividaddoctor.h"
 #include "agregarcitaspaciente.h"
+#include "agregartipremedio.h"
 
 namespace Ui {
 class MainWindow;
@@ -31,8 +32,9 @@ private:
     QSqlQueryModel *model;
     QString id_usuario,id_staff,id_doctor,id_paciente;
     QByteArray foto;
-    QString imgRoute,matric;
+    QString imgRoute,matric,idremedios,idtip,idtipeditar;
     QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser;
+    QString concolor;
     int UserTipo;
     bool verificarPasswordRegistro();
     QString calcularEdad(QString);
@@ -42,9 +44,7 @@ private:
     void cargarDatosUsuarios();
     void cargarHorarioDoc();
     void SolicitudCitas();
-
-
-
+    void cargarCategoria();
 
 private slots:
 
@@ -142,10 +142,56 @@ private slots:
 
     void on_btnMostrarContrasena_2_clicked();
 
+    void on_pushButton_tip_2_clicked();
+
+    void on_pushButton_agregar_tip_clicked();
+
+    void on_pushButton_agregarImagen_clicked();
+
+    void on_pushButton_menu_admin_clicked();
+
+    void on_pushButton_agregar_remedio_clicked();
+
+    void on_pushButton_menu_admin_2_clicked();
+
+    void on_pushButton_agregar_remedio_2_clicked();
+
+    void on_pushButton_Imgremedio_clicked();
+
+    void on_pushButton_agergar_remedio_clicked();
+
+    void on_pushButton_eliminar_remedio_clicked();
+
+    void on_pushButton_editar_remedio_clicked();
+
+    void on_comboBox_eliminarREmedios_currentTextChanged(const QString &arg1);
+
+    void on_pushButton_eliminarRemedio_clicked();
+
+    void on_comboBox_categoriaEdit_currentTextChanged(const QString &arg1);
+
+    void on_pushButton_editarRemedio_clicked();
+
+    void on_pushButton_agregartips_clicked();
+
+    void on_pushButton_eliminarTips_clicked();
+
+    void on_pushButton_eliminartip_clicked();
+
+    void on_pushButton_editarTip_clicked();
+
+    void mostrarTipsEditar();
+    void mostrarTipsEliminar();
+    void mostrarRemedioEliminar();
+    void mostarrRemedioEditar();
+    void Ponertips(QString);
+    void PonerRemedios(QString);
+    void ponerTipseliminar(QString);
+    void on_pushButton_editarTips_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
     void solicitUsuarios();
     QString mactri;
     int userTipo;
@@ -154,6 +200,7 @@ public:
    void mostrarZonas();
    void mostrasConsultorios();
    int verNoti;
+
 
 
 

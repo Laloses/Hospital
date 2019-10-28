@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
         agregaractividaddoctor.cpp \
         agregarcitaspaciente.cpp \
+        agregartipremedio.cpp \
         main.cpp \
         mainwindow.cpp \
         registrodoctor.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
 HEADERS += \
         agregaractividaddoctor.h \
         agregarcitaspaciente.h \
+        agregartipremedio.h \
         mainwindow.h \
         registrodoctor.h \
         registropaciente.h \

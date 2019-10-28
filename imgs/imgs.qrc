@@ -12,5 +12,6 @@
         <file>passwordConf.png</file>
         <file>NoView.png</file>
         <file>view.png</file>
+        <file>fondo.png</file>
     </qresource>
 </RCC>
