@@ -27,6 +27,7 @@ class MainWindow : public QMainWindow
 private:
     Ui::MainWindow *ui;
     QSqlDatabase database;
+    QSqlQueryModel *model;
     QString id_usuario,id_staff,id_doctor,id_paciente;
     QByteArray foto;
     QString imgRoute,matric;
@@ -100,6 +101,24 @@ private slots:
     void on_radioButton_staffs_clicked();
 
     void on_pushButton_menu_Pincipal_Adm_clicked();
+
+    void on_radioCitaPersonal_clicked();
+
+    void on_radioCitaExterna_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_btnBuscarDoctor_clicked();
+
+    void on_btnAgendarCita_clicked();
+
+    void on_tv_listaDocCitas_clicked(const QModelIndex &index);
+
+    void on_fechaCita_userDateChanged(const QDate &date);
+
+    void on_tv_listaDocCitas_doubleClicked(const QModelIndex &index);
+
+    void on_horaCita_activated(const QString &arg1);
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

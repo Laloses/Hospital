@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //titulo de la pagina principal del programa
+    //titulo de la pagina principal del programa1
     setWindowTitle("LOBO HOSPITAL");
     //Conexion a la base de datos
     database= QSqlDatabase::addDatabase("QMYSQL");
@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     else {
         qDebug()<<"Base de datos conectada";
     }
+    model = new QSqlQueryModel;
     datosPac = new QSqlQuery;
     datosDoc = new QSqlQuery;
     datosStaff = new QSqlQuery;
@@ -36,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit_password1->setEchoMode(QLineEdit::Password);
     ui->lineEdit_password2->setEchoMode(QLineEdit::Password);
     ui->lineEdit_passwordLogin->setEchoMode(QLineEdit::Password);
+    ui->tv_listaDocCitas->setHidden(true);
     id_usuario=id_staff=id_doctor=id_paciente="0";
     matric="";
     UserTipo=0;
@@ -803,8 +805,6 @@ void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
     ui->pushButton_SolicitudesUsuarios->hide();
 }
 
-
-
 void MainWindow::PonerInfo(QString matri)
 {
     ui->label_solicitud->clear();
@@ -917,13 +917,10 @@ void MainWindow::on_pushButton_AceptarSoli_clicked()
 
 //----------------------------------------------------------------------------
 void MainWindow::mostrarZonas(){
-
     QSqlQueryModel *queryPuestos;
     queryPuestos= new QSqlQueryModel;
     queryPuestos->setQuery("SELECT nombreArea FROM areah");
     ui->comboBox_area->setModel(queryPuestos);
-
-
 }
 
 
@@ -1218,3 +1215,266 @@ void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
 }
 
 
+void MainWindow::on_radioCitaPersonal_clicked()
+{
+    ui->labelNombreComp->setHidden(true);
+    ui->lineNombreCompleto->setHidden(true);
+    ui->labelOrigen->setHidden(true);
+    ui->lineOrigen->setHidden(true);
+    ui->labelEdad->setHidden(true);
+    ui->lineEdad->setHidden(true);
+    ui->lb_sexo->setHidden(true);
+    ui->cb_sexo->setHidden(true);
+}
+
+void MainWindow::on_radioCitaExterna_clicked()
+{
+    ui->labelNombreComp->setHidden(false);
+    ui->lineNombreCompleto->setHidden(false);
+    ui->labelOrigen->setHidden(false);
+    ui->lineOrigen->setHidden(false);
+    ui->labelEdad->setHidden(false);
+    ui->lineEdad->setHidden(false);
+    ui->lb_sexo->setHidden(false);
+    ui->cb_sexo->setHidden(false);
+}
+
+//Boton citas perfil paciente
+void MainWindow::on_pushButton_clicked()
+{
+    ui->btnBuscarDoctor->setHidden(true);
+    ui->stackedWidget_perfilPaciente->setCurrentIndex(1);
+    QSqlQuery fecha;
+    QStringList f;
+    int anio, mes, dia;
+    fecha.exec("SELECT CURDATE()");
+    fecha.next();
+    f = fecha.value(0).toString().split("-");
+    anio = f.at(0).toInt();
+    mes = f.at(1).toInt();
+    dia= f.at(2).toInt();
+
+    ui->fechaCita->setMinimumDate(QDate(anio,mes,dia));
+
+    QStringList horas;
+    horas<<  "05:00" << "06:00" << "07:00" << "08:00" << "09:00" << "10:00" << "11:00" << "12:00" << "13:00"
+    << "14:00" << "15:00" << "16:00" << "17:00" << "18:00" << "19:00" << "20:00" << "21:00"
+    << "22:00" << "23:00" << "00:00" << "01:00" << "02:00" << "03:00" << "04:00" << "05:00";
+
+    ui->lb_noHayDocs->setHidden(true);
+    ui->lb_selDoc->setHidden(true);
+    ui->lb_maxchar->setHidden(true);
+    ui->lb_charAct->setHidden(true);
+    ui->horaCita->addItems(horas);
+    on_radioCitaPersonal_clicked();
+}
+
+//Buscar doctor
+void MainWindow::on_btnBuscarDoctor_clicked()
+{
+    QSqlQuery horarios, doc;
+    QString hora,fecha;
+    int diaNum, idDoc;
+    diaNum = ui->fechaCita->date().dayOfWeek();
+    hora = ui->horaCita->currentText();
+
+    QStringList dias;
+    dias<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado" << "Domingo";
+
+    horarios.exec("SELECT idDoc FROM horariodoc WHERE hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"'");
+    if(ui->le_nombreDoc->text().isEmpty() && !horarios.next()){
+        ui->lb_noHayDocs->setHidden(false);
+        ui->tv_listaDocCitas->setModel(nullptr);
+    }
+    else{
+        ui->lb_selDoc->setHidden(false);
+        ui->lb_noHayDocs->setHidden(true);
+        idDoc=horarios.value(0).toInt();
+
+        //Si movio la fecha pero aun no pone el nombre del doctor
+        if(!ui->le_nombreDoc->text().isEmpty()){
+            QStringList nombreC;
+            QString nombre, apeM, apeP;
+            nombreC=ui->le_nombreDoc->text().split(" ");
+
+            //Si solo ingreso una palabra
+            if(nombreC.size()==1) {
+                //Buscamos por nombre o apellido paterno
+                nombre = nombreC.at(0);
+                apeP = nombreC.at(0);
+
+                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
+                              "FROM doctor as d , especialidad as e , usuario as u "
+                              "WHERE d.iddoctor = "+QString::number((idDoc))+" "
+                              "AND u.matricula = d.idUser "
+                              "AND d.idEspecialidad = e.idEsp "
+                              "OR u.nombre='"+nombre+"' "
+                              "OR u.appaterno ='"+apeP+"' ");
+            }
+            //Si puso mas de su nombre o apellido
+            else {
+                nombre = nombreC.at(0);
+                apeP = nombreC.at(1);
+                apeM = nombreC.at(2);
+
+                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
+                              "FROM doctor as d , especialidad as e , usuario as u "
+                              "WHERE d.iddoctor = "+QString::number((idDoc))+" "
+                              "AND u.matricula = d.idUser "
+                              "AND d.idEspecialidad = e.idEsp "
+                              "OR u.nombre='"+nombre+"' "
+                              "OR u.appaterno ='"+apeP+"' "
+                              "OR u.apmaterno ='"+apeM+"'");
+            }
+        }
+        //Si está vacio el campo del nombre del doctor
+        //Mostramos todos los doctores disponibles
+        else{
+            model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
+                          "FROM doctor as d , especialidad as e , usuario as u "
+                          "WHERE d.iddoctor = "+QString::number((idDoc))+" "
+                          "AND u.matricula = d.idUser "
+                          "AND d.idEspecialidad = e.idEsp");
+        }
+        qDebug()<<idDoc;
+        ui->tv_listaDocCitas->setModel(model);
+        ui->tv_listaDocCitas->setHidden(false);
+        ui->tv_listaDocCitas->hideColumn(2);
+        ui->tv_listaDocCitas->setColumnWidth(0,ui->tv_listaDocCitas->width()/2);
+        ui->tv_listaDocCitas->setColumnWidth(1,ui->tv_listaDocCitas->width()/2);
+    }
+}
+
+void MainWindow::on_btnAgendarCita_clicked()
+{
+    QRegExp letras("^[a-zZ-A ]*$"), numeros("^[0-9]*$");
+    QString estiloMalo, estiloBueno;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+
+    //Si es una cita del mismo usuario
+    if (ui->radioCitaPersonal->isChecked()){
+        if(id_doctor!="0"){
+            ui->tv_listaDocCitas->setStyleSheet(estiloBueno);
+                   if(!ui->le_nombreDoc->text().isEmpty()){
+                       ui->le_nombreDoc->setStyleSheet(estiloBueno);
+                       if(!ui->sintomasCitas->toPlainText().isEmpty() && ui->sintomasCitas->toPlainText().size()<=500){
+                           ui->sintomasCitas->setStyleSheet(estiloBueno);
+                           ui->lb_maxchar->setHidden(true);
+                           ui->lb_charAct->setHidden(true);
+
+                           agregarCitasPaciente cita;
+                           if ( cita.citasPaciente(id_usuario,ui->fechaCita->date().toString("yyyy-MM-dd"),ui->horaCita->currentText(),id_doctor,ui->sintomasCitas->toPlainText(),"0") ){
+                               QMessageBox::information(this,"Correcto", "Cita agendada correctamente");
+                           }else{
+                               QMessageBox::information(this,"Error", "Hubo un problema al agendar su cita, intente de nuevo más tarde.");
+                           }
+                           //Vaciamos variables
+                           ui->lb_selDoc->setHidden(true);
+                           ui->tv_listaDocCitas->setModel(nullptr);
+                           ui->tv_listaDocCitas->setHidden(true);
+                           ui->le_nombreDoc->setText("");
+                           ui->sintomasCitas->setText("");
+                           id_doctor="0";
+
+                       }else{
+                           ui->sintomasCitas->setStyleSheet(estiloMalo);
+                           ui->lb_charAct->setText( QString::number( ui->sintomasCitas->toPlainText().size() ) );
+                           ui->lb_charAct->setHidden(false);
+                           ui->lb_maxchar->setHidden(false);
+                       }
+
+                   }
+                   else{
+                         ui->le_nombreDoc->setStyleSheet(estiloMalo);
+                   }
+        }
+        else{
+            ui->tv_listaDocCitas->setStyleSheet(estiloMalo);
+        }
+    }
+
+    //Si es una cita de un menor
+    if(ui->radioCitaExterna->isChecked()){
+        if(id_doctor!="0"){
+            ui->tv_listaDocCitas->setStyleSheet(estiloBueno);
+           if(ui->lineNombreCompleto->text().contains(letras)){
+               ui->lineNombreCompleto->setStyleSheet(estiloBueno);
+               if(ui->lineOrigen->text().contains(letras)){
+                   ui->lineOrigen->setStyleSheet(estiloBueno);
+                   if(ui->lineEdad->text().contains(numeros) && ui->lineEdad->text().toInt()<18){
+                       ui->lineEdad->setStyleSheet(estiloBueno);
+                               if(!ui->le_nombreDoc->text().isEmpty()){
+                                   ui->le_nombreDoc->setStyleSheet(estiloBueno);
+                                   if(!ui->sintomasCitas->toPlainText().isEmpty()){
+                                       ui->sintomasCitas->setStyleSheet(estiloBueno);
+
+                                       agregarCitasPaciente cita;
+                                       if( cita.citasExternas(id_paciente, ui->lineNombreCompleto->text(),ui->lineOrigen->text(),ui->lineEdad->text(),ui->cb_sexo->currentText(),ui->fechaCita->date().toString("yyyy-MM-dd"),ui->horaCita->currentText(),id_doctor,ui->sintomasCitas->toPlainText() ) ) {
+                                            QMessageBox::information(this,"Correcto", "Cita agendada correctamente");
+                                       }else{
+                                           QMessageBox::information(this,"Error", "Hubo un problema al agendar su cita, intente de nuevo más tarde.");
+                                       }
+                                       //Vaciamos variables
+                                       ui->lb_selDoc->setHidden(true);
+                                       ui->tv_listaDocCitas->setModel(nullptr);
+                                       ui->tv_listaDocCitas->setHidden(true);
+                                       ui->le_nombreDoc->setText("");
+                                       ui->sintomasCitas->setText("");
+                                       id_doctor="0";
+
+                                   }else{
+                                       ui->sintomasCitas->setStyleSheet(estiloMalo);
+                                   }
+
+                               }
+                               else{ ui->le_nombreDoc->setStyleSheet(estiloMalo);}
+
+
+                                   }
+                                       else{
+                                             ui->lineEdad->setStyleSheet(estiloMalo);
+                                       }
+                                           }
+                                           else{
+                                                 ui->lineOrigen->setStyleSheet(estiloMalo);
+                                           }
+                                                   }
+                                                   else{
+                                                         ui->lineNombreCompleto->setStyleSheet(estiloMalo);
+                                                   }
+        }
+        else{
+              ui->tv_listaDocCitas->setStyleSheet(estiloMalo);
+        }
+    }
+}
+
+//Cuando le da click a la tabla de citas
+void MainWindow::on_tv_listaDocCitas_clicked(const QModelIndex &index)
+{
+    id_doctor = model->index(index.row(),2).data().toString();
+}
+
+void MainWindow::on_tv_listaDocCitas_doubleClicked(const QModelIndex &index)
+{
+    ui->le_nombreDoc->setText( model->index(index.row(),0).data().toString() );
+}
+
+void MainWindow::on_fechaCita_userDateChanged(const QDate &date)
+{
+    QSqlQuery fecha;
+    fecha.exec("SELECT CURDATE()");
+    QString fechaUI = date.toString("yyyy-MM-dd");
+    QString fechaReal = fecha.value(0).toString();
+    if(fechaUI!=fechaReal){
+        on_btnBuscarDoctor_clicked();
+    }
+}
+
+void MainWindow::on_horaCita_activated(const QString &arg1)
+{
+    if(arg1!="05:00"){
+        on_btnBuscarDoctor_clicked();
+    }
+}
