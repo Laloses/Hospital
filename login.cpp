@@ -122,7 +122,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                                     tipo=false;
                                     idStaff=staff.value(1).toString();
                                     idUser=userval;
-                                    return 3;
+                                    return 4;
                         }
                                 else {
                                     tipo=false;

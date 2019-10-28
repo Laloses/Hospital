@@ -267,6 +267,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             //esto lo puse para habilitar las notificaciones
             verNoti=1;
             ui->nofi->hide();
+
             QString busca;
             busca="select *from notificacion where UserP='"+id_paciente+"'; ";
             QSqlQuery buscarNoti;
@@ -288,9 +289,6 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             }
 
             while(buscarNoti.previous()){
-
-
-
                 if(buscarNoti.value(1).toString()=="1")
                 {
                     QPlainTextEdit *b=new QPlainTextEdit();
@@ -310,14 +308,8 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
                 b->setStyleSheet("background-color: rgb(243,173,106); ");
                 ui->barraDeNoti->addWidget(b,filas,0,Qt::AlignTop);
                 filas++;
-
                 }
-
-
             }
-
-
-            on_pushButton_miPerfil_clicked();
 
             QString num=QString::number(contadorNoti);
             qDebug()<<"este numero conte"<<num;
@@ -333,17 +325,12 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
                 ui->notificacionL->setText(num);
                 ui->notificacionL->show();
             }
-
-
-
-
+            on_pushButton_miPerfil_clicked();
 
         }
         else if(tipo==3)
         {
             qDebug()<<"eres un doctor";
-
-
 
             ui->pushButton_salir->setHidden(false);
             ui->pushButton_login->setHidden(true);
@@ -360,10 +347,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             ui->stackedWidget_principal->setCurrentIndex(3);
             ui->stackedWidget_perfilDoctor->setCurrentIndex(0);
 
-
-            //esta funcion no debe ejecutarse ahi
-            //  on_pushButton_miPerfil_clicked();
-           // cargarHorarioDoc();
+            on_pushButton_miPerfil_clicked();
         }
         else if(tipo==4)
         {
@@ -700,6 +684,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
         datosPac->exec("SELECT * FROM paciente WHERE idUser="+id_usuario);
         datosStaff->exec("SELECT * FROM staff WHERE idUser="+id_usuario);
         datosDoc->exec("SELECT * FROM doctor WHERE idUser="+id_usuario);
+
             if(datosPac->next()){
                 cargarDatosUsuarios();
                 //Pagina de paciente
@@ -708,6 +693,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
                 ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
                 id_paciente=datosPac->value(1).toString();
             }
+
             if(datosStaff->next()){
                 cargarDatosUsuarios();
                 id_staff=datosStaff->value(1).toString();
@@ -738,6 +724,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
                 ui->btnGuardarEditarStaff->setHidden(true);
                 //-------------------------------------
             }
+
             if(datosDoc->next()){
                 cargarDatosUsuarios();
                 cargarHorarioDoc();
