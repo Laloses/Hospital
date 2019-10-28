@@ -1899,7 +1899,7 @@ void MainWindow::on_btnAgendarCita_clicked()
                            ui->lb_charAct->setHidden(true);
 
                            agregarCitasPaciente cita;
-                           if ( cita.citasPaciente(id_usuario,ui->fechaCita->date().toString("yyyy-MM-dd"),ui->horaCita->currentText(),id_doctor,ui->sintomasCitas->toPlainText(),"0") ){
+                           if ( cita.citasPaciente(id_usuario,ui->fechaCita->date().toString("yyyy-MM-dd"),ui->horaCita->currentText(),id_doctor,ui->sintomasCitas->toPlainText()) ){
                                QMessageBox::information(this,"Correcto", "Cita agendada correctamente");
                            }else{
                                QMessageBox::information(this,"Error", "Hubo un problema al agendar su cita, intente de nuevo más tarde.");

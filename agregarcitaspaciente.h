@@ -14,7 +14,7 @@ private:
 public:
     agregarCitasPaciente();
     agregarCitasPaciente(QString, int, QString, QString, QString);
-    bool citasPaciente(QString,QString,QString,QString,QString,QString);
+    bool citasPaciente(QString,QString,QString,QString,QString);
     bool citasExternas(QString,QString,QString,QString,QString,QString,QString,QString,QString);
 };
 

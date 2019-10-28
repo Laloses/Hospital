@@ -17,13 +17,13 @@ agregarCitasPaciente::agregarCitasPaciente(QString hostName, int port, QString d
     db.open();
 }
 
-bool agregarCitasPaciente::citasPaciente(QString matricula,QString fecha, QString hora, QString doctor, QString sintomas,QString idcitaExterna){
+bool agregarCitasPaciente::citasPaciente(QString matricula,QString fecha, QString hora, QString doctor, QString sintomas){
 
     bool res=false;
     //query de insertado
     QSqlQuery insertar;
 
-        if(insertar.exec("insert into cita()values("+ matricula +",'"+ fecha +"','"+ hora +"',"+ doctor +",'"+ sintomas +"',"+ idcitaExterna +",false)") ){
+        if(insertar.exec("insert into cita(matricula,fecha,hora,doctor,sintomas,idcitaExterna,estado) values("+ matricula +",'"+ fecha +"','"+ hora +"',"+ doctor +",'"+ sintomas +"',NULL,false)") ){
             res= true;
         }
         else {
