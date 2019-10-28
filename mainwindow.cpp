@@ -1567,6 +1567,7 @@ void MainWindow::on_horaCita_activated(const QString &arg1)
     if(arg1!="05:00"){
         on_btnBuscarDoctor_clicked();
     }
+}
 void MainWindow::SolicitudCitas()
 {
     QString citas,est;
