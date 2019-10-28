@@ -41,6 +41,9 @@ private:
     void mostrarMenuP();
     void cargarDatosUsuarios();
     void cargarHorarioDoc();
+    void SolicitudCitas();
+
+
 
 
 private slots:
@@ -102,6 +105,14 @@ private slots:
     void on_radioButton_staffs_clicked();
 
     void on_pushButton_menu_Pincipal_Adm_clicked();
+    void aceptarCita(QString);
+    void rechazarCita(QString);
+    void verCita(QString);
+
+
+    void on_regresar_citasDoc_clicked();
+
+    void on_butonNotifi_clicked();
 
     void on_radioCitaPersonal_clicked();
 
@@ -130,6 +141,9 @@ public:
     int userTipo;
    void mostrarZonas();
    void mostrasConsultorios();
+   int verNoti;
+
+
 
 };
 
