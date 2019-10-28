@@ -15,6 +15,7 @@
 #include <QtSql/QSqlQueryModel>
 #include "login.h"
 #include "agregaractividaddoctor.h"
+#include "agregarcitaspaciente.h"
 
 namespace Ui {
 class MainWindow;
