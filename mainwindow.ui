@@ -2283,8 +2283,8 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>456</width>
-                <height>266</height>
+                <width>460</width>
+                <height>270</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_14">
@@ -2689,8 +2689,8 @@ color: rgb(68, 94, 134);
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>496</width>
-                <height>346</height>
+                <width>500</width>
+                <height>350</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_15">
@@ -3016,7 +3016,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
            </rect>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_11">
            <widget class="QLabel" name="label_7">
@@ -3128,7 +3128,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
             </property>
             <property name="iconSize">
              <size>
-              <width>430</width>
+              <width>315</width>
               <height>230</height>
              </size>
             </property>
@@ -3169,6 +3169,9 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
               <width>210</width>
               <height>130</height>
              </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"> border:solid 1px black;</string>
             </property>
             <property name="text">
              <string/>
@@ -3246,8 +3249,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>226</width>
-                  <height>256</height>
+                  <width>230</width>
+                  <height>260</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_23">
@@ -3334,8 +3337,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>236</width>
-                  <height>326</height>
+                  <width>240</width>
+                  <height>330</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_21">
@@ -3736,8 +3739,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>226</width>
-                  <height>266</height>
+                  <width>230</width>
+                  <height>270</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_27">
@@ -3900,8 +3903,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>216</width>
-                  <height>216</height>
+                  <width>220</width>
+                  <height>220</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_25">

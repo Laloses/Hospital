@@ -370,7 +370,7 @@ void MainWindow::on_pushButton_imgPerfil_clicked()
 //Para verificar contraseñas iguales
 bool MainWindow::verificarPasswordRegistro(){
     QString estiloBueno,estiloMalo;
-    estiloBueno="border:1px black; border-style:solid";
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
     estiloMalo="border:2px red; border-style:solid";
     if(ui->lineEdit_password1->text() == ui->lineEdit_password2->text() && !ui->lineEdit_password1->text().isEmpty() ){
         ui->lineEdit_password1->setStyleSheet(estiloBueno);
@@ -1263,7 +1263,7 @@ void MainWindow::on_pushButton_agregar_tip_clicked()
 {
     QString estiloBueno, estiloMalo;
     estiloMalo="border:2px red; border-style:solid";
-    estiloBueno="border:1px black; border-style:solid";
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
     QString texto,nomTip,link;
     nomTip=ui->lineEdit_nombreTip->text();
     link=ui->lineEdit_link->text();
@@ -1307,11 +1307,8 @@ void MainWindow::on_pushButton_agregar_tip_clicked()
 
           if(foto==""){
             qDebug()<<"mensaje de eerro";
-            ui->pushButton_agregarImagen->setStyleSheet(estiloMalo);
-          }else {
-            ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
-
-         }
+           ui->pushButton_agregarImagen->setStyleSheet(estiloMalo);
+          }
 
 
       if(nomTip!=""&& link!=""&& texto!="" && foto!=""){
@@ -1333,7 +1330,7 @@ void MainWindow::on_pushButton_agregar_tip_clicked()
 void MainWindow::on_pushButton_menu_admin_clicked()
 {
     QString estiloBueno;
-    estiloBueno="border:1px black; border-style:solid";
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
     ui->stackedWidget_admin->setCurrentIndex(0);
     ui->pushButton_SolicitudesUsuarios->show();
     ui->pushButton_tip_2->show();
@@ -1350,7 +1347,7 @@ void MainWindow::on_pushButton_menu_admin_clicked()
     ui->plainTextEdit_descritip->clear();
     ui->label_imagenTip->setPixmap(c);
     //limpia si se queda en error los campos de agregar nuevo tip
-    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    //ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
     ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
     ui->lineEdit_link->setStyleSheet(estiloBueno);
     ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
@@ -1374,12 +1371,12 @@ void MainWindow::on_pushButton_agregartips_clicked()
 {
     QString estiloBueno, estiloMalo;
     estiloMalo="border:2px red; border-style:solid";
-    estiloBueno="border:1px black; border-style:solid";
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
 
     ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
     ui->lineEdit_link->setStyleSheet(estiloBueno);
     ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
-    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    //ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
     QString concolor =":/ /imgs/fondo.png";
     QIcon color(concolor);
     ui->pushButton_agregarImagen->setIcon(color);
@@ -1409,21 +1406,21 @@ void MainWindow::on_pushButton_eliminarTips_clicked()
 {
     QString estiloBueno, estiloMalo;
     estiloMalo="border:2px red; border-style:solid";
-    estiloBueno="border:1px black; border-style:solid";
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
     QString concolor =":/ /imgs/fondo.png";
     QPixmap c=concolor;
 
     ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
     ui->lineEdit_link->setStyleSheet(estiloBueno);
     ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
-    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    //ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
     QIcon color(concolor);
     ui->pushButton_agregarImagen->setIcon(color);
     mostrarTipsEliminar();
     ui->stackedWidget_tips->setCurrentIndex(2);
 
     //limpia si se queda en error los campos de agregar nuevo tip
-    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    //ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
     ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
     ui->lineEdit_link->setStyleSheet(estiloBueno);
     ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
@@ -1446,7 +1443,7 @@ void MainWindow::on_pushButton_editarTips_clicked()
     QString nombre,link,descrip,image;
     QString estiloBueno, estiloMalo;
     estiloMalo="border:2px red; border-style:solid";
-    estiloBueno="border:1px black; border-style:solid";
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
     nombre=ui->lineEdit_nombretipEdit->text();
     link=ui->lineEdit_liksEdit->text();
     descrip=ui->plainTextEdit_descripEdit->toPlainText();
@@ -1502,7 +1499,8 @@ void MainWindow::on_pushButton_eliminartip_clicked()
 {
     QString estiloBueno, estiloMalo;
     estiloMalo="border:2px red; border-style:solid";
-    estiloBueno="border:1px black; border-style:solid";
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
+
     QMessageBox message(QMessageBox::Question,
      tr("Information"), tr("¿Estas seguro de eliminar el tip del dia?"), QMessageBox::Yes | QMessageBox::No);
     message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
@@ -1668,11 +1666,11 @@ void MainWindow::mostrarTipsEliminar(){
 void MainWindow::on_pushButton_editarTip_clicked()
 {
     QString estiloBueno;
-    estiloBueno="border:1px black; border-style:solid";
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
     QString concolor =":/ /imgs/fondo.png";
     QPixmap c=concolor;
     //limpia si se queda en error los campos de agregar nuevo tip
-    ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
+    //ui->pushButton_agregarImagen->setStyleSheet(estiloBueno);
     ui->plainTextEdit_descripcion->setStyleSheet(estiloBueno);
     ui->lineEdit_link->setStyleSheet(estiloBueno);
     ui->lineEdit_nombreTip->setStyleSheet(estiloBueno);
@@ -1760,7 +1758,7 @@ void MainWindow::on_pushButton_agregar_remedio_2_clicked()
     //estilo de line edit
     QString estiloBueno, estiloMalo;
     estiloMalo="border:2px red; border-style:solid";
-    estiloBueno="border:1px black; border-style:solid";
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
 
     //mensaje de aceptar
     QMessageBox message(QMessageBox::Question,
@@ -2045,7 +2043,7 @@ void MainWindow::on_pushButton_editarRemedio_clicked()
     QString nomRemedio,ingredientes,procedimineto,foto,categoria,buscCategori;
     QString estiloBueno, estiloMalo;
     estiloMalo="border:2px red; border-style:solid";
-    estiloBueno="border:1px black; border-style:solid";
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
     //mensaje de aceptar
     QMessageBox message(QMessageBox::Question,
      tr("Information"), tr("¿Estas seguro de editar el remdio casero?"), QMessageBox::Yes | QMessageBox::No);
