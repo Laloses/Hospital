@@ -919,6 +919,7 @@ void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
     ui->pushButton_SolicitudesUsuarios->hide();
     ui->pushButton_tip_2->hide();
     ui->pushButton_agregar_remedio->hide();
+    ui->widget_opcionesPerfAdmin->setHidden(true);
 }
 
 
@@ -1356,6 +1357,7 @@ void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
     ui->pushButton_SolicitudesUsuarios->show();
     ui->pushButton_agregar_remedio->show();
     ui->pushButton_tip_2->show();
+    ui->widget_opcionesPerfAdmin->setHidden(false);
     ui->stackedWidget_admin->setCurrentIndex(0);
 }
 
@@ -1368,6 +1370,7 @@ void MainWindow::on_pushButton_tip_2_clicked()
     ui->pushButton_SolicitudesUsuarios->hide();
     ui->pushButton_tip_2->hide();
     ui->pushButton_agregar_remedio->hide();
+    ui->widget_opcionesPerfAdmin->setHidden(true);
 
 }
 //metodo paguardad el tip del dia
@@ -1476,6 +1479,7 @@ void MainWindow::on_pushButton_menu_admin_clicked()
     ui->lineEdit_liksEdit->setStyleSheet(estiloBueno);
     ui->plainTextEdit_descripEdit->setStyleSheet(estiloBueno);
     ui->label_imageneditartip->setPixmap(c);
+    ui->widget_opcionesPerfAdmin->setHidden(false);
 }
 
 //METODO PARA AGREGAR TIP
@@ -2601,6 +2605,7 @@ void MainWindow::on_pushButton_agregar_remedio_clicked()
     ui->pushButton_SolicitudesUsuarios->hide();
     ui->pushButton_tip_2->hide();
     ui->pushButton_agregar_remedio->hide();
+    ui->widget_opcionesPerfAdmin->setHidden(true);
 }
 
 void MainWindow::on_pushButton_menu_admin_2_clicked()
@@ -2624,6 +2629,7 @@ void MainWindow::on_pushButton_menu_admin_2_clicked()
     ui->plainTextEdit_editIngredi->clear();
     ui->label_imagenEditar->setPixmap(concolor);
     ui->label_imagEli->setPixmap(concolor);
+    ui->widget_opcionesPerfAdmin->setHidden(false);
 }
 //guardar la imagen del remedio casero
 void MainWindow::on_pushButton_Imgremedio_clicked()
