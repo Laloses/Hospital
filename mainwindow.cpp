@@ -689,51 +689,29 @@ void MainWindow::on_pushButton_miPerfil_clicked()
         datosDoc->exec("SELECT * FROM doctor WHERE idUser="+id_usuario);
 
             if(datosPac->next()){
+                id_paciente=datosPac->value(1).toString();
                 cargarDatosUsuarios();
                 //Pagina de paciente
                 ui->stackedWidget_principal->setCurrentIndex(2);
                 //Pagina de sus datos
                 ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
-                id_paciente=datosPac->value(1).toString();
             }
 
             if(datosStaff->next()){
-                cargarDatosUsuarios();
                 id_staff=datosStaff->value(1).toString();
+                cargarDatosUsuarios();
                 //Pagina de staff
                 ui->stackedWidget_principal->setCurrentIndex(4);
-                //datos staff ----------------------------
-                QPixmap img;
-                //Ponemos su imagen
-                img.loadFromData(datosUser->value(9).toByteArray());
-                //Imagen
-                img.scaled(ui->lblFotoStaff->width(),ui->lblFotoStaff->height(),Qt::KeepAspectRatio);
-                ui->lblFotoStaff->setPixmap(img);
-                //Nombre
-                ui->lineNombreStaff->setText(datosUser->value(2).toString()+" "+datosUser->value(3).toString()+" "+datosUser->value(4).toString());
-                ui->lineCorreoStaff->setText(datosUser->value(7).toString());
-                ui->lineTelStaff->setText(datosUser->value(8).toString());
-                ui->lineFechaNacStaff->setText(datosUser->value(5).toString());
-                ui->lineContrasenia->setText(datosUser->value(1).toString());
-                ui->lineConfirmaContrasenia->setText(datosUser->value(1).toString());
-
-                ui->imgCon1->setHidden(true);
-                ui->imgCon2->setHidden(true);
-                ui->lineContrasenia->setHidden(true);
-                ui->lineConfirmaContrasenia->setHidden(true);
-                ui->btnMostrarContrasena->setHidden(true);
-                ui->btnMostrarContrasena_2->setHidden(true);
-                ui->btnCancelarEditarStaff->setHidden(true);
-                ui->btnGuardarEditarStaff->setHidden(true);
-                //-------------------------------------
+                ui->stackedWidget_PerfilStaff->setCurrentIndex(0);
             }
 
             if(datosDoc->next()){
+                id_doctor=datosDoc->value(1).toString();
                 cargarDatosUsuarios();
                 cargarHorarioDoc();
-                id_doctor=datosDoc->value(1).toString();
                 //Pagina de doctor
                 ui->stackedWidget_principal->setCurrentIndex(3);
+                ui->stackedWidget_perfilDoctor->setCurrentIndex(0);
             }
     }
 }
@@ -748,8 +726,8 @@ void MainWindow::on_pushButton_tip_clicked()
 
 //Funcion para cargar los datos en el perfil del usuario
 void MainWindow::cargarDatosUsuarios(){
+        QPixmap img;
         if(id_paciente!="0"){
-            QPixmap img;
             //Ponemos su imagen
             img.loadFromData(datosUser->value(9).toByteArray());
             //Imagen
@@ -757,17 +735,61 @@ void MainWindow::cargarDatosUsuarios(){
             ui->label_imgPerfilPaciente->setPixmap(img);
             //Nombre
             ui->label_pagPaciente->setText(datosUser->value(2).toString()+" "+datosUser->value(3).toString()+" "+datosUser->value(4).toString());
+            ui->lineCorreoPaciente->setText(datosUser->value(7).toString());
+            ui->lineTelPaciente->setText(datosUser->value(8).toString());
+            ui->lineFechaNacPaciente->setText(datosUser->value(5).toString());
+            ui->lineContraseniaPaciente->setText(datosUser->value(1).toString());
+            ui->lineConfirmaContraseniaPaciente->setText(datosUser->value(1).toString());
+
+            ui->imgCon1_3->setHidden(true);
+            ui->imgCon2_3->setHidden(true);
+            ui->lineContraseniaPaciente->setHidden(true);
+            ui->lineConfirmaContraseniaPaciente->setHidden(true);
+            ui->btnMostrarContrasena_5->setHidden(true);
+            ui->btnMostrarContrasena_6->setHidden(true);
+            ui->btnCancelarEditarPaciente->setHidden(true);
+            ui->btnGuardarEditarPaciente->setHidden(true);
         }
         if(id_doctor!="0"){
-            //datosUser.value()
-            //datosDoc.value()
             //Nombre
-            ui->label_pagDoc->setText(datosUser->value(2).toString()+" "+datosUser->value(3).toString()+" "+datosUser->value(4).toString());
+            ui->lineNombreDoctor->setText(datosUser->value(2).toString()+" "+datosUser->value(3).toString()+" "+datosUser->value(4).toString());
+            //cedula
+            ui->lineCedProfDoctor->setText(datosDoc->value(5).toString());
+            //turno
+            ui->lineTurnoDoctor->setText(datosDoc->value(3).toString());
+            //consultorio
+            QSqlQuery consul;
+            consul.exec("SELECT numConsultorio FROM consultorio WHERE idconsultorio="+datosDoc->value(7).toString());
+            consul.next();
+            ui->lineConsultorioDoctor->setText(consul.value(0).toString());
+            //Correo
+            ui->lineCorreoDoctor->setText(datosUser->value(7).toString());
+            //telefono
+            ui->lineTelDoctor->setText(datosUser->value(8).toString());
+            //FachaN
+            ui->lineFechaNacDoctor->setText(datosUser->value(5).toString());
+            //Contraseña1
+            ui->lineContraseniaDoc->setText(datosUser->value(1).toString());
+            //Contraseña2
+            ui->lineConfirmaContraseniaDoc->setText(datosUser->value(1).toString());
+            //Foto
+            img.loadFromData(datosUser->value(9).toByteArray());
+            //Imagen
+            img.scaled(ui->lblFotoDoctor->width(),ui->lblFotoDoctor->height(),Qt::KeepAspectRatio);
+            ui->lblFotoDoctor->setPixmap(img);
+
+
+            ui->imgCon1_2->setHidden(true);
+            ui->imgCon2_2->setHidden(true);
+            ui->lineContraseniaDoc->setHidden(true);
+            ui->lineConfirmaContraseniaDoc->setHidden(true);
+            ui->btnMostrarContrasena_3->setHidden(true);
+            ui->btnMostrarContrasena_4->setHidden(true);
+            ui->btnCancelarEditarDoctor->setHidden(true);
+            ui->btnGuardarEditarDoctor->setHidden(true);
         }
         if(id_staff!="0"){
-            //datosUser.value()
-            //datosStaff.value()
-            QPixmap img;
+            //datos staff ----------------------------
             //Ponemos su imagen
             img.loadFromData(datosUser->value(9).toByteArray());
             //Imagen
@@ -778,6 +800,17 @@ void MainWindow::cargarDatosUsuarios(){
             ui->lineCorreoStaff->setText(datosUser->value(7).toString());
             ui->lineTelStaff->setText(datosUser->value(8).toString());
             ui->lineFechaNacStaff->setText(datosUser->value(5).toString());
+            ui->lineContrasenia->setText(datosUser->value(1).toString());
+            ui->lineConfirmaContrasenia->setText(datosUser->value(1).toString());
+
+            ui->imgCon1->setHidden(true);
+            ui->imgCon2->setHidden(true);
+            ui->lineContrasenia->setHidden(true);
+            ui->lineConfirmaContrasenia->setHidden(true);
+            ui->btnMostrarContrasena->setHidden(true);
+            ui->btnMostrarContrasena_2->setHidden(true);
+            ui->btnCancelarEditarStaff->setHidden(true);
+            ui->btnGuardarEditarStaff->setHidden(true);
         }
 }
 
@@ -2309,9 +2342,6 @@ void MainWindow::verCita(QString folio)
         ui->lugartext->hide();
         ui->label_5->hide();
         ui->sintomas->setPlainText(cita1.value(5).toString());
-
-
-
     }
     else
     {
@@ -2321,8 +2351,6 @@ void MainWindow::verCita(QString folio)
         datosCita.exec(citaExterna);
         datosCita.next();
         nombreU2=datosCita.value(2).toString();
-
-
 
         ui->tipoCita->setText("--Externa--");
         ui->Responsable->setText(nombreU);
@@ -2335,14 +2363,7 @@ void MainWindow::verCita(QString folio)
         ui->lugar->setText(datosCita.value(3).toString());
         ui->sintomas->setPlainText(cita1.value(5).toString());
 
-
-
-
-
     }
-
-
-
 
 }
 
@@ -2355,18 +2376,14 @@ void MainWindow::on_regresar_citasDoc_clicked()
 
 void MainWindow::on_butonNotifi_clicked()
 {
-
     if(verNoti==1)
     {
         if(ui->notificacionL->text()!="")
         {
             ui->notificacionL->hide();
-
         }
-
         ui->nofi->show();
         verNoti=0;
-
     }
     else
     {
@@ -2377,9 +2394,6 @@ void MainWindow::on_butonNotifi_clicked()
       QSqlQuery upNoti,upNoti1;
       upNoti.exec(idNoti);
 
-
-
-
       while(upNoti.next())
       {
           id=upNoti.value(0).toString();
@@ -2387,10 +2401,6 @@ void MainWindow::on_butonNotifi_clicked()
           upNoti1.exec(update1);
 
       }
-
-
-
-
       verNoti=1;
     }
 }
@@ -2464,7 +2474,7 @@ void MainWindow::on_btnGuardarEditarStaff_clicked()
             else {
                 qDebug() << "------------------------";
                 qDebug() << "Id del usuario (staff)";
-                qDebug(id_usuario.toLatin1());
+                //qDebug(id_usuario.toLatin1());
                 actualizacion="update usuario set clave='"+passwordNueva+"',email='"+correoNuevo+"',telefono='"+telefonoNuevo+"'WHERE matricula='"+id_usuario+"'";
                 perfilStaff.exec(actualizacion);
                 QMessageBox messageBox(QMessageBox::Information,tr("Éxito"), tr("Los datos se han actualizado correctamente."), QMessageBox::Yes);
@@ -2999,3 +3009,272 @@ void MainWindow::on_pushButton_editarRemedio_clicked()
    }
 }
 
+
+void MainWindow::on_btnEditarDoctor_clicked()
+{
+    ui->lineCorreoDoctor->setReadOnly(false);
+    ui->lineCorreoDoctor->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+    ui->lineTelDoctor->setReadOnly(false);
+    ui->lineTelDoctor->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+    ui->btnEditarDoctor->setHidden(true);
+    ui->btnEditarDoctor->setHidden(false);
+    ui->btnGuardarEditarDoctor->setHidden(false);
+    ui->imgCon1_2->setHidden(false);
+    ui->imgCon2_2->setHidden(false);
+    ui->lineContraseniaDoc->setHidden(false);
+    ui->lineConfirmaContraseniaDoc->setHidden(false);
+    ui->lineContraseniaDoc->setReadOnly(false);
+    ui->lineConfirmaContraseniaDoc->setReadOnly(false);
+    ui->btnMostrarContrasena_3->setHidden(false);
+    ui->btnMostrarContrasena_4->setHidden(false);
+    ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+    ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+}
+
+void MainWindow::on_btnCancelarEditarDoctor_clicked()
+{
+    ui->lineCorreoDoctor->setReadOnly(true);
+    ui->lineCorreoDoctor->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+    ui->lineTelDoctor->setReadOnly(true);
+    ui->lineTelDoctor->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none; background-color:transparent");
+    ui->btnEditarDoctor->setHidden(false);
+    ui->btnCancelarEditarDoctor->setHidden(true);
+    ui->btnGuardarEditarDoctor->setHidden(true);
+    ui->imgCon1_2->setHidden(true);
+    ui->imgCon2_2->setHidden(true);
+    ui->lineContraseniaDoc->setHidden(true);
+    ui->lineConfirmaContraseniaDoc->setHidden(true);
+    ui->btnMostrarContrasena_3->setHidden(true);
+    ui->btnMostrarContrasena_4->setHidden(true);
+    ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+    ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+}
+
+void MainWindow::on_btnGuardarEditarDoctor_clicked()
+{
+    QString actualizacion;
+    QSqlQuery perfilStaff;
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Desea guardar los cambios?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+        qDebug() << "Dijo que aye";
+        //datos de edición
+        QString correoNuevo = ui->lineCorreoDoctor->text();
+        QString telefonoNuevo = ui->lineTelDoctor->text();
+        QString passwordNueva = ui->lineContraseniaDoc->text();
+        QString passwordNuevaConf = ui->lineConfirmaContraseniaDoc->text();
+        if(passwordNueva == "" || passwordNuevaConf == "" || correoNuevo == "" || telefonoNuevo == ""){
+            QMessageBox messageBox(QMessageBox::Critical,tr("Error"), tr("Los campos no pueden estar vacíos."), QMessageBox::Yes);
+            messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));messageBox.exec();
+        }
+        else{
+            if(passwordNueva != passwordNuevaConf){
+                QMessageBox messageBox(QMessageBox::Critical,tr("Error"), tr("Verifique que las contraseñas coincidan."), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+            }
+            else {
+                qDebug() << "------------------------";
+                qDebug() << "Id del usuario (doc)";
+                //qDebug(id_usuario.toLatin1());
+                actualizacion="update usuario set clave='"+passwordNueva+"',email='"+correoNuevo+"',telefono='"+telefonoNuevo+"'WHERE matricula='"+id_usuario+"'";
+                perfilStaff.exec(actualizacion);
+                QMessageBox messageBox(QMessageBox::Information,tr("Éxito"), tr("Los datos se han actualizado correctamente."), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+                on_pushButton_miPerfil_clicked();
+                ui->lineCorreoDoctor->setReadOnly(true);
+                ui->lineCorreoDoctor->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+                ui->lineTelDoctor->setReadOnly(true);
+                ui->lineTelDoctor->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none; background-color:transparent");
+                ui->btnEditarDoctor->setHidden(false);
+                ui->imgCon1_2->setHidden(true);
+                ui->imgCon2_2->setHidden(true);
+                ui->lineContraseniaDoc->setHidden(true);
+                ui->lineConfirmaContraseniaDoc->setHidden(true);
+                ui->btnMostrarContrasena_3->setHidden(true);
+                ui->btnMostrarContrasena_4->setHidden(true);
+                ui->btnCancelarEditarDoctor->setHidden(true);
+                ui->btnGuardarEditarDoctor->setHidden(true);
+                ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+                ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+            }
+        }
+    }
+    else{
+        qDebug() << "Dijo que nel";
+    }
+}
+
+void MainWindow::on_btnMostrarContrasena_3_clicked()
+{
+    if(toggleVision==0){
+        QPixmap pixmap(":/imgs/view.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnMostrarContrasena_3->setIcon(ButtonIcon);
+        ui->lineContraseniaDoc->setEchoMode(QLineEdit::Normal);
+        toggleVision = 1;
+    }
+    else if (toggleVision==1) {
+        QPixmap pixmap(":/imgs/NoView.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnMostrarContrasena_3->setIcon(ButtonIcon);
+        ui->lineContraseniaDoc->setEchoMode(QLineEdit::Password);
+        toggleVision = 0;
+    }
+}
+
+void MainWindow::on_btnMostrarContrasena_4_clicked()
+{
+    if(toggleVision1==0){
+        QPixmap pixmap(":/imgs/view.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnMostrarContrasena_4->setIcon(ButtonIcon);
+        ui->lineConfirmaContraseniaDoc->setEchoMode(QLineEdit::Normal);
+        toggleVision1 = 1;
+    }
+    else if (toggleVision1==1) {
+        QPixmap pixmap(":/imgs/NoView.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnMostrarContrasena_4->setIcon(ButtonIcon);
+        ui->lineConfirmaContraseniaDoc->setEchoMode(QLineEdit::Password);
+        toggleVision1 = 0;
+    }
+}
+
+void MainWindow::on_btnEditarPaciente_clicked()
+{
+    ui->lineCorreoPaciente->setReadOnly(false);
+    ui->lineCorreoPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+    ui->lineTelPaciente->setReadOnly(false);
+    ui->lineTelPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+    ui->btnEditarPaciente->setHidden(true);
+    ui->btnCancelarEditarPaciente->setHidden(false);
+    ui->btnGuardarEditarPaciente->setHidden(false);
+    ui->imgCon1_3->setHidden(false);
+    ui->imgCon2_3->setHidden(false);
+    ui->lineContraseniaPaciente->setHidden(false);
+    ui->lineConfirmaContraseniaPaciente->setHidden(false);
+    ui->lineContraseniaPaciente->setReadOnly(false);
+    ui->lineConfirmaContraseniaPaciente->setReadOnly(false);
+    ui->btnMostrarContrasena_5->setHidden(false);
+    ui->btnMostrarContrasena_6->setHidden(false);
+    ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+    ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+}
+
+void MainWindow::on_btnCancelarEditarPaciente_clicked()
+{
+    ui->lineCorreoPaciente->setReadOnly(true);
+    ui->lineCorreoPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+    ui->lineTelPaciente->setReadOnly(true);
+    ui->lineTelPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none; background-color:transparent");
+    ui->btnEditarPaciente->setHidden(false);
+    ui->btnCancelarEditarPaciente->setHidden(true);
+    ui->btnGuardarEditarPaciente->setHidden(true);
+    ui->imgCon1_3->setHidden(true);
+    ui->imgCon2_3->setHidden(true);
+    ui->lineContraseniaPaciente->setHidden(true);
+    ui->lineConfirmaContraseniaPaciente->setHidden(true);
+    ui->btnMostrarContrasena_5->setHidden(true);
+    ui->btnMostrarContrasena_6->setHidden(true);
+    ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+    ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+}
+
+void MainWindow::on_btnGuardarEditarPaciente_clicked()
+{
+    QString actualizacion;
+    QSqlQuery perfilStaff;
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Desea guardar los cambios?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+        qDebug() << "Dijo que aye";
+        //datos de edición
+        QString correoNuevo = ui->lineCorreoPaciente->text();
+        QString telefonoNuevo = ui->lineTelPaciente->text();
+        QString passwordNueva = ui->lineContraseniaPaciente->text();
+        QString passwordNuevaConf = ui->lineConfirmaContraseniaPaciente->text();
+        if(passwordNueva == "" || passwordNuevaConf == "" || correoNuevo == "" || telefonoNuevo == ""){
+            QMessageBox messageBox(QMessageBox::Critical,tr("Error"), tr("Los campos no pueden estar vacíos."), QMessageBox::Yes);
+            messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));messageBox.exec();
+        }
+        else{
+            if(passwordNueva != passwordNuevaConf){
+                QMessageBox messageBox(QMessageBox::Critical,tr("Error"), tr("Verifique que las contraseñas coincidan."), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+            }
+            else {
+                qDebug() << "------------------------";
+                qDebug() << "Id del usuario (paciente)";
+                //qDebug(id_usuario.toLatin1());
+                actualizacion="update usuario set clave='"+passwordNueva+"',email='"+correoNuevo+"',telefono='"+telefonoNuevo+"'WHERE matricula='"+id_usuario+"'";
+                perfilStaff.exec(actualizacion);
+                QMessageBox messageBox(QMessageBox::Information,tr("Éxito"), tr("Los datos se han actualizado correctamente."), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+                on_pushButton_miPerfil_clicked();
+
+                ui->lineCorreoPaciente->setReadOnly(true);
+                ui->lineCorreoPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+                ui->lineTelPaciente->setReadOnly(true);
+                ui->lineTelPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none; background-color:transparent");
+                ui->btnEditarPaciente->setHidden(false);
+                ui->imgCon1_3->setHidden(true);
+                ui->imgCon2_3->setHidden(true);
+                ui->lineContraseniaPaciente->setHidden(true);
+                ui->lineConfirmaContraseniaPaciente->setHidden(true);
+                ui->btnMostrarContrasena_5->setHidden(true);
+                ui->btnMostrarContrasena_6->setHidden(true);
+                ui->btnCancelarEditarPaciente->setHidden(true);
+                ui->btnGuardarEditarPaciente->setHidden(true);
+                ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+                ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+            }
+        }
+    }
+    else{
+        qDebug() << "Dijo que nel";
+    }
+}
+
+void MainWindow::on_btnMostrarContrasena_5_clicked()
+{
+    if(toggleVision==0){
+        QPixmap pixmap(":/imgs/view.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnMostrarContrasena_5->setIcon(ButtonIcon);
+        ui->lineContraseniaPaciente->setEchoMode(QLineEdit::Normal);
+        toggleVision = 1;
+    }
+    else if (toggleVision==1) {
+        QPixmap pixmap(":/imgs/NoView.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnMostrarContrasena_5->setIcon(ButtonIcon);
+        ui->lineContraseniaPaciente->setEchoMode(QLineEdit::Password);
+        toggleVision = 0;
+    }
+}
+
+void MainWindow::on_btnMostrarContrasena_6_clicked()
+{
+    if(toggleVision1==0){
+        QPixmap pixmap(":/imgs/view.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnMostrarContrasena_6->setIcon(ButtonIcon);
+        ui->lineConfirmaContraseniaPaciente->setEchoMode(QLineEdit::Normal);
+        toggleVision1 = 1;
+    }
+    else if (toggleVision1==1) {
+        QPixmap pixmap(":/imgs/NoView.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnMostrarContrasena_6->setIcon(ButtonIcon);
+        ui->lineConfirmaContraseniaPaciente->setEchoMode(QLineEdit::Password);
+        toggleVision1 = 0;
+    }
+}
