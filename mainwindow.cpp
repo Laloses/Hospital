@@ -253,6 +253,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
         else if(tipo==2)
         {
             qDebug()<<"eres un paciente";
+            clearLayout(ui->barraDeNoti);
 
             ui->pushButton_salir->setHidden(false);
             ui->pushButton_login->setHidden(true);
@@ -305,7 +306,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
                  QPlainTextEdit *b=new QPlainTextEdit();
                //QPushButton *b=new QPushButton();
                 b->setPlainText(buscarNoti.value(2).toString());
-                b->setFixedSize(QSize(200,50));
+                b->setFixedSize(QSize(200,70));
                 b->setStyleSheet("background-color: rgb(243,173,106); ");
                 ui->barraDeNoti->addWidget(b,filas,0,Qt::AlignTop);
                 filas++;
@@ -2384,7 +2385,8 @@ void MainWindow::on_butonNotifi_clicked()
           id=upNoti.value(0).toString();
           update1="update notificacion set vista=true where idNoti='"+id+"';";
           upNoti1.exec(update1);
-
+            qDebug()<<id;
+            qDebug()<<update1;
       }
 
 
@@ -2998,3 +3000,165 @@ void MainWindow::on_pushButton_editarRemedio_clicked()
    }
 }
 
+
+void MainWindow::on_pb_rechazarCitas_clicked()
+{
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(4);
+    CitasAceptadas();
+}
+
+void MainWindow::CitasAceptadas()
+{
+    clearLayout(ui->citasAceptadas);
+    int ban=1;
+    QString r1,g1,b1;
+    r1="172,189,211";
+    QString r2,g2,b2;
+    r2="221,221,221";
+    QString rgb="";
+
+    QString citas,est;
+    est="1";
+    citas="select *from cita where doctor='"+id_usuario+"' and estado='"+est+"'; ";
+    QSqlQuery citas1;
+    citas1.exec(citas);
+
+    int i=1;
+     QString folio,matricu,fecha,hora,preparada;
+
+
+    while (citas1.next()) {
+        folio=citas1.value(0).toString();
+        matricu=citas1.value(1).toString();
+        fecha=citas1.value(2).toString();
+        hora=citas1.value(3).toString();
+        preparada=citas1.value(8).toString();
+
+        if(preparada=="Pendiente")
+        {
+
+
+
+    if(ban==1)
+    {
+        rgb=r1;
+        ban=2;
+    }
+    else
+    {
+        rgb=r2;
+        ban=1;
+    }
+
+
+    QLabel *l=new QLabel;
+    l->setText(folio);
+    l->setFixedSize(QSize(100,25));
+    l->setStyleSheet("background-color: rgb("+rgb+")");
+    ui->citasAceptadas->addWidget(l,i,0,Qt::AlignTop);
+
+
+
+
+    QLabel *m=new QLabel;
+    m->setText(matricu);
+    m->setFixedSize(QSize(100,25));
+    m->setStyleSheet("background-color: rgb("+rgb+")");
+    ui->citasAceptadas->addWidget(m,i,1,Qt::AlignTop);
+
+
+
+
+
+    QLabel *r=new QLabel;
+    r->setText(fecha);
+    r->setStyleSheet("background-color: rgb("+rgb+")");
+    r->setFixedSize(QSize(100,25));
+    ui->citasAceptadas->addWidget(r,i,2,Qt::AlignTop);
+
+
+
+
+    QLabel *h=new QLabel;
+    h->setText(hora);
+    h->setFixedSize(QSize(100,25));
+    h->setStyleSheet("background-color: rgb("+rgb+")");
+    ui->citasAceptadas->addWidget(h,i,3,Qt::AlignTop);
+
+    QLabel *ss=new QLabel;
+    ss->setText(" ");
+    ss->setFixedSize(QSize(60,25));
+   ui->citasLay->addWidget(ss,i,4,Qt::AlignTop);
+
+
+
+   QPushButton *b=new QPushButton();
+   b->setText("Cancelar cita");
+   b->setFixedSize(QSize(100,25));
+   b->setStyleSheet("background-color: rgb(138,222,242);border: 1px solid rgb(60,200,234)");
+   QSignalMapper *mapper2=new QSignalMapper(this);
+   connect(b,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
+   mapper2->setMapping(b,folio);
+   connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(CancelarCita(QString)));
+   ui->citasAceptadas->addWidget(b,i,5,Qt::AlignTop);
+
+        }
+        else
+        {
+
+        }
+
+    }
+
+}
+
+void MainWindow::CancelarCita(QString folio)
+{
+    QString upcita;
+    upcita="update cita set preparada='Cancelada' where idCita='"+folio+"' ;";
+    QSqlQuery citaUp;
+    citaUp.exec(upcita);
+
+    QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("Deseas Cancelar la Cita"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+        QString upcita;
+        upcita="update cita set preparada='Cancelada' where idCita='"+folio+"' ;";
+        QSqlQuery citaUp;
+        citaUp.exec(upcita);
+
+
+        //aqui mando la notificacion:
+        QString fech,hor,tipo;
+        QString cita,user1;
+            cita="select *from  cita where idCita='"+folio+"';  ";
+            QSqlQuery cita1;
+            cita1.exec(cita);
+            cita1.next();
+            user1=cita1.value(1).toString();
+
+        fech=cita1.value(2).toString();
+        hor=cita1.value(3).toString();
+
+        QString mensaj;
+        mensaj="Se le informa que su cita para el dia: "+fech+" y con horario de: "+hor+" fue CANCELADA. Acuda o llame a nuestras oficinas para reagendar su cita";
+        tipo="0";
+        QString notificacion;
+        notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+user1+"');";
+        QSqlQuery mandarNoti;
+        mandarNoti.exec(notificacion);
+
+        clearLayout(ui->citasAceptadas);
+        CitasAceptadas();
+
+
+
+
+    }
+    else
+    {
+
+    }
+}

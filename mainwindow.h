@@ -45,6 +45,8 @@ private:
     void cargarHorarioDoc();
     void SolicitudCitas();
     void cargarCategoria();
+    void CitasAceptadas();
+
 
 private slots:
 
@@ -188,6 +190,9 @@ private slots:
     void PonerRemedios(QString);
     void ponerTipseliminar(QString);
     void on_pushButton_editarTips_clicked();
+
+    void on_pb_rechazarCitas_clicked();
+    void CancelarCita(QString);
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

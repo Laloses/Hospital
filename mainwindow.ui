@@ -455,7 +455,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
 </string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -1917,8 +1917,8 @@ color:red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>95</width>
-                    <height>63</height>
+                    <width>100</width>
+                    <height>66</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_22">
@@ -2843,7 +2843,7 @@ QPushButton:focus{
            <string notr="true"/>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>4</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <widget class="QLabel" name="label_imgPerfilDoctor">
@@ -3367,15 +3367,49 @@ background -color: red;
            <widget class="QLabel" name="lb_cancelarCita">
             <property name="geometry">
              <rect>
-              <x>360</x>
-              <y>130</y>
-              <width>71</width>
-              <height>16</height>
+              <x>130</x>
+              <y>10</y>
+              <width>241</width>
+              <height>41</height>
              </rect>
             </property>
             <property name="text">
-             <string>cancelar citas</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;Proximas Citas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
+           </widget>
+           <widget class="QWidget" name="widget_7" native="true">
+            <property name="geometry">
+             <rect>
+              <x>120</x>
+              <y>60</y>
+              <width>661</width>
+              <height>311</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_35">
+             <item row="0" column="0">
+              <widget class="QScrollArea" name="scrollArea_7">
+               <property name="widgetResizable">
+                <bool>true</bool>
+               </property>
+               <widget class="QWidget" name="scrollAreaWidgetContents_7">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>641</width>
+                  <height>291</height>
+                 </rect>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_37">
+                 <item row="0" column="0">
+                  <layout class="QGridLayout" name="citasAceptadas"/>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </widget>
           <widget class="QWidget" name="page_3">
@@ -4777,7 +4811,7 @@ color: rgb(68, 94, 134);
              <rect>
               <x>110</x>
               <y>40</y>
-              <width>281</width>
+              <width>283</width>
               <height>30</height>
              </rect>
             </property>
@@ -5355,7 +5389,7 @@ color: rgb(68, 94, 134);
                         <x>0</x>
                         <y>0</y>
                         <width>478</width>
-                        <height>272</height>
+                        <height>274</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -5453,7 +5487,7 @@ color: rgb(68, 94, 134);
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
+                        <width>464</width>
                         <height>20</height>
                        </rect>
                       </property>
