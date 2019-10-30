@@ -322,7 +322,8 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             else
             {
                 qDebug()<<"encontre algo";
-                ui->notificacionL->setStyleSheet("background-color:rgb(243,173,106);");
+                QPixmap pixmap(":/imgs/notification2.png");
+                ui->notificacionL->setPixmap(pixmap);
                 ui->notificacionL->setText(num);
                 ui->notificacionL->show();
             }

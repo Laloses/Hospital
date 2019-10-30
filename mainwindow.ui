@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>886</width>
-    <height>492</height>
+    <height>518</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -431,14 +431,23 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">#btnEditarStaff, #btnGuardarEditarStaff{
+       <string notr="true">QLineEdit{
+border-top:none;
+border-bottom:1px solid #5d80b6;
+background-color:transparent;
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+}
+QLabel{
+	font: 11pt &quot;MS Shell Dlg 2&quot;;
+}
+#btnEditarStaff, #btnGuardarEditarStaff, #btnAgendarCita, #pushButton_iniciarSesion, #pushButton_imgPerfil, #pushButton_registrarse, #btnEditarDoctor, #btnGuardarEditarDoctor, #pushButton_respuesta, #pb_agregarActividadDoc{
 	border:solid 1px #5d80b6;
 border-radius:5px;
 background-color: #5d80b6;
 color: white;
 font: 11pt &quot;MS Shell Dlg 2&quot;;
 }
-#btnCancelarEditarStaff{
+#btnCancelarEditarStaff, #btnCancelarAgenda, #btnCancelarEditarDoctor{
 border:solid 1px #dddddd;
 border-radius:5px;
 background-color: #dddddd;
@@ -446,16 +455,25 @@ color: #5d80b6;
 font: 11pt &quot;MS Shell Dlg 2&quot;;
 }
 
-#btnEditarStaff:hover, #btnGuardarEditarStaff:hover{
+#btnEditarStaff:hover, #btnGuardarEditarStaff:hover, #pb_agregarActividadDoc:hover, #btnAgendarCita:hover, #pushButton_iniciarSesion:hover, #pushButton_imgPerfil:hover, #pushButton_registrarse:hover, #pushButton_respuesta:hover, #btnEditarDoctor:hover, #btnGuardarEditarDoctor:hover{
 	background-color: #2f405b;
 }
-#btnCancelarEditarStaff:hover{
+#btnCancelarEditarStaff:hover, #btnCancelarAgenda:hover, #btnCancelarEditarDoctor:hover{
 	background-color: #c7c7c7;
 }
+#pushButton_forgotPass{
+	border:none;
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+	color: #2f405b;
+}
+#pushButton_forgotPass:hover{
+	color: #5d80b6;
+}
+
 </string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -487,11 +505,295 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
           </property>
          </widget>
         </item>
+        <item row="0" column="0">
+         <widget class="QWidget" name="widget_zonaLogin" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>330</width>
+            <height>371</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <widget class="QWidget" name="layoutWidget">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>10</y>
+             <width>321</width>
+             <height>411</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_24">
+            <item>
+             <spacer name="verticalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>127</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_53">
+              <item>
+               <spacer name="horizontalSpacer_18">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>18</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_23">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_2">
+                  <item>
+                   <widget class="QLabel" name="label_idUsuario">
+                    <property name="maximumSize">
+                     <size>
+                      <width>95</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>MS Shell Dlg 2</family>
+                      <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>ID de usuario: </string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_59">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>5</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_idUsuario">
+                    <property name="minimumSize">
+                     <size>
+                      <width>133</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>133</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>MS Shell Dlg 2</family>
+                      <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="maxLength">
+                     <number>9</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_3">
+                  <item>
+                   <widget class="QLabel" name="label_password">
+                    <property name="maximumSize">
+                     <size>
+                      <width>95</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>MS Shell Dlg 2</family>
+                      <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Contraseña: </string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_60">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>5</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_passwordLogin">
+                    <property name="minimumSize">
+                     <size>
+                      <width>133</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>133</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>MS Shell Dlg 2</family>
+                      <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
+                     </font>
+                    </property>
+                    <property name="echoMode">
+                     <enum>QLineEdit::Password</enum>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_20">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>18</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <spacer name="horizontalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_forgotPass">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Olvidé mi contraseña</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton_iniciarSesion">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>Iniciar Sesión</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_7">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>127</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
         <item row="0" column="2">
          <widget class="QStackedWidget" name="stackedWidget_registros">
           <property name="minimumSize">
            <size>
-            <width>350</width>
+            <width>351</width>
             <height>371</height>
            </size>
           </property>
@@ -499,26 +801,10 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
            <string notr="true">#label_imgPerfil{
 	border:1px solid rgb(0, 0, 0);
 }
-QPushButton{
-	background-color: rgb(41, 87, 113);
-	border-radius:6px;
-	border:1px solid #fff;
-	color:#fff;
-	padding:6px;
-	text-decoration:none;
-}
-QPushButton:hover{
-	background: rgb(111, 157, 183);
-	color: rgb(0, 0, 0);
-	margin-top: 1px;
-}
-QPushButton:focus{
-	background: rgb(51, 97, 123);
-	color: rgb(255, 255, 255);
-}</string>
+</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_oculto">
            <layout class="QGridLayout" name="gridLayout_5">
@@ -577,623 +863,873 @@ QPushButton:focus{
            </layout>
           </widget>
           <widget class="QWidget" name="page_registro">
-           <layout class="QGridLayout" name="gridLayout_7">
-            <item row="2" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_6">
-              <item>
-               <widget class="QLabel" name="label_nombres">
-                <property name="minimumSize">
-                 <size>
-                  <width>20</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Nombre(s):</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_nombre">
-                <property name="minimumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="14" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_14">
-              <item>
-               <spacer name="horizontalSpacer_10">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_registrarse">
-                <property name="minimumSize">
-                 <size>
-                  <width>72</width>
-                  <height>27</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Registrarse</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_11">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-            <item row="13" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_13">
-              <item>
-               <widget class="QLabel" name="label_passwordRegistro2">
-                <property name="minimumSize">
-                 <size>
-                  <width>80</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Confirmar contraseña:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_password2">
-                <property name="minimumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="9" column="1">
-             <layout class="QHBoxLayout" name="horizontalLayout_16">
-              <item>
-               <widget class="QLabel" name="label_cedula">
-                <property name="minimumSize">
-                 <size>
-                  <width>93</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Cédula Profesional:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_cedula"/>
-              </item>
-             </layout>
-            </item>
-            <item row="7" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_11">
-              <item>
-               <widget class="QLabel" name="label_telefono">
-                <property name="minimumSize">
-                 <size>
-                  <width>20</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Telefono:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_telefono">
-                <property name="minimumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="1" column="1">
-             <layout class="QHBoxLayout" name="horizontalLayout_5">
-              <item>
-               <widget class="QLabel" name="label_tipoUsuario">
-                <property name="minimumSize">
-                 <size>
-                  <width>77</width>
-                  <height>17</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>77</width>
-                  <height>17</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Tipo de usuario:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QRadioButton" name="radioButton_doc">
-                <property name="minimumSize">
-                 <size>
-                  <width>55</width>
-                  <height>17</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>55</width>
-                  <height>17</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Doctor</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QRadioButton" name="radioButton_paciente">
-                <property name="minimumSize">
-                 <size>
-                  <width>64</width>
-                  <height>17</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>64</width>
-                  <height>17</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Paciente</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QRadioButton" name="radioButton_staff">
-                <property name="minimumSize">
-                 <size>
-                  <width>47</width>
-                  <height>17</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>47</width>
-                  <height>17</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Staff</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="6" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_10">
-              <item>
-               <widget class="QLabel" name="label_email">
-                <property name="minimumSize">
-                 <size>
-                  <width>33</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Correo:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_email">
-                <property name="minimumSize">
-                 <size>
-                  <width>113</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="comboBox_email">
-                <property name="minimumSize">
-                 <size>
-                  <width>107</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>107</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>@gmail.com</string>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>10</y>
+              <width>471</width>
+              <height>411</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_31">
+             <item>
+              <spacer name="verticalSpacer_28">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_76">
+               <item>
+                <spacer name="horizontalSpacer_22">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>@hotmail.com</string>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
                  </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>@live.com</string>
+                </spacer>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_5">
+                 <item>
+                  <widget class="QLabel" name="label_tipoUsuario">
+                   <property name="minimumSize">
+                    <size>
+                     <width>110</width>
+                     <height>17</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>110</width>
+                     <height>17</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Tipo de usuario:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="radioButton_doc">
+                   <property name="minimumSize">
+                    <size>
+                     <width>55</width>
+                     <height>17</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>55</width>
+                     <height>17</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Doctor</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="radioButton_paciente">
+                   <property name="minimumSize">
+                    <size>
+                     <width>64</width>
+                     <height>17</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>64</width>
+                     <height>17</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Paciente</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="radioButton_staff">
+                   <property name="minimumSize">
+                    <size>
+                     <width>47</width>
+                     <height>17</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>47</width>
+                     <height>17</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Staff</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_24">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>@outlook.com</string>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
                  </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>@yahoo.com.mx</string>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_25">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_70">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_30">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                   <item>
+                    <widget class="QLabel" name="label_nombres">
+                     <property name="minimumSize">
+                      <size>
+                       <width>75</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Nombre(s):</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit_nombre">
+                     <property name="minimumSize">
+                      <size>
+                       <width>133</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>133</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_75">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_8">
+                   <item>
+                    <widget class="QLabel" name="label_apePaterno">
+                     <property name="text">
+                      <string>Apellido Paterno:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit_apePaterno">
+                     <property name="minimumSize">
+                      <size>
+                       <width>113</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>135</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_76">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_7">
+                   <item>
+                    <widget class="QLabel" name="label_apeMaterno">
+                     <property name="text">
+                      <string>Apellido Materno:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit_apeMaterno">
+                     <property name="minimumSize">
+                      <size>
+                       <width>113</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>133</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_77">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_9">
+                   <item>
+                    <widget class="QLabel" name="label_fNacimiento">
+                     <property name="minimumSize">
+                      <size>
+                       <width>140</width>
+                       <height>18</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Fecha de Nacimiento:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDateEdit" name="dateEdit_fNacimiento">
+                     <property name="minimumSize">
+                      <size>
+                       <width>79</width>
+                       <height>18</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>79</width>
+                       <height>18</height>
+                      </size>
+                     </property>
+                     <property name="dateTime">
+                      <datetime>
+                       <hour>0</hour>
+                       <minute>0</minute>
+                       <second>0</second>
+                       <year>1990</year>
+                       <month>1</month>
+                       <day>1</day>
+                      </datetime>
+                     </property>
+                     <property name="maximumDate">
+                      <date>
+                       <year>2001</year>
+                       <month>12</month>
+                       <day>31</day>
+                      </date>
+                     </property>
+                     <property name="displayFormat">
+                      <string>yyyy/MM/dd</string>
+                     </property>
+                     <property name="calendarPopup">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_78">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_10">
+                   <item>
+                    <widget class="QLabel" name="label_email">
+                     <property name="minimumSize">
+                      <size>
+                       <width>50</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Correo:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit_email">
+                     <property name="minimumSize">
+                      <size>
+                       <width>113</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>133</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="comboBox_email">
+                     <property name="minimumSize">
+                      <size>
+                       <width>107</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>107</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>@gmail.com</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>@hotmail.com</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>@live.com</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>@outlook.com</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>@yahoo.com.mx</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_79">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_11">
+                   <item>
+                    <widget class="QLabel" name="label_telefono">
+                     <property name="minimumSize">
+                      <size>
+                       <width>60</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Teléfono:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit_telefono">
+                     <property name="minimumSize">
+                      <size>
+                       <width>120</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>120</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maxLength">
+                      <number>10</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_73">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_71">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
-                </item>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="11" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_18">
-              <item>
-               <widget class="QLabel" name="label_puesto">
-                <property name="minimumSize">
-                 <size>
-                  <width>25</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Puesto:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="comboBox_puesto"/>
-              </item>
-             </layout>
-            </item>
-            <item row="3" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_7">
-              <item>
-               <widget class="QLabel" name="label_apeMaterno">
-                <property name="text">
-                 <string>Apellido Materno:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_apeMaterno">
-                <property name="minimumSize">
-                 <size>
-                  <width>113</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="12" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_12">
-              <item>
-               <widget class="QLabel" name="label_passwordRegistro1">
-                <property name="minimumSize">
-                 <size>
-                  <width>30</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Contraseña:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_password1">
-                <property name="minimumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>133</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="4" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_8">
-              <item>
-               <widget class="QLabel" name="label_apePaterno">
-                <property name="text">
-                 <string>Apellido Paterno:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_apePaterno">
-                <property name="minimumSize">
-                 <size>
-                  <width>113</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>135</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="7" column="4">
-             <spacer name="horizontalSpacer_25">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="1">
-             <spacer name="verticalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="8" column="1">
-             <layout class="QHBoxLayout" name="horizontalLayout_15">
-              <item>
-               <widget class="QLabel" name="label_especiDoc">
-                <property name="minimumSize">
-                 <size>
-                  <width>30</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Especialidad:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="comboBox_especiDoc"/>
-              </item>
-             </layout>
-            </item>
-            <item row="6" column="0">
-             <spacer name="horizontalSpacer_24">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="5" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_9">
-              <item>
-               <widget class="QLabel" name="label_fNacimiento">
-                <property name="minimumSize">
-                 <size>
-                  <width>80</width>
-                  <height>18</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Fecha de Nacimiento:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QDateEdit" name="dateEdit_fNacimiento">
-                <property name="minimumSize">
-                 <size>
-                  <width>79</width>
-                  <height>18</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>79</width>
-                  <height>18</height>
-                 </size>
-                </property>
-                <property name="dateTime">
-                 <datetime>
-                  <hour>0</hour>
-                  <minute>0</minute>
-                  <second>0</second>
-                  <year>1990</year>
-                  <month>1</month>
-                  <day>1</day>
-                 </datetime>
-                </property>
-                <property name="maximumDate">
-                 <date>
-                  <year>2001</year>
-                  <month>12</month>
-                  <day>31</day>
-                 </date>
-                </property>
-                <property name="displayFormat">
-                 <string>yyyy/MM/dd</string>
-                </property>
-                <property name="calendarPopup">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="10" column="1" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_17">
-              <item>
-               <widget class="QLabel" name="label_universidad">
-                <property name="minimumSize">
-                 <size>
-                  <width>60</width>
-                  <height>20</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Universidad:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_universidad"/>
-              </item>
-             </layout>
-            </item>
-            <item row="4" column="3" rowspan="7">
-             <layout class="QVBoxLayout" name="verticalLayout_3">
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_23">
-                <item>
-                 <widget class="QLabel" name="label_imgPerfil">
-                  <property name="minimumSize">
-                   <size>
-                    <width>91</width>
-                    <height>101</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>91</width>
-                    <height>101</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>      Foto Perfil</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_24">
-                <item>
-                 <widget class="QPushButton" name="pushButton_imgPerfil">
-                  <property name="minimumSize">
-                   <size>
-                    <width>91</width>
-                    <height>27</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Abrir imagen</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </item>
-            <item row="15" column="1">
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_3">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_23">
+                   <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+                    <widget class="QLabel" name="label_imgPerfil">
+                     <property name="minimumSize">
+                      <size>
+                       <width>120</width>
+                       <height>120</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>120</width>
+                       <height>120</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>      Foto</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_24">
+                   <item>
+                    <widget class="QPushButton" name="pushButton_imgPerfil">
+                     <property name="minimumSize">
+                      <size>
+                       <width>120</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Abrir imagen</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_72">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_73">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_18">
+                 <item>
+                  <widget class="QLabel" name="label_puesto">
+                   <property name="minimumSize">
+                    <size>
+                     <width>50</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Puesto:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBox_puesto">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_17">
+                 <item>
+                  <widget class="QLabel" name="label_universidad">
+                   <property name="minimumSize">
+                    <size>
+                     <width>80</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Universidad:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_universidad">
+                   <property name="minimumSize">
+                    <size>
+                     <width>140</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_74">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_74">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_15">
+                 <item>
+                  <widget class="QLabel" name="label_especiDoc">
+                   <property name="minimumSize">
+                    <size>
+                     <width>80</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Especialidad:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBox_especiDoc">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_16">
+                 <item>
+                  <widget class="QLabel" name="label_cedula">
+                   <property name="minimumSize">
+                    <size>
+                     <width>122</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Cédula Profesional:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_cedula">
+                   <property name="minimumSize">
+                    <size>
+                     <width>140</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_75">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_29">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_12">
+                   <item>
+                    <widget class="QLabel" name="label_passwordRegistro1">
+                     <property name="minimumSize">
+                      <size>
+                       <width>80</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Contraseña:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit_password1">
+                     <property name="minimumSize">
+                      <size>
+                       <width>133</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_25">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_13">
+                   <item>
+                    <widget class="QLabel" name="label_passwordRegistro2">
+                     <property name="minimumSize">
+                      <size>
+                       <width>145</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Confirmar contraseña:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit_password2">
+                     <property name="minimumSize">
+                      <size>
+                       <width>133</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>133</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_21">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_26">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>5</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <spacer name="horizontalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_registrarse">
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Registrarse</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_11">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_27">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
           </widget>
           <widget class="QWidget" name="page_preguntas">
            <layout class="QGridLayout" name="gridLayout_3">
@@ -1229,7 +1765,7 @@ QPushButton:focus{
                <widget class="QLabel" name="label_pregunta">
                 <property name="minimumSize">
                  <size>
-                  <width>114</width>
+                  <width>155</width>
                   <height>16</height>
                  </size>
                 </property>
@@ -1265,7 +1801,7 @@ QPushButton:focus{
                <widget class="QLabel" name="label_selecPregunta">
                 <property name="minimumSize">
                  <size>
-                  <width>118</width>
+                  <width>165</width>
                   <height>16</height>
                  </size>
                 </property>
@@ -1276,7 +1812,7 @@ QPushButton:focus{
                  </size>
                 </property>
                 <property name="text">
-                 <string>Selecciona una pregunta</string>
+                 <string>Selecciona una pregunta:</string>
                 </property>
                </widget>
               </item>
@@ -1326,13 +1862,13 @@ QPushButton:focus{
                  <widget class="QLabel" name="label_respuesta">
                   <property name="minimumSize">
                    <size>
-                    <width>51</width>
+                    <width>70</width>
                     <height>16</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>51</width>
+                    <width>70</width>
                     <height>16</height>
                    </size>
                   </property>
@@ -1385,8 +1921,8 @@ QPushButton:focus{
                  <widget class="QPushButton" name="pushButton_respuesta">
                   <property name="minimumSize">
                    <size>
-                    <width>75</width>
-                    <height>23</height>
+                    <width>120</width>
+                    <height>30</height>
                    </size>
                   </property>
                   <property name="text">
@@ -1441,233 +1977,6 @@ QPushButton:focus{
           </widget>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QWidget" name="widget_zonaLogin" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>350</width>
-            <height>371</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">#pushButton_iniciarSesion{
-	background-color: rgb(41, 87, 113);
-	border-radius:6px;
-	border:1px solid #fff;
-	color:#fff;
-	padding:6px;
-	text-decoration:none;
-}
-#pushButton_iniciarSesion:hover{
-	background: rgb(111, 157, 183);
-	color: rgb(0, 0, 0);
-	margin-top: 1px;
-}
-#pushButton_iniciarSesion:focus{
-	background: rgb(51, 97, 123);
-	color: rgb(255, 255, 255);
-}
-#pushButton_forgotPass{
-	border-radius:6px;
-	padding:6px;
-	text-decoration:none;
-}
-#pushButton_forgotPass:hover{
-	color: rgb(111, 157, 183);
-}</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_4">
-           <item row="0" column="0">
-            <spacer name="verticalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>127</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="1" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
-             <item>
-              <spacer name="horizontalSpacer_20">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_idUsuario">
-               <property name="maximumSize">
-                <size>
-                 <width>64</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>ID de usuario</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="lineEdit_idUsuario">
-               <property name="maximumSize">
-                <size>
-                 <width>133</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="maxLength">
-                <number>9</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_18">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item row="2" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <spacer name="horizontalSpacer_21">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_password">
-               <property name="maximumSize">
-                <size>
-                 <width>64</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Contraseña</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="lineEdit_passwordLogin">
-               <property name="maximumSize">
-                <size>
-                 <width>133</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="echoMode">
-                <enum>QLineEdit::Password</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_22">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item row="3" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <item>
-              <spacer name="horizontalSpacer_6">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_forgotPass">
-               <property name="text">
-                <string>Olvidé mi contraseña</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_iniciarSesion">
-               <property name="minimumSize">
-                <size>
-                 <width>78</width>
-                 <height>23</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Iniciar Sesión</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_7">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item row="4" column="0">
-            <spacer name="verticalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>127</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="page_paciente">
@@ -1712,6 +2021,7 @@ QPushButton:focus{
 	color: black;
 	padding:6px;
 	text-decoration:none;
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
 }
 QPushButton:hover{
 	background: rgb(111, 157, 183);
@@ -1744,6 +2054,12 @@ QPushButton:focus{
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_datosPaciente">
+             <property name="minimumSize">
+              <size>
+               <width>75</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string>Mis Datos</string>
              </property>
@@ -1760,8 +2076,8 @@ QPushButton:focus{
             <widget class="QPushButton" name="pushButton_tip">
              <property name="minimumSize">
               <size>
-               <width>75</width>
-               <height>27</height>
+               <width>100</width>
+               <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -1784,6 +2100,12 @@ QPushButton:focus{
            </item>
            <item>
             <widget class="QPushButton" name="pushButton">
+             <property name="minimumSize">
+              <size>
+               <width>75</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string>Citas</string>
              </property>
@@ -1806,7 +2128,7 @@ QPushButton:focus{
             <widget class="QWidget" name="Notificacion" native="true">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>30</width>
                <height>30</height>
               </size>
              </property>
@@ -1815,25 +2137,77 @@ QPushButton:focus{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>101</width>
-                <height>25</height>
+                <width>30</width>
+                <height>30</height>
                </rect>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>30</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color:transparent;</string>
+              </property>
               <property name="text">
-               <string>notificacion</string>
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="imgs/imgs.qrc">
+                <normaloff>:/imgs/notification2.png</normaloff>:/imgs/notification2.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>30</width>
+                <height>30</height>
+               </size>
               </property>
              </widget>
              <widget class="QLabel" name="notificacionL">
               <property name="geometry">
                <rect>
-                <x>80</x>
+                <x>20</x>
                 <y>0</y>
-                <width>16</width>
-                <height>21</height>
+                <width>15</width>
+                <height>20</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>15</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>15</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color:white;</string>
               </property>
               <property name="text">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
              </widget>
             </widget>
@@ -1862,7 +2236,7 @@ color:red;
 </string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="page_miPerfilPac">
            <layout class="QGridLayout" name="gridLayout">
@@ -1917,8 +2291,8 @@ color:red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>95</width>
-                    <height>63</height>
+                    <width>242</width>
+                    <height>335</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_22">
@@ -2104,7 +2478,11 @@ color:red;
                    <widget class="QLabel" name="labelNombreComp">
                     <property name="font">
                      <font>
+                      <family>MS Shell Dlg 2</family>
                       <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
                      </font>
                     </property>
                     <property name="text">
@@ -2122,7 +2500,11 @@ color:red;
                     </property>
                     <property name="font">
                      <font>
+                      <family>MS Shell Dlg 2</family>
                       <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
                      </font>
                     </property>
                    </widget>
@@ -2151,7 +2533,11 @@ color:red;
                    <widget class="QLabel" name="labelOrigen">
                     <property name="font">
                      <font>
+                      <family>MS Shell Dlg 2</family>
                       <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
                      </font>
                     </property>
                     <property name="text">
@@ -2169,7 +2555,11 @@ color:red;
                     </property>
                     <property name="font">
                      <font>
+                      <family>MS Shell Dlg 2</family>
                       <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
                      </font>
                     </property>
                    </widget>
@@ -2197,7 +2587,11 @@ color:red;
                  <widget class="QLabel" name="labelEdad">
                   <property name="font">
                    <font>
+                    <family>MS Shell Dlg 2</family>
                     <pointsize>11</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
                    </font>
                   </property>
                   <property name="text">
@@ -2221,7 +2615,11 @@ color:red;
                   </property>
                   <property name="font">
                    <font>
+                    <family>MS Shell Dlg 2</family>
                     <pointsize>11</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
                    </font>
                   </property>
                  </widget>
@@ -2230,7 +2628,11 @@ color:red;
                  <widget class="QLabel" name="lb_sexo">
                   <property name="font">
                    <font>
+                    <family>MS Shell Dlg 2</family>
                     <pointsize>11</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
                    </font>
                   </property>
                   <property name="text">
@@ -2285,7 +2687,11 @@ color:red;
                    <widget class="QLabel" name="lb_FCitas">
                     <property name="font">
                      <font>
+                      <family>MS Shell Dlg 2</family>
                       <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
                      </font>
                     </property>
                     <property name="text">
@@ -2323,7 +2729,11 @@ color:red;
                    <widget class="QLabel" name="label_horaCitas">
                     <property name="font">
                      <font>
+                      <family>MS Shell Dlg 2</family>
                       <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
                      </font>
                     </property>
                     <property name="text">
@@ -2358,7 +2768,11 @@ color:red;
                    <widget class="QLabel" name="label_docCitas">
                     <property name="font">
                      <font>
+                      <family>MS Shell Dlg 2</family>
                       <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
                      </font>
                     </property>
                     <property name="text">
@@ -2376,7 +2790,11 @@ color:red;
                     </property>
                     <property name="font">
                      <font>
+                      <family>MS Shell Dlg 2</family>
                       <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
                      </font>
                     </property>
                    </widget>
@@ -2434,7 +2852,10 @@ color:red;
                <widget class="QLabel" name="lb_noHayDocs">
                 <property name="font">
                  <font>
+                  <family>MS Shell Dlg 2</family>
+                  <pointsize>11</pointsize>
                   <weight>50</weight>
+                  <italic>false</italic>
                   <bold>false</bold>
                  </font>
                 </property>
@@ -2451,7 +2872,11 @@ color:red;
                    <widget class="QLabel" name="lb_sintomasCitas">
                     <property name="font">
                      <font>
+                      <family>MS Shell Dlg 2</family>
                       <pointsize>11</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
                      </font>
                     </property>
                     <property name="text">
@@ -2565,14 +2990,15 @@ color:red;
                   </property>
                   <property name="font">
                    <font>
-                    <pointsize>10</pointsize>
+                    <family>MS Shell Dlg 2</family>
+                    <pointsize>11</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">border:1px solid #dddddd;
-background-color:#dddddd;
-border-radius:5px;
-color: #5d80b6;</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
                    <string>Cancelar</string>
@@ -2611,14 +3037,15 @@ color: #5d80b6;</string>
                   </property>
                   <property name="font">
                    <font>
-                    <pointsize>10</pointsize>
+                    <family>MS Shell Dlg 2</family>
+                    <pointsize>11</pointsize>
+                    <weight>50</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">border:1px solid #5d80b6;
-border-radius:5px;
-background-color:#5d80b6;
-color: white;</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
                    <string>Agendar Cita</string>
@@ -2707,6 +3134,7 @@ color: white;</string>
 	border-top: 2px double blue;
 	border-bottom: 2px solid #f7f8f9 ;
 }
+/*
 QPushButton{
 	background: #cbc6c3;
 	border-radius:6px;
@@ -2721,7 +3149,7 @@ QPushButton:hover{
 QPushButton:focus{
 	background: rgb(111, 157, 183);
 	color:white;
-}</string>
+}*/</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_9">
         <property name="leftMargin">
@@ -2826,36 +3254,744 @@ QPushButton:focus{
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">#regresar_citasDoc:hover{
+	text-decoration: underline;
+}</string>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
-           <widget class="QLabel" name="label_imgPerfilDoctor">
+           <widget class="QWidget" name="layoutWidget_3">
             <property name="geometry">
              <rect>
-              <x>30</x>
-              <y>30</y>
-              <width>98</width>
-              <height>16</height>
+              <x>10</x>
+              <y>20</y>
+              <width>861</width>
+              <height>361</height>
              </rect>
             </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>100</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Foto perfil doctor</string>
-            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_25">
+             <item>
+              <spacer name="verticalSpacer_19">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_60">
+               <item>
+                <spacer name="horizontalSpacer_61">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_26">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_61">
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_27">
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_62">
+                       <item>
+                        <spacer name="horizontalSpacer_62">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>10</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="lblFotoDoctor">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="minimumSize">
+                          <size>
+                           <width>170</width>
+                           <height>170</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>170</width>
+                           <height>170</height>
+                          </size>
+                         </property>
+                         <property name="layoutDirection">
+                          <enum>Qt::LeftToRight</enum>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">border: 1px solid black;</string>
+                         </property>
+                         <property name="text">
+                          <string>FotoPerfil</string>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_63">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>10</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_63">
+                       <item>
+                        <spacer name="horizontalSpacer_64">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btnEditarDoctor">
+                         <property name="minimumSize">
+                          <size>
+                           <width>100</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>100</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <property name="text">
+                          <string>Editar Perfil</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_65">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_20">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_28">
+                     <item>
+                      <widget class="QLineEdit" name="lineNombreDoctor">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>25</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">font: 75 18pt &quot;MS Shell Dlg 2&quot;;
+border:none;
+background-color:transparent;</string>
+                       </property>
+                       <property name="readOnly">
+                        <bool>true</bool>
+                       </property>
+                       <property name="placeholderText">
+                        <string>Nombre</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_21">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>5</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_64">
+                       <item>
+                        <widget class="QLabel" name="imgCorreo_2">
+                         <property name="minimumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="imgs/imgs.qrc">:/imgs/email.png</pixmap>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLineEdit" name="lineCorreoDoctor">
+                         <property name="minimumSize">
+                          <size>
+                           <width>200</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">font: 15pt &quot;MS Shell Dlg 2&quot;;
+border:none;
+background-color:transparent</string>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                         <property name="placeholderText">
+                          <string>Correo</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_65">
+                       <item>
+                        <widget class="QLabel" name="imgTel_3">
+                         <property name="minimumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="imgs/imgs.qrc">:/imgs/phone.png</pixmap>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLineEdit" name="lineTelDoctor">
+                         <property name="minimumSize">
+                          <size>
+                           <width>200</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">font: 15pt &quot;MS Shell Dlg 2&quot;;
+border:none;
+background-color:transparent</string>
+                         </property>
+                         <property name="maxLength">
+                          <number>10</number>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                         <property name="placeholderText">
+                          <string>Teléfono</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_66">
+                       <item>
+                        <widget class="QLabel" name="imgTel_4">
+                         <property name="minimumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="imgs/imgs.qrc">:/imgs/calendar.png</pixmap>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLineEdit" name="lineFechaNacDoctor">
+                         <property name="minimumSize">
+                          <size>
+                           <width>200</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">font: 15pt &quot;MS Shell Dlg 2&quot;;
+border:none;
+background-color:transparent</string>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                         <property name="placeholderText">
+                          <string>FechaNac</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_22">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>5</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_67">
+                       <item>
+                        <widget class="QLabel" name="imgCon1_2">
+                         <property name="minimumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="imgs/imgs.qrc">:/imgs/password.png</pixmap>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLineEdit" name="lineContraseniaDoc">
+                         <property name="minimumSize">
+                          <size>
+                           <width>200</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">font: 15pt &quot;MS Shell Dlg 2&quot;;
+border:none;
+background-color:transparent</string>
+                         </property>
+                         <property name="echoMode">
+                          <enum>QLineEdit::Password</enum>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                         <property name="placeholderText">
+                          <string>Contraseña</string>
+                         </property>
+                         <property name="clearButtonEnabled">
+                          <bool>false</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_66">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>5</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btnMostrarContrasena_3">
+                         <property name="minimumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">border:none;
+</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="imgs/imgs.qrc">
+                           <normaloff>:/imgs/NoView.png</normaloff>:/imgs/NoView.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_68">
+                       <item>
+                        <widget class="QLabel" name="imgCon2_2">
+                         <property name="minimumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="pixmap">
+                          <pixmap resource="imgs/imgs.qrc">:/imgs/passwordConf.png</pixmap>
+                         </property>
+                         <property name="scaledContents">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLineEdit" name="lineConfirmaContraseniaDoc">
+                         <property name="minimumSize">
+                          <size>
+                           <width>200</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">font: 15pt &quot;MS Shell Dlg 2&quot;;
+border:none;
+background-color:transparent</string>
+                         </property>
+                         <property name="echoMode">
+                          <enum>QLineEdit::Password</enum>
+                         </property>
+                         <property name="readOnly">
+                          <bool>true</bool>
+                         </property>
+                         <property name="placeholderText">
+                          <string>Confirmar Contraseña</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_67">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Fixed</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>5</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btnMostrarContrasena_4">
+                         <property name="minimumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">border:none;
+</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="imgs/imgs.qrc">
+                           <normaloff>:/imgs/NoView.png</normaloff>:/imgs/NoView.png</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>25</width>
+                           <height>25</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_23">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>10</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_69">
+                   <item>
+                    <spacer name="horizontalSpacer_68">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="btnCancelarEditarDoctor">
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="text">
+                      <string>Cancelar</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="btnGuardarEditarDoctor">
+                     <property name="minimumSize">
+                      <size>
+                       <width>130</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="text">
+                      <string>Guardar Cambios</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_69">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_70">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Expanding</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_24">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
            </widget>
           </widget>
           <widget class="QWidget" name="page_horarioDoc">
@@ -2870,7 +4006,13 @@ background -color: red;
               <property name="minimumSize">
                <size>
                 <width>851</width>
-                <height>352</height>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>349</height>
                </size>
               </property>
               <property name="verticalScrollBarPolicy">
@@ -2948,6 +4090,21 @@ background -color: red;
             </item>
             <item row="1" column="2">
              <widget class="QPushButton" name="pb_agregarActividadDoc">
+              <property name="minimumSize">
+               <size>
+                <width>130</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>130</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="text">
                <string>Agregar actividad</string>
               </property>
@@ -2959,22 +4116,22 @@ background -color: red;
            <widget class="QLabel" name="label_citasDoc">
             <property name="geometry">
              <rect>
-              <x>30</x>
+              <x>20</x>
               <y>10</y>
               <width>241</width>
               <height>31</height>
              </rect>
             </property>
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Solicitudes de Citas&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Solicitudes de Citas&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
            <widget class="QWidget" name="widget_3" native="true">
             <property name="geometry">
              <rect>
               <x>10</x>
-              <y>90</y>
-              <width>851</width>
+              <y>80</y>
+              <width>861</width>
               <height>301</height>
              </rect>
             </property>
@@ -2989,7 +4146,7 @@ background -color: red;
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>831</width>
+                  <width>841</width>
                   <height>281</height>
                  </rect>
                 </property>
@@ -3006,8 +4163,8 @@ background -color: red;
            <widget class="QWidget" name="gridLayoutWidget_2">
             <property name="geometry">
              <rect>
-              <x>30</x>
-              <y>70</y>
+              <x>20</x>
+              <y>50</y>
               <width>431</width>
               <height>31</height>
              </rect>
@@ -3019,335 +4176,563 @@ background -color: red;
            <widget class="QPushButton" name="regresar_citasDoc">
             <property name="geometry">
              <rect>
-              <x>10</x>
-              <y>10</y>
-              <width>75</width>
-              <height>31</height>
+              <x>0</x>
+              <y>0</y>
+              <width>117</width>
+              <height>32</height>
              </rect>
             </property>
-            <property name="text">
-             <string>regresar</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_2">
-            <property name="geometry">
-             <rect>
-              <x>310</x>
-              <y>10</y>
-              <width>281</width>
-              <height>41</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600;&quot;&gt;Detalles de Cita:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_4">
-            <property name="geometry">
-             <rect>
-              <x>280</x>
-              <y>50</y>
-              <width>141</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tipo Cita:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="tipoCita">
-            <property name="geometry">
-             <rect>
-              <x>370</x>
-              <y>60</y>
-              <width>141</width>
-              <height>20</height>
-             </rect>
+            <property name="minimumSize">
+             <size>
+              <width>117</width>
+              <height>32</height>
+             </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">border:none;</string>
-            </property>
-            <property name="inputMask">
-             <string/>
+             <string notr="true">border:none;
+font: 13pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(68, 94, 134);</string>
             </property>
             <property name="text">
-             <string/>
+             <string>Regresar</string>
             </property>
-            <property name="readOnly">
-             <bool>true</bool>
+            <property name="icon">
+             <iconset resource="imgs/imgs.qrc">
+              <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
             </property>
            </widget>
-           <widget class="QLabel" name="label_5">
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>90</x>
+              <y>80</y>
+              <width>781</width>
+              <height>286</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_79">
+             <item>
+              <spacer name="horizontalSpacer_85">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_33">
+               <item>
+                <spacer name="verticalSpacer_30">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_54">
+                 <item>
+                  <widget class="QLabel" name="label_5">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Responsable:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="Responsable">
+                   <property name="styleSheet">
+                    <string notr="true">border:none;</string>
+                   </property>
+                   <property name="text">
+                    <string>NOMBRE_RESPONSABLE</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_55">
+                 <item>
+                  <widget class="QLabel" name="label_6">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Paciente:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="paciente">
+                   <property name="styleSheet">
+                    <string notr="true">border:none;</string>
+                   </property>
+                   <property name="text">
+                    <string>NOMBRE_PACIENTE</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_56">
+                 <item>
+                  <widget class="QLabel" name="label_7">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Teléfono:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="telelefono">
+                   <property name="styleSheet">
+                    <string notr="true">border:none;</string>
+                   </property>
+                   <property name="text">
+                    <string>TELEFONO</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_57">
+                 <item>
+                  <widget class="QLabel" name="label_8">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Correo Electrónico:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="correo">
+                   <property name="styleSheet">
+                    <string notr="true">border:none;</string>
+                   </property>
+                   <property name="text">
+                    <string>EMAIL</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_58">
+                 <item>
+                  <widget class="QLabel" name="lugartext">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lugar de origen:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lugar">
+                   <property name="styleSheet">
+                    <string notr="true">border:none;</string>
+                   </property>
+                   <property name="text">
+                    <string>LUGAR_ORIGEN</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_59">
+                 <item>
+                  <widget class="QLabel" name="label_10">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Edad:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="edad">
+                   <property name="styleSheet">
+                    <string notr="true">border:none;</string>
+                   </property>
+                   <property name="text">
+                    <string>EDAD</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_29">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_87">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>5</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="Line" name="line_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_88">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_34">
+               <item>
+                <spacer name="verticalSpacer_32">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_72">
+                 <item>
+                  <widget class="QLabel" name="label_12">
+                   <property name="lineWidth">
+                    <number>1</number>
+                   </property>
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Fecha:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="textFormat">
+                    <enum>Qt::AutoText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="fecha">
+                   <property name="styleSheet">
+                    <string notr="true">border:none;</string>
+                   </property>
+                   <property name="text">
+                    <string>FECHA_CITA</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_77">
+                 <item>
+                  <widget class="QLabel" name="label_13">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Hora:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="hora">
+                   <property name="styleSheet">
+                    <string notr="true">border:none;</string>
+                   </property>
+                   <property name="text">
+                    <string>HORA_CITA</string>
+                   </property>
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_32">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_78">
+                   <item>
+                    <widget class="QLabel" name="label_14">
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Síntomas:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_80">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QPlainTextEdit" name="sintomas">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>350</width>
+                     <height>150</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>600</width>
+                     <height>150</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_31">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_86">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="">
             <property name="geometry">
              <rect>
               <x>30</x>
-              <y>130</y>
-              <width>121</width>
+              <y>40</y>
+              <width>841</width>
+              <height>27</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_81">
+             <item>
+              <spacer name="horizontalSpacer_81">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_71">
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Tipo Cita:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="tipoCita">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">border:none;</string>
+                 </property>
+                 <property name="inputMask">
+                  <string/>
+                 </property>
+                 <property name="text">
+                  <string>TIPO_CITA</string>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_82">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>17</x>
+              <y>0</y>
+              <width>861</width>
               <height>31</height>
              </rect>
             </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline;&quot;&gt;Responsable:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_80">
+             <item>
+              <spacer name="horizontalSpacer_83">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Detalles de Cita&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_84">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
            </widget>
-           <widget class="QLabel" name="label_6">
-            <property name="geometry">
-             <rect>
-              <x>30</x>
-              <y>170</y>
-              <width>131</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline;&quot;&gt;Paciente:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_7">
-            <property name="geometry">
-             <rect>
-              <x>30</x>
-              <y>210</y>
-              <width>81</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline;&quot;&gt;Telefono:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_8">
-            <property name="geometry">
-             <rect>
-              <x>30</x>
-              <y>250</y>
-              <width>141</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline;&quot;&gt;Correo Electronico:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="lugartext">
-            <property name="geometry">
-             <rect>
-              <x>30</x>
-              <y>290</y>
-              <width>111</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline;&quot;&gt;Lugar de origen:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_10">
-            <property name="geometry">
-             <rect>
-              <x>30</x>
-              <y>320</y>
-              <width>81</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline;&quot;&gt;Edad:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="Responsable">
-            <property name="geometry">
-             <rect>
-              <x>120</x>
-              <y>140</y>
-              <width>241</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border:none;</string>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="paciente">
-            <property name="geometry">
-             <rect>
-              <x>120</x>
-              <y>180</y>
-              <width>241</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border:none;</string>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="telelefono">
-            <property name="geometry">
-             <rect>
-              <x>120</x>
-              <y>210</y>
-              <width>151</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border:none;</string>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="correo">
-            <property name="geometry">
-             <rect>
-              <x>160</x>
-              <y>260</y>
-              <width>211</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border:none;</string>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="lugar">
-            <property name="geometry">
-             <rect>
-              <x>160</x>
-              <y>290</y>
-              <width>211</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border:none;</string>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="edad">
-            <property name="geometry">
-             <rect>
-              <x>80</x>
-              <y>330</y>
-              <width>101</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border:none;</string>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_11">
-            <property name="geometry">
-             <rect>
-              <x>380</x>
-              <y>90</y>
-              <width>16</width>
-              <height>311</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;l&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_12">
-            <property name="geometry">
-             <rect>
-              <x>420</x>
-              <y>130</y>
-              <width>61</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline;&quot;&gt;Fecha:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_13">
-            <property name="geometry">
-             <rect>
-              <x>420</x>
-              <y>170</y>
-              <width>61</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline;&quot;&gt;Hora:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="fecha">
-            <property name="geometry">
-             <rect>
-              <x>500</x>
-              <y>140</y>
-              <width>161</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border:none;</string>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-           <widget class="QLineEdit" name="hora">
-            <property name="geometry">
-             <rect>
-              <x>500</x>
-              <y>180</y>
-              <width>161</width>
-              <height>20</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border:none;</string>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_14">
-            <property name="geometry">
-             <rect>
-              <x>410</x>
-              <y>220</y>
-              <width>101</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; text-decoration: underline;&quot;&gt;Sintomas:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QPlainTextEdit" name="sintomas">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="geometry">
-             <rect>
-              <x>400</x>
-              <y>250</y>
-              <width>411</width>
-              <height>131</height>
-             </rect>
-            </property>
-           </widget>
+           <zorder>label_2</zorder>
+           <zorder>label_4</zorder>
+           <zorder>tipoCita</zorder>
+           <zorder>label_5</zorder>
+           <zorder>label_6</zorder>
+           <zorder>label_7</zorder>
+           <zorder>label_8</zorder>
+           <zorder>lugartext</zorder>
+           <zorder>label_10</zorder>
+           <zorder>Responsable</zorder>
+           <zorder>paciente</zorder>
+           <zorder>telelefono</zorder>
+           <zorder>correo</zorder>
+           <zorder>lugar</zorder>
+           <zorder>edad</zorder>
+           <zorder>label_12</zorder>
+           <zorder>label_13</zorder>
+           <zorder>fecha</zorder>
+           <zorder>hora</zorder>
+           <zorder>label_14</zorder>
+           <zorder>sintomas</zorder>
+           <zorder>horizontalSpacer_80</zorder>
+           <zorder>line_7</zorder>
+           <zorder>horizontalSpacer_81</zorder>
+           <zorder>horizontalSpacer_82</zorder>
+           <zorder>horizontalSpacer_83</zorder>
+           <zorder>horizontalSpacer_84</zorder>
+           <zorder>regresar_citasDoc</zorder>
           </widget>
          </widget>
         </item>
@@ -3449,6 +4834,9 @@ QPushButton:focus{
           <width>861</width>
           <height>391</height>
          </rect>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
         </property>
         <widget class="QWidget" name="perfilStaff">
          <widget class="QWidget" name="layoutWidget_2">
@@ -4181,7 +5569,6 @@ background-color:transparent</string>
           </layout>
          </widget>
         </widget>
-        <widget class="QWidget" name="page_6"/>
        </widget>
       </widget>
       <widget class="QWidget" name="page_admin">
@@ -4318,7 +5705,7 @@ QComboBox{
 	border-radius: 5px;
 	selection-background-color:#5d2a42;
 }
-#pushButton_regresarSolicitudes:hover, #pushButton_menu_Pincipal_Adm:hover{
+#pushButton_regresarSolicitudes:hover, #pushButton_menu_Pincipal_Adm:hover, #pushButton_menu_admin_2:hover{
 	text-decoration: underline;
 }
 QLabel{
@@ -4759,9 +6146,9 @@ color: rgb(68, 94, 134);
            <widget class="QWidget" name="widget_2" native="true">
             <property name="geometry">
              <rect>
-              <x>340</x>
+              <x>359</x>
               <y>10</y>
-              <width>520</width>
+              <width>501</width>
               <height>370</height>
              </rect>
             </property>
@@ -4776,7 +6163,7 @@ color: rgb(68, 94, 134);
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>500</width>
+                  <width>481</width>
                   <height>350</height>
                  </rect>
                 </property>
@@ -5311,7 +6698,7 @@ color: rgb(68, 94, 134);
                         <x>0</x>
                         <y>0</y>
                         <width>478</width>
-                        <height>246</height>
+                        <height>272</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -5409,8 +6796,8 @@ color: rgb(68, 94, 134);
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>483</width>
-                        <height>246</height>
+                        <width>461</width>
+                        <height>20</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -5629,6 +7016,19 @@ color: rgb(68, 94, 134);
                     </item>
                     <item>
                      <widget class="QPushButton" name="pushButton_agregar_remedio_2">
+                      <property name="minimumSize">
+                       <size>
+                        <width>130</width>
+                        <height>30</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">border:solid 1px #5d80b6;
+border-radius:5px;
+background-color: #5d80b6;
+color: white;
+font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+                      </property>
                       <property name="text">
                        <string>Agregar remedio</string>
                       </property>
@@ -6038,6 +7438,25 @@ color: rgb(68, 94, 134);
              <layout class="QVBoxLayout" name="verticalLayout_20">
               <item>
                <widget class="QPushButton" name="pushButton_eliminar_remedio">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>130</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:solid 1px #5d80b6;
+border-radius:5px;
+background-color: #5d80b6;
+color: white;
+font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+                </property>
                 <property name="text">
                  <string>Ver remedios</string>
                 </property>
@@ -6045,6 +7464,25 @@ color: rgb(68, 94, 134);
               </item>
               <item>
                <widget class="QPushButton" name="pushButton_agergar_remedio">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>130</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:solid 1px #5d80b6;
+border-radius:5px;
+background-color: #5d80b6;
+color: white;
+font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+                </property>
                 <property name="text">
                  <string>Agregar remedios</string>
                 </property>
@@ -6052,6 +7490,19 @@ color: rgb(68, 94, 134);
               </item>
               <item>
                <widget class="QPushButton" name="pushButton_editar_remedio">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:solid 1px #5d80b6;
+border-radius:5px;
+background-color: #5d80b6;
+color: white;
+font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+                </property>
                 <property name="text">
                  <string>Editar remedios</string>
                 </property>
