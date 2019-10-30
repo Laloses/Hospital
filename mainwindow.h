@@ -189,6 +189,12 @@ private slots:
     void ponerTipseliminar(QString);
     void on_pushButton_editarTips_clicked();
 
+    void on_pb_llenarHistorial_clicked();
+
+    void on_pb_buscarCita_clicked();
+
+    void on_pb_realizarConsulta_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

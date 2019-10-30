@@ -2840,7 +2840,37 @@ QPushButton:focus{
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">QLineEdit{
+border-top:none;
+border-bottom:1px solid #5d80b6;
+background:transparent;
+font: 12pt &quot;MS Shell Dlg 2&quot;;
+}
+QLineEdit:hover{
+border-top:none;
+border-bottom:1px solid #101e5a;
+background:transparent;
+}
+QComboBox{
+	border: 1px #5d80b6;
+	border-style:inset;
+  	color:black;
+	selection-color:white;
+	border-radius: 5px;
+	selection-background-color:#5d2a42;
+}
+#pushButton_regresarSolicitudes:hover, #pushButton_menu_Pincipal_Adm:hover{
+	text-decoration: underline;
+}
+QLabel{
+font: 12pt &quot;MS Shell Dlg 2&quot;;
+}
+#labeldatos{
+font: 75 13pt &quot;MS Shell Dlg 2&quot;;
+}
+QRadioButton{
+font: 12pt &quot;MS Shell Dlg 2&quot;;
+}</string>
           </property>
           <property name="currentIndex">
            <number>5</number>
@@ -2903,7 +2933,7 @@ background -color: red;
                <bool>false</bool>
               </attribute>
               <attribute name="horizontalHeaderCascadingSectionResizes">
-               <bool>false</bool>
+               <bool>true</bool>
               </attribute>
               <attribute name="horizontalHeaderDefaultSectionSize">
                <number>119</number>
@@ -3378,20 +3408,589 @@ background -color: red;
             </property>
            </widget>
           </widget>
-          <widget class="QWidget" name="page_3">
-           <widget class="QLabel" name="label_9">
-            <property name="geometry">
-             <rect>
-              <x>370</x>
-              <y>30</y>
-              <width>131</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Agregar historial paciente</string>
-            </property>
-           </widget>
+          <widget class="QWidget" name="pageRealizarCita">
+           <layout class="QGridLayout" name="gridLayout_35">
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer_59">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>320</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="0" colspan="2">
+             <widget class="QWidget" name="w_infoPacConsulta" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>391</width>
+                <height>341</height>
+               </size>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_36">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="verticalLayout_24">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_55">
+                   <item>
+                    <widget class="QLabel" name="lb_nombrePac">
+                     <property name="minimumSize">
+                      <size>
+                       <width>71</width>
+                       <height>19</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Nombre:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="lb_nomPac">
+                     <property name="minimumSize">
+                      <size>
+                       <width>201</width>
+                       <height>16</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>nom ape ape</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_65">
+                   <item>
+                    <widget class="QLabel" name="lb_edadPac">
+                     <property name="minimumSize">
+                      <size>
+                       <width>41</width>
+                       <height>19</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Edad: </string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="lb_edad">
+                     <property name="minimumSize">
+                      <size>
+                       <width>31</width>
+                       <height>16</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>20</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_66">
+                   <item>
+                    <widget class="QLabel" name="lb_sexoPacCita">
+                     <property name="minimumSize">
+                      <size>
+                       <width>41</width>
+                       <height>19</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Sexo:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="lb_sexoPac">
+                     <property name="minimumSize">
+                      <size>
+                       <width>81</width>
+                       <height>16</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Masculino</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_67">
+                   <item>
+                    <widget class="QLabel" name="lb_religionPac">
+                     <property name="minimumSize">
+                      <size>
+                       <width>71</width>
+                       <height>19</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Religion:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="lb_religion">
+                     <property name="minimumSize">
+                      <size>
+                       <width>71</width>
+                       <height>16</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Cristiana</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="lb_imgPac">
+                 <property name="minimumSize">
+                  <size>
+                   <width>91</width>
+                   <height>101</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>foto pac</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <layout class="QHBoxLayout" name="horizontalLayout_54">
+                 <item>
+                  <layout class="QVBoxLayout" name="verticalLayout_23">
+                   <item>
+                    <widget class="QLabel" name="lb_sintomasPac">
+                     <property name="text">
+                      <string>Sintomas:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_19">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QTextEdit" name="te_sintomas">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>291</width>
+                     <height>101</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="2" column="2" colspan="2">
+             <widget class="QStackedWidget" name="sw_historialReceta">
+              <property name="minimumSize">
+               <size>
+                <width>391</width>
+                <height>341</height>
+               </size>
+              </property>
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <widget class="QWidget" name="p_historial">
+               <layout class="QGridLayout" name="gridLayout_37">
+                <item row="0" column="0">
+                 <widget class="QScrollArea" name="sA_historialPac">
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="horizontalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAlwaysOff</enum>
+                  </property>
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_7">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>393</width>
+                     <height>1106</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_25">
+                    <item>
+                     <widget class="QLabel" name="lb_estatura">
+                      <property name="minimumSize">
+                       <size>
+                        <width>57</width>
+                        <height>22</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Estatura</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="le_estatura">
+                      <property name="styleSheet">
+                       <string notr="true"/>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_peso">
+                      <property name="minimumSize">
+                       <size>
+                        <width>33</width>
+                        <height>22</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Peso</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="le_peso"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_fechaVacuna">
+                      <property name="minimumSize">
+                       <size>
+                        <width>147</width>
+                        <height>19</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Fecha Ultima Vacuna</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QDateEdit" name="dateEdit">
+                      <property name="displayFormat">
+                       <string>yyyy/MM/dd</string>
+                      </property>
+                      <property name="calendarPopup">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_alergias">
+                      <property name="minimumSize">
+                       <size>
+                        <width>57</width>
+                        <height>39</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Alergias</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QTextEdit" name="te_alergias">
+                      <property name="minimumSize">
+                       <size>
+                        <width>196</width>
+                        <height>39</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_accidentes">
+                      <property name="minimumSize">
+                       <size>
+                        <width>75</width>
+                        <height>39</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Accidentes</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QTextEdit" name="te_accidentes">
+                      <property name="minimumSize">
+                       <size>
+                        <width>268</width>
+                        <height>39</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_enfer">
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>29</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Enfermedades</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QTextEdit" name="te_enfermedades">
+                      <property name="minimumSize">
+                       <size>
+                        <width>263</width>
+                        <height>29</height>
+                       </size>
+                      </property>
+                      <property name="verticalScrollBarPolicy">
+                       <enum>Qt::ScrollBarAsNeeded</enum>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_cirugias">
+                      <property name="minimumSize">
+                       <size>
+                        <width>57</width>
+                        <height>29</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Cirugias</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QTextEdit" name="te_cirugias">
+                      <property name="minimumSize">
+                       <size>
+                        <width>296</width>
+                        <height>29</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_hospi">
+                      <property name="minimumSize">
+                       <size>
+                        <width>120</width>
+                        <height>29</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Hospitalizaciones</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QTextEdit" name="te_hospi">
+                      <property name="minimumSize">
+                       <size>
+                        <width>256</width>
+                        <height>29</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_trabajos">
+                      <property name="text">
+                       <string>Trabajos</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QTextEdit" name="te_trabajos"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_habitos">
+                      <property name="text">
+                       <string>Hábitos</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QTextEdit" name="te_habitos"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_frecAlco">
+                      <property name="text">
+                       <string>¿Con cuánta frecuencia ingiere alcohol?</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QTextEdit" name="te_frecAlco"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_frecFuma">
+                      <property name="text">
+                       <string>¿Con cuánta frecuencia fuma?</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QTextEdit" name="te_frecFuma"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lb_enfeFami">
+                      <property name="text">
+                       <string>Enfermedades familiares</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QTextEdit" name="te_enfeFami"/>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_56">
+                      <item>
+                       <spacer name="horizontalSpacer_61">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pb_llenarHistorial">
+                        <property name="text">
+                         <string>Guardar</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="p_receta"/>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_53">
+              <item>
+               <widget class="QLabel" name="lb_folioCita">
+                <property name="minimumSize">
+                 <size>
+                  <width>95</width>
+                  <height>16</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string> Folio de Cita</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="le_folioCita">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>21</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>113</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pb_buscarCita">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="imgs/imgs.qrc">
+                  <normaloff>:/imgs/search.png</normaloff>:/imgs/search.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lb_noCoincideFecha">
+                <property name="font">
+                 <font>
+                  <family>MS Shell Dlg 2</family>
+                  <pointsize>10</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font-size:10pt;
+color:red;</string>
+                </property>
+                <property name="text">
+                 <string>*Aun no es la cita</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="3">
+             <spacer name="horizontalSpacer_60">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>321</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
@@ -4376,7 +4975,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;
 }</string>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="pagePrincipalAdmin">
            <widget class="QLabel" name="label_pageAdmin">
@@ -5177,7 +5776,7 @@ color: rgb(68, 94, 134);
             <item row="1" column="0" colspan="2">
              <widget class="QStackedWidget" name="stackedWidget_tips">
               <property name="currentIndex">
-               <number>2</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="page_11">
                <widget class="QLabel" name="label_7">
@@ -5354,8 +5953,8 @@ color: rgb(68, 94, 134);
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>478</width>
-                        <height>272</height>
+                        <width>461</width>
+                        <height>20</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -5527,6 +6126,19 @@ color: rgb(68, 94, 134);
                 </property>
                </widget>
               </item>
+              <item>
+               <spacer name="verticalSpacer_21">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
              </layout>
             </item>
            </layout>
@@ -5572,7 +6184,7 @@ color: rgb(68, 94, 134);
             <item row="1" column="0" colspan="2">
              <widget class="QStackedWidget" name="stackedWidget_remedio">
               <property name="currentIndex">
-               <number>1</number>
+               <number>3</number>
               </property>
               <widget class="QWidget" name="page_7">
                <widget class="QLabel" name="label_6">
@@ -5743,338 +6355,270 @@ color: rgb(68, 94, 134);
                </layout>
               </widget>
               <widget class="QWidget" name="page_9">
-               <widget class="QComboBox" name="comboBox_eliminarREmedios">
-                <property name="geometry">
-                 <rect>
-                  <x>10</x>
-                  <y>20</y>
-                  <width>181</width>
-                  <height>31</height>
-                 </rect>
-                </property>
-               </widget>
-               <widget class="QPlainTextEdit" name="plainTextEdit_IngredientesEli">
-                <property name="geometry">
-                 <rect>
-                  <x>380</x>
-                  <y>150</y>
-                  <width>230</width>
-                  <height>71</height>
-                 </rect>
-                </property>
-               </widget>
-               <widget class="QPlainTextEdit" name="plainTextEdit_procedimientoEli">
-                <property name="geometry">
-                 <rect>
-                  <x>420</x>
-                  <y>240</y>
-                  <width>251</width>
-                  <height>81</height>
-                 </rect>
-                </property>
-               </widget>
-               <widget class="QLabel" name="label_imagEli">
-                <property name="geometry">
-                 <rect>
-                  <x>510</x>
-                  <y>20</y>
-                  <width>140</width>
-                  <height>121</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-               <widget class="QLabel" name="label__descipcion">
-                <property name="geometry">
-                 <rect>
-                  <x>310</x>
-                  <y>260</y>
-                  <width>109</width>
-                  <height>24</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>Descripcion:</string>
-                </property>
-               </widget>
-               <widget class="QLabel" name="label__ingredientes">
-                <property name="geometry">
-                 <rect>
-                  <x>260</x>
-                  <y>170</y>
-                  <width>109</width>
-                  <height>24</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>Ingredientes:</string>
-                </property>
-               </widget>
-               <widget class="QPushButton" name="pushButton_eliminarRemedio">
-                <property name="geometry">
-                 <rect>
-                  <x>60</x>
-                  <y>340</y>
-                  <width>106</width>
-                  <height>28</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>Eliminar remedio</string>
-                </property>
-               </widget>
-               <widget class="QWidget" name="layoutWidget">
-                <property name="geometry">
-                 <rect>
-                  <x>240</x>
-                  <y>20</y>
-                  <width>181</width>
-                  <height>31</height>
-                 </rect>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_19">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_nomRemedioEli_3">
-                   <property name="text">
-                    <string>Nombre:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QLabel" name="label_nomRemedioEli">
-                   <property name="text">
-                    <string/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-               <widget class="QWidget" name="layoutWidget">
-                <property name="geometry">
-                 <rect>
-                  <x>240</x>
-                  <y>70</y>
-                  <width>180</width>
-                  <height>26</height>
-                 </rect>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_20">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_CategoriaEli_2">
-                   <property name="text">
-                    <string>Categoria:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QLabel" name="label_CategoriaEli">
-                   <property name="text">
-                    <string/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-               <widget class="QWidget" name="widget_6" native="true">
-                <property name="geometry">
-                 <rect>
-                  <x>-20</x>
-                  <y>50</y>
-                  <width>250</width>
-                  <height>290</height>
-                 </rect>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_26">
-                 <item row="0" column="0">
-                  <widget class="QScrollArea" name="scrollArea_6">
-                   <property name="widgetResizable">
-                    <bool>true</bool>
-                   </property>
-                   <widget class="QWidget" name="scrollAreaWidgetContents_6">
-                    <property name="geometry">
-                     <rect>
-                      <x>0</x>
-                      <y>0</y>
-                      <width>230</width>
-                      <height>270</height>
-                     </rect>
-                    </property>
-                    <layout class="QGridLayout" name="gridLayout_27">
+               <layout class="QGridLayout" name="gridLayout_38">
+                <item row="0" column="0" rowspan="4">
+                 <layout class="QVBoxLayout" name="verticalLayout_26">
+                  <item>
+                   <widget class="QComboBox" name="comboBox_eliminarREmedios"/>
+                  </item>
+                  <item>
+                   <widget class="QWidget" name="widget_6" native="true">
+                    <layout class="QGridLayout" name="gridLayout_26">
                      <item row="0" column="0">
-                      <layout class="QGridLayout" name="listatips_4"/>
+                      <widget class="QScrollArea" name="scrollArea_6">
+                       <property name="widgetResizable">
+                        <bool>true</bool>
+                       </property>
+                       <widget class="QWidget" name="scrollAreaWidgetContents_6">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>20</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                        <layout class="QGridLayout" name="gridLayout_27">
+                         <item row="0" column="0">
+                          <layout class="QGridLayout" name="listatips_4"/>
+                         </item>
+                        </layout>
+                       </widget>
+                      </widget>
                      </item>
                     </layout>
                    </widget>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="0" column="1">
+                 <layout class="QGridLayout" name="gridLayout_19">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_nomRemedioEli_3">
+                    <property name="text">
+                     <string>Nombre:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLabel" name="label_nomRemedioEli">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QLabel" name="label_imagEli">
+                  <property name="text">
+                   <string>IMAGEN</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <layout class="QGridLayout" name="gridLayout_20">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_CategoriaEli_2">
+                    <property name="text">
+                     <string>Categoria:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLabel" name="label_CategoriaEli">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="2" column="1" colspan="2">
+                 <layout class="QHBoxLayout" name="horizontalLayout_57">
+                  <item>
+                   <widget class="QLabel" name="label__ingredientes">
+                    <property name="text">
+                     <string>Ingredientes:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPlainTextEdit" name="plainTextEdit_IngredientesEli"/>
+                  </item>
+                 </layout>
+                </item>
+                <item row="3" column="1" rowspan="2" colspan="2">
+                 <layout class="QHBoxLayout" name="horizontalLayout_58">
+                  <item>
+                   <widget class="QLabel" name="label__descipcion">
+                    <property name="text">
+                     <string>Descripcion:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPlainTextEdit" name="plainTextEdit_procedimientoEli"/>
+                  </item>
+                 </layout>
+                </item>
+                <item row="4" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_59">
+                  <item>
+                   <spacer name="horizontalSpacer_62">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_eliminarRemedio">
+                    <property name="text">
+                     <string>Eliminar remedio</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
               </widget>
               <widget class="QWidget" name="page_10">
-               <widget class="QComboBox" name="comboBox_categoriaEdit">
-                <property name="geometry">
-                 <rect>
-                  <x>30</x>
-                  <y>40</y>
-                  <width>151</width>
-                  <height>31</height>
-                 </rect>
-                </property>
-               </widget>
-               <widget class="QLabel" name="label_editNombre">
-                <property name="geometry">
-                 <rect>
-                  <x>230</x>
-                  <y>60</y>
-                  <width>77</width>
-                  <height>24</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>Nombre:</string>
-                </property>
-               </widget>
-               <widget class="QLabel" name="label_editCategoria">
-                <property name="geometry">
-                 <rect>
-                  <x>240</x>
-                  <y>100</y>
-                  <width>93</width>
-                  <height>30</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>Categoria:</string>
-                </property>
-               </widget>
-               <widget class="QComboBox" name="comboBox_catEditar">
-                <property name="geometry">
-                 <rect>
-                  <x>340</x>
-                  <y>100</y>
-                  <width>141</width>
-                  <height>30</height>
-                 </rect>
-                </property>
-               </widget>
-               <widget class="QLineEdit" name="lineEdit_nombreEdit">
-                <property name="geometry">
-                 <rect>
-                  <x>320</x>
-                  <y>60</y>
-                  <width>176</width>
-                  <height>27</height>
-                 </rect>
-                </property>
-               </widget>
-               <widget class="QPlainTextEdit" name="plainTextEdit_editProcedi">
-                <property name="geometry">
-                 <rect>
-                  <x>450</x>
-                  <y>300</y>
-                  <width>251</width>
-                  <height>71</height>
-                 </rect>
-                </property>
-               </widget>
-               <widget class="QPlainTextEdit" name="plainTextEdit_editIngredi">
-                <property name="geometry">
-                 <rect>
-                  <x>400</x>
-                  <y>200</y>
-                  <width>251</width>
-                  <height>71</height>
-                 </rect>
-                </property>
-               </widget>
-               <widget class="QLabel" name="label_imagenEditar">
-                <property name="geometry">
-                 <rect>
-                  <x>520</x>
-                  <y>20</y>
-                  <width>160</width>
-                  <height>130</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-               <widget class="QLabel" name="label_editIngredi">
-                <property name="geometry">
-                 <rect>
-                  <x>260</x>
-                  <y>200</y>
-                  <width>119</width>
-                  <height>24</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>Ingredientes:</string>
-                </property>
-               </widget>
-               <widget class="QLabel" name="label_editprocedi">
-                <property name="geometry">
-                 <rect>
-                  <x>310</x>
-                  <y>310</y>
-                  <width>134</width>
-                  <height>24</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>Procedimiento:</string>
-                </property>
-               </widget>
-               <widget class="QPushButton" name="pushButton_editarRemedio">
-                <property name="geometry">
-                 <rect>
-                  <x>50</x>
-                  <y>330</y>
-                  <width>93</width>
-                  <height>28</height>
-                 </rect>
-                </property>
-                <property name="text">
-                 <string>Editar remedio</string>
-                </property>
-               </widget>
-               <widget class="QWidget" name="widget_5" native="true">
-                <property name="geometry">
-                 <rect>
-                  <x>-10</x>
-                  <y>80</y>
-                  <width>240</width>
-                  <height>240</height>
-                 </rect>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_24">
-                 <item row="0" column="0">
-                  <widget class="QScrollArea" name="scrollArea_5">
-                   <property name="widgetResizable">
-                    <bool>true</bool>
-                   </property>
-                   <widget class="QWidget" name="scrollAreaWidgetContents_5">
-                    <property name="geometry">
-                     <rect>
-                      <x>0</x>
-                      <y>0</y>
-                      <width>220</width>
-                      <height>220</height>
-                     </rect>
-                    </property>
-                    <layout class="QGridLayout" name="gridLayout_25">
+               <layout class="QGridLayout" name="gridLayout_39">
+                <item row="0" column="0" rowspan="4">
+                 <layout class="QVBoxLayout" name="verticalLayout_27">
+                  <item>
+                   <widget class="QComboBox" name="comboBox_categoriaEdit"/>
+                  </item>
+                  <item>
+                   <widget class="QWidget" name="widget_5" native="true">
+                    <layout class="QGridLayout" name="gridLayout_24">
                      <item row="0" column="0">
-                      <layout class="QGridLayout" name="listatips_2"/>
+                      <widget class="QScrollArea" name="scrollArea_5">
+                       <property name="widgetResizable">
+                        <bool>true</bool>
+                       </property>
+                       <widget class="QWidget" name="scrollAreaWidgetContents_5">
+                        <property name="geometry">
+                         <rect>
+                          <x>0</x>
+                          <y>0</y>
+                          <width>267</width>
+                          <height>236</height>
+                         </rect>
+                        </property>
+                        <layout class="QGridLayout" name="gridLayout_25">
+                         <item row="0" column="0">
+                          <layout class="QGridLayout" name="listatips_2"/>
+                         </item>
+                        </layout>
+                       </widget>
+                      </widget>
                      </item>
                     </layout>
                    </widget>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="0" column="1">
+                 <layout class="QHBoxLayout" name="horizontalLayout_60">
+                  <item>
+                   <widget class="QLabel" name="label_editNombre">
+                    <property name="text">
+                     <string>Nombre:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="lineEdit_nombreEdit"/>
+                  </item>
+                 </layout>
+                </item>
+                <item row="0" column="2" rowspan="2">
+                 <widget class="QLabel" name="label_imagenEditar">
+                  <property name="minimumSize">
+                   <size>
+                    <width>160</width>
+                    <height>130</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>IMAGEN</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <layout class="QHBoxLayout" name="horizontalLayout_61">
+                  <item>
+                   <widget class="QLabel" name="label_editCategoria">
+                    <property name="text">
+                     <string>Categoria:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="comboBox_catEditar"/>
+                  </item>
+                 </layout>
+                </item>
+                <item row="2" column="1" colspan="2">
+                 <layout class="QHBoxLayout" name="horizontalLayout_62">
+                  <item>
+                   <widget class="QLabel" name="label_editIngredi">
+                    <property name="text">
+                     <string>Ingredientes:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPlainTextEdit" name="plainTextEdit_editIngredi"/>
+                  </item>
+                 </layout>
+                </item>
+                <item row="3" column="1" rowspan="2" colspan="2">
+                 <layout class="QHBoxLayout" name="horizontalLayout_63">
+                  <item>
+                   <widget class="QLabel" name="label_editprocedi">
+                    <property name="text">
+                     <string>Procedimiento:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPlainTextEdit" name="plainTextEdit_editProcedi"/>
+                  </item>
+                 </layout>
+                </item>
+                <item row="4" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_64">
+                  <item>
+                   <spacer name="horizontalSpacer_63">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_editarRemedio">
+                    <property name="text">
+                     <string>Editar remedio</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
               </widget>
              </widget>
             </item>
@@ -6100,6 +6644,19 @@ color: rgb(68, 94, 134);
                  <string>Editar remedios</string>
                 </property>
                </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_22">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </item>

@@ -1804,7 +1804,7 @@ void MainWindow::on_pushButton_clicked()
     on_radioCitaPersonal_clicked();
 }
 
-//Buscar doctor
+//Buscar un doctor para una cita
 void MainWindow::on_btnBuscarDoctor_clicked()
 {
     QSqlQuery horarios, doc;
@@ -1816,7 +1816,7 @@ void MainWindow::on_btnBuscarDoctor_clicked()
     QStringList dias;
     dias<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado" << "Domingo";
 
-    horarios.exec("SELECT idDoc FROM horariodoc WHERE hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"'");
+    horarios.exec("SELECT idDoc FROM horariodoc WHERE hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"' AND nombreAct='Consulta'");
     if(ui->le_nombreDoc->text().isEmpty() && !horarios.next()){
         ui->lb_noHayDocs->setHidden(false);
         ui->tv_listaDocCitas->setModel(nullptr);
@@ -1825,52 +1825,12 @@ void MainWindow::on_btnBuscarDoctor_clicked()
         ui->lb_selDoc->setHidden(false);
         ui->lb_noHayDocs->setHidden(true);
         idDoc=horarios.value(0).toInt();
-
-        //Si movio la fecha pero aun no pone el nombre del doctor
-        if(!ui->le_nombreDoc->text().isEmpty()){
-            QStringList nombreC;
-            QString nombre, apeM, apeP;
-            nombreC=ui->le_nombreDoc->text().split(" ");
-
-            //Si solo ingreso una palabra
-            if(nombreC.size()==1) {
-                //Buscamos por nombre o apellido paterno
-                nombre = nombreC.at(0);
-                apeP = nombreC.at(0);
-
-                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
-                              "FROM doctor as d , especialidad as e , usuario as u "
-                              "WHERE d.iddoctor = "+QString::number((idDoc))+" "
-                              "AND u.matricula = d.idUser "
-                              "AND d.idEspecialidad = e.idEsp "
-                              "OR u.nombre='"+nombre+"' "
-                              "OR u.appaterno ='"+apeP+"' ");
-            }
-            //Si puso mas de su nombre o apellido
-            else {
-                nombre = nombreC.at(0);
-                apeP = nombreC.at(1);
-                apeM = nombreC.at(2);
-
-                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
-                              "FROM doctor as d , especialidad as e , usuario as u "
-                              "WHERE d.iddoctor = "+QString::number((idDoc))+" "
-                              "AND u.matricula = d.idUser "
-                              "AND d.idEspecialidad = e.idEsp "
-                              "OR u.nombre='"+nombre+"' "
-                              "OR u.appaterno ='"+apeP+"' "
-                              "OR u.apmaterno ='"+apeM+"'");
-            }
-        }
-        //Si está vacio el campo del nombre del doctor
         //Mostramos todos los doctores disponibles
-        else{
-            model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
+        model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
                           "FROM doctor as d , especialidad as e , usuario as u "
                           "WHERE d.iddoctor = "+QString::number((idDoc))+" "
                           "AND u.matricula = d.idUser "
                           "AND d.idEspecialidad = e.idEsp");
-        }
         qDebug()<<idDoc;
         ui->tv_listaDocCitas->setModel(model);
         ui->tv_listaDocCitas->setHidden(false);
@@ -2009,9 +1969,7 @@ void MainWindow::on_fechaCita_userDateChanged(const QDate &date)
 
 void MainWindow::on_horaCita_activated(const QString &arg1)
 {
-    if(arg1!="05:00"){
         on_btnBuscarDoctor_clicked();
-    }
 }
 void MainWindow::SolicitudCitas()
 {
@@ -2020,12 +1978,6 @@ void MainWindow::SolicitudCitas()
     citas="select *from cita where doctor='"+id_usuario+"' and estado='"+est+"'; ";
     QSqlQuery citas1;
     citas1.exec(citas);
-
-
-
-
-
-
     int f=0;
     int fi=0;
     int ban=1;
@@ -2061,7 +2013,6 @@ void MainWindow::SolicitudCitas()
     ui->encabezadoCitas->addWidget(l3,0,3,Qt::AlignLeft);
 
 
-
     QString folio,matricu,fecha,hora;
     int i=0;
 
@@ -2090,8 +2041,6 @@ void MainWindow::SolicitudCitas()
         ui->citasLay->addWidget(l,i,0,Qt::AlignTop);
 
 
-
-
         QLabel *m=new QLabel;
         m->setText(matricu);
         m->setFixedSize(QSize(100,25));
@@ -2099,17 +2048,11 @@ void MainWindow::SolicitudCitas()
         ui->citasLay->addWidget(m,i,1,Qt::AlignTop);
 
 
-
-
-
         QLabel *r=new QLabel;
         r->setText(fecha);
         r->setStyleSheet("background-color: rgb("+rgb+")");
         r->setFixedSize(QSize(100,25));
         ui->citasLay->addWidget(r,i,2,Qt::AlignTop);
-
-
-
 
         QLabel *h=new QLabel;
         h->setText(hora);
@@ -2123,7 +2066,6 @@ void MainWindow::SolicitudCitas()
        ui->citasLay->addWidget(ss,i,4,Qt::AlignTop);
 
 
-
        QPushButton *b=new QPushButton();
        b->setText("Revisar");
        b->setFixedSize(QSize(100,25));
@@ -2133,7 +2075,6 @@ void MainWindow::SolicitudCitas()
        mapper2->setMapping(b,folio);
        connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(verCita(QString)));
        ui->citasLay->addWidget(b,i,5,Qt::AlignTop);
-
 
        QPushButton *s=new QPushButton();
        s->setText("Aceptar");
@@ -2194,21 +2135,13 @@ void MainWindow::aceptarCita(QString folio)
         QSqlQuery mandarNoti;
         mandarNoti.exec(notificacion);
 
-
-
-
         clearLayout(ui->citasLay);
         SolicitudCitas();
-
     }
     else
     {
 
     }
-
-
-
-
 }
 
 void MainWindow::rechazarCita(QString folio)
@@ -2218,9 +2151,6 @@ void MainWindow::rechazarCita(QString folio)
     message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
     message.setButtonText(QMessageBox::No, tr("Cancelar"));
     if (message.exec() == QMessageBox::Yes){
-
-
-
 
         //aqui mando la notificacion:
         QString fech,hor,tipo;
@@ -2247,20 +2177,12 @@ void MainWindow::rechazarCita(QString folio)
         QSqlQuery eliminar;
         eliminar.exec(delete1);
 
-
-
         clearLayout(ui->citasLay);
         SolicitudCitas();
-
-
     }
     else
     {
-
     }
-
-
-
 }
 
 void MainWindow::verCita(QString folio)
@@ -2308,9 +2230,6 @@ void MainWindow::verCita(QString folio)
         ui->lugartext->hide();
         ui->label_5->hide();
         ui->sintomas->setPlainText(cita1.value(5).toString());
-
-
-
     }
     else
     {
@@ -2320,8 +2239,6 @@ void MainWindow::verCita(QString folio)
         datosCita.exec(citaExterna);
         datosCita.next();
         nombreU2=datosCita.value(2).toString();
-
-
 
         ui->tipoCita->setText("--Externa--");
         ui->Responsable->setText(nombreU);
@@ -2333,16 +2250,7 @@ void MainWindow::verCita(QString folio)
         ui->hora->setText(cita1.value(3).toString());
         ui->lugar->setText(datosCita.value(3).toString());
         ui->sintomas->setPlainText(cita1.value(5).toString());
-
-
-
-
-
     }
-
-
-
-
 }
 
 void MainWindow::on_regresar_citasDoc_clicked()
@@ -2376,9 +2284,6 @@ void MainWindow::on_butonNotifi_clicked()
       QSqlQuery upNoti,upNoti1;
       upNoti.exec(idNoti);
 
-
-
-
       while(upNoti.next())
       {
           id=upNoti.value(0).toString();
@@ -2386,10 +2291,6 @@ void MainWindow::on_butonNotifi_clicked()
           upNoti1.exec(update1);
 
       }
-
-
-
-
       verNoti=1;
     }
 }
@@ -2997,4 +2898,61 @@ void MainWindow::on_pushButton_editarRemedio_clicked()
      }
    }
 }
+
+// ////////////////////////////// LLENAR EL HISTORIAL //////////////////////////////
+
+//doctor quiere hacer una consulta
+void MainWindow::on_pb_realizarConsulta_clicked()
+{
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(5);
+    //Ocultamos los menus
+    ui->lb_noCoincideFecha->setHidden(true);
+    ui->w_infoPacConsulta->setHidden(true);
+    ui->sw_historialReceta->setHidden(true);
+}
+
+//Cuando busca un folio de cita
+void MainWindow::on_pb_buscarCita_clicked()
+{
+    QSqlQuery cita,fecha;
+    QPixmap pix;
+
+    cita.exec("SELECT * FROM cita WHERE idCita="+ui->le_folioCita->text());
+    if(cita.next()){
+        //Verificamos si es el dia de la consulta (La hora no porque puede que pase antes el paciente)
+        fecha.exec("SELECT CURDATE()");
+        fecha.next();
+        if(fecha.value(0).toDate().toString("yyyy/MM/dd") == cita.value(2).toDate().toString("yyyy/MM/dd") ){
+            //Si si es el dia
+            datosPac->exec("SELECT CONCAT(nombre,' ',appaterno,' ',apmaterno) as nomC, edad, sexo, religion,fotop FROM usuario WHERE matricula="+cita.value(1).toString());
+            if( datosPac->next() ){
+                ui->lb_noCoincideFecha->setHidden(true);
+
+                //Llenamos el ui
+                ui->lb_nomPac->setText(datosPac->value(0).toString());
+                ui->lb_edad->setText(datosPac->value(1).toString());
+                ui->lb_sexoPac->setText(datosPac->value(2).toString());
+                ui->lb_religion->setText(datosPac->value(3).toString());
+                ui->te_sintomas->setText(cita.value(5).toString());
+                pix.loadFromData(datosPac->value(4).toByteArray());
+                ui->lb_imgPac->setPixmap(pix.scaled(ui->lb_imgPac->width(),ui->lb_imgPac->height(),Qt::KeepAspectRatio));
+                //mostramos los menus
+                ui->w_infoPacConsulta->setHidden(false);
+                ui->sw_historialReceta->setHidden(false);
+
+            }else qDebug()<<"Mala usuario"<<datosDoc->lastError().text();
+        //Si no es el dia
+        }else ui->lb_noCoincideFecha->setHidden(false);
+    }else qDebug()<<"Mala cita"<<cita.lastError().text();
+}
+
+//Cuando termina de llenar el historial
+void MainWindow::on_pb_llenarHistorial_clicked()
+{
+    //Validar los datos
+
+    //Nos movemos a la receta
+    ui->sw_historialReceta->setCurrentIndex(1);
+}
+// ////////////////////////////// FIN : LLENAR EL HISTORIAL //////////////////////////////
 
