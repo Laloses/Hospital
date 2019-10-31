@@ -85,7 +85,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                         if(est1=="1")
                         {
                             tipo=false;
-                            idDoctor=doctor.value(1).toString();
+                            idDoctor=doctor.value(0).toString();
                             idUser=userval;
                             return 3;
                         }
@@ -104,7 +104,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                         if(user==aux)
                         {
                             tipo=false;
-                            idPaciente=paciente.value(1).toString();
+                            idPaciente=paciente.value(0).toString();
                             idUser=userval;
                             return 2;
                         }
@@ -120,7 +120,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                                 if(est2=="1")
                                 {
                                     tipo=false;
-                                    idStaff=staff.value(1).toString();
+                                    idStaff=staff.value(0).toString();
                                     idUser=userval;
                                     return 4;
                         }

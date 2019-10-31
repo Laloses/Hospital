@@ -33,7 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //Ocultamos el boton salir
     ui->pushButton_salir->setHidden(true);
     ui->pushButton_miPerfil->setHidden(true);
-    id_staff=id_doctor=id_usuario=id_paciente="0";
 
     //Modo de contraseñas
     ui->lineEdit_password1->setEchoMode(QLineEdit::Password);
@@ -270,7 +269,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             ui->nofi->hide();
 
             QString busca;
-            busca="select *from notificacion where UserP='"+id_paciente+"'; ";
+            busca="select * from notificacion where UserP='"+id_paciente+"'; ";
             QSqlQuery buscarNoti;
             buscarNoti.exec(busca);
 
@@ -689,7 +688,6 @@ void MainWindow::on_pushButton_miPerfil_clicked()
         datosDoc->exec("SELECT * FROM doctor WHERE idUser="+id_usuario);
 
             if(datosPac->next()){
-                id_paciente=datosPac->value(1).toString();
                 cargarDatosUsuarios();
                 //Pagina de paciente
                 ui->stackedWidget_principal->setCurrentIndex(2);
@@ -698,7 +696,6 @@ void MainWindow::on_pushButton_miPerfil_clicked()
             }
 
             if(datosStaff->next()){
-                id_staff=datosStaff->value(1).toString();
                 cargarDatosUsuarios();
                 //Pagina de staff
                 ui->stackedWidget_principal->setCurrentIndex(4);
@@ -706,7 +703,6 @@ void MainWindow::on_pushButton_miPerfil_clicked()
             }
 
             if(datosDoc->next()){
-                id_doctor=datosDoc->value(1).toString();
                 cargarDatosUsuarios();
                 cargarHorarioDoc();
                 //Pagina de doctor
