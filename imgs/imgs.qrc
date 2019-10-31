@@ -13,5 +13,11 @@
         <file>NoView.png</file>
         <file>view.png</file>
         <file>fondo.png</file>
+        <file>notification.png</file>
+        <file>notification2.png</file>
+        <file>consultorio.png</file>
+        <file>diploma.png</file>
+        <file>horario.png</file>
+        <file>universidad.png</file>
     </qresource>
 </RCC>
