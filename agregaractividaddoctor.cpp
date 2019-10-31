@@ -12,7 +12,7 @@ agregarActividadDoctor::agregarActividadDoctor(QWidget *parent, QString id) :
     QString especialidad;
     //Buscamos su especialidad
     q.exec("SELECT idEspecialidad,horario FROM doctor WHERE iddoctor="+idDoc);
-    q.next();
+    if( !q.next() ) qDebug()<<idDoc<<" "<<q.lastError().text();
     especialidad=q.value(0).toString();
     turno=q.value(1).toString();
     //Cruzamos las actividades por default y su especialidad

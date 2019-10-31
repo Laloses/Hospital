@@ -193,6 +193,25 @@ private slots:
 
     void on_pb_rechazarCitas_clicked();
     void CancelarCita(QString);
+    void on_btnEditarDoctor_clicked();
+
+    void on_btnCancelarEditarDoctor_clicked();
+
+    void on_btnGuardarEditarDoctor_clicked();
+
+    void on_btnMostrarContrasena_3_clicked();
+
+    void on_btnMostrarContrasena_4_clicked();
+
+    void on_btnEditarPaciente_clicked();
+
+    void on_btnCancelarEditarPaciente_clicked();
+
+    void on_btnGuardarEditarPaciente_clicked();
+
+    void on_btnMostrarContrasena_5_clicked();
+
+    void on_btnMostrarContrasena_6_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
