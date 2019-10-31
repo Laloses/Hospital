@@ -211,7 +211,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
         informacion.exec();
     }else {
 
-        qDebug()<<"entre por que no escribi nada 2";
+        qDebug()<<"escribi algo";
         login lo;
         tipo=lo.ingresar(user,clave,database);
 
@@ -2471,11 +2471,16 @@ void MainWindow::on_btnGuardarEditarStaff_clicked()
                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
                 messageBox.exec();
             }
+            else if(telefonoNuevo.size() < 10){
+                QMessageBox messageBox(QMessageBox::Critical,tr("Error"), tr("Telefono debe ser 10 dígitos"), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+            }
             else {
                 qDebug() << "------------------------";
                 qDebug() << "Id del usuario (staff)";
-                //qDebug(id_usuario.toLatin1());
-                actualizacion="update usuario set clave='"+passwordNueva+"',email='"+correoNuevo+"',telefono='"+telefonoNuevo+"'WHERE matricula='"+id_usuario+"'";
+                qDebug(id_usuario.toLatin1());
+                actualizacion="update usuario set clave='"+passwordNueva+"',email='"+correoNuevo+"',telefono="+telefonoNuevo+" WHERE matricula='"+id_usuario+"'";
                 perfilStaff.exec(actualizacion);
                 QMessageBox messageBox(QMessageBox::Information,tr("Éxito"), tr("Los datos se han actualizado correctamente."), QMessageBox::Yes);
                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
@@ -3017,8 +3022,8 @@ void MainWindow::on_btnEditarDoctor_clicked()
     ui->lineTelDoctor->setReadOnly(false);
     ui->lineTelDoctor->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
     ui->btnEditarDoctor->setHidden(true);
-    ui->btnEditarDoctor->setHidden(false);
     ui->btnGuardarEditarDoctor->setHidden(false);
+    ui->btnCancelarEditarDoctor->setHidden(false);
     ui->imgCon1_2->setHidden(false);
     ui->imgCon2_2->setHidden(false);
     ui->lineContraseniaDoc->setHidden(false);
@@ -3075,16 +3080,21 @@ void MainWindow::on_btnGuardarEditarDoctor_clicked()
                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
                 messageBox.exec();
             }
+            else if(telefonoNuevo.size() < 10){
+                QMessageBox messageBox(QMessageBox::Critical,tr("Error"), tr("Telefono debe ser 10 dígitos"), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+            }
             else {
                 qDebug() << "------------------------";
                 qDebug() << "Id del usuario (doc)";
-                //qDebug(id_usuario.toLatin1());
-                actualizacion="update usuario set clave='"+passwordNueva+"',email='"+correoNuevo+"',telefono='"+telefonoNuevo+"'WHERE matricula='"+id_usuario+"'";
-                perfilStaff.exec(actualizacion);
-                QMessageBox messageBox(QMessageBox::Information,tr("Éxito"), tr("Los datos se han actualizado correctamente."), QMessageBox::Yes);
-                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
-                messageBox.exec();
-                on_pushButton_miPerfil_clicked();
+                qDebug(id_usuario.toLatin1());
+                actualizacion="update usuario set clave='"+passwordNueva+"',email='"+correoNuevo+"',telefono="+telefonoNuevo+" WHERE matricula='"+id_usuario+"'";
+                if( perfilStaff.exec(actualizacion) ){
+                    QMessageBox messageBox(QMessageBox::Information,tr("Éxito"), tr("Los datos se han actualizado correctamente."), QMessageBox::Yes);
+                    messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                    messageBox.exec();
+                } else qDebug()<<perfilStaff.lastError().text();
                 ui->lineCorreoDoctor->setReadOnly(true);
                 ui->lineCorreoDoctor->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineTelDoctor->setReadOnly(true);
@@ -3100,6 +3110,7 @@ void MainWindow::on_btnGuardarEditarDoctor_clicked()
                 ui->btnGuardarEditarDoctor->setHidden(true);
                 ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+                on_pushButton_miPerfil_clicked();
             }
         }
     }
@@ -3209,16 +3220,21 @@ void MainWindow::on_btnGuardarEditarPaciente_clicked()
                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
                 messageBox.exec();
             }
+            else if(telefonoNuevo.size() < 10){
+                QMessageBox messageBox(QMessageBox::Critical,tr("Error"), tr("Telefono debe ser 10 dígitos"), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+            }
             else {
                 qDebug() << "------------------------";
                 qDebug() << "Id del usuario (paciente)";
-                //qDebug(id_usuario.toLatin1());
-                actualizacion="update usuario set clave='"+passwordNueva+"',email='"+correoNuevo+"',telefono='"+telefonoNuevo+"'WHERE matricula='"+id_usuario+"'";
-                perfilStaff.exec(actualizacion);
-                QMessageBox messageBox(QMessageBox::Information,tr("Éxito"), tr("Los datos se han actualizado correctamente."), QMessageBox::Yes);
-                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
-                messageBox.exec();
-                on_pushButton_miPerfil_clicked();
+                qDebug(id_usuario.toLatin1());
+                actualizacion="update usuario set clave='"+passwordNueva+"',email='"+correoNuevo+"',telefono='"+telefonoNuevo+"' WHERE matricula='"+id_usuario+"'";
+                if( perfilStaff.exec(actualizacion) ){
+                    QMessageBox messageBox(QMessageBox::Information,tr("Éxito"), tr("Los datos se han actualizado correctamente."), QMessageBox::Yes);
+                    messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                    messageBox.exec();
+                } else qDebug()<<perfilStaff.lastError().text();
 
                 ui->lineCorreoPaciente->setReadOnly(true);
                 ui->lineCorreoPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
@@ -3235,6 +3251,7 @@ void MainWindow::on_btnGuardarEditarPaciente_clicked()
                 ui->btnGuardarEditarPaciente->setHidden(true);
                 ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+                on_pushButton_miPerfil_clicked();
             }
         }
     }
