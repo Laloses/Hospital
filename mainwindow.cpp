@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Ocultamos el boton salir
     ui->pushButton_salir->setHidden(true);
     ui->pushButton_miPerfil->setHidden(true);
+    ui->pb_remedios->setHidden(true);
 
     //Modo de contraseñas
     ui->lineEdit_password1->setEchoMode(QLineEdit::Password);
@@ -263,6 +264,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 
             id_paciente=lo.getIdPaciente();
             id_usuario=lo.getIdUser();
+            ui->pb_remedios->setHidden(false);
 
             //esto lo puse para habilitar las notificaciones
             verNoti=1;
@@ -326,6 +328,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
                 ui->notificacionL->setText(num);
                 ui->notificacionL->show();
             }
+
             on_pushButton_miPerfil_clicked();
 
         }
@@ -385,7 +388,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 }
 
 void MainWindow::ocultarMenuP(){
-    ui->comboBox_servicios->setHidden(true);
+    ui->pb_servicios->setHidden(true);
     ui->pushButton_especialidades->setHidden(true);
     ui->pushButton_infoHospital->setHidden(true);
     ui->pushButton__dirMedico->setHidden(true);
@@ -395,7 +398,7 @@ void MainWindow::ocultarMenuP(){
 }
 
 void MainWindow::mostrarMenuP(){
-    ui->comboBox_servicios->setHidden(false);
+    ui->pb_servicios->setHidden(false);
     ui->pushButton_especialidades->setHidden(false);
     ui->pushButton_infoHospital->setHidden(false);
     ui->pushButton__dirMedico->setHidden(false);
@@ -418,6 +421,7 @@ void MainWindow::on_pushButton_salir_clicked()
     ui->pushButton_registro->setHidden(false);
 
     //mostramos cosas del menu de arriba
+    ui->pb_remedios->setHidden(true);
     mostrarMenuP();
 }
 

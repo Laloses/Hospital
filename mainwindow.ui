@@ -78,14 +78,14 @@
 	background: rgb(51, 97, 123);
 	color: rgb(255, 255, 255);
 }
-QComboBox, #pushButton_especialidades, #pushButton__dirMedico, #pushButton_infoHospital{
+#pb_servicios, #pushButton_especialidades, #pushButton__dirMedico, #pushButton_infoHospital,#pb_remedios{
 	background-color: transparent;
 	border-radius:6px;
 	color:#fff;
 	padding:6px;
 	text-decoration:none;
 }
-QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover, #pushButton_infoHospital:hover{
+#pb_servicios:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover, #pushButton_infoHospital:hover,#pb_remedios:hover{
 	color: rgb(111, 157, 183);
 }</string>
       </property>
@@ -329,33 +329,10 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
               </spacer>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_servicios">
-               <property name="focusPolicy">
-                <enum>Qt::WheelFocus</enum>
+              <widget class="QPushButton" name="pb_servicios">
+               <property name="text">
+                <string>SERVICIOS</string>
                </property>
-               <property name="autoFillBackground">
-                <bool>false</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QListView::item:selected {
-      border: 1px solid #6a6ea9;
-  }</string>
-               </property>
-               <item>
-                <property name="text">
-                 <string>SERVICIOS</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
               </widget>
              </item>
              <item>
@@ -397,6 +374,20 @@ QComboBox:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover,
               <widget class="QPushButton" name="pushButton_infoHospital">
                <property name="text">
                 <string>INFORMACIÓN HOSPITAL</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_8">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pb_remedios">
+               <property name="text">
+                <string>REMEDIOS</string>
                </property>
               </widget>
              </item>
@@ -473,7 +464,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
 </string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -2976,7 +2967,7 @@ background-color:transparent</string>
                         <x>0</x>
                         <y>0</y>
                         <width>198</width>
-                        <height>275</height>
+                        <height>146</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -4948,7 +4939,7 @@ background -color: red;
                     <x>0</x>
                     <y>0</y>
                     <width>848</width>
-                    <height>306</height>
+                    <height>280</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -6394,8 +6385,8 @@ color: rgb(68, 94, 134);
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>409</width>
-                      <height>321</height>
+                      <width>20</width>
+                      <height>20</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_14">
@@ -6783,8 +6774,8 @@ color: rgb(68, 94, 134);
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>411</width>
-                    <height>387</height>
+                    <width>20</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
@@ -7290,8 +7281,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>478</width>
-                        <height>309</height>
+                        <width>461</width>
+                        <height>20</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -7389,8 +7380,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>478</width>
-                        <height>309</height>
+                        <width>461</width>
+                        <height>20</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -7826,8 +7817,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>426</width>
-                          <height>260</height>
+                          <width>20</width>
+                          <height>20</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -8146,6 +8137,21 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
          </widget>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="p_servicios">
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>140</y>
+          <width>101</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>SERVICIOS</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
