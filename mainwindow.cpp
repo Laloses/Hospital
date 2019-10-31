@@ -2016,9 +2016,14 @@ void MainWindow::on_horaCita_activated(const QString &arg1)
 }
 void MainWindow::SolicitudCitas()
 {
-    QString citas,est;
+    QString citas,est,idD,idD2;
+    idD="select iddoctor from doctor where idUser='"+id_usuario+"'; ";
+    QSqlQuery busId;
+    busId.exec(idD);
+    busId.next();
+    idD2=busId.value(0).toString();;
     est="0";
-    citas="select *from cita where doctor='"+id_usuario+"' and estado='"+est+"'; ";
+    citas="select *from cita where doctor='"+idD2+"' and estado='"+est+"'; ";
     QSqlQuery citas1;
     citas1.exec(citas);
 
@@ -3028,7 +3033,7 @@ void MainWindow::CitasAceptadas()
     QSqlQuery citas1;
     citas1.exec(citas);
 
-    int i=1;
+     int i=1;
      QString folio,matricu,fecha,hora,preparada;
 
 
@@ -3106,6 +3111,8 @@ void MainWindow::CitasAceptadas()
    mapper2->setMapping(b,folio);
    connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(CancelarCita(QString)));
    ui->citasAceptadas->addWidget(b,i,5,Qt::AlignTop);
+
+    i++;
 
         }
         else
