@@ -2047,14 +2047,9 @@ void MainWindow::SolicitudCitas()
 {
     QString citas,est;
     est="0";
-    citas="select *from cita where doctor='"+id_usuario+"' and estado='"+est+"'; ";
+    citas="select * from cita where doctor='"+id_usuario+"' and estado='"+est+"'; ";
     QSqlQuery citas1;
     citas1.exec(citas);
-
-
-
-
-
 
     int f=0;
     int fi=0;
@@ -2089,9 +2084,6 @@ void MainWindow::SolicitudCitas()
     l3->setFixedSize(QSize(100,25));
     l3->setStyleSheet("border: 1px solid rgb(9,9,9)");
     ui->encabezadoCitas->addWidget(l3,0,3,Qt::AlignLeft);
-
-
-
     QString folio,matricu,fecha,hora;
     int i=0;
 
@@ -2119,17 +2111,11 @@ void MainWindow::SolicitudCitas()
         l->setStyleSheet("background-color: rgb("+rgb+")");
         ui->citasLay->addWidget(l,i,0,Qt::AlignTop);
 
-
-
-
         QLabel *m=new QLabel;
         m->setText(matricu);
         m->setFixedSize(QSize(100,25));
         m->setStyleSheet("background-color: rgb("+rgb+")");
         ui->citasLay->addWidget(m,i,1,Qt::AlignTop);
-
-
-
 
 
         QLabel *r=new QLabel;
@@ -2255,7 +2241,7 @@ void MainWindow::rechazarCita(QString folio)
         //aqui mando la notificacion:
         QString fech,hor,tipo;
         QString cita,user1;
-            cita="select *from  cita where idCita='"+folio+"';  ";
+            cita="select * from  cita where idCita='"+folio+"';  ";
             QSqlQuery cita1;
             cita1.exec(cita);
             cita1.next();
@@ -2281,8 +2267,6 @@ void MainWindow::rechazarCita(QString folio)
 
         clearLayout(ui->citasLay);
         SolicitudCitas();
-
-
     }
     else
     {
