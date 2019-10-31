@@ -3017,9 +3017,14 @@ void MainWindow::CitasAceptadas()
     r2="221,221,221";
     QString rgb="";
 
-    QString citas,est;
+    QString citas,est,idD,idD2;
+    idD="select iddoctor from doctor where idUser='"+id_usuario+"'; ";
+    QSqlQuery busId;
+    busId.exec(idD);
+    busId.next();
+    idD2=busId.value(0).toString();
     est="1";
-    citas="select *from cita where doctor='"+id_usuario+"' and estado='"+est+"'; ";
+    citas="select *from cita where doctor='"+idD2+"' and estado='"+est+"'; ";
     QSqlQuery citas1;
     citas1.exec(citas);
 
@@ -3088,7 +3093,7 @@ void MainWindow::CitasAceptadas()
     QLabel *ss=new QLabel;
     ss->setText(" ");
     ss->setFixedSize(QSize(60,25));
-   ui->citasLay->addWidget(ss,i,4,Qt::AlignTop);
+    ui->citasAceptadas->addWidget(ss,i,4,Qt::AlignTop);
 
 
 
