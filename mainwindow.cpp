@@ -396,6 +396,7 @@ void MainWindow::ocultarMenuP(){
     ui->line->setHidden(true);
     ui->line_2->setHidden(true);
     ui->line_3->setHidden(true);
+    ui->line_8->setHidden(true);
 }
 
 void MainWindow::mostrarMenuP(){
@@ -406,6 +407,7 @@ void MainWindow::mostrarMenuP(){
     ui->line->setHidden(false);
     ui->line_2->setHidden(false);
     ui->line_3->setHidden(false);
+    ui->line_8->setHidden(false);
 }
 
 //Salir
@@ -3170,7 +3172,8 @@ void MainWindow::CancelarCita(QString folio)
 
     }
     else
-    {
+    {}
+}
 
 void MainWindow::on_btnEditarDoctor_clicked()
 {
