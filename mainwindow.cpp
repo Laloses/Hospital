@@ -2940,6 +2940,33 @@ void MainWindow::on_pb_buscarCita_clicked()
                 ui->w_infoPacConsulta->setHidden(false);
                 ui->sw_historialReceta->setHidden(false);
 
+                // ///////////////////// CARGAMOS LOS DATOS ACUTALES DEL HISTORIAL DEL PACIENTE /////////////////////
+
+                QSqlQuery historialPac,idPac;
+                idPac.exec("SELECT idpaciente FROM paciente WHERE idUser="+cita.value(1).toString());
+                idPac.next();
+
+                // Si no tiene historial, crear uno nuevo
+                if(!historialPac.exec("SELECT * FROM historialPaciente WHERE idPaciente="+idPac.value(0).toString())){
+                    historialPac.exec("INSERT INTO historialPaciente(idPaciente) value ("+idPac.value(0).toString()+")");
+                }
+                // Si ya tiene un historial, cargar los datos a la ui
+                else{
+                    ui->le_estatura->setText(historialPac.value(1).toString());
+                    ui->le_peso->setText(historialPac.value(2).toString());
+                    ui->de_ultimaVacuna->setDate(historialPac.value(3).toDate());
+                    ui->te_alergias->setText(historialPac.value(4).toString());
+                    ui->te_accidentes->setText(historialPac.value(5).toString());
+                    ui->te_enfermedades->setText(historialPac.value(6).toString());
+                    ui->te_cirugias->setText(historialPac.value(7).toString());
+                    ui->te_hospi->setText(historialPac.value(8).toString());
+                    ui->te_trabajos->setText(historialPac.value(9).toString());
+                    ui->te_habitos->setText(historialPac.value(10).toString());
+                    ui->te_frecAlco->setText(historialPac.value(11).toString());
+                    ui->te_frecFuma->setText(historialPac.value(12).toString());
+                    ui->te_enfeFami->setText(historialPac.value(13).toString());
+                }
+
             }else qDebug()<<"Mala usuario"<<datosDoc->lastError().text();
         //Si no es el dia
         }else ui->lb_noCoincideFecha->setHidden(false);
@@ -2949,10 +2976,31 @@ void MainWindow::on_pb_buscarCita_clicked()
 //Cuando termina de llenar el historial
 void MainWindow::on_pb_llenarHistorial_clicked()
 {
-    //Validar los datos
+    //Insertar los datos
+    QSqlQuery llenarHist;
+    if( !llenarHist.exec("UPDATE historialPaciente SET "
+                         " estatura ="+ui->le_estatura->text()+
+                         "peso ="+ui->le_peso->text()+
+                         "fechaUltimaVacuna="+ui->de_ultimaVacuna->date().toString("yyyy-MM-dd")+
+                         "alergias="+ui->te_alergias->toPlainText()+
+                         "accidente="+ui->te_accidentes->toPlainText()+
+                         "enfermedad="+ui->te_enfermedades->toPlainText()+
+                         "cirugias="+ui->te_cirugias->toPlainText()+
+                         "hospitalizaciones="+ui->te_hospi->toPlainText()+
+                         "trabajos="+ui->te_trabajos->toPlainText()+
+                         "habitos="+ui->te_habitos->toPlainText()+
+                         "frecuenciaAlcohol="+ui->te_frecAlco->toPlainText()+
+                         "frecuenciaCigarro="+ui->te_frecFuma->toPlainText()+
+                         "enfermedadesFamilia="+ui->te_enfeFami->toPlainText() )){
 
-    //Nos movemos a la receta
-    ui->sw_historialReceta->setCurrentIndex(1);
+        //Si no se puede hacer la consulta
+        qDebug()<<llenarHist.lastError().text();
+        QMessageBox::warning(this,"Error","No se pudo guardar los datos");
+
+    }else{
+        //Nos movemos a la receta
+        ui->sw_historialReceta->setCurrentIndex(1);
+    }
 }
 // ////////////////////////////// FIN : LLENAR EL HISTORIAL //////////////////////////////
 
