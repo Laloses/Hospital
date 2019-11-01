@@ -213,6 +213,14 @@ private slots:
 
     void on_btnMostrarContrasena_6_clicked();
 
+    void PonerCitas(QString);
+
+    void mostrarCitas();
+
+    void on_pushButton_Cancelar_Cita_clicked();
+
+    void on_butonNotifi_4_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
