@@ -17,6 +17,8 @@
 #include "agregaractividaddoctor.h"
 #include "agregarcitaspaciente.h"
 #include "agregartipremedio.h"
+#include "pagarcitaspaciente.h"
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -46,6 +48,9 @@ private:
     void SolicitudCitas();
     void cargarCategoria();
     void CitasAceptadas();
+    pagarCitasPaciente *pagar;
+    QTimer *ocultar;
+    int contador;
 
 
 private slots:
@@ -214,12 +219,15 @@ private slots:
     void on_btnMostrarContrasena_6_clicked();
 
     void PonerCitas(QString);
+    void PagarCitas(QString);
 
     void mostrarCitas();
 
     void on_pushButton_Cancelar_Cita_clicked();
 
     void on_butonNotifi_4_clicked();
+
+    void actTablaCitas();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

@@ -1,6 +1,8 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "pagarcitaspaciente.h"
 #include <QString>
+#include <QTimer>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -3517,11 +3519,11 @@ void MainWindow::PonerCitas(QString folio){
     QSqlQuery query;
     qDebug()<<"folio:"<<folio;
     QMessageBox messageBox(QMessageBox::Warning,
-                           tr(""), tr("Cita canselada"), QMessageBox::Yes);
+                           tr(""), tr("Cita cancelada"), QMessageBox::Yes);
     messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
 
     QMessageBox message(QMessageBox::Question,
-                        tr("Warning"), tr("¿Estas seguro de cancelartu cita?"), QMessageBox::Yes | QMessageBox::No);
+                        tr("Warning"), tr("¿Estas seguro de cancelar tu cita?"), QMessageBox::Yes | QMessageBox::No);
     message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
     message.setButtonText(QMessageBox::No, tr("Cancelar"));
 
@@ -3553,15 +3555,38 @@ void MainWindow::PonerCitas(QString folio){
     }
 }
 
+void MainWindow::PagarCitas(QString folio){
+    QString consulta;
+    QSqlQuery query;
+    qDebug()<<"folio:"<<folio;
+    QMessageBox messageBox(QMessageBox::Warning,
+                           tr(""), tr("Cita cancelada"), QMessageBox::Yes);
+    messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
 
+    QMessageBox message(QMessageBox::Question,
+                        tr("Warning"), tr("¿Estas seguro de pagar tu cita?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+    if (message.exec() == QMessageBox::Yes){
+            pagar = new pagarCitasPaciente(folio,this);
+            pagar->show();
+            ocultar=new QTimer(this);
+            connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaCitas()));
+            ocultar->start(1000);
+
+    }
+
+}
 void MainWindow::mostrarCitas(){
 
 
     QString citas,est;
     QSqlQuery consulta;
     est="1";
-    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_paciente+"' and cit.estado='"+est+"'";
+    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_usuario+"' and cit.estado='"+est+"' and cit.pagada=0";
     if(!consulta.exec(citas)) consulta.lastError().text();
+
     int f=0;
     int ban=1;
     QString r1,g1,b1;
@@ -3659,6 +3684,18 @@ void MainWindow::mostrarCitas(){
         mapper1->setMapping(q,folio);
         connect(mapper1,SIGNAL(mapped(QString)),this,SLOT(PonerCitas(QString)));
         ui->citasLay_2->addWidget(q,i,7,Qt::AlignTop);
+
+
+        QPushButton *p= new QPushButton();
+        p->setText("Pagar");
+        p->setFixedSize(QSize(100,25));
+        p->setStyleSheet("background-color: rgb(138,198,242)");
+        QSignalMapper *mapper2=new QSignalMapper(this);
+        connect(p,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
+        mapper2->setMapping(p,folio);
+        connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(PagarCitas(QString)));
+        ui->citasLay_2->addWidget(p,i,9,Qt::AlignTop);
+
         i++;
 
     }
@@ -3707,4 +3744,15 @@ void MainWindow::on_butonNotifi_4_clicked()
         verNoti=1;
     }
 
+}
+
+void MainWindow::actTablaCitas()
+{
+    contador++;
+    if(contador==180){
+        ocultar->stop();
+
+    }
+    clearLayout(ui->citasLay_2);
+    mostrarCitas();
 }
