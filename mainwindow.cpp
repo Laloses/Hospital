@@ -272,7 +272,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             ui->nofi->hide();
 
             QString busca;
-            busca="select * from notificacion where UserP='"+id_paciente+"'; ";
+            busca="select *from notificacion where UserP='"+id_usuario+"'";
             QSqlQuery buscarNoti;
             buscarNoti.exec(busca);
 
@@ -286,7 +286,6 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
                 qDebug()<<"ya se vio: "<<nueva;
                 if(nueva=="0")
                 {
-
                     contadorNoti++;
               }
             }
@@ -357,7 +356,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             ui->nofi_2->hide();
 
             QString busca;
-            busca="select *from notificacion where UserP='"+ id_doctor+"'; ";
+            busca="select *from notificacion where UserP='"+id_doctor+"'";
             QSqlQuery buscarNoti;
             buscarNoti.exec(busca);
 
@@ -379,6 +378,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             while(buscarNoti.previous()){
                 if(buscarNoti.value(1).toString()=="1")
                 {
+
                     QPlainTextEdit *b=new QPlainTextEdit();
                     // QPushButton *b=new QPushButton();
                     b->setPlainText(buscarNoti.value(2).toString());
@@ -756,6 +756,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
         datosDoc->exec("SELECT * FROM doctor WHERE idUser="+id_usuario);
 
             if(datosPac->next()){
+                id_paciente=datosPac->value(0).toString();
                 cargarDatosUsuarios();
                 //Pagina de paciente
                 ui->stackedWidget_principal->setCurrentIndex(2);
@@ -764,6 +765,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
             }
 
             if(datosStaff->next()){
+                id_paciente=datosStaff->value(0).toString();
                 cargarDatosUsuarios();
                 //Pagina de staff
                 ui->stackedWidget_principal->setCurrentIndex(4);
@@ -771,6 +773,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
             }
 
             if(datosDoc->next()){
+                id_paciente=datosDoc->value(0).toString();
                 cargarDatosUsuarios();
                 cargarHorarioDoc();
                 //Pagina de doctor
@@ -3517,11 +3520,11 @@ void MainWindow::PonerCitas(QString folio){
     QSqlQuery query;
     qDebug()<<"folio:"<<folio;
     QMessageBox messageBox(QMessageBox::Warning,
-                           tr(""), tr("Cita canselada"), QMessageBox::Yes);
+                           tr(""), tr("Cita cancelada"), QMessageBox::Yes);
     messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
 
     QMessageBox message(QMessageBox::Question,
-                        tr("Warning"), tr("¿Estas seguro de cancelartu cita?"), QMessageBox::Yes | QMessageBox::No);
+                        tr("Warning"), tr("¿Estas seguro de cancelar tu cita?"), QMessageBox::Yes | QMessageBox::No);
     message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
     message.setButtonText(QMessageBox::No, tr("Cancelar"));
 
@@ -3560,7 +3563,7 @@ void MainWindow::mostrarCitas(){
     QString citas,est;
     QSqlQuery consulta;
     est="1";
-    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_paciente+"' and cit.estado='"+est+"'";
+    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_usuario+"' and cit.estado='"+est+"'";
     if(!consulta.exec(citas)) consulta.lastError().text();
     int f=0;
     int ban=1;
@@ -3651,7 +3654,7 @@ void MainWindow::mostrarCitas(){
         ui->citasLay_2->addWidget(ss,i,4,Qt::AlignTop);
 
         QPushButton *q=new QPushButton();
-        q->setText("Rechazar");
+        q->setText("Cancelar");
         q->setFixedSize(QSize(100,25));
         q->setStyleSheet("background-color: rgb(138,198,242)");
         QSignalMapper *mapper1=new QSignalMapper(this);
@@ -3692,7 +3695,7 @@ void MainWindow::on_butonNotifi_4_clicked()
         ui->nofi_2->hide();
 
         QString idNoti,id,update1;
-        idNoti="select idNoti from notificacion;";
+        idNoti="select idNoti from notificacion";
         QSqlQuery upNoti,upNoti1;
         upNoti.exec(idNoti);
 

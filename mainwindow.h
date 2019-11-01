@@ -85,6 +85,7 @@ private slots:
     void on_pushButton_datosPaciente_clicked();
 
     void on_pb_agregarActividadDoc_clicked();
+
     void on_pushButton_SolicitudesUsuarios_clicked();
 
     void on_pushButton_AceptarSoli_clicked();
@@ -107,7 +108,9 @@ private slots:
     void on_radioButton_staffs_clicked();
 
     void on_pushButton_menu_Pincipal_Adm_clicked();
+
     void aceptarCita(QString);
+
     void rechazarCita(QString);
     void verCita(QString);
 
