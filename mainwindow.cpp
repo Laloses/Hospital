@@ -3171,8 +3171,8 @@ void MainWindow::CancelarCita(QString folio)
 
 
     }
-    else
-    {}
+    //else
+    //{}
 }
 
 void MainWindow::on_btnEditarDoctor_clicked()
