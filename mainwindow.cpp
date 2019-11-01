@@ -3000,6 +3000,7 @@ void MainWindow::on_pb_llenarHistorial_clicked()
     }else{
         //Nos movemos a la receta
         ui->sw_historialReceta->setCurrentIndex(1);
+        ui->w_masMedicamentos->setHidden(true);
     }
 }
 // ////////////////////////////// FIN : LLENAR EL HISTORIAL //////////////////////////////

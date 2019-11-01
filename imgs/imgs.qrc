@@ -13,5 +13,6 @@
         <file>NoView.png</file>
         <file>view.png</file>
         <file>fondo.png</file>
+        <file>mas.png</file>
     </qresource>
 </RCC>
