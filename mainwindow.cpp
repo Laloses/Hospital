@@ -1936,7 +1936,7 @@ void MainWindow::on_btnBuscarDoctor_clicked()
                 nombre = nombreC.at(0);
                 apeP = nombreC.at(0);
 
-                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
+                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor "
                               "FROM doctor as d , especialidad as e , usuario as u "
                               "WHERE d.iddoctor = "+QString::number((idDoc))+" "
                               "AND u.matricula = d.idUser "
@@ -1950,7 +1950,7 @@ void MainWindow::on_btnBuscarDoctor_clicked()
                 apeP = nombreC.at(1);
                 apeM = nombreC.at(2);
 
-                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
+                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor "
                               "FROM doctor as d , especialidad as e , usuario as u "
                               "WHERE d.iddoctor = "+QString::number((idDoc))+" "
                               "AND u.matricula = d.idUser "
@@ -1963,7 +1963,7 @@ void MainWindow::on_btnBuscarDoctor_clicked()
         //Si está vacio el campo del nombre del doctor
         //Mostramos todos los doctores disponibles
         else{
-            model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
+            model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor "
                           "FROM doctor as d , especialidad as e , usuario as u "
                           "WHERE d.iddoctor = "+QString::number((idDoc))+" "
                           "AND u.matricula = d.idUser "
