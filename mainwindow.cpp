@@ -2916,19 +2916,31 @@ void MainWindow::on_pb_buscarCita_clicked()
 {
     QSqlQuery cita,fecha;
     QPixmap pix;
+    QString estiloMalo, estiloBueno;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
 
-    cita.exec("SELECT * FROM cita WHERE idCita="+ui->le_folioCita->text());
-    if(cita.next()){
-        //Verificamos si es el dia de la consulta (La hora no porque puede que pase antes el paciente)
+    if( !ui->le_folioCita->text().isEmpty() )
+        cita.exec("SELECT * FROM cita WHERE idCita="+ui->le_folioCita->text());
+    else{
+        ui->le_folioCita->setStyleSheet(estiloMalo);
+        ui->lb_noCoincideFecha->setText("Ingrese un folio.");
+        ui->lb_noCoincideFecha->setHidden(false);
+        return;
+    }
+    if( cita.next() ){
+        ui->le_folioCita->setStyleSheet(estiloBueno);
         fecha.exec("SELECT CURDATE()");
         fecha.next();
+        //Verificamos si es el dia de la consulta (La hora no se revisa porque puede pasar un paciente antes)
         if(fecha.value(0).toDate().toString("yyyy/MM/dd") == cita.value(2).toDate().toString("yyyy/MM/dd") ){
             //Si si es el dia
+            //buscamos los datos del paciente de esa cita
             datosPac->exec("SELECT CONCAT(nombre,' ',appaterno,' ',apmaterno) as nomC, edad, sexo, religion,fotop FROM usuario WHERE matricula="+cita.value(1).toString());
             if( datosPac->next() ){
                 ui->lb_noCoincideFecha->setHidden(true);
 
-                //Llenamos el ui
+                //Llenamos el los datos del paciente
                 ui->lb_nomPac->setText(datosPac->value(0).toString());
                 ui->lb_edad->setText(datosPac->value(1).toString());
                 ui->lb_sexoPac->setText(datosPac->value(2).toString());
@@ -2938,20 +2950,24 @@ void MainWindow::on_pb_buscarCita_clicked()
                 ui->lb_imgPac->setPixmap(pix.scaled(ui->lb_imgPac->width(),ui->lb_imgPac->height(),Qt::KeepAspectRatio));
                 //mostramos los menus
                 ui->w_infoPacConsulta->setHidden(false);
+                ui->sw_historialReceta->setCurrentIndex(0);
                 ui->sw_historialReceta->setHidden(false);
 
                 // ///////////////////// CARGAMOS LOS DATOS ACUTALES DEL HISTORIAL DEL PACIENTE /////////////////////
 
-                QSqlQuery historialPac,idPac;
+                QSqlQuery historialPac,idPac,defaultHistorial;
                 idPac.exec("SELECT idpaciente FROM paciente WHERE idUser="+cita.value(1).toString());
                 idPac.next();
 
+                historialPac.exec("SELECT * FROM historialPaciente WHERE idPaciente="+idPac.value(0).toString());
                 // Si no tiene historial, crear uno nuevo
-                if(!historialPac.exec("SELECT * FROM historialPaciente WHERE idPaciente="+idPac.value(0).toString())){
-                    historialPac.exec("INSERT INTO historialPaciente(idPaciente) value ("+idPac.value(0).toString()+")");
+                if(!historialPac.next()){
+                    if(!defaultHistorial.exec("INSERT INTO historialPaciente(idPaciente) value ("+idPac.value(0).toString()+")"))
+                        qDebug()<<defaultHistorial.lastError().text();
+                        historialPac.exec("SELECT * FROM historialPaciente WHERE idPaciente="+idPac.value(0).toString());
+                        historialPac.next();
                 }
-                // Si ya tiene un historial, cargar los datos a la ui
-                else{
+                // Cargar los datos a la ui
                     ui->le_estatura->setText(historialPac.value(1).toString());
                     ui->le_peso->setText(historialPac.value(2).toString());
                     ui->de_ultimaVacuna->setDate(historialPac.value(3).toDate());
@@ -2965,42 +2981,61 @@ void MainWindow::on_pb_buscarCita_clicked()
                     ui->te_frecAlco->setText(historialPac.value(11).toString());
                     ui->te_frecFuma->setText(historialPac.value(12).toString());
                     ui->te_enfeFami->setText(historialPac.value(13).toString());
-                }
 
             }else qDebug()<<"Mala usuario"<<datosDoc->lastError().text();
         //Si no es el dia
-        }else ui->lb_noCoincideFecha->setHidden(false);
-    }else qDebug()<<"Mala cita"<<cita.lastError().text();
+        }else {
+            ui->lb_noCoincideFecha->setHidden(false);
+            ui->lb_noCoincideFecha->setText("Aun no es la fecha de la cita");
+        }
+    }else {
+        qDebug()<<"Mala cita"<<cita.lastError().text();
+        ui->lb_noCoincideFecha->setText("No existe la cita.");
+        ui->le_folioCita->setStyleSheet(estiloMalo);
+        ui->lb_noCoincideFecha->setHidden(false);
+    }
 }
 
 //Cuando termina de llenar el historial
 void MainWindow::on_pb_llenarHistorial_clicked()
 {
+    QString estiloMalo, estiloBueno;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
     //Insertar los datos
-    QSqlQuery llenarHist;
+    QSqlQuery llenarHist, cita,idPac;
+    cita.exec("SELECT matricula FROM cita WHERE idCita="+ui->le_folioCita->text());
+    cita.next();
+    idPac.exec("SELECT idpaciente FROM paciente WHERE idUser="+cita.value(0).toString());
+    idPac.next();
+    //Ejecutmaos el update
+    qDebug()<<idPac.value(0).toString();
     if( !llenarHist.exec("UPDATE historialPaciente SET "
-                         " estatura ="+ui->le_estatura->text()+
-                         "peso ="+ui->le_peso->text()+
-                         "fechaUltimaVacuna="+ui->de_ultimaVacuna->date().toString("yyyy-MM-dd")+
-                         "alergias="+ui->te_alergias->toPlainText()+
-                         "accidente="+ui->te_accidentes->toPlainText()+
-                         "enfermedad="+ui->te_enfermedades->toPlainText()+
-                         "cirugias="+ui->te_cirugias->toPlainText()+
-                         "hospitalizaciones="+ui->te_hospi->toPlainText()+
-                         "trabajos="+ui->te_trabajos->toPlainText()+
-                         "habitos="+ui->te_habitos->toPlainText()+
-                         "frecuenciaAlcohol="+ui->te_frecAlco->toPlainText()+
-                         "frecuenciaCigarro="+ui->te_frecFuma->toPlainText()+
-                         "enfermedadesFamilia="+ui->te_enfeFami->toPlainText() )){
+                         " estatura="+ui->le_estatura->text()+
+                         ", peso="+ui->le_peso->text()+
+                         ", fechaUltimaVacuna='"+ui->de_ultimaVacuna->date().toString("yyyy-MM-dd")+
+                         "', alergias='"+ui->te_alergias->toPlainText()+
+                         "', accidente='"+ui->te_accidentes->toPlainText()+
+                         "', enfermedad='"+ui->te_enfermedades->toPlainText()+
+                         "', cirugias='"+ui->te_cirugias->toPlainText()+
+                         "', hospitalizaciones='"+ui->te_hospi->toPlainText()+
+                         "', trabajos='"+ui->te_trabajos->toPlainText()+
+                         "', habitos='"+ui->te_habitos->toPlainText()+
+                         "', frecuenciaAlcohol='"+ui->te_frecAlco->toPlainText()+
+                         "', frecuenciaCigarro='"+ui->te_frecFuma->toPlainText()+
+                         "', enfermedadesFamilia='"+ui->te_enfeFami->toPlainText()+
+                         "' WHERE idPaciente="+idPac.value(0).toString() )){
 
-        //Si no se puede hacer la consulta
+        //Si no se puede hacer el update
         qDebug()<<llenarHist.lastError().text();
-        QMessageBox::warning(this,"Error","No se pudo guardar los datos");
+        QMessageBox::warning(this,"Error","No se pudieron guardar los datos, intente más tarde.");
 
+    //si se ejecutó correctamente
     }else{
-        //Nos movemos a la receta
+        //Nos movemos a la receta y diagnostico
         ui->sw_historialReceta->setCurrentIndex(1);
         ui->w_masMedicamentos->setHidden(true);
+        ui->pb_buscarCita->setEnabled(false);
     }
 }
 // ////////////////////////////// FIN : LLENAR EL HISTORIAL //////////////////////////////

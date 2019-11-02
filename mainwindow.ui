@@ -3622,7 +3622,7 @@ background -color: red;
                </size>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="p_historial">
                <layout class="QGridLayout" name="gridLayout_37">
@@ -3644,52 +3644,35 @@ background -color: red;
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>0</y>
+                     <y>-781</y>
                      <width>393</width>
-                     <height>1106</height>
+                     <height>1104</height>
                     </rect>
                    </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_25">
-                    <item>
-                     <widget class="QLabel" name="lb_estatura">
+                   <layout class="QGridLayout" name="gridLayout_43">
+                    <item row="8" column="0">
+                     <widget class="QLabel" name="lb_accidentes">
                       <property name="minimumSize">
                        <size>
-                        <width>57</width>
-                        <height>22</height>
+                        <width>75</width>
+                        <height>39</height>
                        </size>
                       </property>
                       <property name="text">
-                       <string>Estatura</string>
+                       <string>Accidentes</string>
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QLineEdit" name="le_estatura">
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                     </widget>
+                    <item row="19" column="0">
+                     <widget class="QTextEdit" name="te_habitos"/>
                     </item>
-                    <item>
-                     <widget class="QLabel" name="lb_peso">
-                      <property name="minimumSize">
-                       <size>
-                        <width>33</width>
-                        <height>22</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>Peso</string>
-                      </property>
-                     </widget>
+                    <item row="17" column="0">
+                     <widget class="QTextEdit" name="te_trabajos"/>
                     </item>
-                    <item>
+                    <item row="3" column="0">
                      <widget class="QLineEdit" name="le_peso"/>
                     </item>
-                    <item>
+                    <item row="4" column="0">
                      <widget class="QLabel" name="lb_fechaVacuna">
                       <property name="minimumSize">
                        <size>
@@ -3702,30 +3685,50 @@ background -color: red;
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QDateEdit" name="de_ultimaVacuna">
-                      <property name="displayFormat">
-                       <string>yyyy/MM/dd</string>
-                      </property>
-                      <property name="calendarPopup">
-                       <bool>true</bool>
+                    <item row="24" column="0">
+                     <widget class="QLabel" name="lb_enfeFami">
+                      <property name="text">
+                       <string>Enfermedades familiares</string>
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QLabel" name="lb_alergias">
+                    <item row="18" column="0">
+                     <widget class="QLabel" name="lb_habitos">
+                      <property name="text">
+                       <string>Hábitos</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="21" column="0">
+                     <widget class="QTextEdit" name="te_frecAlco"/>
+                    </item>
+                    <item row="23" column="0">
+                     <widget class="QTextEdit" name="te_frecFuma"/>
+                    </item>
+                    <item row="13" column="0">
+                     <widget class="QTextEdit" name="te_cirugias">
                       <property name="minimumSize">
                        <size>
-                        <width>57</width>
-                        <height>39</height>
+                        <width>296</width>
+                        <height>29</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="lb_peso">
+                      <property name="minimumSize">
+                       <size>
+                        <width>33</width>
+                        <height>22</height>
                        </size>
                       </property>
                       <property name="text">
-                       <string>Alergias</string>
+                       <string>Peso</string>
                       </property>
                      </widget>
                     </item>
-                    <item>
+                    <item row="7" column="0">
                      <widget class="QTextEdit" name="te_alergias">
                       <property name="minimumSize">
                        <size>
@@ -3742,43 +3745,7 @@ p, li { white-space: pre-wrap; }
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QLabel" name="lb_accidentes">
-                      <property name="minimumSize">
-                       <size>
-                        <width>75</width>
-                        <height>39</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>Accidentes</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QTextEdit" name="te_accidentes">
-                      <property name="minimumSize">
-                       <size>
-                        <width>268</width>
-                        <height>39</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="lb_enfer">
-                      <property name="minimumSize">
-                       <size>
-                        <width>100</width>
-                        <height>29</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>Enfermedades</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
+                    <item row="11" column="0">
                      <widget class="QTextEdit" name="te_enfermedades">
                       <property name="minimumSize">
                        <size>
@@ -3791,7 +3758,7 @@ p, li { white-space: pre-wrap; }
                       </property>
                      </widget>
                     </item>
-                    <item>
+                    <item row="12" column="0">
                      <widget class="QLabel" name="lb_cirugias">
                       <property name="minimumSize">
                        <size>
@@ -3804,17 +3771,77 @@ p, li { white-space: pre-wrap; }
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QTextEdit" name="te_cirugias">
+                    <item row="16" column="0">
+                     <widget class="QLabel" name="lb_trabajos">
+                      <property name="text">
+                       <string>Trabajos</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="20" column="0">
+                     <widget class="QLabel" name="lb_frecAlco">
+                      <property name="text">
+                       <string>¿Con cuánta frecuencia ingiere alcohol?</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="lb_estatura">
                       <property name="minimumSize">
                        <size>
-                        <width>296</width>
+                        <width>57</width>
+                        <height>22</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Estatura</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="26" column="0">
+                     <widget class="QPushButton" name="pb_llenarHistorial">
+                      <property name="text">
+                       <string>Guardar</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="6" column="0">
+                     <widget class="QLabel" name="lb_alergias">
+                      <property name="minimumSize">
+                       <size>
+                        <width>57</width>
+                        <height>39</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Alergias</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="10" column="0">
+                     <widget class="QLabel" name="lb_enfer">
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>29</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Enfermedades</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="15" column="0">
+                     <widget class="QTextEdit" name="te_hospi">
+                      <property name="minimumSize">
+                       <size>
+                        <width>256</width>
                         <height>29</height>
                        </size>
                       </property>
                      </widget>
                     </item>
-                    <item>
+                    <item row="14" column="0">
                      <widget class="QLabel" name="lb_hospi">
                       <property name="minimumSize">
                        <size>
@@ -3827,89 +3854,45 @@ p, li { white-space: pre-wrap; }
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QTextEdit" name="te_hospi">
-                      <property name="minimumSize">
-                       <size>
-                        <width>256</width>
-                        <height>29</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="lb_trabajos">
-                      <property name="text">
-                       <string>Trabajos</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QTextEdit" name="te_trabajos"/>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="lb_habitos">
-                      <property name="text">
-                       <string>Hábitos</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QTextEdit" name="te_habitos"/>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="lb_frecAlco">
-                      <property name="text">
-                       <string>¿Con cuánta frecuencia ingiere alcohol?</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QTextEdit" name="te_frecAlco"/>
-                    </item>
-                    <item>
+                    <item row="22" column="0">
                      <widget class="QLabel" name="lb_frecFuma">
                       <property name="text">
                        <string>¿Con cuánta frecuencia fuma?</string>
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QTextEdit" name="te_frecFuma"/>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="lb_enfeFami">
+                    <item row="1" column="0">
+                     <widget class="QLineEdit" name="le_estatura">
+                      <property name="styleSheet">
+                       <string notr="true"/>
+                      </property>
                       <property name="text">
-                       <string>Enfermedades familiares</string>
+                       <string/>
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QTextEdit" name="te_enfeFami"/>
+                    <item row="5" column="0">
+                     <widget class="QDateEdit" name="de_ultimaVacuna">
+                      <property name="displayFormat">
+                       <string>yyyy/MM/dd</string>
+                      </property>
+                      <property name="calendarPopup">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
                     </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_56">
-                      <item>
-                       <spacer name="horizontalSpacer_61">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pb_llenarHistorial">
-                        <property name="text">
-                         <string>Guardar</string>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
+                    <item row="9" column="0">
+                     <widget class="QTextEdit" name="te_accidentes">
+                      <property name="minimumSize">
+                       <size>
+                        <width>268</width>
+                        <height>39</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="25" column="0">
+                     <widget class="QTextEdit" name="te_enfeFami"/>
                     </item>
                    </layout>
                   </widget>
@@ -3934,12 +3917,25 @@ p, li { white-space: pre-wrap; }
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>0</y>
+                     <y>-42</y>
                      <width>401</width>
-                     <height>334</height>
+                     <height>365</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_42">
+                    <item row="4" column="0">
+                     <widget class="QPushButton" name="pb_receta">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777195</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Guardar</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item row="0" column="0">
                      <layout class="QHBoxLayout" name="horizontalLayout_71">
                       <property name="spacing">
@@ -4018,6 +4014,13 @@ p, li { white-space: pre-wrap; }
                       </item>
                      </layout>
                     </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="lb_diagnostico">
+                      <property name="text">
+                       <string>Diagnóstico</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item row="1" column="0">
                      <widget class="QWidget" name="w_masMedicamentos" native="true">
                       <property name="minimumSize">
@@ -4049,13 +4052,6 @@ p, li { white-space: pre-wrap; }
                         <layout class="QGridLayout" name="medicamentosLay"/>
                        </item>
                       </layout>
-                     </widget>
-                    </item>
-                    <item row="2" column="0">
-                     <widget class="QLabel" name="lb_diagnostico">
-                      <property name="text">
-                       <string>Diagnóstico</string>
-                      </property>
                      </widget>
                     </item>
                     <item row="3" column="0">
