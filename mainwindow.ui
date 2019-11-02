@@ -3483,7 +3483,7 @@ background -color: red;
                     <widget class="QLabel" name="lb_edad">
                      <property name="minimumSize">
                       <size>
-                       <width>31</width>
+                       <width>10</width>
                        <height>16</height>
                       </size>
                      </property>
@@ -3560,7 +3560,7 @@ background -color: red;
                 <widget class="QLabel" name="lb_imgPac">
                  <property name="minimumSize">
                   <size>
-                   <width>91</width>
+                   <width>30</width>
                    <height>101</height>
                   </size>
                  </property>
@@ -3602,7 +3602,7 @@ background -color: red;
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>291</width>
+                     <width>100</width>
                      <height>101</height>
                     </size>
                    </property>
@@ -3622,7 +3622,7 @@ background -color: red;
                </size>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="p_historial">
                <layout class="QGridLayout" name="gridLayout_37">
@@ -3724,7 +3724,7 @@ background -color: red;
                        </size>
                       </property>
                       <property name="text">
-                       <string>Peso</string>
+                       <string>Peso (kg)</string>
                       </property>
                      </widget>
                     </item>
@@ -3794,7 +3794,7 @@ p, li { white-space: pre-wrap; }
                        </size>
                       </property>
                       <property name="text">
-                       <string>Estatura</string>
+                       <string>Estatura (cm)</string>
                       </property>
                      </widget>
                     </item>
@@ -3861,16 +3861,6 @@ p, li { white-space: pre-wrap; }
                       </property>
                      </widget>
                     </item>
-                    <item row="1" column="0">
-                     <widget class="QLineEdit" name="le_estatura">
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                     </widget>
-                    </item>
                     <item row="5" column="0">
                      <widget class="QDateEdit" name="de_ultimaVacuna">
                       <property name="displayFormat">
@@ -3893,6 +3883,16 @@ p, li { white-space: pre-wrap; }
                     </item>
                     <item row="25" column="0">
                      <widget class="QTextEdit" name="te_enfeFami"/>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLineEdit" name="le_estatura">
+                      <property name="styleSheet">
+                       <string notr="true"/>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </widget>
@@ -3917,30 +3917,14 @@ p, li { white-space: pre-wrap; }
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-42</y>
-                     <width>401</width>
-                     <height>365</height>
+                     <y>0</y>
+                     <width>406</width>
+                     <height>397</height>
                     </rect>
                    </property>
-                   <layout class="QGridLayout" name="gridLayout_42">
-                    <item row="4" column="0">
-                     <widget class="QPushButton" name="pb_receta">
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777195</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>Guardar</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="0">
-                     <layout class="QHBoxLayout" name="horizontalLayout_71">
-                      <property name="spacing">
-                       <number>0</number>
-                      </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_25">
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_56">
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_68">
                         <item>
@@ -3969,12 +3953,19 @@ p, li { white-space: pre-wrap; }
                         <item>
                          <widget class="QLabel" name="label_9">
                           <property name="text">
-                           <string>Porción</string>
+                           <string>Porción (grs)</string>
                           </property>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="le_porcion"/>
+                         <widget class="QLineEdit" name="le_porcion">
+                          <property name="maximumSize">
+                           <size>
+                            <width>41</width>
+                            <height>16777215</height>
+                           </size>
+                          </property>
+                         </widget>
                         </item>
                        </layout>
                       </item>
@@ -3992,8 +3983,31 @@ p, li { white-space: pre-wrap; }
                         </item>
                        </layout>
                       </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_71">
+                      <item>
+                       <spacer name="horizontalSpacer_61">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
                       <item>
                        <widget class="QPushButton" name="pb_masMedicina">
+                        <property name="maximumSize">
+                         <size>
+                          <width>30</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
                         <property name="styleSheet">
                          <string notr="true">background: transparent;</string>
                         </property>
@@ -4012,16 +4026,22 @@ p, li { white-space: pre-wrap; }
                         </property>
                        </widget>
                       </item>
+                      <item>
+                       <spacer name="horizontalSpacer_64">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
                      </layout>
                     </item>
-                    <item row="2" column="0">
-                     <widget class="QLabel" name="lb_diagnostico">
-                      <property name="text">
-                       <string>Diagnóstico</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="0">
+                    <item>
                      <widget class="QWidget" name="w_masMedicamentos" native="true">
                       <property name="minimumSize">
                        <size>
@@ -4054,13 +4074,33 @@ p, li { white-space: pre-wrap; }
                       </layout>
                      </widget>
                     </item>
-                    <item row="3" column="0">
+                    <item>
+                     <widget class="QLabel" name="lb_diagnostico">
+                      <property name="text">
+                       <string>Diagnóstico</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
                      <widget class="QTextEdit" name="te_diagnostico">
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
                         <height>200</height>
                        </size>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pb_receta">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777195</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Guardar</string>
                       </property>
                      </widget>
                     </item>

@@ -3040,3 +3040,49 @@ void MainWindow::on_pb_llenarHistorial_clicked()
 }
 // ////////////////////////////// FIN : LLENAR EL HISTORIAL //////////////////////////////
 
+// ////////////////////////////// LLENAR EL RECETA Y DIAGNOSTICO //////////////////////////////
+void MainWindow::on_pb_receta_clicked()
+{
+    QString estiloMalo, estiloBueno;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+    //Validamos los datos
+    if(!ui->te_diagnostico->toPlainText().isEmpty()){
+        ui->te_diagnostico->setStyleSheet(estiloBueno);
+    }
+    else {
+        ui->te_diagnostico->setStyleSheet(estiloMalo);
+    }
+
+}
+
+//Agregar medicamentos
+void MainWindow::on_pb_masMedicina_clicked()
+{
+    QString estiloMalo, estiloBueno;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+    QString medicina,porcion,frecuecia;
+    //Validamos y asignamos los datos
+    if(!ui->le_medicamento->text().isEmpty()){
+        ui->le_medicamento->setStyleSheet(estiloBueno);
+        if(!ui->le_porcion->text().isEmpty()){
+            ui->le_porcion->setStyleSheet(estiloBueno);
+            if(!ui->le_frecuencia->text().isEmpty()){
+                ui->le_frecuencia->setStyleSheet(estiloBueno);
+                //Si no estan vacíos los campos creamos objetos dinamicos para mostrarlos
+
+            }
+            else{
+                ui->le_frecuencia->setStyleSheet(estiloMalo);
+            }
+        }
+        else{
+            ui->le_porcion->setStyleSheet(estiloMalo);
+        }
+    }
+    else{
+        ui->le_medicamento->setStyleSheet(estiloMalo);
+    }
+}
+// ////////////////////////////// FIN: LLENAR EL RECETA Y DIAGNOSTICO //////////////////////////////

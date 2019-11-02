@@ -195,6 +195,10 @@ private slots:
 
     void on_pb_realizarConsulta_clicked();
 
+    void on_pb_receta_clicked();
+
+    void on_pb_masMedicina_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -206,7 +210,9 @@ public:
    void mostrarZonas();
    void mostrasConsultorios();
    int verNoti;
-
+   QList<String> medicinas;
+   QList<String> porciones;
+   QList<String> frecMedicinas;
 
 
 
