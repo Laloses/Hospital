@@ -1,7 +1,9 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QString>
-
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QSignalMapper>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -3274,4 +3276,261 @@ void MainWindow::on_btnMostrarContrasena_6_clicked()
         ui->lineConfirmaContraseniaPaciente->setEchoMode(QLineEdit::Password);
         toggleVision1 = 0;
     }
+}
+
+void MainWindow::on_btnCitasCanceladas_clicked()
+{
+    clearLayout(ui->reagendas);
+    qDebug() << "Yepo";
+    QString citas;
+    citas = "SELECT cita.idCita, cita.matricula, cita.fecha, cita.hora,CONCAT_WS(' ', usuario.nombre,usuario.appaterno,usuario.apmaterno) AS Doctor FROM cita INNER JOIN doctor on doctor.iddoctor = cita.doctor INNER JOIN usuario on doctor.idUser = usuario.matricula WHERE cita.estado = 1 AND cita.preparada = 'Cancelada';";
+    QSqlQuery citasCanceladas;
+    citasCanceladas.exec(citas);
+    qDebug() << citas;
+    ui->stackedWidget_admin->setCurrentIndex(5);
+    int fila = 1;
+
+    while(citasCanceladas.next()){
+
+        //datos del query
+        QString folio = citasCanceladas.value(0).toString();
+        QString matricula = citasCanceladas.value(1).toString();
+        QString fecha = citasCanceladas.value(2).toString();
+        QString hora = citasCanceladas.value(3).toString();
+        QString doctor = citasCanceladas.value(4).toString();
+
+        QPushButton* btnReagendar = new QPushButton();
+        btnReagendar->setText("Reasignar Cita");
+        btnReagendar->setStyleSheet("border:solid 1px #5d80b6;border-radius:5px;background-color: #5d80b6;color: white;font: 11pt 'MS Shell Dlg 2';");
+        btnReagendar->setFixedSize(130, 30);
+        QSignalMapper *mapper2=new QSignalMapper(this);
+        connect(btnReagendar,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
+        mapper2->setMapping(btnReagendar,folio);
+        connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(cambiarVentana(QString)));
+
+
+        QPushButton* btnEliminar = new QPushButton();
+        btnEliminar->setText("Eliminar Cita");
+        btnEliminar->setStyleSheet("border:solid 1px #ED6853;border-radius:5px;background-color: #ED6853;color: white;font: 11pt 'MS Shell Dlg 2';");
+        btnEliminar->setFixedSize(130, 30);
+        QSignalMapper *mapper1=new QSignalMapper(this);
+        connect(btnEliminar,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
+        mapper1->setMapping(btnEliminar,folio);
+        connect(mapper1,SIGNAL(mapped(QString)),this,SLOT(eliminarCita(QString)));
+
+
+        QLabel *Paciente = new QLabel;
+        Paciente->setAlignment(Qt::AlignCenter);
+        Paciente->setText(matricula);
+        Paciente->setFixedSize(90,25);
+
+        QLabel *Fecha = new QLabel;
+        Fecha->setAlignment(Qt::AlignCenter);
+        Fecha->setText(fecha);
+        Fecha->setFixedSize(110,25);
+
+        QLabel *Hora = new QLabel;
+        Hora->setAlignment(Qt::AlignCenter);
+        Hora->setText(hora);
+        Hora->setFixedSize(90,25);
+
+        QLabel *Doctor = new QLabel;
+        Doctor->setAlignment(Qt::AlignCenter);
+        Doctor->setText(doctor);
+        Doctor->setFixedSize(130,25);
+
+        QLabel *vacio = new QLabel;
+        vacio->setAlignment(Qt::AlignCenter);
+        vacio->setText(" ");
+        vacio->setFixedSize(60,25);
+
+
+
+        ui->reagendas->addWidget(Paciente, fila, 1, Qt::AlignTop);
+        ui->reagendas->addWidget(Fecha, fila, 2, Qt::AlignTop);
+        ui->reagendas->addWidget(Hora, fila, 3, Qt::AlignTop);
+        ui->reagendas->addWidget(Doctor, fila, 4, Qt::AlignTop);
+        ui->reagendas->addWidget(vacio, fila, 5, Qt::AlignTop);
+        ui->reagendas->addWidget(btnReagendar, fila, 6, Qt::AlignTop);
+        ui->reagendas->addWidget(btnEliminar, fila, 7, Qt::AlignTop);
+
+        fila++;
+    }
+
+
+}
+
+void MainWindow::eliminarCita(QString folio)
+{
+    QString borrarCitas;
+    borrarCitas = "delete from cita where idCita = '"+folio+"';";
+    QSqlQuery borrarCitasCanceladas;
+    borrarCitasCanceladas.exec(borrarCitas);
+
+    on_btnCitasCanceladas_clicked();
+}
+
+void MainWindow::cambiarVentana(QString folio)
+{
+    idCita1=folio;
+    ui->btnBuscarDoctor_2->hide();
+    ui->stackedWidget_admin->setCurrentIndex(6);
+    QString obtenerDatos;
+    obtenerDatos = "select cita.matricula, cita.fecha, cita.hora, cita.sintomas from cita where idCita = '"+folio+"';";
+    QSqlQuery obtenerCitas;
+    obtenerCitas.exec(obtenerDatos);
+    obtenerCitas.next();
+
+    QString matricula = obtenerCitas.value(0).toString();
+    QDate fecha = obtenerCitas.value(1).toDate();
+    QString hora = obtenerCitas.value(2).toString();
+    QString sintomas = obtenerCitas.value(3).toString();
+
+    ui->fechaCita_2->setDate(fecha);
+    ui->horaCita_2->addItem(hora);
+    ui->sintomasCitas_2->setText(sintomas);
+
+    ui->fechaCita_2->setEnabled(false);
+    ui->horaCita_2->setEnabled(false);
+    ui->sintomasCitas_2->setEnabled(false);
+    docDisp(folio);
+
+}
+
+void MainWindow::on_btnCancelarAgenda_2_clicked()
+{
+    ui->stackedWidget_admin->setCurrentIndex(5);
+    on_btnCitasCanceladas_clicked();
+    ui->le_nombreDoc_2->clear();
+}
+
+void MainWindow::on_pushButton_menu_admin_3_clicked()
+{
+    ui->stackedWidget_admin->setCurrentIndex(0);
+}
+
+void MainWindow::docDisp(QString folio){
+    qDebug()<<"entre";
+    QSqlQuery horarios, doc;
+    QString hora,fecha;
+    int diaNum, idDoc;
+    diaNum = ui->fechaCita_2->date().dayOfWeek();
+    hora = ui->horaCita_2->currentText();
+    qDebug()<<hora;
+
+    QString doc4,doc1,doc2;
+    doc4="select doctor from cita where idCita='"+folio+"' ";
+    qDebug()<<doc4;
+    QSqlQuery doc3;
+    doc3.exec(doc4);
+    doc3.next();
+    doc1=doc3.value(0).toString();
+
+
+
+
+    QStringList dias;
+    dias<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado" << "Domingo";
+    qDebug()<<dias.at(diaNum-1);
+    horarios.exec("SELECT idDoc FROM horariodoc WHERE hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"'");
+    if(!horarios.next()){
+        ui->lb_noHayDocs_2->setHidden(false);
+        ui->tv_listaDocCitas_2->setModel(nullptr);
+        qDebug()<<"estoy vacio";
+    }
+    else{
+        ui->lb_selDoc_2->setHidden(false);
+        ui->lb_noHayDocs_2->setHidden(true);
+        idDoc=horarios.value(0).toInt();
+        doc2=horarios.value(0).toString();
+
+        if(doc1==doc2)
+        {
+            qDebug()<<"son iguales";
+            idDoc=0;
+        }else {
+
+
+
+
+        //Si movio la fecha pero aun no pone el nombre del doctor
+        if(!ui->le_nombreDoc_2->text().isEmpty()){
+            QStringList nombreC;
+            QString nombre, apeM, apeP;
+            nombreC=ui->le_nombreDoc_2->text().split(" ");
+
+            //Si solo ingreso una palabra
+            if(nombreC.size()==1) {
+                //Buscamos por nombre o apellido paterno
+                nombre = nombreC.at(0);
+                apeP = nombreC.at(0);
+
+                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
+                              "FROM doctor as d , especialidad as e , usuario as u "
+                              "WHERE d.iddoctor = "+QString::number((idDoc))+" "
+                              "AND u.matricula = d.idUser "
+                              "AND d.idEspecialidad = e.idEsp "
+                              "OR u.nombre='"+nombre+"' "
+                              "OR u.appaterno ='"+apeP+"' ");
+            }
+            //Si puso mas de su nombre o apellido
+            else {
+                nombre = nombreC.at(0);
+                apeP = nombreC.at(1);
+                apeM = nombreC.at(2);
+
+                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
+                              "FROM doctor as d , especialidad as e , usuario as u "
+                              "WHERE d.iddoctor = "+QString::number((idDoc))+" "
+                              "AND u.matricula = d.idUser "
+                              "AND d.idEspecialidad = e.idEsp "
+                              "OR u.nombre='"+nombre+"' "
+                              "OR u.appaterno ='"+apeP+"' "
+                              "OR u.apmaterno ='"+apeM+"'");
+            }
+        }
+        //Si está vacio el campo del nombre del doctor
+        //Mostramos todos los doctores disponibles
+        else{
+            model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
+                          "FROM doctor as d , especialidad as e , usuario as u "
+                          "WHERE d.iddoctor = "+QString::number((idDoc))+" "
+                          "AND u.matricula = d.idUser "
+                          "AND d.idEspecialidad = e.idEsp");
+        }
+        qDebug()<<idDoc;
+        ui->tv_listaDocCitas_2->setModel(model);
+        ui->tv_listaDocCitas_2->setHidden(false);
+        ui->tv_listaDocCitas_2->hideColumn(2);
+        ui->tv_listaDocCitas_2->setColumnWidth(0,ui->tv_listaDocCitas->width()/2);
+        ui->tv_listaDocCitas_2->setColumnWidth(1,ui->tv_listaDocCitas->width()/2);
+    }
+    }
+}
+
+void MainWindow::on_tv_listaDocCitas_2_clicked(const QModelIndex &index)
+{
+        id_doctor = model->index(index.row(),2).data().toString();
+}
+
+void MainWindow::on_tv_listaDocCitas_2_doubleClicked(const QModelIndex &index)
+{
+
+        ui->le_nombreDoc_2->setText( model->index(index.row(),0).data().toString() );
+}
+
+void MainWindow::on_btnAgendarCita_2_clicked()
+{
+    QString cita,doc1,doc2;
+    QSqlQuery doc;
+    doc1="select iddoctor from doctor where idUser='"+id_doctor+"'; ";
+    doc.exec(doc1);
+    doc.next();
+    doc2=doc.value(0).toString();
+
+    QString pend="Pendiente";
+    cita="update cita set doctor='"+doc2+"', estado=0, preparada='"+pend+"' where idCita='"+idCita1+"'; ";
+    qDebug()<<cita;
+    QSqlQuery upd;
+    upd.exec(cita);
 }
