@@ -1,4 +1,3 @@
-#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -210,9 +209,9 @@ public:
    void mostrarZonas();
    void mostrasConsultorios();
    int verNoti;
-   QList<String> medicinas;
-   QList<String> porciones;
-   QList<String> frecMedicinas;
+   QList<QString> medicinas;
+   QList<QString> porciones;
+   QList<QString> frecMedicinas;
 
 
 
