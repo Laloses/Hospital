@@ -3362,12 +3362,25 @@ void MainWindow::on_btnCitasCanceladas_clicked()
 
 void MainWindow::eliminarCita(QString folio)
 {
-    QString borrarCitas;
-    borrarCitas = "delete from cita where idCita = '"+folio+"';";
-    QSqlQuery borrarCitasCanceladas;
-    borrarCitasCanceladas.exec(borrarCitas);
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Desea eliminar la cita?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+        QString borrarCitas;
+        borrarCitas = "delete from cita where idCita = '"+folio+"';";
+        QSqlQuery borrarCitasCanceladas;
+        borrarCitasCanceladas.exec(borrarCitas);
 
-    on_btnCitasCanceladas_clicked();
+        QMessageBox message2(QMessageBox::Question,
+        tr("Information"), tr("La cita ha sido eliminada."), QMessageBox::Yes);
+        message2.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+        on_btnCitasCanceladas_clicked();
+    }
+    else{
+        message.close();
+    }
 }
 
 void MainWindow::cambiarVentana(QString folio)
@@ -3521,16 +3534,32 @@ void MainWindow::on_tv_listaDocCitas_2_doubleClicked(const QModelIndex &index)
 
 void MainWindow::on_btnAgendarCita_2_clicked()
 {
-    QString cita,doc1,doc2;
-    QSqlQuery doc;
-    doc1="select iddoctor from doctor where idUser='"+id_doctor+"'; ";
-    doc.exec(doc1);
-    doc.next();
-    doc2=doc.value(0).toString();
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Desea guardar los cambios?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+        qDebug() << "aye";
 
-    QString pend="Pendiente";
-    cita="update cita set doctor='"+doc2+"', estado=0, preparada='"+pend+"' where idCita='"+idCita1+"'; ";
-    qDebug()<<cita;
-    QSqlQuery upd;
-    upd.exec(cita);
+        QString cita,doc1,doc2;
+        QSqlQuery doc;
+        doc1="select iddoctor from doctor where idUser='"+id_doctor+"'; ";
+        doc.exec(doc1);
+        doc.next();
+        doc2=doc.value(0).toString();
+
+        QString pend="Pendiente";
+        cita="update cita set doctor='"+doc2+"', estado=0, preparada='"+pend+"' where idCita='"+idCita1+"'; ";
+        qDebug()<<cita;
+        QSqlQuery upd;
+        upd.exec(cita);
+
+        QMessageBox message(QMessageBox::Question,
+        tr("Information"), tr("Los cambios se han guardado con éxito."), QMessageBox::Yes);
+        message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+        message.exec();
+    }
+    else{
+        qDebug() << "nel pastel";
+    }
 }
