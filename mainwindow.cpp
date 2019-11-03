@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
     toggleVision = 0;
     toggleVision1 = 0;
     contMedicinas=0;
-    //ui->sa_receta->setsi
+    ui->tv_listaDocCitas->horizontalHeader()->setVisible(true);
 }
 
 MainWindow::~MainWindow()
