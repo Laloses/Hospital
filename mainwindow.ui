@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>886</width>
-    <height>518</height>
+    <height>577</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -2984,7 +2984,7 @@ background-color:transparent</string>
                         <x>0</x>
                         <y>0</y>
                         <width>198</width>
-                        <height>146</height>
+                        <height>291</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -3868,8 +3868,8 @@ background-color:transparent</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
-                    <height>20</height>
+                    <width>33</width>
+                    <height>24</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -3985,9 +3985,23 @@ QPushButton:focus{
             </widget>
            </item>
            <item>
+            <widget class="Line" name="line_10">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="pushButton_citasDoc">
              <property name="text">
               <string>Citas Pendientes</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line_11">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
              </property>
             </widget>
            </item>
@@ -3999,9 +4013,30 @@ QPushButton:focus{
             </widget>
            </item>
            <item>
+            <widget class="Line" name="line_12">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="pb_realizarConsulta">
              <property name="text">
               <string>Realizar Consulta</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line_13">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_historial">
+             <property name="text">
+              <string> Historial medico</string>
              </property>
             </widget>
            </item>
@@ -4087,7 +4122,7 @@ QPushButton:focus{
           </layout>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="1" column="1">
          <widget class="QStackedWidget" name="stackedWidget_perfilDoctor">
           <property name="minimumSize">
            <size>
@@ -4101,7 +4136,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>6</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_40">
@@ -4137,8 +4172,8 @@ QPushButton:focus{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>180</width>
-                    <height>80</height>
+                    <width>176</width>
+                    <height>409</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -4986,7 +5021,7 @@ background -color: red;
                <number>7</number>
               </property>
               <attribute name="horizontalHeaderVisible">
-               <bool>true</bool>
+               <bool>false</bool>
               </attribute>
               <attribute name="horizontalHeaderCascadingSectionResizes">
                <bool>true</bool>
@@ -5078,8 +5113,8 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>296</height>
+                    <width>840</width>
+                    <height>344</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -5629,8 +5664,8 @@ color: rgb(68, 94, 134);</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>641</width>
-                  <height>291</height>
+                  <width>637</width>
+                  <height>287</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_37">
@@ -5870,7 +5905,7 @@ color: rgb(68, 94, 134);</string>
                </size>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="p_historial">
                <layout class="QGridLayout" name="gridLayout_37">
@@ -5893,8 +5928,8 @@ color: rgb(68, 94, 134);</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>314</width>
-                     <height>1111</height>
+                     <width>383</width>
+                     <height>1267</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_43">
@@ -6180,8 +6215,8 @@ p, li { white-space: pre-wrap; }
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>393</width>
-                     <height>381</height>
+                     <width>383</width>
+                     <height>412</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_30">
@@ -6424,6 +6459,229 @@ color:red;</string>
              </spacer>
             </item>
            </layout>
+          </widget>
+          <widget class="QWidget" name="page_3">
+           <widget class="QWidget" name="layoutWidget_3">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>880</width>
+              <height>451</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_4">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_50">
+               <item row="0" column="2">
+                <widget class="QPushButton" name="pushButton_buscarHistMedico">
+                 <property name="cursor">
+                  <cursorShape>OpenHandCursor</cursorShape>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color:transparent;</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="imgs/imgs.qrc">
+                   <normaloff>:/imgs/search.png</normaloff>:/imgs/search.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>30</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_16">
+                 <property name="text">
+                  <string>Numero de paciente:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="label_mensajePaciente">
+                 <property name="styleSheet">
+                  <string notr="true">color: rgb(255, 0, 0);</string>
+                 </property>
+                 <property name="text">
+                  <string> Error en el numero de paciente no existe. Intente de nuevo</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="lineEdit_matriculaMedico"/>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_espacioBlanco">
+                 <property name="styleSheet">
+                  <string notr="true">color: rgb(255, 0, 0);</string>
+                 </property>
+                 <property name="text">
+                  <string> Error espacio en blanco. Ingrese un numero de paciente.</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="0">
+              <widget class="QScrollArea" name="sA_historialPac_2">
+               <property name="styleSheet">
+                <string notr="true">font-size:12pt;</string>
+               </property>
+               <property name="verticalScrollBarPolicy">
+                <enum>Qt::ScrollBarAsNeeded</enum>
+               </property>
+               <property name="horizontalScrollBarPolicy">
+                <enum>Qt::ScrollBarAlwaysOff</enum>
+               </property>
+               <property name="widgetResizable">
+                <bool>true</bool>
+               </property>
+               <widget class="QWidget" name="scrollAreaWidgetContents_10">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>855</width>
+                  <height>1333</height>
+                 </rect>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_54">
+                 <item row="3" column="1" colspan="2">
+                  <widget class="QPlainTextEdit" name="plainTextEdit_alergias">
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="21" column="1" colspan="2">
+                  <widget class="QPlainTextEdit" name="plainTextEdit_Familiares"/>
+                 </item>
+                 <item row="16" column="1">
+                  <widget class="QLabel" name="label_26">
+                   <property name="text">
+                    <string>antecedentes no patologicos:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="1">
+                  <widget class="QLabel" name="label_21">
+                   <property name="text">
+                    <string>Enfermedades:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLabel" name="label_18">
+                   <property name="text">
+                    <string>Peso:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1" colspan="2">
+                  <widget class="QPlainTextEdit" name="plainTextEdit_accidentes"/>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLabel" name="label_17">
+                   <property name="text">
+                    <string>Estatura:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="18" column="1">
+                  <widget class="QLabel" name="label_27">
+                   <property name="text">
+                    <string>Cigarro:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="12" column="1">
+                  <widget class="QLabel" name="label_24">
+                   <property name="text">
+                    <string>Trabajos:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QLabel" name="label_20">
+                   <property name="text">
+                    <string>Accidentes:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1" colspan="2">
+                  <widget class="QPlainTextEdit" name="plainTextEdit_cirugias"/>
+                 </item>
+                 <item row="17" column="1" colspan="2">
+                  <widget class="QPlainTextEdit" name="plainTextEdit_alcoholismo"/>
+                 </item>
+                 <item row="15" column="1" colspan="2">
+                  <widget class="QPlainTextEdit" name="plainTextEdit_habitos"/>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QLineEdit" name="lineEdit_peso"/>
+                 </item>
+                 <item row="19" column="1" colspan="2">
+                  <widget class="QPlainTextEdit" name="plainTextEdit_cigarro"/>
+                 </item>
+                 <item row="20" column="1">
+                  <widget class="QLabel" name="label_28">
+                   <property name="text">
+                    <string>Antecedentes familiares:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="11" column="1" colspan="2">
+                  <widget class="QPlainTextEdit" name="plainTextEdit_hospitalizacion"/>
+                 </item>
+                 <item row="7" column="1" colspan="2">
+                  <widget class="QPlainTextEdit" name="plainTextEdit_enfermedades"/>
+                 </item>
+                 <item row="10" column="1">
+                  <widget class="QLabel" name="label_23">
+                   <property name="text">
+                    <string>Hospitalizaciónes:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="13" column="1" colspan="2">
+                  <widget class="QPlainTextEdit" name="plainTextEdit_trabajos"/>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLabel" name="label_19">
+                   <property name="text">
+                    <string>antecedentes patologicos:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QLineEdit" name="lineEdit_estatura"/>
+                 </item>
+                 <item row="14" column="1">
+                  <widget class="QLabel" name="label_25">
+                   <property name="text">
+                    <string>Habitos:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="1">
+                  <widget class="QLabel" name="label_22">
+                   <property name="text">
+                    <string>Antecedentes quirurgicos:</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </widget>
         </item>
@@ -7277,7 +7535,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="pagePrincipalAdmin">
            <layout class="QGridLayout" name="gridLayout_36">
@@ -7511,8 +7769,8 @@ color: rgb(68, 94, 134);
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>20</width>
-                      <height>20</height>
+                      <width>403</width>
+                      <height>361</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_14">
@@ -7900,8 +8158,8 @@ color: rgb(68, 94, 134);
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>404</width>
+                    <height>436</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
@@ -8217,7 +8475,7 @@ color: rgb(68, 94, 134);
             <item row="1" column="0" colspan="2">
              <widget class="QStackedWidget" name="stackedWidget_tips">
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="page_11">
                <widget class="QLabel" name="label_7">
@@ -8407,8 +8665,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
-                        <height>20</height>
+                        <width>457</width>
+                        <height>24</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -8506,8 +8764,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
-                        <height>20</height>
+                        <width>457</width>
+                        <height>24</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -8956,8 +9214,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -9090,8 +9348,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
@@ -9205,8 +9463,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -9380,8 +9638,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">

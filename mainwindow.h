@@ -238,6 +238,10 @@ private slots:
 
     void quitarMedicina(int);
 
+    void on_pushButton_historial_clicked();
+
+    void on_pushButton_buscarHistMedico_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

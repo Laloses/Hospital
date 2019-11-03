@@ -892,7 +892,9 @@ void MainWindow::on_pushButton_citasDoc_clicked()
 {
     //pag citas doc
     ui->stackedWidget_perfilDoctor->setCurrentIndex(2);
-
+    ui->lineEdit_matriculaMedico->clear();
+    ui->label_mensajePaciente->hide();
+    ui->label_espacioBlanco->hide();
     SolicitudCitas();
 
 
@@ -902,6 +904,9 @@ void MainWindow::on_pushButton_horarioDoc_clicked()
 {
     //Mostrar su horario
     ui->stackedWidget_perfilDoctor->setCurrentIndex(1);
+    ui->lineEdit_matriculaMedico->clear();
+    ui->label_mensajePaciente->hide();
+    ui->label_espacioBlanco->hide();
     cargarHorarioDoc();
 }
 
@@ -3057,6 +3062,9 @@ void MainWindow::on_pb_rechazarCitas_clicked()
 {
     ui->stackedWidget_perfilDoctor->setCurrentIndex(4);
     CitasAceptadas();
+    ui->lineEdit_matriculaMedico->clear();
+    ui->label_mensajePaciente->hide();
+    ui->label_espacioBlanco->hide();
 }
 
 void MainWindow::CitasAceptadas()
@@ -3707,6 +3715,9 @@ void MainWindow::on_pb_realizarConsulta_clicked()
     ui->lb_noCoincideFecha->setHidden(true);
     ui->w_infoPacConsulta->setHidden(true);
     ui->sw_historialReceta->setHidden(true);
+    ui->lineEdit_matriculaMedico->clear();
+    ui->label_mensajePaciente->hide();
+    ui->label_espacioBlanco->hide();
 }
 
 //Cuando busca un folio de cita
@@ -4010,4 +4021,82 @@ void MainWindow::quitarMedicina(int numMedicina){
     clearLayout(child->layout());
     qDebug()<<"medicinas"<<medicinas.size();
 }
-// ////////////////////////////// FIN: LLENAR EL RECETA Y DIAGNOSTICO //////////////////////////////
+// ////////////////////////////// FIN: LLENAR EL RECETA Y DIAGNOSTICO ////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////
+
+// /////INICIO PARA PODER BUSCAR EL HISTORIAL DEL PACINETE (MEDICO: CONTIENE ALERGIAS Y DEMAS)//////
+// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+void MainWindow::on_pushButton_historial_clicked()
+{
+ ui->stackedWidget_perfilDoctor->setCurrentIndex(6);
+ ui->lineEdit_matriculaMedico->clear();
+ ui->sA_historialPac_2->hide();
+ ui->label_mensajePaciente->hide();
+ ui->label_espacioBlanco->hide();
+
+}
+
+void MainWindow::on_pushButton_buscarHistMedico_clicked()
+{
+    QString altura,peso,alergia,accidente,enfermedades,cirujias,hospital,trabajos,habitos,alcohol,cigarro,familia,consulta,idUsuario,idUsuario2;
+    QSqlQuery query;
+    idUsuario2="2019";
+    idUsuario=ui->lineEdit_matriculaMedico->text();
+    if(idUsuario==""){
+        //qDebug()<<"entre 1 if";
+            ui->label_espacioBlanco->show();
+            ui->label_mensajePaciente->hide();
+            ui->sA_historialPac_2->hide();
+
+    }
+        if(idUsuario!=""){
+            //qDebug()<<"entre 2 if";
+                consulta="select *from paciente where idUser='"+idUsuario+"'";
+                query.exec(consulta);
+                query.next();
+                idUsuario2=query.value(1).toString();
+                //qDebug()<<"USUARIO"<<idUsuario2;
+                //qDebug()<<"USUARIO"<<idUsuario;
+                ui->label_mensajePaciente->show();
+                ui->label_espacioBlanco->hide();
+                ui->sA_historialPac_2->hide();
+
+   }
+        if(idUsuario==idUsuario2){
+           //  qDebug()<<"entre 3 if";
+             ui->label_mensajePaciente->hide();
+             ui->label_espacioBlanco->hide();
+            consulta="select estatura,peso,fechaUltimaVacuna,alergias,accidente,enfermedad,cirugias,hospitalizaciones,trabajos,habitos,frecuenciaAlcohol,frecuenciaCigarro,enfermedadesFamilia "
+                     " from historialPaciente inner join paciente on historialPaciente.idPaciente=paciente.idpaciente where paciente.idUser='"+idUsuario+"'";
+            query.exec(consulta);
+            query.next();
+            altura=query.value(0).toString();
+            peso=query.value(1).toString();
+            alergia=query.value(3).toString();
+            accidente=query.value(4).toString();
+            enfermedades=query.value(5).toString();
+            cirujias=query.value(6).toString();
+            hospital=query.value(7).toString();
+            trabajos=query.value(8).toString();
+            habitos=query.value(9).toString();
+            alcohol=query.value(10).toString();
+            cigarro=query.value(11).toString();
+            familia=query.value(12).toString();
+
+            ui->lineEdit_estatura->setText(altura);
+            ui->lineEdit_peso->setText(peso);
+            ui->plainTextEdit_alergias->setPlainText(alergia);
+            ui->plainTextEdit_accidentes->setPlainText(accidente);
+            ui->plainTextEdit_enfermedades->setPlainText(enfermedades);
+            ui->plainTextEdit_cirugias->setPlainText(cirujias);
+            ui->plainTextEdit_hospitalizacion->setPlainText(hospital);
+            ui->plainTextEdit_trabajos->setPlainText(trabajos);
+            ui->plainTextEdit_habitos->setPlainText(habitos);
+            ui->plainTextEdit_alcoholismo->setPlainText(alcohol);
+            ui->plainTextEdit_cigarro->setPlainText(cigarro);
+            ui->plainTextEdit_Familiares->setPlainText(familia);
+            ui->sA_historialPac_2->show();
+        }
+}
