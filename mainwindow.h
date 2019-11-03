@@ -1,3 +1,4 @@
+#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -44,6 +45,10 @@ private:
     void cargarHorarioDoc();
     void SolicitudCitas();
     void cargarCategoria();
+    QList<QString> medicinas;
+    QList<QString> porciones;
+    QList<QString> frecMedicinas;
+    int contMedicinas;
 
 private slots:
 
@@ -198,6 +203,8 @@ private slots:
 
     void on_pb_masMedicina_clicked();
 
+    void quitarMedicina(int);
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -209,11 +216,6 @@ public:
    void mostrarZonas();
    void mostrasConsultorios();
    int verNoti;
-   QList<QString> medicinas;
-   QList<QString> porciones;
-   QList<QString> frecMedicinas;
-
-
 
 };
 

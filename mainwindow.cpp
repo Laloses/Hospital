@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     UserTipo=0;
     toggleVision = 0;
     toggleVision1 = 0;
+    contMedicinas=0;
 }
 
 MainWindow::~MainWindow()
@@ -3034,7 +3035,6 @@ void MainWindow::on_pb_llenarHistorial_clicked()
     }else{
         //Nos movemos a la receta y diagnostico
         ui->sw_historialReceta->setCurrentIndex(1);
-        ui->w_masMedicamentos->setHidden(true);
         ui->pb_buscarCita->setEnabled(false);
     }
 }
@@ -3071,7 +3071,53 @@ void MainWindow::on_pb_masMedicina_clicked()
             if(!ui->le_frecuencia->text().isEmpty()){
                 ui->le_frecuencia->setStyleSheet(estiloBueno);
                 //Si no estan vacíos los campos creamos objetos dinamicos para mostrarlos
+                //Los guardamos en un layaout horizontal
+                QHBoxLayout *hlay = new QHBoxLayout;
+                hlay->setObjectName("medicinaNum"+QString::number(medicinas.size()));
 
+                QLabel *l=new QLabel;
+                l->setText(ui->le_medicamento->text()+": ");
+                //l->setFixedSize(QSize(100,25));
+                //l->setStyleSheet("border: 1px solid rgb(9,9,9)");
+                hlay->addWidget(l,Qt::AlignLeft);
+
+                l=new QLabel;
+                l->setText(ui->le_porcion->text()+"grs,");
+                //l->setFixedSize(QSize(100,25));
+                //l->setStyleSheet("border: 1px solid rgb(9,9,9)");
+                hlay->addWidget(l,Qt::AlignLeft);
+
+                l=new QLabel;
+                l->setText(ui->le_frecuencia->text());
+                //l->setFixedSize(QSize(100,25));
+                //l->setStyleSheet("border: 1px solid rgb(9,9,9)");
+                hlay->addWidget(l,Qt::AlignLeft);
+
+                QPushButton *pb = new QPushButton;
+                pb->setText("Quitar");
+                pb->setFixedSize(QSize(70,25));
+                //b->setStyleSheet("background-color: rgb(138,222,242);border: 1px solid rgb(60,200,234)");
+                QSignalMapper *mapper=new QSignalMapper(this);
+                connect(pb,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+                mapper->setMapping(pb,contMedicinas);
+                connect(mapper,SIGNAL(mapped(int)),this,SLOT(quitarMedicina(int)));
+                hlay->addWidget(pb,Qt::AlignLeft);
+
+                contMedicinas=medicinas.size();
+                hlay->setAlignment(Qt::AlignLeft);
+                hlay->setSpacing(0);
+                ui->medicamentosLay->addLayout(hlay);
+
+                //Guardamos los valores en los arreglos
+                medicinas.append(ui->le_medicamento->text());
+                porciones.append(ui->le_porcion->text());
+                frecMedicinas.append(ui->le_frecuencia->text());
+
+                //Vaciamos las variables del ui
+                ui->le_medicamento->setText("");
+                ui->le_porcion->setText("");
+                ui->le_frecuencia->setText("");
+                qDebug()<<"medicinas"<<medicinas.size();
             }
             else{
                 ui->le_frecuencia->setStyleSheet(estiloMalo);
@@ -3084,5 +3130,16 @@ void MainWindow::on_pb_masMedicina_clicked()
     else{
         ui->le_medicamento->setStyleSheet(estiloMalo);
     }
+}
+
+void MainWindow::quitarMedicina(int numMedicina){
+    //El num de medicina nos dice la posicion en el arreglo
+    medicinas.removeAt(numMedicina);
+    porciones.removeAt(numMedicina);
+    frecMedicinas.removeAt(numMedicina);
+    QLayoutItem *child;
+    child = ui->medicamentosLay->takeAt(numMedicina);
+    clearLayout(child->layout());
+    qDebug()<<"medicinas"<<medicinas.size();
 }
 // ////////////////////////////// FIN: LLENAR EL RECETA Y DIAGNOSTICO //////////////////////////////

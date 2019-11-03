@@ -3644,8 +3644,8 @@ background -color: red;
                    <property name="geometry">
                     <rect>
                      <x>0</x>
-                     <y>-781</y>
-                     <width>393</width>
+                     <y>0</y>
+                     <width>314</width>
                      <height>1104</height>
                     </rect>
                    </property>
@@ -3903,7 +3903,7 @@ p, li { white-space: pre-wrap; }
               <widget class="QWidget" name="p_receta">
                <layout class="QGridLayout" name="gridLayout_40">
                 <item row="0" column="0">
-                 <widget class="QScrollArea" name="scrollArea_7">
+                 <widget class="QScrollArea" name="sa_receta">
                   <property name="horizontalScrollBarPolicy">
                    <enum>Qt::ScrollBarAlwaysOff</enum>
                   </property>
@@ -3918,15 +3918,18 @@ p, li { white-space: pre-wrap; }
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>406</width>
-                     <height>397</height>
+                     <width>393</width>
+                     <height>383</height>
                     </rect>
                    </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_25">
+                   <layout class="QVBoxLayout" name="verticalLayout_30">
                     <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_56">
                       <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_68">
+                       <layout class="QVBoxLayout" name="verticalLayout_25">
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
                         <item>
                          <widget class="QLabel" name="lb_medicina">
                           <property name="font">
@@ -3949,7 +3952,10 @@ p, li { white-space: pre-wrap; }
                        </layout>
                       </item>
                       <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_69">
+                       <layout class="QVBoxLayout" name="verticalLayout_28">
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
                         <item>
                          <widget class="QLabel" name="label_9">
                           <property name="text">
@@ -3958,19 +3964,15 @@ p, li { white-space: pre-wrap; }
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="le_porcion">
-                          <property name="maximumSize">
-                           <size>
-                            <width>41</width>
-                            <height>16777215</height>
-                           </size>
-                          </property>
-                         </widget>
+                         <widget class="QLineEdit" name="le_porcion"/>
                         </item>
                        </layout>
                       </item>
                       <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_70">
+                       <layout class="QVBoxLayout" name="verticalLayout_29">
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
                         <item>
                          <widget class="QLabel" name="label_15">
                           <property name="text">
@@ -4042,37 +4044,7 @@ p, li { white-space: pre-wrap; }
                      </layout>
                     </item>
                     <item>
-                     <widget class="QWidget" name="w_masMedicamentos" native="true">
-                      <property name="minimumSize">
-                       <size>
-                        <width>341</width>
-                        <height>35</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>345</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <layout class="QGridLayout" name="gridLayout_41">
-                       <property name="leftMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="topMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>0</number>
-                       </property>
-                       <item row="0" column="0">
-                        <layout class="QGridLayout" name="medicamentosLay"/>
-                       </item>
-                      </layout>
-                     </widget>
+                     <layout class="QVBoxLayout" name="medicamentosLay"/>
                     </item>
                     <item>
                      <widget class="QLabel" name="lb_diagnostico">
@@ -5174,7 +5146,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;
 }</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="pagePrincipalAdmin">
            <widget class="QLabel" name="label_pageAdmin">
@@ -6707,8 +6679,8 @@ color: rgb(68, 94, 134);
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>267</width>
+                          <height>236</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
