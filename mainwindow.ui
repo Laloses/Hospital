@@ -3558,6 +3558,12 @@ background -color: red;
                </item>
                <item row="0" column="1">
                 <widget class="QLabel" name="lb_imgPac">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="minimumSize">
                   <size>
                    <width>30</width>
@@ -3615,6 +3621,12 @@ background -color: red;
             </item>
             <item row="2" column="2" colspan="2">
              <widget class="QStackedWidget" name="sw_historialReceta">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>391</width>
@@ -3629,7 +3641,7 @@ background -color: red;
                 <item row="0" column="0">
                  <widget class="QScrollArea" name="sA_historialPac">
                   <property name="styleSheet">
-                   <string notr="true"/>
+                   <string notr="true">font-size:12pt;</string>
                   </property>
                   <property name="verticalScrollBarPolicy">
                    <enum>Qt::ScrollBarAsNeeded</enum>
@@ -3645,8 +3657,8 @@ background -color: red;
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>314</width>
-                     <height>1104</height>
+                     <width>393</width>
+                     <height>1115</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_43">
@@ -3740,8 +3752,8 @@ background -color: red;
                        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                       </property>
                      </widget>
                     </item>
@@ -3904,11 +3916,25 @@ p, li { white-space: pre-wrap; }
                <layout class="QGridLayout" name="gridLayout_40">
                 <item row="0" column="0">
                  <widget class="QScrollArea" name="sa_receta">
+                  <property name="sizeIncrement">
+                   <size>
+                    <width>0</width>
+                    <height>1</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">font-size:12pt;</string>
+                  </property>
                   <property name="horizontalScrollBarPolicy">
                    <enum>Qt::ScrollBarAlwaysOff</enum>
                   </property>
                   <property name="sizeAdjustPolicy">
-                   <enum>QAbstractScrollArea::AdjustToContents</enum>
+                   <enum>QAbstractScrollArea::AdjustIgnored</enum>
                   </property>
                   <property name="widgetResizable">
                    <bool>true</bool>
@@ -3919,7 +3945,7 @@ p, li { white-space: pre-wrap; }
                      <x>0</x>
                      <y>0</y>
                      <width>393</width>
-                     <height>383</height>
+                     <height>389</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_30">
@@ -3959,7 +3985,7 @@ p, li { white-space: pre-wrap; }
                         <item>
                          <widget class="QLabel" name="label_9">
                           <property name="text">
-                           <string>Porción (grs)</string>
+                           <string>Porción</string>
                           </property>
                          </widget>
                         </item>
@@ -6679,8 +6705,8 @@ color: rgb(68, 94, 134);
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>267</width>
-                          <height>236</height>
+                          <width>20</width>
+                          <height>20</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
