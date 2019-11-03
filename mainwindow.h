@@ -46,7 +46,10 @@ private:
     void SolicitudCitas();
     void cargarCategoria();
     void CitasAceptadas();
-
+    QList<QString> medicinas;
+    QList<QString> porciones;
+    QList<QString> frecMedicinas;
+    int contMedicinas;
 
 private slots:
 
@@ -223,6 +226,17 @@ private slots:
     void on_pushButton_Cancelar_Cita_clicked();
 
     void on_butonNotifi_4_clicked();
+    void on_pb_llenarHistorial_clicked();
+
+    void on_pb_buscarCita_clicked();
+
+    void on_pb_realizarConsulta_clicked();
+
+    void on_pb_receta_clicked();
+
+    void on_pb_masMedicina_clicked();
+
+    void quitarMedicina(int);
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
@@ -235,9 +249,6 @@ public:
    void mostrarZonas();
    void mostrasConsultorios();
    int verNoti;
-
-
-
 
 };
 

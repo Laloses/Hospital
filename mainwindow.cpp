@@ -45,6 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
     UserTipo=0;
     toggleVision = 0;
     toggleVision1 = 0;
+    contMedicinas=0;
+    //ui->sa_receta->setsi
 }
 
 MainWindow::~MainWindow()
@@ -1905,7 +1907,7 @@ void MainWindow::on_pushButton_clicked()
     on_radioCitaPersonal_clicked();
 }
 
-//Buscar doctor
+//Buscar un doctor para una cita
 void MainWindow::on_btnBuscarDoctor_clicked()
 {
     QSqlQuery horarios, doc;
@@ -1917,7 +1919,7 @@ void MainWindow::on_btnBuscarDoctor_clicked()
     QStringList dias;
     dias<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado" << "Domingo";
 
-    horarios.exec("SELECT idDoc FROM horariodoc WHERE hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"'");
+    horarios.exec("SELECT idDoc FROM horariodoc WHERE hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"' AND nombreAct='Consulta'");
     if(ui->le_nombreDoc->text().isEmpty() && !horarios.next()){
         ui->lb_noHayDocs->setHidden(false);
         ui->tv_listaDocCitas->setModel(nullptr);
@@ -1971,13 +1973,13 @@ void MainWindow::on_btnBuscarDoctor_clicked()
                           "WHERE d.iddoctor = "+QString::number((idDoc))+" "
                           "AND u.matricula = d.idUser "
                           "AND d.idEspecialidad = e.idEsp");
-        }
         qDebug()<<idDoc;
         ui->tv_listaDocCitas->setModel(model);
         ui->tv_listaDocCitas->setHidden(false);
         ui->tv_listaDocCitas->hideColumn(2);
         ui->tv_listaDocCitas->setColumnWidth(0,ui->tv_listaDocCitas->width()/2);
         ui->tv_listaDocCitas->setColumnWidth(1,ui->tv_listaDocCitas->width()/2);
+    }
     }
 }
 
@@ -2110,9 +2112,7 @@ void MainWindow::on_fechaCita_userDateChanged(const QDate &date)
 
 void MainWindow::on_horaCita_activated(const QString &arg1)
 {
-    if(arg1!="05:00"){
         on_btnBuscarDoctor_clicked();
-    }
 }
 void MainWindow::SolicitudCitas()
 {
@@ -2127,6 +2127,8 @@ void MainWindow::SolicitudCitas()
     QSqlQuery citas1;
     citas1.exec(citas);
 
+    int f=0;
+    int fi=0;
     int ban=1;
     QString r1,g1,b1;
     r1="172,189,211";
@@ -2158,6 +2160,8 @@ void MainWindow::SolicitudCitas()
     l3->setFixedSize(QSize(100,25));
     l3->setStyleSheet("border: 1px solid rgb(9,9,9)");
     ui->encabezadoCitas->addWidget(l3,0,3,Qt::AlignLeft);
+
+
     QString folio,matricu,fecha,hora;
     int i=0;
 
@@ -2185,6 +2189,7 @@ void MainWindow::SolicitudCitas()
         l->setStyleSheet("background-color: rgb("+rgb+")");
         ui->citasLay->addWidget(l,i,0,Qt::AlignTop);
 
+
         QLabel *m=new QLabel;
         m->setText(matricu);
         m->setFixedSize(QSize(100,25));
@@ -2198,9 +2203,6 @@ void MainWindow::SolicitudCitas()
         r->setFixedSize(QSize(100,25));
         ui->citasLay->addWidget(r,i,2,Qt::AlignTop);
 
-
-
-
         QLabel *h=new QLabel;
         h->setText(hora);
         h->setFixedSize(QSize(100,25));
@@ -2213,7 +2215,6 @@ void MainWindow::SolicitudCitas()
        ui->citasLay->addWidget(ss,i,4,Qt::AlignTop);
 
 
-
        QPushButton *b=new QPushButton();
        b->setText("Revisar");
        b->setFixedSize(QSize(100,25));
@@ -2223,7 +2224,6 @@ void MainWindow::SolicitudCitas()
        mapper2->setMapping(b,folio);
        connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(verCita(QString)));
        ui->citasLay->addWidget(b,i,5,Qt::AlignTop);
-
 
        QPushButton *s=new QPushButton();
        s->setText("Aceptar");
@@ -2284,12 +2284,8 @@ void MainWindow::aceptarCita(QString folio)
         QSqlQuery mandarNoti;
         mandarNoti.exec(notificacion);
 
-
-
-
         clearLayout(ui->citasLay);
         SolicitudCitas();
-
     }
     else
     {
@@ -2305,9 +2301,6 @@ void MainWindow::rechazarCita(QString folio)
     message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
     message.setButtonText(QMessageBox::No, tr("Cancelar"));
     if (message.exec() == QMessageBox::Yes){
-
-
-
 
         //aqui mando la notificacion:
         QString fech,hor,tipo;
@@ -2334,18 +2327,12 @@ void MainWindow::rechazarCita(QString folio)
         QSqlQuery eliminar;
         eliminar.exec(delete1);
 
-
-
         clearLayout(ui->citasLay);
         SolicitudCitas();
     }
     else
     {
-
     }
-
-
-
 }
 
 void MainWindow::verCita(QString folio)
@@ -2415,7 +2402,6 @@ void MainWindow::verCita(QString folio)
         ui->sintomas->setPlainText(cita1.value(5).toString());
 
     }
-
 }
 
 void MainWindow::on_regresar_citasDoc_clicked()
@@ -3711,3 +3697,317 @@ void MainWindow::on_butonNotifi_4_clicked()
     }
 
 }
+// ////////////////////////////// LLENAR EL HISTORIAL //////////////////////////////
+
+//doctor quiere hacer una consulta
+void MainWindow::on_pb_realizarConsulta_clicked()
+{
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(5);
+    //Ocultamos los menus
+    ui->lb_noCoincideFecha->setHidden(true);
+    ui->w_infoPacConsulta->setHidden(true);
+    ui->sw_historialReceta->setHidden(true);
+}
+
+//Cuando busca un folio de cita
+void MainWindow::on_pb_buscarCita_clicked()
+{
+    QSqlQuery cita,fecha;
+    QPixmap pix;
+    QString estiloMalo, estiloBueno;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+
+    if( !ui->le_folioCita->text().isEmpty() )
+        cita.exec("SELECT * FROM cita WHERE idCita="+ui->le_folioCita->text());
+    else{
+        ui->le_folioCita->setStyleSheet(estiloMalo);
+        ui->lb_noCoincideFecha->setText("Ingrese un folio.");
+        ui->lb_noCoincideFecha->setHidden(false);
+        return;
+    }
+    if( cita.next() ){
+        ui->le_folioCita->setStyleSheet(estiloBueno);
+        fecha.exec("SELECT CURDATE()");
+        fecha.next();
+        //Verificamos si es el dia de la consulta (La hora no se revisa porque puede pasar un paciente antes)
+        if(fecha.value(0).toDate().toString("yyyy/MM/dd") == cita.value(2).toDate().toString("yyyy/MM/dd") && cita.value(8).toString() == "Pendiente"){
+            //Si si es el dia
+            //buscamos los datos del paciente de esa cita
+            datosPac->exec("SELECT CONCAT(nombre,' ',appaterno,' ',apmaterno) as nomC, edad, sexo, religion,fotop FROM usuario WHERE matricula="+cita.value(1).toString());
+            if( datosPac->next() ){
+                ui->lb_noCoincideFecha->setHidden(true);
+
+                //Llenamos el los datos del paciente
+                ui->lb_nomPac->setText(datosPac->value(0).toString());
+                ui->lb_edad->setText(datosPac->value(1).toString());
+                ui->lb_sexoPac->setText(datosPac->value(2).toString());
+                ui->lb_religion->setText(datosPac->value(3).toString());
+                ui->te_sintomas->setText(cita.value(5).toString());
+                pix.loadFromData(datosPac->value(4).toByteArray());
+                ui->lb_imgPac->setPixmap(pix.scaled(ui->lb_imgPac->width(),ui->lb_imgPac->height(),Qt::KeepAspectRatio));
+                //mostramos los menus
+                ui->w_infoPacConsulta->setHidden(false);
+                ui->sw_historialReceta->setCurrentIndex(0);
+                ui->sw_historialReceta->setHidden(false);
+
+                // ///////////////////// CARGAMOS LOS DATOS ACUTALES DEL HISTORIAL DEL PACIENTE /////////////////////
+
+                QSqlQuery historialPac,idPac,defaultHistorial;
+                idPac.exec("SELECT idpaciente FROM paciente WHERE idUser="+cita.value(1).toString());
+                idPac.next();
+
+                historialPac.exec("SELECT * FROM historialPaciente WHERE idPaciente="+idPac.value(0).toString());
+                // Si no tiene historial, crear uno nuevo
+                if(!historialPac.next()){
+                    if(!defaultHistorial.exec("INSERT INTO historialPaciente(idPaciente) value ("+idPac.value(0).toString()+")"))
+                        qDebug()<<defaultHistorial.lastError().text();
+                        historialPac.exec("SELECT * FROM historialPaciente WHERE idPaciente="+idPac.value(0).toString());
+                        historialPac.next();
+                }
+                // Cargar los datos a la ui
+                    ui->le_estatura->setText(historialPac.value(1).toString());
+                    ui->le_peso->setText(historialPac.value(2).toString());
+                    ui->de_ultimaVacuna->setDate(historialPac.value(3).toDate());
+                    ui->te_alergias->setText(historialPac.value(4).toString());
+                    ui->te_accidentes->setText(historialPac.value(5).toString());
+                    ui->te_enfermedades->setText(historialPac.value(6).toString());
+                    ui->te_cirugias->setText(historialPac.value(7).toString());
+                    ui->te_hospi->setText(historialPac.value(8).toString());
+                    ui->te_trabajos->setText(historialPac.value(9).toString());
+                    ui->te_habitos->setText(historialPac.value(10).toString());
+                    ui->te_frecAlco->setText(historialPac.value(11).toString());
+                    ui->te_frecFuma->setText(historialPac.value(12).toString());
+                    ui->te_enfeFami->setText(historialPac.value(13).toString());
+
+            }else qDebug()<<"Mala usuario"<<datosDoc->lastError().text();
+        //Si no es el dia
+        }else if(fecha.value(0).toDate().toString("yyyy/MM/dd") > cita.value(2).toDate().toString("yyyy/MM/dd")){
+            ui->lb_noCoincideFecha->setHidden(false);
+            ui->lb_noCoincideFecha->setText("Ya pasó la fecha de la cita");
+
+            //Agregar un botón para borrarla ?????????????????????????
+        }
+        else if(cita.value(8).toString() != "Pendiente"){
+            ui->lb_noCoincideFecha->setHidden(false);
+            ui->lb_noCoincideFecha->setText("Cita concluida");
+        }
+        else{
+            ui->lb_noCoincideFecha->setHidden(false);
+            ui->lb_noCoincideFecha->setText("Aun no es la fecha de la cita");
+        }
+    }else {
+        qDebug()<<"Mala cita"<<cita.lastError().text();
+        ui->lb_noCoincideFecha->setText("No existe una cita con este folio.");
+        ui->le_folioCita->setStyleSheet(estiloMalo);
+        ui->lb_noCoincideFecha->setHidden(false);
+    }
+}
+
+//Cuando termina de llenar el historial
+void MainWindow::on_pb_llenarHistorial_clicked()
+{
+    QString estiloMalo, estiloBueno;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+    //Insertar los datos
+    QSqlQuery llenarHist, cita,idPac;
+    cita.exec("SELECT matricula FROM cita WHERE idCita="+ui->le_folioCita->text());
+    cita.next();
+    idPac.exec("SELECT idpaciente FROM paciente WHERE idUser="+cita.value(0).toString());
+    idPac.next();
+    //Ejecutmaos el update
+    qDebug()<<idPac.value(0).toString();
+    if( !llenarHist.exec("UPDATE historialPaciente SET "
+                         " estatura="+ui->le_estatura->text()+
+                         ", peso="+ui->le_peso->text()+
+                         ", fechaUltimaVacuna='"+ui->de_ultimaVacuna->date().toString("yyyy-MM-dd")+
+                         "', alergias='"+ui->te_alergias->toPlainText()+
+                         "', accidente='"+ui->te_accidentes->toPlainText()+
+                         "', enfermedad='"+ui->te_enfermedades->toPlainText()+
+                         "', cirugias='"+ui->te_cirugias->toPlainText()+
+                         "', hospitalizaciones='"+ui->te_hospi->toPlainText()+
+                         "', trabajos='"+ui->te_trabajos->toPlainText()+
+                         "', habitos='"+ui->te_habitos->toPlainText()+
+                         "', frecuenciaAlcohol='"+ui->te_frecAlco->toPlainText()+
+                         "', frecuenciaCigarro='"+ui->te_frecFuma->toPlainText()+
+                         "', enfermedadesFamilia='"+ui->te_enfeFami->toPlainText()+
+                         "' WHERE idPaciente="+idPac.value(0).toString() )){
+
+        //Si no se puede hacer el update
+        qDebug()<<llenarHist.lastError().text();
+        QMessageBox::warning(this,"Error","No se pudieron guardar los datos, intente más tarde.");
+
+    //si se ejecutó correctamente
+    }else{
+        //Nos movemos a la receta y diagnostico
+        ui->sw_historialReceta->setCurrentIndex(1);
+        //Desactivamos el boton para que no se pueda regresar al historial
+        ui->pb_buscarCita->setEnabled(false);
+    }
+}
+// ////////////////////////////// FIN : LLENAR EL HISTORIAL //////////////////////////////
+
+// ////////////////////////////// LLENAR EL RECETA Y DIAGNOSTICO //////////////////////////////
+void MainWindow::on_pb_receta_clicked()
+{
+    QString estiloMalo, estiloBueno;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+
+    //Validamos los datos
+    if(!ui->te_diagnostico->toPlainText().isEmpty()){
+        ui->te_diagnostico->setStyleSheet(estiloBueno);
+        //si hay al menos una medicina ingresada
+        if(medicinas.size() > 0){
+            ui->pb_masMedicina->setStyleSheet(estiloBueno);
+            ui->le_medicamento->setStyleSheet(estiloBueno);
+            ui->le_porcion->setStyleSheet(estiloBueno);
+            ui->le_frecuencia->setStyleSheet(estiloBueno);
+
+            //Preguntar si esta seguro
+            QMessageBox::StandardButton preg;
+            if( medicinas.size() >1 )
+                preg = QMessageBox::question(this,"Guardar datos","¿Esta seguro de guardar datos? Se guardarán "+QString::number(medicinas.size())+" medicamentos.");
+            else preg = QMessageBox::question(this,"Guardar datos","¿Esta seguro de guardar datos? Se guardará "+QString::number(medicinas.size())+" medicamento.");
+            if( preg == QMessageBox::No) return;
+
+            //Hacemos los insert
+            QSqlQuery receta;
+            QString value;
+            int i;
+            bool si=true;
+            for(i=0; i<medicinas.size(); i++){
+                value=ui->le_folioCita->text()+", '"+medicinas.at(i)+"','"
+                        +porciones.at(i)+"', '"+frecMedicinas.at(i)+"'";
+                if (!receta.exec("INSERT INTO receta() value("+value+")") ){
+                    qDebug()<<receta.lastError().text();
+                    si=false;
+                }
+            }
+
+            //Marcamos como completada la cita
+            QSqlQuery cita;
+            if (cita.exec("UPDATE cita SET preparada='Completada' WHERE idCita="+ui->le_folioCita->text()) )
+                qDebug()<<"Cita concluida";
+
+            //Vaciamos las variables y movemos de página
+            if(si){
+                ui->le_folioCita->setText("");
+                while(!medicinas.isEmpty()){
+                    medicinas.removeLast();
+                    porciones.removeLast();
+                    frecMedicinas.removeLast();
+                }
+                ui->te_diagnostico->setText("");
+                QMessageBox::information(this,"Correcto","Datos guardados correctamente.");
+                on_pb_realizarConsulta_clicked();
+                //Activamos el boton de buscar consultas
+                ui->pb_buscarCita->setEnabled(true);
+            }
+            else{
+                QMessageBox::warning(this,"Error","No se pudo ingresar su infomación, intente más tarde.");
+            }
+
+        }
+        else{
+            QMessageBox::warning(this,"Error","Por favor ingresa una medicina");
+            ui->pb_masMedicina->setStyleSheet(estiloMalo);
+            ui->le_medicamento->setStyleSheet(estiloMalo);
+            ui->le_porcion->setStyleSheet(estiloMalo);
+            ui->le_frecuencia->setStyleSheet(estiloMalo);
+        }
+    }
+    else {
+        ui->te_diagnostico->setStyleSheet(estiloMalo);
+    }
+
+}
+
+//Agregar medicamentos
+void MainWindow::on_pb_masMedicina_clicked()
+{
+    QString estiloMalo, estiloBueno;
+    estiloMalo="border:2px red; border-style:solid";
+    estiloBueno="border:1px black; border-style:solid";
+    QString medicina,porcion,frecuecia;
+    //Validamos y asignamos los datos
+    if(!ui->le_medicamento->text().isEmpty()){
+        ui->le_medicamento->setStyleSheet(estiloBueno);
+        if(!ui->le_porcion->text().isEmpty()){
+            ui->le_porcion->setStyleSheet(estiloBueno);
+            if(!ui->le_frecuencia->text().isEmpty()){
+                ui->le_frecuencia->setStyleSheet(estiloBueno);
+                //Si no estan vacíos los campos creamos objetos dinamicos para mostrarlos
+                //Los guardamos en un layaout horizontal
+                QHBoxLayout *hlay = new QHBoxLayout;
+                hlay->setObjectName("medicinaNum"+QString::number(medicinas.size()));
+
+                QLabel *l=new QLabel;
+                l->setText(ui->le_medicamento->text()+": ");
+                //l->setFixedSize(QSize(100,25));
+                //l->setStyleSheet("border: 1px solid rgb(9,9,9)");
+                hlay->addWidget(l,Qt::AlignLeft);
+
+                l=new QLabel;
+                l->setText(ui->le_porcion->text()+"grs,");
+                //l->setFixedSize(QSize(100,25));
+                //l->setStyleSheet("border: 1px solid rgb(9,9,9)");
+                hlay->addWidget(l,Qt::AlignLeft);
+
+                l=new QLabel;
+                l->setText(ui->le_frecuencia->text());
+                //l->setFixedSize(QSize(100,25));
+                //l->setStyleSheet("border: 1px solid rgb(9,9,9)");
+                hlay->addWidget(l,Qt::AlignLeft);
+
+                QPushButton *pb = new QPushButton;
+                pb->setText("Quitar");
+                pb->setFixedSize(QSize(70,25));
+                //b->setStyleSheet("background-color: rgb(138,222,242);border: 1px solid rgb(60,200,234)");
+                QSignalMapper *mapper=new QSignalMapper(this);
+                connect(pb,SIGNAL(clicked(bool)),mapper,SLOT(map()));
+                mapper->setMapping(pb,contMedicinas);
+                connect(mapper,SIGNAL(mapped(int)),this,SLOT(quitarMedicina(int)));
+                hlay->addWidget(pb,Qt::AlignLeft);
+
+                contMedicinas=medicinas.size();
+                hlay->setAlignment(Qt::AlignLeft);
+                hlay->setSpacing(0);
+                ui->medicamentosLay->addLayout(hlay);
+
+                //Guardamos los valores en los arreglos
+                medicinas.append(ui->le_medicamento->text());
+                porciones.append(ui->le_porcion->text());
+                frecMedicinas.append(ui->le_frecuencia->text());
+
+                //Vaciamos las variables del ui
+                ui->le_medicamento->setText("");
+                ui->le_porcion->setText("");
+                ui->le_frecuencia->setText("");
+                qDebug()<<"medicinas"<<medicinas.size();
+            }
+            else{
+                ui->le_frecuencia->setStyleSheet(estiloMalo);
+            }
+        }
+        else{
+            ui->le_porcion->setStyleSheet(estiloMalo);
+        }
+    }
+    else{
+        ui->le_medicamento->setStyleSheet(estiloMalo);
+    }
+}
+
+void MainWindow::quitarMedicina(int numMedicina){
+    //El num de medicina nos dice la posicion en el arreglo
+    medicinas.removeAt(numMedicina);
+    porciones.removeAt(numMedicina);
+    frecMedicinas.removeAt(numMedicina);
+    QLayoutItem *child;
+    child = ui->medicamentosLay->takeAt(numMedicina);
+    clearLayout(child->layout());
+    qDebug()<<"medicinas"<<medicinas.size();
+}
+// ////////////////////////////// FIN: LLENAR EL RECETA Y DIAGNOSTICO //////////////////////////////
