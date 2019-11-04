@@ -54,7 +54,7 @@ bool pagarCitasPaciente::pagarCitas(QString idUser, QString titular, QString dig
             return true;
         }
     }
-
+    return false;
 }
 
 
@@ -109,12 +109,12 @@ bool pagarCitasPaciente::on_pushButton_pagarC_clicked()
     {
         if ( pagarCitas(idUser,titular,digitos,fechaV,codigsec) ){
             QMessageBox::information(this,"Correcto", "Pago realizado");
+            this->close();
         }else{
             QMessageBox::information(this,"Error", "Hubo un problema al procesar tu pago.");
         }
 
     }
-    this->close();
     return flag;
 }
 
