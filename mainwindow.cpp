@@ -3873,6 +3873,7 @@ void MainWindow::on_pb_receta_clicked()
             if( preg == QMessageBox::No) return;
 
             //Hacemos los insert
+            //receta
             QSqlQuery receta;
             QString value;
             int i;
@@ -3885,6 +3886,10 @@ void MainWindow::on_pb_receta_clicked()
                     si=false;
                 }
             }
+            //Diagnostico
+            QSqlQuery diag;
+            if( diag.exec("INSERT INTO diagnostico(idCita,diagnostico) value("+ui->le_folioCita->text()+",'"+ui->te_diagnostico->toPlainText()+"')") )
+                qDebug()<<"diag insertado";
 
             //Marcamos como completada la cita
             QSqlQuery cita;

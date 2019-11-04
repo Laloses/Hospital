@@ -20,6 +20,17 @@
 #stackedWidget_principal{
 	background-color: white;
 }
+QPushButton{
+	border:solid 1px #5d80b6;
+border-radius:5px;
+background-color: #5d80b6;
+color: white;
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+height:30px;
+}
+QPushButton:hover{
+padding-top:1px;
+}
 </string>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -123,7 +134,7 @@
            </property>
            <property name="styleSheet">
             <string notr="true">border:none;
-</string>
+background-color:transparent;</string>
            </property>
            <property name="text">
             <string/>
@@ -464,7 +475,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
 </string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -486,7 +497,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
       </widget>
       <widget class="QWidget" name="page_login">
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">font-size:12pt;</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_6">
         <item row="0" column="1">
@@ -553,14 +564,14 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                    <widget class="QLabel" name="label_idUsuario">
                     <property name="maximumSize">
                      <size>
-                      <width>95</width>
+                      <width>16777215</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="font">
                      <font>
                       <family>MS Shell Dlg 2</family>
-                      <pointsize>11</pointsize>
+                      <pointsize>12</pointsize>
                       <weight>50</weight>
                       <italic>false</italic>
                       <bold>false</bold>
@@ -604,7 +615,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                     <property name="font">
                      <font>
                       <family>MS Shell Dlg 2</family>
-                      <pointsize>11</pointsize>
+                      <pointsize>12</pointsize>
                       <weight>50</weight>
                       <italic>false</italic>
                       <bold>false</bold>
@@ -623,14 +634,14 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                    <widget class="QLabel" name="label_password">
                     <property name="maximumSize">
                      <size>
-                      <width>95</width>
+                      <width>16777215</width>
                       <height>25</height>
                      </size>
                     </property>
                     <property name="font">
                      <font>
                       <family>MS Shell Dlg 2</family>
-                      <pointsize>11</pointsize>
+                      <pointsize>12</pointsize>
                       <weight>50</weight>
                       <italic>false</italic>
                       <bold>false</bold>
@@ -674,7 +685,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                     <property name="font">
                      <font>
                       <family>MS Shell Dlg 2</family>
-                      <pointsize>11</pointsize>
+                      <pointsize>12</pointsize>
                       <weight>50</weight>
                       <italic>false</italic>
                       <bold>false</bold>
@@ -726,6 +737,10 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                   <width>130</width>
                   <height>30</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color:transparent;
+font-size:10pt;</string>
                 </property>
                 <property name="text">
                  <string>Olvidé mi contraseña</string>
@@ -795,7 +810,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
 </string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="page_oculto">
            <layout class="QGridLayout" name="gridLayout_5">
@@ -897,7 +912,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>110</width>
+                      <width>16777215</width>
                       <height>17</height>
                      </size>
                     </property>
@@ -916,7 +931,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>55</width>
+                      <width>16777215</width>
                       <height>17</height>
                      </size>
                     </property>
@@ -935,7 +950,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>64</width>
+                      <width>16777215</width>
                       <height>17</height>
                      </size>
                     </property>
@@ -954,7 +969,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>47</width>
+                      <width>16777215</width>
                       <height>17</height>
                      </size>
                     </property>
@@ -1152,7 +1167,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                       <property name="maximumSize">
                        <size>
                         <width>79</width>
-                        <height>18</height>
+                        <height>16777215</height>
                        </size>
                       </property>
                       <property name="dateTime">
@@ -1237,7 +1252,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                       <property name="maximumSize">
                        <size>
                         <width>107</width>
-                        <height>20</height>
+                        <height>16777215</height>
                        </size>
                       </property>
                       <item>
@@ -1411,34 +1426,34 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_73">
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_18">
-                  <item>
-                   <widget class="QLabel" name="label_puesto">
-                    <property name="minimumSize">
-                     <size>
-                      <width>50</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>Puesto:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QComboBox" name="comboBox_puesto">
-                    <property name="minimumSize">
-                     <size>
-                      <width>100</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_17">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_18">
+                    <item>
+                     <widget class="QLabel" name="label_puesto">
+                      <property name="minimumSize">
+                       <size>
+                        <width>50</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Puesto:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="comboBox_puesto">
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
                   <item>
                    <widget class="QLabel" name="label_universidad">
                     <property name="minimumSize">
@@ -1496,7 +1511,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                    <widget class="QLabel" name="label_especiDoc">
                     <property name="minimumSize">
                      <size>
-                      <width>80</width>
+                      <width>90</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -1523,7 +1538,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                    <widget class="QLabel" name="label_cedula">
                     <property name="minimumSize">
                      <size>
-                      <width>122</width>
+                      <width>130</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -1542,7 +1557,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>140</width>
+                      <width>16777215</width>
                       <height>16777215</height>
                      </size>
                     </property>
@@ -1643,7 +1658,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>133</width>
+                        <width>16777215</width>
                         <height>20</height>
                        </size>
                       </property>
@@ -1784,7 +1799,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>114</width>
+                  <width>16777215</width>
                   <height>16</height>
                  </size>
                 </property>
@@ -1820,8 +1835,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>118</width>
-                  <height>16</height>
+                  <width>16777215</width>
+                  <height>20</height>
                  </size>
                 </property>
                 <property name="text">
@@ -1881,8 +1896,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>70</width>
-                    <height>16</height>
+                    <width>16777215</width>
+                    <height>20</height>
                    </size>
                   </property>
                   <property name="text">
@@ -2729,7 +2744,8 @@ background-color:transparent</string>
                            </size>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">border:none;</string>
+                           <string notr="true">border:none;
+background-color:transparent;</string>
                           </property>
                           <property name="text">
                            <string/>
@@ -2830,7 +2846,8 @@ background-color:transparent</string>
                            </size>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">border:none;</string>
+                           <string notr="true">border:none;
+background-color:transparent;</string>
                           </property>
                           <property name="text">
                            <string/>
@@ -2984,7 +3001,7 @@ background-color:transparent</string>
                         <x>0</x>
                         <y>0</y>
                         <width>198</width>
-                        <height>146</height>
+                        <height>275</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -3868,8 +3885,8 @@ background-color:transparent</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
-                    <height>20</height>
+                    <width>848</width>
+                    <height>312</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -4101,7 +4118,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>5</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_40">
@@ -4138,7 +4155,7 @@ QPushButton:focus{
                     <x>0</x>
                     <y>0</y>
                     <width>180</width>
-                    <height>80</height>
+                    <height>359</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -4986,7 +5003,7 @@ background -color: red;
                <number>7</number>
               </property>
               <attribute name="horizontalHeaderVisible">
-               <bool>true</bool>
+               <bool>false</bool>
               </attribute>
               <attribute name="horizontalHeaderCascadingSectionResizes">
                <bool>true</bool>
@@ -5187,7 +5204,8 @@ background -color: red;
                 <property name="styleSheet">
                  <string notr="true">border:none;
 font: 13pt &quot;MS Shell Dlg 2&quot;;
-color: rgb(68, 94, 134);</string>
+color: rgb(68, 94, 134);
+background-color:transparent;</string>
                 </property>
                 <property name="text">
                  <string>Regresar</string>
@@ -5596,53 +5614,43 @@ color: rgb(68, 94, 134);</string>
            </layout>
           </widget>
           <widget class="QWidget" name="page_2">
-           <widget class="QLabel" name="lb_cancelarCita">
-            <property name="geometry">
-             <rect>
-              <x>130</x>
-              <y>10</y>
-              <width>241</width>
-              <height>41</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;Proximas Citas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-           <widget class="QWidget" name="widget_7" native="true">
-            <property name="geometry">
-             <rect>
-              <x>120</x>
-              <y>60</y>
-              <width>661</width>
-              <height>311</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_35">
-             <item row="0" column="0">
-              <widget class="QScrollArea" name="scrollArea_7">
-               <property name="widgetResizable">
-                <bool>true</bool>
-               </property>
-               <widget class="QWidget" name="scrollAreaWidgetContents_7">
-                <property name="geometry">
-                 <rect>
-                  <x>0</x>
-                  <y>0</y>
-                  <width>641</width>
-                  <height>291</height>
-                 </rect>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_37">
-                 <item row="0" column="0">
-                  <layout class="QGridLayout" name="citasAceptadas"/>
-                 </item>
-                </layout>
-               </widget>
-              </widget>
-             </item>
-            </layout>
-           </widget>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="lb_cancelarCita">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;Proximas Citas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QWidget" name="widget_7" native="true">
+              <layout class="QGridLayout" name="gridLayout_35">
+               <item row="0" column="0">
+                <widget class="QScrollArea" name="scrollArea_7">
+                 <property name="widgetResizable">
+                  <bool>true</bool>
+                 </property>
+                 <widget class="QWidget" name="scrollAreaWidgetContents_7">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>848</width>
+                    <height>311</height>
+                   </rect>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_37">
+                   <item row="0" column="0">
+                    <layout class="QGridLayout" name="citasAceptadas"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="pageRealizarCita">
            <layout class="QGridLayout" name="gridLayout_35">
@@ -5893,8 +5901,8 @@ color: rgb(68, 94, 134);</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>314</width>
-                     <height>1111</height>
+                     <width>393</width>
+                     <height>1114</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_43">
@@ -6048,6 +6056,12 @@ p, li { white-space: pre-wrap; }
                     </item>
                     <item row="26" column="0">
                      <widget class="QPushButton" name="pb_llenarHistorial">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>30</height>
+                       </size>
+                      </property>
                       <property name="text">
                        <string>Guardar</string>
                       </property>
@@ -6181,7 +6195,7 @@ p, li { white-space: pre-wrap; }
                      <x>0</x>
                      <y>0</y>
                      <width>393</width>
-                     <height>381</height>
+                     <height>376</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_30">
@@ -6327,6 +6341,12 @@ p, li { white-space: pre-wrap; }
                     </item>
                     <item>
                      <widget class="QPushButton" name="pb_receta">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>30</height>
+                       </size>
+                      </property>
                       <property name="maximumSize">
                        <size>
                         <width>16777195</width>
@@ -6379,6 +6399,9 @@ p, li { white-space: pre-wrap; }
               </item>
               <item>
                <widget class="QPushButton" name="pb_buscarCita">
+                <property name="styleSheet">
+                 <string notr="true">background-color:transparent;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -6491,14 +6514,14 @@ QPushButton:focus{
          <item>
           <widget class="QPushButton" name="pushButton_horarioDoc_2">
            <property name="text">
-            <string>Mi horario</string>
+            <string>boton</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_citasDoc_2">
            <property name="text">
-            <string>Mis citas</string>
+            <string>boton2</string>
            </property>
           </widget>
          </item>
@@ -8407,7 +8430,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
+                        <width>478</width>
                         <height>20</height>
                        </rect>
                       </property>
@@ -8506,7 +8529,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
+                        <width>478</width>
                         <height>20</height>
                        </rect>
                       </property>
