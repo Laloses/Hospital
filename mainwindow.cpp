@@ -1,9 +1,12 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "pagarcitaspaciente.h"
 #include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QSignalMapper>
+#include <QTimer>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -3544,15 +3547,49 @@ void MainWindow::PonerCitas(QString folio){
     }
 }
 
+void MainWindow::PagarCitas(QString folio){
+    QString consulta;
+    QSqlQuery query;
+    qDebug()<<"folio:"<<folio;
+    QMessageBox messageBox(QMessageBox::Warning,
+                           tr(""), tr("Cita cancelada"), QMessageBox::Yes);
+    messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
 
+    QMessageBox message(QMessageBox::Question,
+                        tr("Warning"), tr("¿Estas seguro de pagar tu cita?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+    QMessageBox metodo(QMessageBox::Question,
+                        tr("Warning"), tr("¿Como quiere pagar?"), QMessageBox::Yes | QMessageBox::No);
+    metodo.setButtonText(QMessageBox::Yes, tr("Ventanilla"));
+    metodo.setButtonText(QMessageBox::No, tr("Tarjeta de Crédito"));
+    if (message.exec() == QMessageBox::Yes){
+
+        //Preguntar método de pago
+        if (metodo.exec() == QMessageBox::Yes){
+            //Notificar al cajero
+            QMessageBox::information(this,"Ventanilla","Pase a pagar a ventanilla con su folio de cita.");
+        }
+        else{
+                pagar = new pagarCitasPaciente(folio,this);
+                pagar->show();
+                ocultar=new QTimer(this);
+                connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaCitas()));
+                ocultar->start(1000);
+        }
+    }
+}
 void MainWindow::mostrarCitas(){
 
-
-    QString citas,est;
-    QSqlQuery consulta;
+    clearLayout(ui->citasLay_2);
+    QString citas,est,preparada;
+    QSqlQuery consulta,consulta2;
     est="1";
-    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_usuario+"' and cit.estado='"+est+"'";
+    preparada="Pendiente";
+    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_usuario+"' and cit.estado='"+est+"' and cit.pagada=0 and cit.preparada='"+preparada+"'";
     if(!consulta.exec(citas)) consulta.lastError().text();
+
     int f=0;
     int ban=1;
     QString r1,g1,b1;
@@ -3587,9 +3624,9 @@ void MainWindow::mostrarCitas(){
     ui->encabezadoCitas_2->addWidget(hor,0,3,Qt::AlignLeft);
 
 
-
     QString folio,doctor,fecha,hora,nomDoct;
     int i=0;
+    int l=0;
 
     while(consulta.next())
     {
@@ -3607,7 +3644,6 @@ void MainWindow::mostrarCitas(){
             rgb=r2;
             ban=1;
         }
-
 
         QLabel *fol=new QLabel;
         fol->setText(folio);
@@ -3651,11 +3687,72 @@ void MainWindow::mostrarCitas(){
         connect(mapper1,SIGNAL(mapped(QString)),this,SLOT(PonerCitas(QString)));
         ui->citasLay_2->addWidget(q,i,7,Qt::AlignTop);
         i++;
-
     }
 
-}
+    preparada="Completada";
+    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_usuario+"' and cit.estado='"+est+"' and cit.pagada=0 and cit.preparada='"+preparada+"'";
+    if(!consulta2.exec(citas)) consulta2.lastError().text();
+    while(consulta2.next()){
+        folio=consulta2.value(0).toString();
+        doctor=consulta2.value(1).toString()+" "+consulta2.value(2).toString()+" "+consulta2.value(3).toString();
+        hora=consulta2.value(4).toString();
+        fecha=consulta2.value(5).toString();
+        if(ban==1)
+        {
+            rgb=r1;
+            ban=2;
+        }
+        else
+        {
+            rgb=r2;
+            ban=1;
+        }
 
+        QLabel *fol=new QLabel;
+        fol->setText(folio);
+        fol->setFixedSize(QSize(100,25));
+        fol->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->citasLay_2->addWidget(fol,l,0,Qt::AlignTop);
+
+
+        QLabel *m=new QLabel;
+        m->setText(doctor);
+        m->setFixedSize(QSize(110,25));
+        m->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->citasLay_2->addWidget(m,l,1,Qt::AlignTop);
+
+
+        QLabel *r=new QLabel;
+        r->setText(fecha);
+        r->setStyleSheet("background-color: rgb("+rgb+")");
+        r->setFixedSize(QSize(100,25));
+        ui->citasLay_2->addWidget(r,l,2,Qt::AlignTop);
+
+
+        QLabel *h=new QLabel;
+        h->setText(hora);
+        h->setFixedSize(QSize(100,25));
+        h->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->citasLay_2->addWidget(h,l,3,Qt::AlignTop);
+
+        QLabel *ss=new QLabel;
+        ss->setText(" ");
+        ss->setFixedSize(QSize(40,25));
+        ui->citasLay_2->addWidget(ss,l,4,Qt::AlignTop);
+
+        QPushButton *p= new QPushButton();
+        p->setText("Pagar");
+        p->setFixedSize(QSize(100,25));
+        p->setStyleSheet("background-color: rgb(138,198,242)");
+        QSignalMapper *mapper2=new QSignalMapper(this);
+        connect(p,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
+        mapper2->setMapping(p,folio);
+        connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(PagarCitas(QString)));
+        ui->citasLay_2->addWidget(p,l,9,Qt::AlignTop);
+
+        l++;
+    }
+}
 
 
 void MainWindow::on_pushButton_Cancelar_Cita_clicked()
@@ -4309,3 +4406,15 @@ void MainWindow::on_btnAgendarCita_2_clicked()
         qDebug() << "nel pastel";
     }
 }
+
+void MainWindow::actTablaCitas()
+{
+    contador++;
+    if(contador==180){
+        ocultar->stop();
+
+    }
+    clearLayout(ui->citasLay_2);
+    mostrarCitas();
+}
+// ///

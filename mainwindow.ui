@@ -811,7 +811,7 @@ font-size:10pt;</string>
 </string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_oculto">
            <layout class="QGridLayout" name="gridLayout_5">
@@ -4119,7 +4119,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_40">
@@ -6375,6 +6375,168 @@ color:red;</string>
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="cajero"/>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QWidget" name="widget_opcionesPerfilDoctor_2" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>886</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+	background-color: transparent;
+	border-radius:6px;
+	color: black;
+	padding:6px;
+	text-decoration:none;
+}
+QPushButton:hover{
+	background: rgb(111, 157, 183);
+	color: white;
+}
+QPushButton:focus{
+	background: rgb(51, 97, 123);
+	color: rgb(255, 255, 255);
+}</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_98">
+           <property name="topMargin">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>5</number>
+           </property>
+           <item>
+            <spacer name="horizontalSpacer_108">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_horarioDoc_2">
+             <property name="text">
+              <string>Mi horario</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_citasDoc_2">
+             <property name="text">
+              <string>Citas Pendientes</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_rechazarCitas_2">
+             <property name="text">
+              <string>Mis Citas</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pb_realizarConsulta_2">
+             <property name="text">
+              <string>Realizar Consulta</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_109">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="butonNotifi_5">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:transparent;</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="imgs/imgs.qrc">
+               <normaloff>:/imgs/notification2.png</normaloff>:/imgs/notification2.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="notificacionL_5">
+             <property name="minimumSize">
+              <size>
+               <width>15</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>15</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>MS Shell Dlg 2</family>
+               <pointsize>11</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color:white;</string>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
