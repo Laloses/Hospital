@@ -4027,7 +4027,7 @@ void MainWindow::on_btnCitasCanceladas_clicked()
     citas = "SELECT cita.idCita, cita.matricula, cita.fecha, cita.hora,CONCAT_WS(' ', usuario.nombre,usuario.appaterno,usuario.apmaterno) AS Doctor FROM cita INNER JOIN doctor on doctor.iddoctor = cita.doctor INNER JOIN usuario on doctor.idUser = usuario.matricula WHERE cita.estado = 1 AND cita.preparada = 'Cancelada';";
     QSqlQuery citasCanceladas;
     citasCanceladas.exec(citas);
-    qDebug() << citas;
+    //qDebug() << citas;
     ui->stackedWidget_admin->setCurrentIndex(5);
     int fila = 1;
 
@@ -4044,6 +4044,7 @@ void MainWindow::on_btnCitasCanceladas_clicked()
         btnReagendar->setText("Reasignar Cita");
         btnReagendar->setStyleSheet("border:solid 1px #5d80b6;border-radius:5px;background-color: #5d80b6;color: white;font: 11pt 'MS Shell Dlg 2';");
         btnReagendar->setFixedSize(130, 30);
+
         QSignalMapper *mapper2=new QSignalMapper(this);
         connect(btnReagendar,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
         mapper2->setMapping(btnReagendar,folio);
@@ -4054,6 +4055,7 @@ void MainWindow::on_btnCitasCanceladas_clicked()
         btnEliminar->setText("Eliminar Cita");
         btnEliminar->setStyleSheet("border:solid 1px #ED6853;border-radius:5px;background-color: #ED6853;color: white;font: 11pt 'MS Shell Dlg 2';");
         btnEliminar->setFixedSize(130, 30);
+
         QSignalMapper *mapper1=new QSignalMapper(this);
         connect(btnEliminar,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
         mapper1->setMapping(btnEliminar,folio);
@@ -4109,9 +4111,11 @@ void MainWindow::eliminarCita(QString folio)
     message.setButtonText(QMessageBox::No, tr("Cancelar"));
     if (message.exec() == QMessageBox::Yes){
         QString borrarCitas;
-        borrarCitas = "delete from cita where idCita = '"+folio+"';";
+        borrarCitas = "delete from cita where idCita ='"+folio+"'";
         QSqlQuery borrarCitasCanceladas;
-        borrarCitasCanceladas.exec(borrarCitas);
+        if (!borrarCitasCanceladas.exec(borrarCitas))
+        qDebug()<<borrarCitasCanceladas.lastError().text();
+        qDebug()<<folio;
 
         QMessageBox message2(QMessageBox::Question,
         tr("Information"), tr("La cita ha sido eliminada."), QMessageBox::Yes);
@@ -4121,6 +4125,7 @@ void MainWindow::eliminarCita(QString folio)
     }
     else{
         message.close();
+        qDebug()<<"else";
     }
 }
 

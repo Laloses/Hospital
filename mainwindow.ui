@@ -134,7 +134,8 @@ padding-top:1px;
            </property>
            <property name="styleSheet">
             <string notr="true">border:none;
-background-color:transparent;</string>
+background-color:transparent;
+padding-top:0;</string>
            </property>
            <property name="text">
             <string/>
@@ -475,7 +476,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
 </string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -4118,7 +4119,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_40">
@@ -7226,7 +7227,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <widget class="QWidget" name="pagePrincipalAdmin">
            <layout class="QGridLayout" name="gridLayout_36">
