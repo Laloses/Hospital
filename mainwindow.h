@@ -50,6 +50,7 @@ private:
     QList<QString> porciones;
     QList<QString> frecMedicinas;
     int contMedicinas;
+    QString idCita1;
 
 private slots:
 
@@ -237,6 +238,22 @@ private slots:
     void on_pb_masMedicina_clicked();
 
     void quitarMedicina(int);
+    void on_btnCitasCanceladas_clicked();
+
+    void eliminarCita(QString);
+
+    void cambiarVentana(QString);
+
+    void on_btnCancelarAgenda_2_clicked();
+
+    void on_pushButton_menu_admin_3_clicked();
+    void docDisp(QString);
+
+    void on_tv_listaDocCitas_2_clicked(const QModelIndex &index);
+
+    void on_tv_listaDocCitas_2_doubleClicked(const QModelIndex &index);
+
+    void on_btnAgendarCita_2_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
