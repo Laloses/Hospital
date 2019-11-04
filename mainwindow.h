@@ -242,6 +242,8 @@ private slots:
 
     void on_pushButton_buscarHistMedico_clicked();
 
+    void on_verHistoClinico_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

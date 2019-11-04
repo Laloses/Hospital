@@ -4100,3 +4100,9 @@ void MainWindow::on_pushButton_buscarHistMedico_clicked()
             ui->sA_historialPac_2->show();
         }
 }
+
+void MainWindow::on_verHistoClinico_clicked()
+{
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(7);
+
+}
