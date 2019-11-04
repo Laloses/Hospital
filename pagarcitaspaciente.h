@@ -24,11 +24,14 @@ public:
 private slots:
     bool on_pushButton_pagarC_clicked();
 
+    void on_cb_tarjetas_currentTextChanged(const QString &arg1);
+
 private:
     Ui::pagarCitasPaciente *ui;
     QString folioR;
     QString nombreP;
-    QSqlQuery q;
+    QSqlQuery q,d;
+    QList<QSqlRecord> tarjetas;
 };
 
 #endif // PAGARCITASPACIENTE_H

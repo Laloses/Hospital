@@ -5,7 +5,6 @@
 
 #include <QDebug>
 #include <QSqlQuery>
-
 pagarCitasPaciente::pagarCitasPaciente(QString p,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::pagarCitasPaciente)
@@ -14,30 +13,47 @@ pagarCitasPaciente::pagarCitasPaciente(QString p,QWidget *parent) :
     ui->setupUi(this);
     ui->folio1->setText(folioR);
 
-    //q.exec("select idUser,nombre from paciente as p inner join usuario as u "
-      //     "on u.matricula=p.idUser where idUser='"+id_usuario+"'");
+    QSqlQuery p2;
+    p2.exec("select matricula from cita where idCita='"+folioR+"'");
+    p2.next();
 
+
+    d.exec("select * from tarjeta where idUser='"+p2.value(0).toString()+"'");
+    while(d.next()){
+        tarjetas.append(d.record());
+        ui->cb_tarjetas->addItem(d.value(3).toString());
+    }
 
 }
 pagarCitasPaciente::~pagarCitasPaciente()
 {
     delete ui;
+
 }
 
 bool pagarCitasPaciente::pagarCitas(QString idUser, QString titular, QString digitos, QString fechaV, QString codigsec)
 {
-    QSqlQuery insertar,d,update;
+    QSqlQuery insertar,update;
     d.exec("select matricula from cita where idCita='"+ui->folio1->text()+"'");
     d.next();
     idUser=d.value(0).toString();
-    if(insertar.exec("insert into tarjeta(idUser,titular,digitos,fechaV,codigsec) values("+idUser+",'"+ titular +"','"+digitos+"',"+fechaV+",'"+codigsec+"')") )
-    {
-        insertar.next();
-        if(update.exec("UPDATE cita SET pagada=1 WHERE idCita='"+ui->folio1->text()+"'") ){
 
+    //Sino es una tarjeta nueva
+    if(ui->cb_tarjetas->currentText() == "Nueva"){
+        if(insertar.exec("insert into tarjeta(idUser,titular,digitos,fechaV,codigsec) values("+idUser+",'"+ titular +"','"+digitos+"','"+fechaV+"','"+codigsec+"')") )
+        {
+            insertar.next();
+            if(update.exec("UPDATE cita SET pagada=1 WHERE idCita='"+ui->folio1->text()+"'") ){
+                return true;
+            }
+            else qDebug()<<"Error al actualizar el pago"<<insertar.lastError().text();
+        } else qDebug()<<"Error al realizar pago"<<insertar.lastError().text();
+    }
+    else{
+        if(update.exec("UPDATE cita SET pagada=1 WHERE idCita='"+ui->folio1->text()+"'") ){
+            return true;
         }
-        else qDebug()<<"Error al actualizar el pago"<<insertar.lastError().text();
-    } else qDebug()<<"Error al realizar pago"<<insertar.lastError().text();
+    }
 
 }
 
@@ -53,7 +69,7 @@ bool pagarCitasPaciente::on_pushButton_pagarC_clicked()
 
     if(!ui->line_noTarjeta->text().isEmpty()){
         ui->line_noTarjeta->setStyleSheet(estiloBueno);
-        if(!ui->line_titulart->text().isEmpty()){
+        if(!ui->line_titulart->text().isEmpty() && ui->line_titulart->text().contains(letras)){
             ui->line_titulart->setStyleSheet(estiloBueno);
         if(!ui->lineEdit_vencim->text().isEmpty()){
             ui->lineEdit_vencim->setStyleSheet(estiloBueno);
@@ -98,13 +114,34 @@ bool pagarCitasPaciente::on_pushButton_pagarC_clicked()
         }
 
     }
-    return flag;
-
     this->close();
+    return flag;
+}
 
-
-
-
-
-
+void pagarCitasPaciente::on_cb_tarjetas_currentTextChanged(const QString &arg1)
+{
+    if(arg1!= "Nueva"){
+        for(int i=0; i<tarjetas.size(); i++){
+            if( tarjetas.at(i).value(3).toString() == arg1 ){
+                ui->line_titulart->setText(tarjetas.at(i).value(2).toString());
+                ui->line_noTarjeta->setText(tarjetas.at(i).value(3).toString());
+                ui->lineEdit_vencim->setDate(tarjetas.at(i).value(4).toDate());
+                ui->lineEdit_cvv->setText(tarjetas.at(i).value(5).toString());
+                ui->line_titulart->setEnabled(false);
+                ui->line_noTarjeta->setEnabled(false);
+                ui->lineEdit_vencim->setEnabled(false);
+                ui->lineEdit_cvv->setEnabled(false);
+                break;
+            }
+        }
+    }
+    else {
+        ui->line_titulart->setText("");
+        ui->line_noTarjeta->setText("");
+        ui->lineEdit_cvv->setText("");
+        ui->line_titulart->setEnabled(true);
+        ui->line_noTarjeta->setEnabled(true);
+        ui->lineEdit_vencim->setEnabled(true);
+        ui->lineEdit_cvv->setEnabled(true);
+    }
 }
