@@ -4035,6 +4035,8 @@ void MainWindow::on_pushButton_historial_clicked()
  ui->sA_historialPac_2->hide();
  ui->label_mensajePaciente->hide();
  ui->label_espacioBlanco->hide();
+ ui->verHistoClinico->hide();
+ ui->verHistoClinico->show();
 
 }
 
@@ -4097,6 +4099,7 @@ void MainWindow::on_pushButton_buscarHistMedico_clicked()
             ui->plainTextEdit_alcoholismo->setPlainText(alcohol);
             ui->plainTextEdit_cigarro->setPlainText(cigarro);
             ui->plainTextEdit_Familiares->setPlainText(familia);
+            ui->verHistoClinico->show();
             ui->sA_historialPac_2->show();
         }
 }
@@ -4104,5 +4107,107 @@ void MainWindow::on_pushButton_buscarHistMedico_clicked()
 void MainWindow::on_verHistoClinico_clicked()
 {
     ui->stackedWidget_perfilDoctor->setCurrentIndex(7);
+    mostrarHistorialClinico();
+}
+
+void MainWindow::historialClinico(QString idCita){
+
+
 
 }
+
+void MainWindow::mostrarHistorialClinico(){
+
+
+    QString citas,est,id_usuario;
+    QSqlQuery consulta;
+    est="1";
+    id_usuario=ui->lineEdit_matriculaMedico->text();
+    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_usuario+"'";
+    if(!consulta.exec(citas)) consulta.lastError().text();
+    int f=0;
+    int ban=1;
+    QString r1,g1,b1;
+    r1="172,189,211";
+    QString r2,g2,b2;
+    r2="221,221,221";
+    QString rgb="";
+
+    QString folio,doctor,fecha,hora,nomDoct;
+    int i=0;
+
+    while(consulta.next())
+    {
+        folio=consulta.value(0).toString();
+        doctor=consulta.value(1).toString()+" "+consulta.value(2).toString()+" "+consulta.value(3).toString();
+        hora=consulta.value(4).toString();
+        fecha=consulta.value(5).toString();
+        if(ban==1)
+        {
+            rgb=r1;
+            ban=2;
+        }
+        else
+        {
+            rgb=r2;
+            ban=1;
+        }
+
+        /*
+        QLabel *fol=new QLabel;
+        fol->setText(folio);
+        fol->setFixedSize(QSize(100,25));
+        fol->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->barraclinico->addWidget(fol,i,0,Qt::AlignTop);
+        */
+
+        QLabel *m=new QLabel;
+        m->setText(doctor);
+        m->setFixedSize(QSize(110,25));
+        m->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->barraclinico->addWidget(m,i,1,Qt::AlignTop);
+
+
+        QLabel *r=new QLabel;
+        r->setText(fecha);
+        r->setStyleSheet("background-color: rgb("+rgb+")");
+        r->setFixedSize(QSize(100,25));
+        ui->barraclinico->addWidget(r,i,2,Qt::AlignTop);
+
+
+        QLabel *h=new QLabel;
+        h->setText(hora);
+        h->setFixedSize(QSize(100,25));
+        h->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->barraclinico->addWidget(h,i,3,Qt::AlignTop);
+
+
+        QLabel *ss=new QLabel;
+        ss->setText(" ");
+        ss->setFixedSize(QSize(120,25));
+        ui->barraclinico->addWidget(ss,i,4,Qt::AlignTop);
+
+
+
+        QPushButton *q=new QPushButton();
+       // q->setText("Cancelar");
+        q->setFixedSize(QSize(100,25));
+        q->setStyleSheet("background-color: rgb(138,198,242)");
+        QPixmap pixmap(":/imgs/view.png");
+        QIcon ButtonIcon(pixmap);
+        q->setIcon(ButtonIcon);
+        QSize l(10,10);
+        q->setIconSize(l);
+        QSignalMapper *mapper1=new QSignalMapper(this);
+        connect(q,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
+        mapper1->setMapping(q,folio);
+        connect(mapper1,SIGNAL(mapped(QString)),this,SLOT(historialClinico(QString)));
+        ui->barraclinico->addWidget(q,i,7,Qt::AlignTop);
+        i++;
+
+    }
+
+
+
+}
+

@@ -2984,7 +2984,7 @@ background-color:transparent</string>
                         <x>0</x>
                         <y>0</y>
                         <width>198</width>
-                        <height>280</height>
+                        <height>80</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -3868,8 +3868,8 @@ background-color:transparent</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>371</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -4195,7 +4195,7 @@ QPushButton:focus{
                     <x>0</x>
                     <y>0</y>
                     <width>180</width>
-                    <height>418</height>
+                    <height>80</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -5135,8 +5135,8 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>355</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -6850,7 +6850,7 @@ border:none</string>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_52">
                  <item row="0" column="0">
-                  <layout class="QGridLayout" name="barraDeNoti_3"/>
+                  <layout class="QGridLayout" name="barraclinico"/>
                  </item>
                 </layout>
                </widget>
@@ -6861,15 +6861,48 @@ border:none</string>
            <widget class="QLabel" name="label_29">
             <property name="geometry">
              <rect>
-              <x>40</x>
-              <y>30</y>
-              <width>271</width>
-              <height>41</height>
+              <x>350</x>
+              <y>10</y>
+              <width>100</width>
+              <height>18</height>
              </rect>
             </property>
             <property name="text">
              <string> Historial clinico </string>
             </property>
+           </widget>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>40</x>
+              <y>50</y>
+              <width>350</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_4">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_31">
+               <property name="text">
+                <string>Doctor</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_30">
+               <property name="text">
+                <string>Fecha</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_32">
+               <property name="text">
+                <string> Hora</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </widget>
          </widget>

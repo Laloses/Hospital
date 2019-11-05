@@ -244,6 +244,10 @@ private slots:
 
     void on_verHistoClinico_clicked();
 
+    void historialClinico(QString);
+
+    void mostrarHistorialClinico();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
