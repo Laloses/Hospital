@@ -2984,7 +2984,7 @@ background-color:transparent</string>
                         <x>0</x>
                         <y>0</y>
                         <width>198</width>
-                        <height>80</height>
+                        <height>76</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -3868,8 +3868,8 @@ background-color:transparent</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
-                    <height>20</height>
+                    <width>33</width>
+                    <height>24</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -4194,8 +4194,8 @@ QPushButton:focus{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>180</width>
-                    <height>80</height>
+                    <width>176</width>
+                    <height>76</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -5135,8 +5135,8 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
-                    <height>20</height>
+                    <width>33</width>
+                    <height>24</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -5686,8 +5686,8 @@ color: rgb(68, 94, 134);</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>641</width>
-                  <height>291</height>
+                  <width>637</width>
+                  <height>287</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_37">
@@ -5950,8 +5950,8 @@ color: rgb(68, 94, 134);</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>393</width>
-                     <height>1111</height>
+                     <width>373</width>
+                     <height>1267</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_43">
@@ -6237,8 +6237,8 @@ p, li { white-space: pre-wrap; }
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>226</width>
-                     <height>381</height>
+                     <width>282</width>
+                     <height>412</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_30">
@@ -6628,8 +6628,8 @@ border:none</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>849</width>
-                 <height>1092</height>
+                 <width>256</width>
+                 <height>1337</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_45">
@@ -6844,8 +6844,8 @@ border:none</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>810</width>
-                  <height>331</height>
+                  <width>806</width>
+                  <height>327</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_52">
@@ -6871,13 +6871,13 @@ border:none</string>
              <string> Historial clinico </string>
             </property>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>40</x>
               <y>50</y>
               <width>350</width>
-              <height>20</height>
+              <height>24</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_4">
@@ -7991,8 +7991,8 @@ color: rgb(68, 94, 134);
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>20</width>
-                      <height>20</height>
+                      <width>24</width>
+                      <height>24</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_14">
@@ -8380,8 +8380,8 @@ color: rgb(68, 94, 134);
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>24</width>
+                    <height>24</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
@@ -8887,8 +8887,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
-                        <height>20</height>
+                        <width>457</width>
+                        <height>24</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -8986,8 +8986,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
-                        <height>20</height>
+                        <width>457</width>
+                        <height>24</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -9436,8 +9436,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -9570,8 +9570,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
@@ -9685,8 +9685,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -9860,8 +9860,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">

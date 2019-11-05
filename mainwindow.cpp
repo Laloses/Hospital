@@ -4112,7 +4112,13 @@ void MainWindow::on_verHistoClinico_clicked()
 
 void MainWindow::historialClinico(QString idCita){
 
-
+    QString citas,fecha,medicamento,diagnostico,nombre;
+    QSqlQuery consulta;
+    citas=" select cit.idCita,cit.fecha,rec.medicamento,dig.diagnostico,us.nombre,us.appaterno,us.apmaterno "
+          "from cita as cit inner join receta as rec on cit.idCita=rec.idCita inner join diagnostico as dig  on rec.idCita=dig.idCita "
+          "inner join doctor as doc on doc.iddoctor=cit.doctor inner join usuario as us on us.matricula=doc.idUser where cit.idCita='"+idCita+"'";
+    consulta.exec(citas);
+    consulta.next();
 
 }
 
@@ -4192,11 +4198,11 @@ void MainWindow::mostrarHistorialClinico(){
         QPushButton *q=new QPushButton();
        // q->setText("Cancelar");
         q->setFixedSize(QSize(100,25));
-        q->setStyleSheet("background-color: rgb(138,198,242)");
+        q->setStyleSheet("background-color:transparent;");
         QPixmap pixmap(":/imgs/view.png");
         QIcon ButtonIcon(pixmap);
         q->setIcon(ButtonIcon);
-        QSize l(10,10);
+        QSize l(45,45);
         q->setIconSize(l);
         QSignalMapper *mapper1=new QSignalMapper(this);
         connect(q,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
