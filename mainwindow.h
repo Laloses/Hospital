@@ -19,6 +19,7 @@
 #include "agregartipremedio.h"
 #include "pagarcitaspaciente.h"
 #include <QTimer>
+#include "mostrarhistoclinico.h"
 
 namespace Ui {
 class MainWindow;
@@ -263,6 +264,16 @@ private slots:
     void on_btnAgendarCita_2_clicked();
 
     void actTablaCitas();
+
+    void on_pushButton_historial_clicked();
+
+    void on_pushButton_buscarHistMedico_clicked();
+
+    void on_verHistoClinico_clicked();
+
+    void historialClinico(QString);
+
+    void mostrarHistorialClinico();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

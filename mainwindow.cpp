@@ -897,7 +897,9 @@ void MainWindow::on_pushButton_citasDoc_clicked()
 {
     //pag citas doc
     ui->stackedWidget_perfilDoctor->setCurrentIndex(2);
-
+    ui->lineEdit_matriculaMedico->clear();
+    ui->label_mensajePaciente->hide();
+    ui->label_espacioBlanco->hide();
     SolicitudCitas();
 
 
@@ -907,6 +909,9 @@ void MainWindow::on_pushButton_horarioDoc_clicked()
 {
     //Mostrar su horario
     ui->stackedWidget_perfilDoctor->setCurrentIndex(1);
+    ui->lineEdit_matriculaMedico->clear();
+    ui->label_mensajePaciente->hide();
+    ui->label_espacioBlanco->hide();
     cargarHorarioDoc();
 }
 
@@ -3062,6 +3067,9 @@ void MainWindow::on_pb_rechazarCitas_clicked()
 {
     ui->stackedWidget_perfilDoctor->setCurrentIndex(4);
     CitasAceptadas();
+    ui->lineEdit_matriculaMedico->clear();
+    ui->label_mensajePaciente->hide();
+    ui->label_espacioBlanco->hide();
 }
 
 void MainWindow::CitasAceptadas()
@@ -3806,6 +3814,9 @@ void MainWindow::on_pb_realizarConsulta_clicked()
     ui->lb_noCoincideFecha->setHidden(true);
     ui->w_infoPacConsulta->setHidden(true);
     ui->sw_historialReceta->setHidden(true);
+    ui->lineEdit_matriculaMedico->clear();
+    ui->label_mensajePaciente->hide();
+    ui->label_espacioBlanco->hide();
 }
 
 //Cuando busca un folio de cita
@@ -4114,6 +4125,195 @@ void MainWindow::quitarMedicina(int numMedicina){
     clearLayout(child->layout());
     qDebug()<<"medicinas"<<medicinas.size();
 }
+// ////////////////////////////// FIN: LLENAR EL RECETA Y DIAGNOSTICO ////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////
+
+// /////INICIO PARA PODER BUSCAR EL HISTORIAL DEL PACINETE (MEDICO: CONTIENE ALERGIAS Y DEMAS)//////
+// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+void MainWindow::on_pushButton_historial_clicked()
+{
+ ui->stackedWidget_perfilDoctor->setCurrentIndex(6);
+ ui->lineEdit_matriculaMedico->clear();
+ ui->sA_historialPac_2->hide();
+ ui->label_mensajePaciente->hide();
+ ui->label_espacioBlanco->hide();
+ ui->verHistoClinico->hide();
+
+
+}
+
+void MainWindow::on_pushButton_buscarHistMedico_clicked()
+{
+    QString altura,peso,alergia,accidente,enfermedades,cirujias,hospital,trabajos,habitos,alcohol,cigarro,familia,consulta,idUsuario,idUsuario2;
+    QSqlQuery query;
+    idUsuario2="2019";
+    idUsuario=ui->lineEdit_matriculaMedico->text();
+    if(idUsuario==""){
+        //qDebug()<<"entre 1 if";
+            ui->label_espacioBlanco->show();
+            ui->label_mensajePaciente->hide();
+            ui->sA_historialPac_2->hide();
+
+    }
+        if(idUsuario!=""){
+            //qDebug()<<"entre 2 if";
+                consulta="select *from paciente where idUser='"+idUsuario+"'";
+                query.exec(consulta);
+                query.next();
+                idUsuario2=query.value(1).toString();
+                //qDebug()<<"USUARIO"<<idUsuario2;
+                //qDebug()<<"USUARIO"<<idUsuario;
+                ui->label_mensajePaciente->show();
+                ui->label_espacioBlanco->hide();
+                ui->sA_historialPac_2->hide();
+
+   }
+        if(idUsuario==idUsuario2){
+           //  qDebug()<<"entre 3 if";
+             ui->label_mensajePaciente->hide();
+             ui->label_espacioBlanco->hide();
+            consulta="select estatura,peso,fechaUltimaVacuna,alergias,accidente,enfermedad,cirugias,hospitalizaciones,trabajos,habitos,frecuenciaAlcohol,frecuenciaCigarro,enfermedadesFamilia "
+                     " from historialPaciente inner join paciente on historialPaciente.idPaciente=paciente.idpaciente where paciente.idUser='"+idUsuario+"'";
+            query.exec(consulta);
+            query.next();
+            altura=query.value(0).toString();
+            peso=query.value(1).toString();
+            alergia=query.value(3).toString();
+            accidente=query.value(4).toString();
+            enfermedades=query.value(5).toString();
+            cirujias=query.value(6).toString();
+            hospital=query.value(7).toString();
+            trabajos=query.value(8).toString();
+            habitos=query.value(9).toString();
+            alcohol=query.value(10).toString();
+            cigarro=query.value(11).toString();
+            familia=query.value(12).toString();
+
+            ui->lineEdit_estatura->setText(altura);
+            ui->lineEdit_peso->setText(peso);
+            ui->plainTextEdit_alergias->setPlainText(alergia);
+            ui->plainTextEdit_accidentes->setPlainText(accidente);
+            ui->plainTextEdit_enfermedades->setPlainText(enfermedades);
+            ui->plainTextEdit_cirugias->setPlainText(cirujias);
+            ui->plainTextEdit_hospitalizacion->setPlainText(hospital);
+            ui->plainTextEdit_trabajos->setPlainText(trabajos);
+            ui->plainTextEdit_habitos->setPlainText(habitos);
+            ui->plainTextEdit_alcoholismo->setPlainText(alcohol);
+            ui->plainTextEdit_cigarro->setPlainText(cigarro);
+            ui->plainTextEdit_Familiares->setPlainText(familia);
+            ui->verHistoClinico->show();
+            ui->sA_historialPac_2->show();
+        }
+}
+
+void MainWindow::on_verHistoClinico_clicked()
+{
+     ui->stackedWidget_perfilDoctor->setCurrentIndex(7);
+    mostrarHistorialClinico();
+}
+
+void MainWindow::historialClinico(QString idCita){
+
+    QString citas,fecha,cita,diagnostico,nombre;
+    QSqlQuery consulta;
+    citas=" select cit.idCita,cit.fecha,rec.medicamento,dig.diagnostico,us.nombre,us.appaterno,us.apmaterno "
+          "from cita as cit inner join receta as rec on cit.idCita=rec.idCita inner join diagnostico as dig  on rec.idCita=dig.idCita "
+          "inner join paciente as pac on pac.idUser=cit.matricula inner join usuario as us on us.matricula=pac.idUser where cit.idCita='"+idCita+"'";
+    consulta.exec(citas);
+    consulta.next();
+    fecha=consulta.value(1).toString();
+    cita=consulta.value(0).toString();
+    diagnostico=consulta.value(3).toString();
+    nombre=consulta.value(4).toString()+" "+consulta.value(5).toString()+" "+consulta.value(6).toString();
+    static MostrarHistoclinico l;
+    l.mostrarClinico(cita,diagnostico,nombre,fecha);
+    l.show();
+}
+
+void MainWindow::mostrarHistorialClinico(){
+
+
+    QString citas,est,id_usuario;
+    QSqlQuery consulta;
+    est="1";
+    id_usuario=ui->lineEdit_matriculaMedico->text();
+    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_usuario+"'";
+    if(!consulta.exec(citas)) consulta.lastError().text();
+    int f=0;
+    int ban=1;
+    QString r1,g1,b1;
+    r1="172,189,211";
+    QString r2,g2,b2;
+    r2="221,221,221";
+    QString rgb="";
+
+    QString folio,doctor,fecha,hora,nomDoct;
+    int i=0;
+
+    while(consulta.next())
+    {
+        folio=consulta.value(0).toString();
+        doctor=consulta.value(1).toString()+" "+consulta.value(2).toString()+" "+consulta.value(3).toString();
+        hora=consulta.value(4).toString();
+        fecha=consulta.value(5).toString();
+        if(ban==1)
+        {
+            rgb=r1;
+            ban=2;
+        }
+        else
+        {
+            rgb=r2;
+            ban=1;
+        }
+
+
+
+        QLabel *m=new QLabel;
+        m->setText(doctor);
+        m->setFixedSize(QSize(140,25));
+        m->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->barraclinico->addWidget(m,i,1,Qt::AlignTop);
+
+
+        QLabel *r=new QLabel;
+        r->setText(fecha);
+        r->setStyleSheet("background-color: rgb("+rgb+")");
+        r->setFixedSize(QSize(100,25));
+        ui->barraclinico->addWidget(r,i,2,Qt::AlignTop);
+
+
+        QLabel *h=new QLabel;
+        h->setText(hora);
+        h->setFixedSize(QSize(100,25));
+        h->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->barraclinico->addWidget(h,i,3,Qt::AlignTop);
+
+
+        QLabel *ss=new QLabel;
+        ss->setText(" ");
+        ss->setFixedSize(QSize(120,25));
+        ui->barraclinico->addWidget(ss,i,4,Qt::AlignTop);
+
+
+        QPushButton *q=new QPushButton();
+        q->setText("Ver diagnostico");
+        q->setFixedSize(QSize(150,25));
+        q->setStyleSheet("border:solid 1px #5d80b6;border-radius:5px;background-color: #5d80b6;color: white;font: 11pt 'MS Shell Dlg 2'");
+        QSignalMapper *mapper1=new QSignalMapper(this);
+        connect(q,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
+        mapper1->setMapping(q,folio);
+        connect(mapper1,SIGNAL(mapped(QString)),this,SLOT(historialClinico(QString)));
+        ui->barraclinico->addWidget(q,i,7,Qt::AlignTop);
+        i++;
+
+    }
+
+
+}
+
 // ////////////////////////////// FIN: LLENAR EL RECETA Y DIAGNOSTICO //////////////////////////////
 
 void MainWindow::on_btnCitasCanceladas_clicked()

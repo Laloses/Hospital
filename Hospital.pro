@@ -30,6 +30,7 @@ SOURCES += \
         agregartipremedio.cpp \
         main.cpp \
         mainwindow.cpp \
+        mostrarhistoclinico.cpp \
         pagarcitaspaciente.cpp \
         registrodoctor.cpp \
         registropaciente.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
         agregarcitaspaciente.h \
         agregartipremedio.h \
         mainwindow.h \
+        mostrarhistoclinico.h \
         pagarcitaspaciente.h \
         registrodoctor.h \
         registropaciente.h \
@@ -52,6 +54,7 @@ HEADERS += \
 FORMS += \
         agregaractividaddoctor.ui \
         mainwindow.ui \
+        mostrarhistoclinico.ui \
         pagarcitaspaciente.ui \
         tipdeldia.ui
 
