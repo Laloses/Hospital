@@ -65,7 +65,7 @@ MainWindow::~MainWindow()
 //Cuando da clic en el logo lo manda a la principal
 void MainWindow::on_pushButton_logo_clicked()
 {
-    if(id_paciente.trimmed() != "0" && id_usuario.trimmed()==""0){
+    if(id_paciente.trimmed() != "0" || id_usuario.trimmed()=="0"){
         //Página principal
         ui->stackedWidget_principal->setCurrentIndex(0);
     }
