@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>540</width>
-    <height>178</height>
+    <height>181</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,9 +49,15 @@ QLabel{
      </item>
      <item>
       <widget class="QComboBox" name="cb_tarjetas">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
        <item>
         <property name="text">
-         <string>Nueva</string>
+         <string>Nueva tarjeta</string>
         </property>
        </item>
       </widget>
@@ -214,6 +220,12 @@ QLabel{
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_pagarC">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>25</height>
+           </size>
+          </property>
           <property name="text">
            <string>Pagar</string>
           </property>

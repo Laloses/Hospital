@@ -466,17 +466,21 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
 }
 #pushButton_forgotPass{
 	border:none;
-	font: 10pt &quot;MS Shell Dlg 2&quot;;
 	color: #2f405b;
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+	text-decoration: underline;
 }
 #pushButton_forgotPass:hover{
 	color: #5d80b6;
 }
-
+#btnMostrarContrasena,#btnMostrarContrasena_2,#btnMostrarContrasena_3,#btnMostrarContrasena_4, #btnBuscarDoctor{
+	background-color:transparent;
+border:none
+}
 </string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -823,7 +827,7 @@ font-size:10pt;</string>
 </string>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_oculto">
            <layout class="QGridLayout" name="gridLayout_5">
@@ -1173,13 +1177,13 @@ font-size:10pt;</string>
                      <widget class="QDateEdit" name="dateEdit_fNacimiento">
                       <property name="minimumSize">
                        <size>
-                        <width>79</width>
+                        <width>110</width>
                         <height>18</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>79</width>
+                        <width>110</width>
                         <height>16777215</height>
                        </size>
                       </property>
@@ -1258,13 +1262,13 @@ font-size:10pt;</string>
                      <widget class="QComboBox" name="comboBox_email">
                       <property name="minimumSize">
                        <size>
-                        <width>107</width>
+                        <width>150</width>
                         <height>20</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>107</width>
+                        <width>150</width>
                         <height>16777215</height>
                        </size>
                       </property>
@@ -1302,7 +1306,7 @@ font-size:10pt;</string>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>
-                        <width>40</width>
+                        <width>5</width>
                         <height>20</height>
                        </size>
                       </property>
@@ -1380,6 +1384,12 @@ font-size:10pt;</string>
                    <layout class="QHBoxLayout" name="horizontalLayout_23">
                     <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
                      <widget class="QLabel" name="label_imgPerfil">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
                       <property name="minimumSize">
                        <size>
                         <width>120</width>
@@ -1393,7 +1403,7 @@ font-size:10pt;</string>
                        </size>
                       </property>
                       <property name="text">
-                       <string>      Foto</string>
+                       <string>Foto</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -1408,12 +1418,12 @@ font-size:10pt;</string>
                      <widget class="QPushButton" name="pushButton_imgPerfil">
                       <property name="minimumSize">
                        <size>
-                        <width>120</width>
+                        <width>130</width>
                         <height>30</height>
                        </size>
                       </property>
                       <property name="text">
-                       <string>Abrir imagen</string>
+                       <string>Agregar imagen</string>
                       </property>
                      </widget>
                     </item>
@@ -1459,7 +1469,7 @@ font-size:10pt;</string>
                      <widget class="QComboBox" name="comboBox_puesto">
                       <property name="minimumSize">
                        <size>
-                        <width>100</width>
+                        <width>150</width>
                         <height>0</height>
                        </size>
                       </property>
@@ -1537,7 +1547,7 @@ font-size:10pt;</string>
                    <widget class="QComboBox" name="comboBox_especiDoc">
                     <property name="minimumSize">
                      <size>
-                      <width>100</width>
+                      <width>150</width>
                       <height>0</height>
                      </size>
                     </property>
@@ -1755,6 +1765,22 @@ font-size:10pt;</string>
                 </item>
                </layout>
               </item>
+              <item>
+               <spacer name="verticalSpacer_27">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::MinimumExpanding</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>10</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
              </layout>
             </item>
             <item row="0" column="2">
@@ -1840,9 +1866,15 @@ font-size:10pt;</string>
              <layout class="QHBoxLayout" name="horizontalLayout_20">
               <item>
                <widget class="QLabel" name="label_selecPregunta">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
-                  <width>165</width>
+                  <width>180</width>
                   <height>16</height>
                  </size>
                 </property>
@@ -1861,7 +1893,7 @@ font-size:10pt;</string>
                <widget class="QComboBox" name="comboBox_pregunta">
                 <property name="minimumSize">
                  <size>
-                  <width>82</width>
+                  <width>200</width>
                   <height>20</height>
                  </size>
                 </property>
@@ -1887,19 +1919,6 @@ font-size:10pt;</string>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_19">
                 <item>
-                 <spacer name="horizontalSpacer_19">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
                  <widget class="QLabel" name="label_respuesta">
                   <property name="minimumSize">
                    <size>
@@ -1920,9 +1939,15 @@ font-size:10pt;</string>
                 </item>
                 <item>
                  <widget class="QLineEdit" name="lineEdit_respuesta">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>0</height>
+                   </size>
+                  </property>
                   <property name="maximumSize">
                    <size>
-                    <width>147</width>
+                    <width>250</width>
                     <height>20</height>
                    </size>
                   </property>
@@ -2366,7 +2391,7 @@ color:red;
                            <enum>Qt::LeftToRight</enum>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">border: 1px solid black;</string>
+                           <string notr="true"/>
                           </property>
                           <property name="text">
                            <string>FotoPerfil</string>
@@ -2540,7 +2565,7 @@ background-color:transparent;</string>
                          <widget class="QLineEdit" name="lineCorreoPaciente">
                           <property name="minimumSize">
                            <size>
-                            <width>200</width>
+                            <width>250</width>
                             <height>20</height>
                            </size>
                           </property>
@@ -3905,7 +3930,7 @@ background-color:transparent;</string>
                     <x>0</x>
                     <y>0</y>
                     <width>848</width>
-                    <height>311</height>
+                    <height>317</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -4137,7 +4162,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>6</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_40">
@@ -4186,7 +4211,7 @@ QPushButton:focus{
                     <x>0</x>
                     <y>0</y>
                     <width>180</width>
-                    <height>376</height>
+                    <height>382</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -4207,7 +4232,7 @@ QPushButton:focus{
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>165</width>
+                <width>150</width>
                 <height>20</height>
                </size>
               </property>
@@ -4257,7 +4282,7 @@ QPushButton:focus{
                    <enum>Qt::LeftToRight</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">border: 1px solid black;</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
                    <string>FotoPerfil</string>
@@ -4292,7 +4317,7 @@ QPushButton:focus{
                <widget class="QLineEdit" name="lineNombreDoctor">
                 <property name="minimumSize">
                  <size>
-                  <width>0</width>
+                  <width>250</width>
                   <height>25</height>
                  </size>
                 </property>
@@ -4508,9 +4533,15 @@ background-color:transparent</string>
                 </item>
                 <item>
                  <widget class="QLineEdit" name="lineCorreoDoctor">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="minimumSize">
                    <size>
-                    <width>200</width>
+                    <width>250</width>
                     <height>20</height>
                    </size>
                   </property>
@@ -4883,7 +4914,7 @@ background-color:transparent</string>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>165</width>
+                <width>150</width>
                 <height>20</height>
                </size>
               </property>
@@ -5019,7 +5050,58 @@ background -color: red;
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="0" column="0" colspan="3">
+            <item row="1" column="2">
+             <widget class="QPushButton" name="pb_agregarActividadDoc">
+              <property name="minimumSize">
+               <size>
+                <width>130</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>130</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>Agregar actividad</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <spacer name="horizontalSpacer_32">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="3">
+             <spacer name="horizontalSpacer_99">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="0" colspan="4">
              <widget class="QTableWidget" name="tableHorario">
               <property name="minimumSize">
                <size>
@@ -5086,41 +5168,6 @@ background -color: red;
               <column/>
              </widget>
             </item>
-            <item row="1" column="1">
-             <spacer name="horizontalSpacer_32">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="pb_agregarActividadDoc">
-              <property name="minimumSize">
-               <size>
-                <width>130</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>130</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>Agregar actividad</string>
-              </property>
-             </widget>
-            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="page">
@@ -5139,7 +5186,7 @@ background -color: red;
                     <x>0</x>
                     <y>0</y>
                     <width>848</width>
-                    <height>277</height>
+                    <height>301</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -5629,7 +5676,7 @@ background-color:transparent;</string>
                     <x>0</x>
                     <y>0</y>
                     <width>866</width>
-                    <height>310</height>
+                    <height>334</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_37">
@@ -5906,7 +5953,7 @@ background-color:transparent;</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>314</width>
+                     <width>402</width>
                      <height>1114</height>
                     </rect>
                    </property>
@@ -6635,7 +6682,7 @@ QPushButton:focus{
                            <enum>Qt::LeftToRight</enum>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">border: 1px solid black;</string>
+                           <string notr="true"/>
                           </property>
                           <property name="text">
                            <string>FotoPerfil</string>
@@ -7315,7 +7362,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;
 }</string>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="pagePrincipalAdmin">
            <layout class="QGridLayout" name="gridLayout_36">
@@ -7564,8 +7611,8 @@ background:transparent;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>20</width>
-                      <height>20</height>
+                      <width>409</width>
+                      <height>321</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_14">
@@ -7598,7 +7645,7 @@ background:transparent;</string>
                   </property>
                  </spacer>
                 </item>
-                <item>
+                <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
                  <widget class="QLabel" name="label_solicitud">
                   <property name="minimumSize">
                    <size>
@@ -7607,10 +7654,13 @@ background:transparent;</string>
                    </size>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">border:1px solid black;</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
-                   <string/>
+                   <string>Foto</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
                  </widget>
                 </item>
@@ -7952,8 +8002,8 @@ background:transparent;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>411</width>
+                    <height>392</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
