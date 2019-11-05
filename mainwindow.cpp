@@ -4140,7 +4140,7 @@ void MainWindow::on_pushButton_historial_clicked()
  ui->label_mensajePaciente->hide();
  ui->label_espacioBlanco->hide();
  ui->verHistoClinico->hide();
- ui->verHistoClinico->show();
+
 
 }
 
@@ -4210,20 +4210,26 @@ void MainWindow::on_pushButton_buscarHistMedico_clicked()
 
 void MainWindow::on_verHistoClinico_clicked()
 {
-    ui->stackedWidget_perfilDoctor->setCurrentIndex(7);
+     ui->stackedWidget_perfilDoctor->setCurrentIndex(7);
     mostrarHistorialClinico();
 }
 
 void MainWindow::historialClinico(QString idCita){
 
-    QString citas,fecha,medicamento,diagnostico,nombre;
+    QString citas,fecha,cita,diagnostico,nombre;
     QSqlQuery consulta;
     citas=" select cit.idCita,cit.fecha,rec.medicamento,dig.diagnostico,us.nombre,us.appaterno,us.apmaterno "
           "from cita as cit inner join receta as rec on cit.idCita=rec.idCita inner join diagnostico as dig  on rec.idCita=dig.idCita "
-          "inner join doctor as doc on doc.iddoctor=cit.doctor inner join usuario as us on us.matricula=doc.idUser where cit.idCita='"+idCita+"'";
+          "inner join paciente as pac on pac.idUser=cit.matricula inner join usuario as us on us.matricula=pac.idUser where cit.idCita='"+idCita+"'";
     consulta.exec(citas);
     consulta.next();
-
+    fecha=consulta.value(1).toString();
+    cita=consulta.value(0).toString();
+    diagnostico=consulta.value(3).toString();
+    nombre=consulta.value(4).toString()+" "+consulta.value(5).toString()+" "+consulta.value(6).toString();
+    static MostrarHistoclinico l;
+    l.mostrarClinico(cita,diagnostico,nombre,fecha);
+    l.show();
 }
 
 void MainWindow::mostrarHistorialClinico(){
@@ -4263,17 +4269,11 @@ void MainWindow::mostrarHistorialClinico(){
             ban=1;
         }
 
-        /*
-        QLabel *fol=new QLabel;
-        fol->setText(folio);
-        fol->setFixedSize(QSize(100,25));
-        fol->setStyleSheet("background-color: rgb("+rgb+")");
-        ui->barraclinico->addWidget(fol,i,0,Qt::AlignTop);
-        */
+
 
         QLabel *m=new QLabel;
         m->setText(doctor);
-        m->setFixedSize(QSize(110,25));
+        m->setFixedSize(QSize(140,25));
         m->setStyleSheet("background-color: rgb("+rgb+")");
         ui->barraclinico->addWidget(m,i,1,Qt::AlignTop);
 
@@ -4298,16 +4298,10 @@ void MainWindow::mostrarHistorialClinico(){
         ui->barraclinico->addWidget(ss,i,4,Qt::AlignTop);
 
 
-
         QPushButton *q=new QPushButton();
-       // q->setText("Cancelar");
-        q->setFixedSize(QSize(100,25));
-        q->setStyleSheet("background-color:transparent;");
-        QPixmap pixmap(":/imgs/view.png");
-        QIcon ButtonIcon(pixmap);
-        q->setIcon(ButtonIcon);
-        QSize l(45,45);
-        q->setIconSize(l);
+        q->setText("Ver diagnostico");
+        q->setFixedSize(QSize(150,25));
+        q->setStyleSheet("border:solid 1px #5d80b6;border-radius:5px;background-color: #5d80b6;color: white;font: 11pt 'MS Shell Dlg 2'");
         QSignalMapper *mapper1=new QSignalMapper(this);
         connect(q,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
         mapper1->setMapping(q,folio);
@@ -4316,7 +4310,6 @@ void MainWindow::mostrarHistorialClinico(){
         i++;
 
     }
-
 
 
 }

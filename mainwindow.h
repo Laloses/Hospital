@@ -19,6 +19,7 @@
 #include "agregartipremedio.h"
 #include "pagarcitaspaciente.h"
 #include <QTimer>
+#include "mostrarhistoclinico.h"
 
 namespace Ui {
 class MainWindow;

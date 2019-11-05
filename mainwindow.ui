@@ -476,7 +476,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
 </string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -3020,7 +3020,7 @@ background-color:transparent;</string>
                         <x>0</x>
                         <y>0</y>
                         <width>198</width>
-                        <height>279</height>
+                        <height>80</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -3904,8 +3904,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>311</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -4194,7 +4194,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>7</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_40">
@@ -4243,7 +4243,7 @@ QPushButton:focus{
                     <x>0</x>
                     <y>0</y>
                     <width>180</width>
-                    <height>376</height>
+                    <height>382</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -5196,7 +5196,7 @@ background -color: red;
                     <x>0</x>
                     <y>0</y>
                     <width>848</width>
-                    <height>277</height>
+                    <height>301</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -5686,7 +5686,7 @@ background-color:transparent;</string>
                     <x>0</x>
                     <y>0</y>
                     <width>866</width>
-                    <height>310</height>
+                    <height>334</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_37">
@@ -5940,7 +5940,7 @@ background-color:transparent;</string>
                </size>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="p_historial">
                <layout class="QGridLayout" name="gridLayout_37">
@@ -5963,7 +5963,7 @@ background-color:transparent;</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>314</width>
+                     <width>402</width>
                      <height>1114</height>
                     </rect>
                    </property>
@@ -6656,8 +6656,8 @@ border:none</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>256</width>
-                 <height>1337</height>
+                 <width>849</width>
+                 <height>1092</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_45">
@@ -6852,7 +6852,7 @@ border:none</string>
               <x>20</x>
               <y>80</y>
               <width>830</width>
-              <height>351</height>
+              <height>310</height>
              </rect>
             </property>
             <property name="minimumSize">
@@ -6872,8 +6872,8 @@ border:none</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>806</width>
-                  <height>327</height>
+                  <width>810</width>
+                  <height>290</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_52">
@@ -6902,7 +6902,7 @@ border:none</string>
            <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
-              <x>40</x>
+              <x>140</x>
               <y>50</y>
               <width>350</width>
               <height>24</height>
@@ -8750,7 +8750,7 @@ background:transparent;
             <item row="1" column="0" colspan="2">
              <widget class="QStackedWidget" name="stackedWidget_tips">
               <property name="currentIndex">
-               <number>1</number>
+               <number>2</number>
               </property>
               <widget class="QWidget" name="page_11">
                <widget class="QLabel" name="label_7">
@@ -8940,8 +8940,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>457</width>
-                        <height>24</height>
+                        <width>478</width>
+                        <height>302</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -9039,8 +9039,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>457</width>
-                        <height>24</height>
+                        <width>461</width>
+                        <height>20</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -9489,8 +9489,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>24</width>
-                          <height>24</height>
+                          <width>20</width>
+                          <height>20</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -9623,8 +9623,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>24</width>
-                          <height>24</height>
+                          <width>20</width>
+                          <height>20</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
@@ -9738,8 +9738,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>24</width>
-                          <height>24</height>
+                          <width>20</width>
+                          <height>20</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
