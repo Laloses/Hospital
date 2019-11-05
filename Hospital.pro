@@ -30,6 +30,7 @@ SOURCES += \
         agregartipremedio.cpp \
         main.cpp \
         mainwindow.cpp \
+        pagarcitaspaciente.cpp \
         registrodoctor.cpp \
         registropaciente.cpp \
         registrostaff.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
         agregarcitaspaciente.h \
         agregartipremedio.h \
         mainwindow.h \
+        pagarcitaspaciente.h \
         registrodoctor.h \
         registropaciente.h \
         registrostaff.h \
@@ -50,6 +52,7 @@ HEADERS += \
 FORMS += \
         agregaractividaddoctor.ui \
         mainwindow.ui \
+        pagarcitaspaciente.ui \
         tipdeldia.ui
 
 RC_ICONS = icono.ico
