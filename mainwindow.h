@@ -275,6 +275,8 @@ private slots:
 
     void mostrarHistorialClinico();
 
+    void on_pushButton_2_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

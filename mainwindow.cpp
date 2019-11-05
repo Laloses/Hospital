@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     toggleVision = 0;
     toggleVision1 = 0;
     contMedicinas=0;
-    ui->tv_listaDocCitas->horizontalHeader()->setVisible(true);
+    ui->tv_listaDocCitas->horizontalHeader()->setHidden(false);
 }
 
 MainWindow::~MainWindow()
@@ -65,8 +65,10 @@ MainWindow::~MainWindow()
 //Cuando da clic en el logo lo manda a la principal
 void MainWindow::on_pushButton_logo_clicked()
 {
-    //Página principal
-    ui->stackedWidget_principal->setCurrentIndex(0);
+    if(id_paciente.trimmed() != "0" && id_usuario.trimmed()==""0){
+        //Página principal
+        ui->stackedWidget_principal->setCurrentIndex(0);
+    }
 }
 
 //Cuando da clic en el boton de login
@@ -491,7 +493,7 @@ void MainWindow::on_pushButton_salir_clicked()
     //Mostrar botones de login y registrar
     ui->pushButton_login->setHidden(false);
     ui->pushButton_registro->setHidden(false);
-
+    ui->tableHorario->clear();
     //mostramos cosas del menu de arriba
     ui->pb_remedios->setHidden(true);
     mostrarMenuP();
@@ -743,7 +745,7 @@ void MainWindow::on_pushButton_respuesta_clicked()
             ui->lineEdit_password1->setText("");
 
         //movemos al usuario al inicio
-        on_pushButton_logo_clicked();
+        on_pushButton_login_clicked();
     }
     else {
         QMessageBox::critical(this,"No se Registro", "Hay un error en el servidor, intente más tarde.");
@@ -994,7 +996,7 @@ void MainWindow::cargarHorarioDoc(){
 
             //hora
             int col=0,fil=0;
-            for(int j=0; j<8; j++){
+            for(int j=0; j<=8; j++){
                 if (horas.at(j) == q.value(1).toString()){
                     fil=j;
                     break;
@@ -1012,11 +1014,20 @@ void MainWindow::cargarHorarioDoc(){
             ui->tableHorario->setItem(fil, col, new QTableWidgetItem);
 
             if(q.value(0).toString()=="Consulta"){
-                ui->tableHorario->item(fil, col)->setBackground(Qt::blue);
+                ui->tableHorario->item(fil, col)->setBackground(Qt::darkBlue);
             }
             else
             if(q.value(0).toString()=="Descanso"){
                 ui->tableHorario->item(fil, col)->setBackground(Qt::green);
+            }
+            else if(q.value(0).toString()=="Coordinación"){
+                ui->tableHorario->item(fil, col)->setBackground(Qt::magenta);
+            }
+            else if(q.value(0).toString()=="Investigación"){
+                ui->tableHorario->item(fil, col)->setBackground(Qt::darkCyan);
+            }
+            else if(q.value(0).toString()=="Administración"){
+                ui->tableHorario->item(fil, col)->setBackground(Qt::black);
             }
             else{
                 ui->tableHorario->item(fil, col)->setBackground(Qt::red);
@@ -1033,7 +1044,6 @@ void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
     ui->pushButton_SolicitudesUsuarios->hide();
     ui->pushButton_tip_2->hide();
     ui->pushButton_agregar_remedio->hide();
-    ui->widget_opcionesPerfAdmin->setHidden(true);
 }
 
 
@@ -1282,6 +1292,7 @@ void MainWindow::on_pushButton_guardar_clicked()
              }
         }
     }
+    on_radioButton_doctors_clicked();
 
 }
 
@@ -1471,7 +1482,6 @@ void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
     ui->pushButton_SolicitudesUsuarios->show();
     ui->pushButton_agregar_remedio->show();
     ui->pushButton_tip_2->show();
-    ui->widget_opcionesPerfAdmin->setHidden(false);
     ui->stackedWidget_admin->setCurrentIndex(0);
 }
 
@@ -1484,7 +1494,6 @@ void MainWindow::on_pushButton_tip_2_clicked()
     ui->pushButton_SolicitudesUsuarios->hide();
     ui->pushButton_tip_2->hide();
     ui->pushButton_agregar_remedio->hide();
-    ui->widget_opcionesPerfAdmin->setHidden(true);
 
 }
 //metodo paguardad el tip del dia
@@ -1593,7 +1602,6 @@ void MainWindow::on_pushButton_menu_admin_clicked()
     ui->lineEdit_liksEdit->setStyleSheet(estiloBueno);
     ui->plainTextEdit_descripEdit->setStyleSheet(estiloBueno);
     ui->label_imageneditartip->setPixmap(c);
-    ui->widget_opcionesPerfAdmin->setHidden(false);
 }
 
 //METODO PARA AGREGAR TIP
@@ -2670,7 +2678,6 @@ void MainWindow::on_pushButton_agregar_remedio_clicked()
     ui->pushButton_SolicitudesUsuarios->hide();
     ui->pushButton_tip_2->hide();
     ui->pushButton_agregar_remedio->hide();
-    ui->widget_opcionesPerfAdmin->setHidden(true);
 }
 
 void MainWindow::on_pushButton_menu_admin_2_clicked()
@@ -2694,7 +2701,6 @@ void MainWindow::on_pushButton_menu_admin_2_clicked()
     ui->plainTextEdit_editIngredi->clear();
     ui->label_imagenEditar->setPixmap(concolor);
     ui->label_imagEli->setPixmap(concolor);
-    ui->widget_opcionesPerfAdmin->setHidden(false);
 }
 //guardar la imagen del remedio casero
 void MainWindow::on_pushButton_Imgremedio_clicked()
@@ -4457,8 +4463,8 @@ void MainWindow::cambiarVentana(QString folio)
 void MainWindow::on_btnCancelarAgenda_2_clicked()
 {
     ui->stackedWidget_admin->setCurrentIndex(5);
-    on_btnCitasCanceladas_clicked();
     ui->le_nombreDoc_2->clear();
+    on_btnCitasCanceladas_clicked();
 }
 
 void MainWindow::on_pushButton_menu_admin_3_clicked()
@@ -4467,7 +4473,7 @@ void MainWindow::on_pushButton_menu_admin_3_clicked()
 }
 
 void MainWindow::docDisp(QString folio){
-    qDebug()<<"entre";
+    qDebug()<<"entre a buscar doctores";
     QSqlQuery horarios, doc;
     QString hora,fecha;
     int diaNum, idDoc;
@@ -4483,19 +4489,17 @@ void MainWindow::docDisp(QString folio){
     doc3.next();
     doc1=doc3.value(0).toString();
 
-
-
-
     QStringList dias;
     dias<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado" << "Domingo";
     qDebug()<<dias.at(diaNum-1);
-    horarios.exec("SELECT idDoc FROM horariodoc WHERE hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"'");
+    horarios.exec("SELECT idDoc FROM horariodoc WHERE idDoc!='"+doc1+"' and  hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"'");
     if(!horarios.next()){
         ui->lb_noHayDocs_2->setHidden(false);
         ui->tv_listaDocCitas_2->setModel(nullptr);
         qDebug()<<"estoy vacio";
     }
     else{
+        horarios.exec("SELECT idDoc FROM horariodoc WHERE idDoc!='"+doc1+"' and  hora='"+hora+"' AND dia='"+dias.at(diaNum-1)+"'");
         ui->lb_selDoc_2->setHidden(false);
         ui->lb_noHayDocs_2->setHidden(true);
         idDoc=horarios.value(0).toInt();
@@ -4505,63 +4509,25 @@ void MainWindow::docDisp(QString folio){
         {
             qDebug()<<"son iguales";
             idDoc=0;
-        }else {
-
-
-
+        }else{
 
         //Si movio la fecha pero aun no pone el nombre del doctor
-        if(!ui->le_nombreDoc_2->text().isEmpty()){
-            QStringList nombreC;
+        if(ui->le_nombreDoc_2->text().isEmpty()){
             QString nombre, apeM, apeP;
-            nombreC=ui->le_nombreDoc_2->text().split(" ");
-
-            //Si solo ingreso una palabra
-            if(nombreC.size()==1) {
-                //Buscamos por nombre o apellido paterno
-                nombre = nombreC.at(0);
-                apeP = nombreC.at(0);
 
                 model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
                               "FROM doctor as d , especialidad as e , usuario as u "
-                              "WHERE d.iddoctor = "+QString::number((idDoc))+" "
-                              "AND u.matricula = d.idUser "
+                              "WHERE d.iddoctor != "+doc1+" "
                               "AND d.idEspecialidad = e.idEsp "
-                              "OR u.nombre='"+nombre+"' "
-                              "OR u.appaterno ='"+apeP+"' ");
-            }
-            //Si puso mas de su nombre o apellido
-            else {
-                nombre = nombreC.at(0);
-                apeP = nombreC.at(1);
-                apeM = nombreC.at(2);
-
-                model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
-                              "FROM doctor as d , especialidad as e , usuario as u "
-                              "WHERE d.iddoctor = "+QString::number((idDoc))+" "
-                              "AND u.matricula = d.idUser "
-                              "AND d.idEspecialidad = e.idEsp "
-                              "OR u.nombre='"+nombre+"' "
-                              "OR u.appaterno ='"+apeP+"' "
-                              "OR u.apmaterno ='"+apeM+"'");
+                              "AND u.matricula = d.idUser ");
+                qDebug()<<idDoc;
+                ui->tv_listaDocCitas_2->setModel(model);
+                ui->tv_listaDocCitas_2->setHidden(false);
+                ui->tv_listaDocCitas_2->hideColumn(2);
+                ui->tv_listaDocCitas_2->setColumnWidth(0,ui->tv_listaDocCitas_2->width()/2);
+                ui->tv_listaDocCitas_2->setColumnWidth(1,ui->tv_listaDocCitas_2->width()/2);
             }
         }
-        //Si está vacio el campo del nombre del doctor
-        //Mostramos todos los doctores disponibles
-        else{
-            model->setQuery("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.idUser "
-                          "FROM doctor as d , especialidad as e , usuario as u "
-                          "WHERE d.iddoctor = "+QString::number((idDoc))+" "
-                          "AND u.matricula = d.idUser "
-                          "AND d.idEspecialidad = e.idEsp");
-        }
-        qDebug()<<idDoc;
-        ui->tv_listaDocCitas_2->setModel(model);
-        ui->tv_listaDocCitas_2->setHidden(false);
-        ui->tv_listaDocCitas_2->hideColumn(2);
-        ui->tv_listaDocCitas_2->setColumnWidth(0,ui->tv_listaDocCitas->width()/2);
-        ui->tv_listaDocCitas_2->setColumnWidth(1,ui->tv_listaDocCitas->width()/2);
-    }
     }
 }
 
@@ -4602,6 +4568,8 @@ void MainWindow::on_btnAgendarCita_2_clicked()
         tr("Information"), tr("Los cambios se han guardado con éxito."), QMessageBox::Yes);
         message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
         message.exec();
+
+        ui->stackedWidget_admin->setCurrentIndex(0);
     }
     else{
         qDebug() << "nel pastel";
@@ -4619,3 +4587,8 @@ void MainWindow::actTablaCitas()
     mostrarCitas();
 }
 // ///
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->stackedWidget_registros->setCurrentIndex(1);
+}
