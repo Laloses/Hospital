@@ -332,6 +332,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
                 qDebug()<<"encontre algo";
                 QPixmap pixmap(":/imgs/notification2.png");
                 ui->notificacionL->setPixmap(pixmap);
+                ui->notificacionL->setStyleSheet("background-color:red; border:solid 1px red; border-radius:500px; color: white;");
                 ui->notificacionL->setText(num);
                 ui->notificacionL->show();
             }
@@ -416,7 +417,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
             else
             {
                 qDebug()<<"encontre algo";
-                ui->notificacionL_4->setStyleSheet("background-color:rgb(243,173,106);");
+                ui->notificacionL_4->setStyleSheet("background-color:red; border:solid 1px red; border-radius:500px; color: white;");
                 ui->notificacionL_4->setText(num);
                 ui->notificacionL_4->show();
             }

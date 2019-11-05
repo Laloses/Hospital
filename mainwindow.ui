@@ -473,14 +473,14 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
 #pushButton_forgotPass:hover{
 	color: #5d80b6;
 }
-#btnMostrarContrasena,#btnMostrarContrasena_2,#btnMostrarContrasena_3,#btnMostrarContrasena_4, #btnBuscarDoctor{
+#btnMostrarContrasena,#btnMostrarContrasena_2,#btnMostrarContrasena_3,#btnMostrarContrasena_4, #btnBuscarDoctor, #btnBuscarDoctor_2{
 	background-color:transparent;
 border:none
 }
 </string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -2303,7 +2303,7 @@ color:red;
 </string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_miPerfilPac">
            <layout class="QGridLayout" name="gridLayout_39">
@@ -3023,7 +3023,7 @@ background-color:transparent;</string>
                  <widget class="QWidget" name="nofi" native="true">
                   <property name="minimumSize">
                    <size>
-                    <width>100</width>
+                    <width>250</width>
                     <height>100</height>
                    </size>
                   </property>
@@ -3044,21 +3044,13 @@ background-color:transparent;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>198</width>
+                        <width>230</width>
                         <height>279</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
                        <item row="0" column="0">
-                        <layout class="QGridLayout" name="barraDeNoti">
-                         <item row="0" column="0">
-                          <widget class="QPushButton" name="pushButton">
-                           <property name="text">
-                            <string>PushButton</string>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
+                        <layout class="QGridLayout" name="barraDeNoti"/>
                        </item>
                       </layout>
                      </widget>
@@ -4162,7 +4154,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>6</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_40">
@@ -4195,7 +4187,7 @@ QPushButton:focus{
              <widget class="QWidget" name="nofi_2" native="true">
               <property name="minimumSize">
                <size>
-                <width>200</width>
+                <width>250</width>
                 <height>100</height>
                </size>
               </property>
@@ -4210,7 +4202,7 @@ QPushButton:focus{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>180</width>
+                    <width>230</width>
                     <height>382</height>
                    </rect>
                   </property>
@@ -5264,73 +5256,23 @@ background -color: red;
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="0" column="0" colspan="2">
-             <layout class="QHBoxLayout" name="horizontalLayout_80">
-              <item>
-               <widget class="QPushButton" name="regresar_citasDoc">
-                <property name="minimumSize">
-                 <size>
-                  <width>117</width>
-                  <height>32</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">border:none;
-font: 13pt &quot;MS Shell Dlg 2&quot;;
-color: rgb(68, 94, 134);
-background-color:transparent;</string>
-                </property>
-                <property name="text">
-                 <string>Regresar</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="imgs/imgs.qrc">
-                  <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>25</width>
-                  <height>25</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_83">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_2">
-                <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Detalles de Cita&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_84">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
+            <item row="4" column="2">
+             <spacer name="verticalSpacer_29">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
-            <item row="1" column="0" colspan="2">
+            <item row="1" column="1" colspan="2">
              <layout class="QHBoxLayout" name="horizontalLayout_71">
               <item>
                <spacer name="horizontalSpacer_81">
@@ -5389,7 +5331,23 @@ background-color:transparent;</string>
               </item>
              </layout>
             </item>
-            <item row="2" column="0">
+            <item row="3" column="1">
+             <spacer name="verticalSpacer_29">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="1">
              <layout class="QVBoxLayout" name="verticalLayout_33">
               <item>
                <spacer name="verticalSpacer_30">
@@ -5553,7 +5511,7 @@ background-color:transparent;</string>
               </item>
              </layout>
             </item>
-            <item row="2" column="1" rowspan="2">
+            <item row="2" column="2" rowspan="2">
              <layout class="QVBoxLayout" name="verticalLayout_34">
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_72">
@@ -5607,34 +5565,100 @@ background-color:transparent;</string>
               </item>
              </layout>
             </item>
-            <item row="3" column="0">
-             <spacer name="verticalSpacer_29">
+            <item row="0" column="1" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_80">
+              <item>
+               <widget class="QPushButton" name="regresar_citasDoc">
+                <property name="minimumSize">
+                 <size>
+                  <width>117</width>
+                  <height>32</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:none;
+font: 13pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(68, 94, 134);
+background-color:transparent;</string>
+                </property>
+                <property name="text">
+                 <string>Regresar</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="imgs/imgs.qrc">
+                  <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_83">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Detalles de Cita&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_84">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item row="4" column="3">
+             <spacer name="horizontalSpacer_19">
               <property name="orientation">
-               <enum>Qt::Vertical</enum>
+               <enum>Qt::Horizontal</enum>
               </property>
               <property name="sizeType">
-               <enum>QSizePolicy::Expanding</enum>
+               <enum>QSizePolicy::Fixed</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>40</height>
+                <height>20</height>
                </size>
               </property>
              </spacer>
             </item>
-            <item row="4" column="1">
-             <spacer name="verticalSpacer_29">
+            <item row="3" column="0">
+             <spacer name="horizontalSpacer_100">
               <property name="orientation">
-               <enum>Qt::Vertical</enum>
+               <enum>Qt::Horizontal</enum>
               </property>
               <property name="sizeType">
-               <enum>QSizePolicy::Expanding</enum>
+               <enum>QSizePolicy::Fixed</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
                 <width>20</width>
-                <height>40</height>
+                <height>20</height>
                </size>
               </property>
              </spacer>
@@ -5657,6 +5681,15 @@ background-color:transparent;</string>
             </property>
             <item row="0" column="0">
              <widget class="QLabel" name="lb_cancelarCita">
+              <property name="font">
+               <font>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>11</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
               <property name="text">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;Proximas Citas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -5930,7 +5963,7 @@ background-color:transparent;</string>
                </size>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="p_historial">
                <layout class="QGridLayout" name="gridLayout_37">
@@ -6479,7 +6512,7 @@ p, li { white-space: pre-wrap; }
 color:red;</string>
                 </property>
                 <property name="text">
-                 <string>*Aun no es la cita</string>
+                 <string>*Aún no es la cita</string>
                 </property>
                </widget>
               </item>
@@ -9824,22 +9857,6 @@ font-size:10pt;</string>
                   </spacer>
                  </item>
                 </layout>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_31">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>3</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
                <item>
                 <widget class="QTextEdit" name="sintomasCitas_2">
