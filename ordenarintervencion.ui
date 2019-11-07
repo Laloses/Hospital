@@ -35,23 +35,22 @@ QLabel{
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-</string>
+     <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabDetalles">
      <attribute name="title">
       <string>Intervención</string>
      </attribute>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>27</x>
-        <y>10</y>
+        <x>30</x>
+        <y>0</y>
         <width>551</width>
-        <height>341</height>
+        <height>351</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -89,7 +88,7 @@ QLabel{
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="intervencinNombreDoc">
+            <widget class="QLabel" name="intervencionNombreDoc">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -165,22 +164,6 @@ QLabel{
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>3</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -210,22 +193,6 @@ QLabel{
           </spacer>
          </item>
         </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>3</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -328,22 +295,6 @@ QLabel{
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>3</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_9">
          <item>
           <widget class="QLabel" name="label_2">
@@ -354,7 +305,7 @@ QLabel{
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Tiempo de recuperación:</string>
+            <string>Tiempo de recuperación (Días):</string>
            </property>
           </widget>
          </item>
@@ -394,22 +345,6 @@ QLabel{
           </spacer>
          </item>
         </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>3</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -472,7 +407,7 @@ QLabel{
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>10</height>
+           <height>3</height>
           </size>
          </property>
         </spacer>
@@ -553,7 +488,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
      <attribute name="title">
       <string>Pago</string>
      </attribute>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -593,7 +528,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit">
+              <widget class="QLineEdit" name="lineServ">
                <property name="minimumSize">
                 <size>
                  <width>250</width>
@@ -622,7 +557,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_2">
+                <widget class="QLineEdit" name="lineCantidad">
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
@@ -671,7 +606,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_3"/>
+                <widget class="QLineEdit" name="lineCosto"/>
                </item>
               </layout>
              </item>

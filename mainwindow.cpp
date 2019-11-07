@@ -1,6 +1,7 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "pagarcitaspaciente.h"
+#include "ordenarintervencion.h"
 #include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -4591,4 +4592,10 @@ void MainWindow::actTablaCitas()
 void MainWindow::on_pushButton_2_clicked()
 {
     ui->stackedWidget_registros->setCurrentIndex(1);
+}
+
+void MainWindow::on_pb_ordenarI_clicked()
+{
+    OrdenarIntervencion* ventanaIntervencion = new OrdenarIntervencion(ui->le_folioCita->text(), this);
+    ventanaIntervencion->show();
 }
