@@ -344,6 +344,32 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
         }
         else if(tipo==3)
         {
+            especialidad=lo.getEspecialidad();
+            qDebug()<<"especialidad"<<especialidad;
+            if(especialidad=="19"){
+             qDebug()<<"eres un doctor pero tu eres el triar";
+             ui->lineEdit_idUsuario->clear();
+             ui->lineEdit_passwordLogin->clear();
+             ui->stackedWidget_principal->setCurrentIndex(3);
+             ui->stackedWidget_perfilDoctor->setCurrentIndex(9);
+             ui->pushButton_salir->setHidden(false);
+             ui->pushButton_login->setHidden(true);
+             ui->pushButton_registro->setHidden(true);
+
+             ui->pushButton_horarioDoc->hide();
+             ui->pb_rechazarCitas->hide();
+             ui->pb_realizarConsulta->hide();
+             ui->pushButton_historial->hide();
+             ui->pb_inter->hide();
+             ui->pushButton_4->hide();
+             ui->butonNotifi_4->hide();
+             ui->notificacionL_4->hide();
+             ui->line_10->hide();
+             ui->line_7->hide();
+             ui->line_12->hide();
+             ui->line_13->hide();
+             ui->line_14->hide();
+            }else {
             qDebug()<<"eres un doctor";
 
             ui->pushButton_salir->setHidden(false);
@@ -423,8 +449,10 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
                 ui->notificacionL_4->setText(num);
                 ui->notificacionL_4->show();
             }
+
+          }
             on_pushButton_miPerfil_clicked();
-        }
+       }
         else if(tipo==4)
         {
             qDebug()<<"eres de staff";
@@ -496,6 +524,19 @@ void MainWindow::on_pushButton_salir_clicked()
     ui->tableHorario->clear();
     //mostramos cosas del menu de arriba
     ui->pb_remedios->setHidden(true);
+    ui->pushButton_horarioDoc->show();
+    ui->pb_rechazarCitas->show();
+    ui->pb_realizarConsulta->show();
+    ui->pushButton_historial->show();
+    ui->pb_inter->show();
+    ui->pushButton_4->show();
+    ui->butonNotifi_4->show();
+    ui->notificacionL_4->show();
+    ui->line_10->show();
+    ui->line_7->show();
+    ui->line_12->show();
+    ui->line_13->show();
+    ui->line_14->show();
     mostrarMenuP();
 }
 
@@ -4586,7 +4627,6 @@ void MainWindow::actTablaCitas()
     clearLayout(ui->citasLay_2);
     mostrarCitas();
 }
-// ///
 
 void MainWindow::on_pushButton_2_clicked()
 {
