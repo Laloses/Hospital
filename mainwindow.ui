@@ -4298,7 +4298,7 @@ QPushButton:focus{
                     <x>0</x>
                     <y>0</y>
                     <width>230</width>
-                    <height>80</height>
+                    <height>439</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -5281,8 +5281,8 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
-                    <height>20</height>
+                    <width>848</width>
+                    <height>358</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -5824,8 +5824,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
-                    <height>20</height>
+                    <width>848</width>
+                    <height>371</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_37">
@@ -6395,7 +6395,7 @@ p, li { white-space: pre-wrap; }
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>354</width>
+                     <width>402</width>
                      <height>412</height>
                     </rect>
                    </property>
@@ -6802,7 +6802,7 @@ border:none</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>202</width>
+                 <width>849</width>
                  <height>1092</height>
                 </rect>
                </property>
@@ -7095,187 +7095,256 @@ border:none</string>
            </widget>
           </widget>
           <widget class="QWidget" name="page_15">
-           <layout class="QGridLayout" name="gridLayout_68">
+           <layout class="QGridLayout" name="gridLayout_69">
             <item row="0" column="0">
-             <layout class="QVBoxLayout" name="verticalLayout_46">
-              <item>
-               <widget class="QLabel" name="label_37">
-                <property name="text">
-                 <string>Paciente</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <layout class="QGridLayout" name="gridLayout_58">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_36">
-                  <property name="text">
-                   <string>Nombre:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="lineEdit_nombreEmergencia">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QGridLayout" name="gridLayout_59">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_38">
-                  <property name="text">
-                   <string>Forma de llegada:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="lineEdit_formaLLegada"/>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QGridLayout" name="gridLayout_65">
-                <item row="0" column="0">
-                 <widget class="QRadioButton" name="radioButton_2">
-                  <property name="minimumSize">
-                   <size>
-                    <width>32</width>
-                    <height>32</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="imgs/imgs.qrc">
-                    <normaloff>:/imgs/azul.png</normaloff>:/imgs/azul.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>24</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QRadioButton" name="radioButton_5">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string> </string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="imgs/imgs.qrc">
-                    <normaloff>:/imgs/verde.png</normaloff>:/imgs/verde.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>24</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="2">
-                 <widget class="QRadioButton" name="radioButton_3">
-                  <property name="text">
-                   <string> </string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="imgs/imgs.qrc">
-                    <normaloff>:/imgs/amarillo.png</normaloff>:/imgs/amarillo.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>24</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="3">
-                 <widget class="QRadioButton" name="radioButton_4">
-                  <property name="text">
-                   <string> Naranja</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="imgs/imgs.qrc">
-                    <normaloff>:/imgs/naranja.png</normaloff>:/imgs/naranja.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>24</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="4">
-                 <widget class="QRadioButton" name="radioButton">
-                  <property name="text">
-                   <string> Rojo</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="imgs/imgs.qrc">
-                    <normaloff>:/imgs/rojo.png</normaloff>:/imgs/rojo.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>24</width>
-                    <height>24</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QGridLayout" name="gridLayout_60">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_39">
-                  <property name="text">
-                   <string>Causas:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QPlainTextEdit" name="plainTextEdit"/>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QGridLayout" name="gridLayout_61">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_40">
-                  <property name="text">
-                   <string>Signos vitales:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QPlainTextEdit" name="plainTextEdit_vitales"/>
-                </item>
-               </layout>
-              </item>
-             </layout>
+             <widget class="QLabel" name="label_37">
+              <property name="text">
+               <string>Paciente</string>
+              </property>
+             </widget>
             </item>
-            <item row="0" column="1">
+            <item row="0" column="1" rowspan="7">
              <widget class="Line" name="line_11">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_58">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_36">
+                <property name="text">
+                 <string>Nombre:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_nombreEmergencia">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="2" column="0">
+             <layout class="QGridLayout" name="gridLayout_59">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_38">
+                <property name="text">
+                 <string>Forma de llegada:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_formaLLegada"/>
+              </item>
+             </layout>
+            </item>
+            <item row="3" column="0">
+             <layout class="QGridLayout" name="gridLayout_68">
+              <item row="0" column="0">
+               <spacer name="horizontalSpacer_117">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>57</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_45">
+                <property name="text">
+                 <string>Clacificacion de uregencias.</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <spacer name="horizontalSpacer_118">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>57</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item row="4" column="0">
+             <layout class="QGridLayout" name="gridLayout_65">
+              <item row="2" column="3">
+               <widget class="QRadioButton" name="radioButton_4">
+                <property name="text">
+                 <string> Naranja</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="imgs/imgs.qrc">
+                  <normaloff>:/imgs/naranja.png</normaloff>:/imgs/naranja.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>24</width>
+                  <height>24</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QRadioButton" name="radioButton_3">
+                <property name="text">
+                 <string> </string>
+                </property>
+                <property name="icon">
+                 <iconset resource="imgs/imgs.qrc">
+                  <normaloff>:/imgs/amarillo.png</normaloff>:/imgs/amarillo.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>24</width>
+                  <height>24</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QRadioButton" name="radioButton_5">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string> </string>
+                </property>
+                <property name="icon">
+                 <iconset resource="imgs/imgs.qrc">
+                  <normaloff>:/imgs/verde.png</normaloff>:/imgs/verde.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>24</width>
+                  <height>24</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QRadioButton" name="radioButton_2">
+                <property name="minimumSize">
+                 <size>
+                  <width>32</width>
+                  <height>32</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="imgs/imgs.qrc">
+                  <normaloff>:/imgs/azul.png</normaloff>:/imgs/azul.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>24</width>
+                  <height>24</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="4">
+               <widget class="QRadioButton" name="radioButton">
+                <property name="text">
+                 <string> Rojo</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="imgs/imgs.qrc">
+                  <normaloff>:/imgs/rojo.png</normaloff>:/imgs/rojo.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>24</width>
+                  <height>24</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="5" column="0">
+             <layout class="QGridLayout" name="gridLayout_60">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_39">
+                <property name="text">
+                 <string>Causas:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPlainTextEdit" name="plainTextEdit"/>
+              </item>
+             </layout>
+            </item>
+            <item row="6" column="0">
+             <layout class="QGridLayout" name="gridLayout_61">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_40">
+                <property name="text">
+                 <string>Signos vitales:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPlainTextEdit" name="plainTextEdit_vitales"/>
+              </item>
+             </layout>
+            </item>
+            <item row="7" column="2">
+             <layout class="QGridLayout" name="gridLayout_67">
+              <item row="0" column="0">
+               <spacer name="horizontalSpacer_110">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>198</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="1">
+               <widget class="QPushButton" name="pushButton_5">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Guardar</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="2" rowspan="7">
              <layout class="QVBoxLayout" name="verticalLayout_39">
               <item>
                <widget class="QLabel" name="label_41">
@@ -7339,42 +7408,6 @@ border:none</string>
                  <widget class="QLineEdit" name="lineEdit_parentesco"/>
                 </item>
                </layout>
-              </item>
-             </layout>
-            </item>
-            <item row="1" column="2">
-             <layout class="QGridLayout" name="gridLayout_67">
-              <item row="0" column="0">
-               <spacer name="horizontalSpacer_110">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>198</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="0" column="1">
-               <widget class="QPushButton" name="pushButton_5">
-                <property name="minimumSize">
-                 <size>
-                  <width>100</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Guardar</string>
-                </property>
-               </widget>
               </item>
              </layout>
             </item>
