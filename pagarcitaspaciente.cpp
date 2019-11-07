@@ -145,3 +145,5 @@ void pagarCitasPaciente::on_cb_tarjetas_currentTextChanged(const QString &arg1)
         ui->lineEdit_cvv->setEnabled(true);
     }
 }
+
+

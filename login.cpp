@@ -22,8 +22,8 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
     recurso=base;
     recurso.open();
 
-    QSqlQuery admi2,doctor,staff,paciente,usuarios;
-    QString admi1,doctor1,staff1,paciente1,usuarios1;
+    QSqlQuery admi2,doctor,staff,paciente,usuarios,p1;
+    QString admi1,doctor1,staff1,paciente1,usuarios1,p2;
 
     admi1="select matricula,clave from admin where matricula='"+user+"'";
     usuarios1="select matricula,clave from usuario where matricula="+user;
@@ -34,11 +34,13 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
     //aqui hare los querys para encontrar el tipo de usuario
     doctor1="select iddoctor,idUser,estado from doctor where idUser="+user;
     staff1="select idstaff,idUser,estado from staff where idUser="+user;
+    p2="select idpuesto from staff where idUser="+user;
     paciente1="select idpaciente,idUser from paciente where idUser="+user;
 
     doctor.exec(doctor1);
     staff.exec(staff1);
     paciente.exec(paciente1);
+    p1.exec(p2);
 
 
     //pasamos los valores donde se encuentre un usuario
@@ -150,6 +152,7 @@ QString login::getIdUser(){
 QString login::getIdStaff(){
     return idStaff;
 }
+
 
 QString login::getIdPaciente(){
     return idPaciente;

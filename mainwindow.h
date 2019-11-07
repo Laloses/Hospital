@@ -231,6 +231,7 @@ private slots:
     void PagarCitas(QString);
 
     void mostrarCitas();
+    void mostrarCitasV();
 
     void on_pushButton_Cancelar_Cita_clicked();
 
@@ -276,6 +277,10 @@ private slots:
     void mostrarHistorialClinico();
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_horarioDoc_2_clicked();
+
+    void on_radioButton_toggled(bool checked);
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
