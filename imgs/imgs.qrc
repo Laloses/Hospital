@@ -20,5 +20,10 @@
         <file>horario.png</file>
         <file>universidad.png</file>
         <file>mas.png</file>
+        <file>amarillo.png</file>
+        <file>azul.png</file>
+        <file>naranja.png</file>
+        <file>rojo.png</file>
+        <file>verde.png</file>
     </qresource>
 </RCC>
