@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        agregarUrgencia.cpp \
         agregaractividaddoctor.cpp \
         agregarcitaspaciente.cpp \
         agregartipremedio.cpp \
@@ -39,6 +40,7 @@ SOURCES += \
         tipdeldia.cpp
 
 HEADERS += \
+        agregarUrgencia.h \
         agregaractividaddoctor.h \
         agregarcitaspaciente.h \
         agregartipremedio.h \
@@ -52,6 +54,7 @@ HEADERS += \
         tipdeldia.h
 
 FORMS += \
+        agregarUrgencia.ui \
         agregaractividaddoctor.ui \
         mainwindow.ui \
         mostrarhistoclinico.ui \

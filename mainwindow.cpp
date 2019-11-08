@@ -4592,3 +4592,9 @@ void MainWindow::on_pushButton_2_clicked()
 {
     ui->stackedWidget_registros->setCurrentIndex(1);
 }
+
+void MainWindow::on_pb_addUrgencia_clicked()
+{
+    agregarUrgencia *urg= new agregarUrgencia();
+    urg->show();
+}

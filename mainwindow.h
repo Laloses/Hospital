@@ -20,6 +20,7 @@
 #include "pagarcitaspaciente.h"
 #include <QTimer>
 #include "mostrarhistoclinico.h"
+#include "agregarUrgencia.h"
 
 namespace Ui {
 class MainWindow;
@@ -276,6 +277,8 @@ private slots:
     void mostrarHistorialClinico();
 
     void on_pushButton_2_clicked();
+
+    void on_pb_addUrgencia_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
