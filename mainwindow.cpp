@@ -7,6 +7,12 @@
 #include <QSignalMapper>
 #include <QTimer>
 
+#include <QFileDialog>
+#include <QFile>
+#include <QFileSystemModel>
+#include <QPrinter>
+
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -4609,14 +4615,14 @@ void MainWindow::on_pushButton_horarioDoc_2_clicked()
      ui->stackedWidget_PerfilStaff->setCurrentIndex(1);
 }
 
-void MainWindow::mostrarCitasV()
+
+
+void MainWindow::on_radioButton_clicked()
 {
     clearLayout(ui->pagosConfirmados);
     QString citas,est,preparada;
     QSqlQuery consulta,consulta2;
     est="1";
-
-
     int f=0;
     int ban=1;
     QString r1,g1,b1;
@@ -4628,7 +4634,9 @@ void MainWindow::mostrarCitasV()
     int i=0;
     int l=0;
     preparada="Completada";
-    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_usuario+"' and cit.estado='"+est+"' and cit.pagada=0 and cit.preparada='"+preparada+"'";
+    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join "
+    "doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where "
+    "cit.estado='"+est+"' and cit.pagada=0 and cit.preparada='"+preparada+"' order by cit.fecha desc";
     if(!consulta2.exec(citas)) consulta2.lastError().text();
     while(consulta2.next()){
         folio=consulta2.value(0).toString();
@@ -4685,20 +4693,141 @@ void MainWindow::mostrarCitasV()
         QSignalMapper *mapper3=new QSignalMapper(this);
         connect(p,SIGNAL(clicked(bool)),mapper3,SLOT(map()));
         mapper3->setMapping(p,folio);
-        connect(mapper3,SIGNAL(mapped(QString)),this,SLOT(PagarCitas(QString)));
-        ui->pagosConfirmados->addWidget(p,l,9,Qt::AlignTop);
+        connect(mapper3,SIGNAL(mapped(QString)),this,SLOT(pagarCitasEfect(QString)));
+        ui->pagosConfirmados->addWidget(p,l,6,Qt::AlignTop);
 
         l++;
     }
 }
 
-
-
-
-void MainWindow::on_radioButton_toggled(bool checked)
+void MainWindow::pagarCitasEfect(QString folio)
 {
-    if(checked)
+    //parte para generar datos de pdf//
+    QSqlQuery user,fecha,doc,usuarionoti;
+    QString html,d,nombreUser,fechaPago,nombreDoc,fechaCita,usernoti;
+    user.exec("select cit.idCita,CONCAT(' ', us.nombre,' ',us.appaterno,' ',us.apmaterno),cit.hora,cit.fecha from usuario as us inner join paciente as p on us.matricula=p.idUser inner join cita as cit on p.idUser=cit.matricula where cit.estado=1 and cit.pagada=0 and cit.preparada='Completada';");
+    user.next();
+    fecha.exec("select CURRENT_DATE()");
+    fecha.next();
+    doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.estado=1 and cit.pagada=0 and cit.preparada='Completada'");
+    doc.next();
+    usuarionoti.exec("select matricula from cita where idCita="+folio+"");
+
+    nombreUser=user.value(1).toString();
+    fechaPago=fecha.value(0).toString();
+    nombreDoc=doc.value(0).toString();
+    fechaCita=user.value(3).toString();
+    usernoti=usuarionoti.value(0).toString();
+    //termina parte de generar datos de pdf//
+
+    //inicia parte para actualizar pago y enviar notificacion//
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Desea realizar el pago?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+
+    //querys para hacer actualizaciones de pago
+    QSqlQuery update,insert,mandarNoti;
+    QString mensaj,tipo,cita,user1,notificacion;
+    QSqlQuery cita1;
+    cita1.exec(cita);
+    cita1.next();
+    mensaj="Se le informa que su cita con el no. de folio:"+folio+" ha sido pagada con éxito.";
+    tipo="1";
+    notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+usernoti+"');";
+
+    if(update.exec("UPDATE cita SET pagada=1 WHERE idCita='"+folio+"'"))
     {
-        mostrarCitasV();
-    }
+        update.next();
+        if(mandarNoti.exec(notificacion))
+        {
+            mandarNoti.next();
+             qDebug()<<"notificacion enviada bien";
+
+             //inicia parte para generar pdf de pago"
+             QMessageBox message(QMessageBox::Question,
+             tr("Information"), tr("¿Desea generar comprobante de pago?"), QMessageBox::Yes | QMessageBox::No);
+             message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+             message.setButtonText(QMessageBox::No, tr("Cancelar"));
+             if (message.exec() == QMessageBox::Yes){
+
+                 html="<H1 align=center> Comprobante de pago </H1>"
+                         "<H6 align=center>*LOBOHOSPITAL* A.C DE C.V se deslinda de cualquier mal uso de este comprobante*</H6>"
+                         "<H5 align=center>25 pte #1230, colonia Volcanes, Puebla,Pue</H5>"
+                         "<br><br><br><br>"
+
+                         "<H5 align=left>NOMBRE Y APELLIDO: "+nombreUser+"</H5>"
+                         "<H5 align=left>MÉDICO RESPONSABLE:"+nombreDoc+"</H5>"
+                         "<H5 align=left>FECHA DE EMISIÓN DE PAGO: "+fechaPago+" </H5>"
+                         "<H5 align=left>FORMA DE PAGO: EFECTIVO</H5>"
+
+                         "<hr style=color: #0056b2; />"
+
+                         "<table>"
+                         "<tr align=center>"
+                           "<label style=margin:7%;>FOLIO </label>"
+                           "<label style=margin:11%;>FECHA DE CITA </label>"
+                           "<label style=margin:15%;>DESCRIPCION </label>"
+                           "<label style=margin:15%;>PRECIO UNITARIO </label>"
+                           "<label style=margin:9%;>IMPORTE </label>"
+                         "</tr>"
+                         "</table>"
+                         "<hr style=color: #0056b2; />"
+                           "<table>"
+                             "<tr align=center>"
+                             "<label style=margin-left:7%;>"+folio+"</label>"
+                             "<label style=margin-left:21%;>"+fechaCita+" </label>"
+                             "<label style=margin-left:31%;>DESCRIPCION </label>"
+                             "<label style=margin-left:45%;>PRECIO UNITARIO </label>"
+                             "<label style=margin-left:60%;>IMPORTE </label>"
+                             "</tr>"
+                          "</table> <br><br><br><br><br><br><br><br><br><br><br><br><br>"
+                         "<table>"
+                           "<tr align=right>"
+                              "<label style=margin-left:68%;>SUBTOTAL</label>"
+                            "</tr>"
+                         "</table>"
+                         "<table>"
+                          "<tr align=right>"
+                            "<label style=margin-left:68%;>TOTAL</label>"
+                            "</tr>"
+                          "</table>";
+                 QTextDocument document;
+                 document.setHtml(html);
+
+                 QPrinter printer(QPrinter::HighResolution);
+                  printer.setOutputFormat(QPrinter::PdfFormat);
+                  printer.setPaperSize(QPrinter::A4);
+                  auto nombreArchivo=QFileDialog::getSaveFileName(this,"Guardar archivo",QDir::rootPath(),"Archivos (*.pdf);;");
+                  if(nombreArchivo==""){
+
+                                      }
+                                      else{
+
+                                          printer.setOutputFileName(nombreArchivo);
+                                      }
+
+                  printer.setPageMargins(QMarginsF(15, 15, 15, 15));
+                                      document.print(&printer);
+
+             }
+             else
+             {
+
+             }
+
+             //termina parte para generar pdf//
+
+            }else
+                {
+                    qDebug()<<"Error al enviar la notificacion"<<mandarNoti.lastError().text();
+                }
+        }else
+        {
+                qDebug()<<"Error al actualizar el pago"<<update.lastError().text();
+        }
+              }else
+               {
+            }
 }

@@ -20,6 +20,8 @@
 #include "pagarcitaspaciente.h"
 #include <QTimer>
 #include "mostrarhistoclinico.h"
+#include <QtPrintSupport/QPrinter>
+
 
 namespace Ui {
 class MainWindow;
@@ -36,7 +38,7 @@ private:
     QString id_usuario,id_staff,id_doctor,id_paciente;
     QByteArray foto;
     QString imgRoute,matric,idremedios,idtip,idtipeditar;
-    QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser;
+    QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser ,d;
     QString concolor;
     int UserTipo;
     bool verificarPasswordRegistro();
@@ -57,6 +59,7 @@ private:
     pagarCitasPaciente *pagar;
     QTimer *ocultar;
     int contador;
+
 
 
 private slots:
@@ -229,9 +232,10 @@ private slots:
 
     void PonerCitas(QString);
     void PagarCitas(QString);
+    void pagarCitasEfect(QString);
+
 
     void mostrarCitas();
-    void mostrarCitasV();
 
     void on_pushButton_Cancelar_Cita_clicked();
 
@@ -280,7 +284,7 @@ private slots:
 
     void on_pushButton_horarioDoc_2_clicked();
 
-    void on_radioButton_toggled(bool checked);
+    void on_radioButton_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
