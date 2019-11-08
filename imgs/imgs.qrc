@@ -20,5 +20,6 @@
         <file>horario.png</file>
         <file>universidad.png</file>
         <file>mas.png</file>
+        <file>x-button.png</file>
     </qresource>
 </RCC>

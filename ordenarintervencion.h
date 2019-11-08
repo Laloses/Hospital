@@ -10,6 +10,7 @@
 #include <QTimer>
 #include <QStringList>
 #include <QCompleter>
+#include <QMessageBox>
 
 namespace Ui {
 class OrdenarIntervencion;
@@ -35,6 +36,12 @@ private slots:
     void on_lineServ_editingFinished();
 
     void on_lineServ_textChanged(const QString &arg1);
+
+    void on_btnAgregarArticulo_clicked();
+
+    void eliminarFila();
+
+    void actualizaPrecios();
 
 private:
     Ui::OrdenarIntervencion *ui;

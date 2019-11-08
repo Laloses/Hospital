@@ -491,10 +491,10 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>571</width>
-        <height>341</height>
+        <x>30</x>
+        <y>0</y>
+        <width>551</width>
+        <height>352</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -504,7 +504,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
+          <enum>QSizePolicy::Expanding</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -570,6 +570,9 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                    <height>16777215</height>
                   </size>
                  </property>
+                 <property name="text">
+                  <string>1</string>
+                 </property>
                 </widget>
                </item>
               </layout>
@@ -628,7 +631,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
           </spacer>
          </item>
          <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="btnAgregarArticulo">
            <property name="minimumSize">
             <size>
              <width>120</width>
@@ -725,12 +728,51 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
          </item>
          <item>
           <widget class="QTableWidget" name="tablaArticulos">
-           <property name="maximumSize">
+           <property name="minimumSize">
             <size>
-             <width>559</width>
-             <height>130</height>
+             <width>0</width>
+             <height>140</height>
             </size>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>547</width>
+             <height>140</height>
+            </size>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="tabKeyNavigation">
+            <bool>false</bool>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropOverwriteMode">
+            <bool>false</bool>
+           </property>
+           <property name="showGrid">
+            <bool>true</bool>
+           </property>
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>20</number>
+           </attribute>
+           <attribute name="horizontalHeaderMinimumSectionSize">
+            <number>20</number>
+           </attribute>
+           <attribute name="horizontalHeaderStretchLastSection">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderDefaultSectionSize">
+            <number>32</number>
+           </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>32</number>
+           </attribute>
            <column>
             <property name="text">
              <string>Descripción</string>
@@ -746,25 +788,19 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
              <string>Costo</string>
             </property>
            </column>
+           <column>
+            <property name="text">
+             <string/>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string/>
+            </property>
+           </column>
           </widget>
          </item>
         </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_10">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>3</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_18">
@@ -867,7 +903,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>3</height>
+           <height>10</height>
           </size>
          </property>
         </spacer>
@@ -888,7 +924,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_5">
+          <widget class="QPushButton" name="btnBackInter">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -947,7 +983,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
+          <enum>QSizePolicy::Expanding</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>

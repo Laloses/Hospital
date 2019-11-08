@@ -4,6 +4,7 @@
 #include <QString>
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlQuery>
+#include <QSignalMapper>
 
 OrdenarIntervencion::OrdenarIntervencion(QString idCita, QWidget *parent) :
     QMainWindow(parent),
@@ -63,6 +64,14 @@ OrdenarIntervencion::OrdenarIntervencion(QString idCita, QWidget *parent) :
                connect(cuenta, SIGNAL(timeout()), this, SLOT(precio()));
                 cuenta->start(100);
     //---------------------------------------------------------
+    //int anchoTabla = ui->tablaArticulos->width();
+    ui->tablaArticulos->verticalHeader()->hide();
+    ui->tablaArticulos->setColumnWidth(0,270);
+    ui->tablaArticulos->setColumnWidth(1,92);
+    ui->tablaArticulos->setColumnWidth(2,92);
+    ui->tablaArticulos->setColumnWidth(3,59);
+    ui->tablaArticulos->setColumnWidth(4,32);
+
 }
 
 OrdenarIntervencion::~OrdenarIntervencion()
@@ -106,4 +115,102 @@ void OrdenarIntervencion::on_lineServ_editingFinished()
 void OrdenarIntervencion::on_lineServ_textChanged(const QString &arg1)
 {
     cuenta->start(100);
+}
+
+void OrdenarIntervencion::on_btnAgregarArticulo_clicked()
+{
+    QString nombreItem = ui->lineServ->text();
+    QString costo = ui->lineCosto->text();
+    QString cantidad = ui->lineCantidad->text();
+    if(nombreItem == "" || costo == ""){
+        QMessageBox messageBox(QMessageBox::Warning,tr("Warning"), tr("Ingrese un artículo o servicio para continuar."), QMessageBox::Yes);
+                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                 messageBox.exec();
+    }
+    else if (cantidad == "") {
+        QMessageBox messageBox(QMessageBox::Warning,tr("Warning"), tr("Ingrese la cantidad deseada."), QMessageBox::Yes);
+                 messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                 messageBox.exec();
+    }
+    else{
+        double costoInt = costo.toDouble();
+        double cantidadDoub = cantidad.toDouble();
+        double total = costoInt * cantidadDoub;
+
+        QString Total = "$ " + QString::number(total);
+        QTableWidgetItem *nombre = new QTableWidgetItem(nombreItem);
+
+        QTableWidgetItem *numero = new QTableWidgetItem(cantidad);
+        numero->setTextAlignment(Qt::AlignHCenter);
+        numero->setTextAlignment(Qt::AlignVCenter);
+
+        QTableWidgetItem *precioTotal = new QTableWidgetItem(Total);
+        precioTotal->setTextAlignment(Qt::AlignHCenter);
+        precioTotal->setTextAlignment(Qt::AlignVCenter);
+
+        QWidget* pWidget = new QWidget();
+
+        QPushButton* btnEliminar = new QPushButton();
+        QIcon icon(":/imgs/x-button.png");
+        btnEliminar->setIcon(icon);
+        btnEliminar->setIconSize(QSize(30,30));
+        btnEliminar->show();
+        btnEliminar->setMinimumWidth(30);
+        btnEliminar->setMinimumHeight(30);
+        btnEliminar->setMaximumWidth(30);
+        btnEliminar->setMaximumHeight(30);
+        btnEliminar->setStyleSheet("background-color: transparent; border:none;");
+
+        QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
+        pLayout->addWidget(btnEliminar);
+        pLayout->setAlignment(Qt::AlignCenter);
+        pLayout->setContentsMargins(0, 0, 0, 0);
+        pWidget->setLayout(pLayout);
+
+        QWidget* vacio = new QWidget();
+        QLabel* vacia = new QLabel();
+        QHBoxLayout* vacioLayout = new QHBoxLayout(vacio);
+        vacioLayout->addWidget(vacia);
+        vacioLayout->setAlignment(Qt::AlignCenter);
+        vacioLayout->setContentsMargins(0, 0, 0, 0);
+        vacio->setLayout(vacioLayout);
+
+        ui->tablaArticulos->insertRow(ui->tablaArticulos->rowCount());
+        int fila = ui->tablaArticulos->rowCount()-1;
+        ui->tablaArticulos->setItem(fila, 0, nombre);
+        ui->tablaArticulos->setItem(fila, 1, numero);
+        ui->tablaArticulos->setItem(fila, 2, precioTotal);
+        ui->tablaArticulos->setCellWidget(fila, 3, vacio);
+        ui->tablaArticulos->setCellWidget(fila, 4, btnEliminar);
+
+        connect(btnEliminar, &QPushButton::clicked, this, &OrdenarIntervencion::eliminarFila);
+
+        ui->lineServ->clear();
+        ui->lineCosto->clear();
+        ui->lineCantidad->setText("1");
+    }
+
+}
+
+void OrdenarIntervencion::eliminarFila()
+{
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Desea eliminar este artículo?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+        QWidget *w = qobject_cast<QWidget *>(sender()->parent());
+        if(w){
+            int row = ui->tablaArticulos->indexAt(w->pos()).row();
+            ui->tablaArticulos->removeRow(row);
+            ui->tablaArticulos->setCurrentCell(0, 0);
+        }
+    }
+    else{
+        message.close();
+    }
+}
+
+void OrdenarIntervencion::actualizaPrecios(){
+
 }
