@@ -4632,3 +4632,20 @@ void MainWindow::on_pushButton_2_clicked()
 {
     ui->stackedWidget_registros->setCurrentIndex(1);
 }
+
+void MainWindow::on_pushButton_guardaUrgencia_clicked()
+{
+    QString nombre,llegada,color,causas,signos,nombreAcom,telefono,direccion,parentescos;
+    nombre=ui->lineEdit_nombreEmergencia->text();
+    llegada=ui->lineEdit_formaLLegada->text();
+    causas=ui->plainTextEdit_causas->toPlainText();
+    signos=ui->plainTextEdit_vitales->toPlainText();
+    nombreAcom=ui->lineEdit_nombreAcom->text();
+    telefono=ui->lineEdit_telefonoAcomp->text();
+    direccion=ui->lineEdit_dirrecion->text();
+    parentescos=ui->lineEdit_parentesco->text();
+
+
+
+
+}

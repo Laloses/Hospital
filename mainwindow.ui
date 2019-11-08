@@ -3068,8 +3068,8 @@ background-color:transparent;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>198</width>
-                        <height>28</height>
+                        <width>226</width>
+                        <height>76</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -3945,8 +3945,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>33</width>
+                    <height>24</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -4297,8 +4297,8 @@ QPushButton:focus{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>226</width>
+                    <height>76</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -5281,8 +5281,8 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>33</width>
+                    <height>24</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -5824,8 +5824,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>33</width>
+                    <height>24</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_37">
@@ -6395,7 +6395,7 @@ p, li { white-space: pre-wrap; }
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>282</width>
+                     <width>346</width>
                      <height>437</height>
                     </rect>
                    </property>
@@ -7018,8 +7018,8 @@ border:none</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
-                  <height>28</height>
+                  <width>806</width>
+                  <height>286</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_52">
@@ -7264,7 +7264,7 @@ border:none</string>
               <item row="2" column="4">
                <widget class="QRadioButton" name="radioButton_rojo">
                 <property name="text">
-                 <string> </string>
+                 <string/>
                 </property>
                 <property name="icon">
                  <iconset resource="imgs/imgs.qrc">
@@ -7290,7 +7290,7 @@ border:none</string>
                </widget>
               </item>
               <item row="1" column="0">
-               <widget class="QPlainTextEdit" name="plainTextEdit"/>
+               <widget class="QPlainTextEdit" name="plainTextEdit_causas"/>
               </item>
              </layout>
             </item>
@@ -7324,7 +7324,7 @@ border:none</string>
                </spacer>
               </item>
               <item row="0" column="1">
-               <widget class="QPushButton" name="pushButton_5">
+               <widget class="QPushButton" name="pushButton_guardaUrgencia">
                 <property name="minimumSize">
                  <size>
                   <width>100</width>
@@ -7377,7 +7377,7 @@ border:none</string>
                  </widget>
                 </item>
                 <item row="0" column="1">
-                 <widget class="QLineEdit" name="lineEdit_telefono_2"/>
+                 <widget class="QLineEdit" name="lineEdit_telefonoAcomp"/>
                 </item>
                </layout>
               </item>
@@ -8541,8 +8541,8 @@ background:transparent;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>98</width>
-                      <height>28</height>
+                      <width>24</width>
+                      <height>24</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_14">
@@ -8932,8 +8932,8 @@ background:transparent;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>24</width>
+                    <height>24</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
@@ -9440,8 +9440,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>478</width>
-                        <height>28</height>
+                        <width>457</width>
+                        <height>24</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -9539,8 +9539,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>478</width>
-                        <height>28</height>
+                        <width>457</width>
+                        <height>24</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -9989,8 +9989,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>98</width>
-                          <height>28</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -10123,8 +10123,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>98</width>
-                          <height>28</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
@@ -10238,8 +10238,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>98</width>
-                          <height>28</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -10413,8 +10413,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>98</width>
-                          <height>28</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
