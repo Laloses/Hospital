@@ -11,6 +11,8 @@
 #include <QStringList>
 #include <QCompleter>
 #include <QMessageBox>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 
 namespace Ui {
 class OrdenarIntervencion;
@@ -39,9 +41,21 @@ private slots:
 
     void on_btnAgregarArticulo_clicked();
 
-    void eliminarFila();
+    void eliminarFila(int fila);
 
     void on_comboQuiro_currentIndexChanged(int index);
+
+    void on_intervencionFecha_dateChanged(const QDate &date);
+
+    void on_tablaArticulos_itemClicked(QTableWidgetItem *item);
+
+    void on_tablaArticulos_cellClicked(int row, int column);
+
+    void on_tablaArticulos_cellPressed(int row, int column);
+
+    void insertarArt();
+
+    void on_btnAgendarQuiro_clicked();
 
 private:
     Ui::OrdenarIntervencion *ui;
@@ -54,6 +68,10 @@ private:
     QSqlQuery *datosDoctor;
 
     QTimer *cuenta;
+
+    double CostoTotal;
+    double iva;
+    double subtotal;
 };
 
 #endif // ORDENARINTERVENCION_H

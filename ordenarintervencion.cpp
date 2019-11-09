@@ -12,6 +12,7 @@ OrdenarIntervencion::OrdenarIntervencion(QString idCita, QWidget *parent) :
     ui(new Ui::OrdenarIntervencion)
 {
     ui->setupUi(this);
+    ui->tabWidget->setCurrentIndex(0);
     idCita1 = idCita;
 
     //Conexion a la base de datos
@@ -29,12 +30,12 @@ OrdenarIntervencion::OrdenarIntervencion(QString idCita, QWidget *parent) :
     }
 
     datosPaciente = new QSqlQuery;
-    datosPaciente->prepare("SELECT CONCAT_WS( ' ', usuario.nombre, usuario.appaterno, usuario.apmaterno ) AS Paciente FROM cita INNER JOIN paciente ON paciente.idpaciente = cita.doctor INNER JOIN usuario ON paciente.idUser = usuario.matricula WHERE cita.idCita ='"+idCita+"'");
+    datosPaciente->prepare("SELECT CONCAT_WS( ' ', usuario.nombre, usuario.appaterno, usuario.apmaterno ) AS Paciente, paciente.idpaciente FROM cita INNER JOIN paciente ON paciente.idpaciente = cita.doctor INNER JOIN usuario ON paciente.idUser = usuario.matricula WHERE cita.idCita ='"+idCita+"'");
     datosPaciente->exec();
     datosPaciente->next();
     QString paciente = datosPaciente->value(0).toString();
     datosDoctor = new QSqlQuery;
-    datosDoctor->prepare("SELECT CONCAT_WS( ' ', usuario.nombre, usuario.appaterno, usuario.apmaterno ) AS Doctor FROM cita INNER JOIN doctor ON doctor.iddoctor = cita.doctor INNER JOIN usuario ON doctor.idUser = usuario.matricula WHERE cita.idCita ='"+idCita+"'");
+    datosDoctor->prepare("SELECT CONCAT_WS( ' ', usuario.nombre, usuario.appaterno, usuario.apmaterno ) AS Doctor, doctor.iddoctor FROM cita INNER JOIN doctor ON doctor.iddoctor = cita.doctor INNER JOIN usuario ON doctor.idUser = usuario.matricula WHERE cita.idCita ='"+idCita+"'");
     datosDoctor->exec();
     datosDoctor->next();
     QString doctor = datosDoctor->value(0).toString();
@@ -81,7 +82,7 @@ OrdenarIntervencion::OrdenarIntervencion(QString idCita, QWidget *parent) :
     }
 
     ui->label_5->hide();
-
+    iva = 0;
 }
 
 OrdenarIntervencion::~OrdenarIntervencion()
@@ -133,105 +134,59 @@ void OrdenarIntervencion::on_btnAgregarArticulo_clicked()
     QString costo = ui->lineCosto->text();
     QString cantidad = ui->lineCantidad->text();
     if(nombreItem == "" || costo == ""){
-        QMessageBox messageBox(QMessageBox::Warning,tr("Warning"), tr("Ingrese un artículo o servicio para continuar."), QMessageBox::Yes);
+        QMessageBox messageBox(QMessageBox::Warning,tr("Advertencia"), tr("Ingrese un artículo o servicio para continuar."), QMessageBox::Yes);
                  messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
                  messageBox.exec();
     }
     else if (cantidad == "") {
-        QMessageBox messageBox(QMessageBox::Warning,tr("Warning"), tr("Ingrese la cantidad deseada."), QMessageBox::Yes);
+        QMessageBox messageBox(QMessageBox::Warning,tr("Advertencia"), tr("Ingrese la cantidad deseada."), QMessageBox::Yes);
                  messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
                  messageBox.exec();
     }
     else{
-        double costoInt = costo.toDouble();
-        double cantidadDoub = cantidad.toDouble();
-        double total = costoInt * cantidadDoub;
-
-        QString Total = "$ " + QString::number(total);
-        QTableWidgetItem *nombre = new QTableWidgetItem(nombreItem);
-
-        QTableWidgetItem *numero = new QTableWidgetItem(cantidad);
-        numero->setTextAlignment(Qt::AlignHCenter);
-        numero->setTextAlignment(Qt::AlignVCenter);
-
-        QTableWidgetItem *precioTotal = new QTableWidgetItem(Total);
-        precioTotal->setTextAlignment(Qt::AlignHCenter);
-        precioTotal->setTextAlignment(Qt::AlignVCenter);
-
-        QWidget* pWidget = new QWidget();
-
-        QPushButton* btnEliminar = new QPushButton();
-        QIcon icon(":/imgs/x-button.png");
-        btnEliminar->setIcon(icon);
-        btnEliminar->setIconSize(QSize(30,30));
-        btnEliminar->show();
-        btnEliminar->setMinimumWidth(30);
-        btnEliminar->setMinimumHeight(30);
-        btnEliminar->setMaximumWidth(30);
-        btnEliminar->setMaximumHeight(30);
-        btnEliminar->setStyleSheet("background-color: transparent; border:none;");
-
-        QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
-        pLayout->addWidget(btnEliminar);
-        pLayout->setAlignment(Qt::AlignCenter);
-        pLayout->setContentsMargins(0, 0, 0, 0);
-        pWidget->setLayout(pLayout);
-
-        QWidget* vacio = new QWidget();
-        QLabel* vacia = new QLabel();
-        QHBoxLayout* vacioLayout = new QHBoxLayout(vacio);
-        vacioLayout->addWidget(vacia);
-        vacioLayout->setAlignment(Qt::AlignCenter);
-        vacioLayout->setContentsMargins(0, 0, 0, 0);
-        vacio->setLayout(vacioLayout);
-
-        ui->tablaArticulos->insertRow(ui->tablaArticulos->rowCount());
-        int fila = ui->tablaArticulos->rowCount()-1;
-        ui->tablaArticulos->setItem(fila, 0, nombre);
-        ui->tablaArticulos->setItem(fila, 1, numero);
-        ui->tablaArticulos->setItem(fila, 2, precioTotal);
-        ui->tablaArticulos->setCellWidget(fila, 3, vacio);
-        ui->tablaArticulos->setCellWidget(fila, 4, btnEliminar);
-
-        connect(btnEliminar, &QPushButton::clicked, this, &OrdenarIntervencion::eliminarFila);
-
-        ui->lineServ->clear();
-        ui->lineCosto->clear();
-        ui->lineCantidad->setText("1");
-        cuenta->stop();
-
-        double subtotal = 0;
-        for(int i = 0; i <= ui->tablaArticulos->rowCount()-1;i++)
-        {
-            //obtenemos el precio del artículo
-            QString price = ui->tablaArticulos->item(i, 2)->text();
-            QStringList listPrice = price.split(QRegExp("\\s+"));
-            subtotal = subtotal + listPrice.at(1).toDouble();
-            qDebug() << "Subto: " << subtotal;
+        int cuentaFilas = ui->tablaArticulos->rowCount();
+        int band = 0;
+        //verificamos que no sea el mismo elemento
+        if(cuentaFilas < 1){
+            band=0;
+            insertarArt();
         }
-        ui->lblSubtotal->setText(QString::number(subtotal));
-        double iva = 0;
-        iva = (subtotal*16)/100;
-        double CostoTotal = 0;
-        CostoTotal = iva+subtotal;
-        ui->lblTotal->setText(QString::number(CostoTotal));
+        else{
+            for(int i = 0; i <= ui->tablaArticulos->rowCount()-1;i++)
+            {
+                //obtenemos el precio del artículo
+                QString elemento = ui->tablaArticulos->item(i, 0)->text();
+                if(nombreItem == elemento)
+                {
+                    band=1;
+                    qDebug() << "nigga plz";
+                }
+            }
+            if(band == 0){
+                insertarArt();
+            }
+            else{
+                QMessageBox messageBox(QMessageBox::Critical,tr("Error"), tr("Este elemento ya fue ingresado."), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+                ui->lineServ->clear();
+                ui->lineCosto->clear();
+                ui->lineCantidad->setText("1");
+                cuenta->stop();
+            }
+        }
     }
-
 }
 
-void OrdenarIntervencion::eliminarFila()
+void OrdenarIntervencion::eliminarFila(int fila)
 {
     QMessageBox message(QMessageBox::Question,
     tr("Information"), tr("¿Desea eliminar este artículo?"), QMessageBox::Yes | QMessageBox::No);
     message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
     message.setButtonText(QMessageBox::No, tr("Cancelar"));
     if (message.exec() == QMessageBox::Yes){
-        QWidget *w = qobject_cast<QWidget *>(sender()->parent());
-        if(w){
-            int row = ui->tablaArticulos->indexAt(w->pos()).row();
-            ui->tablaArticulos->removeRow(row);
+            ui->tablaArticulos->removeRow(fila);
             ui->tablaArticulos->setCurrentCell(0, 0);
-        }
         double subtotal = 0;
         for(int i = 0; i <= ui->tablaArticulos->rowCount()-1;i++)
         {
@@ -261,8 +216,153 @@ void OrdenarIntervencion::on_comboQuiro_currentIndexChanged(int index)
     QSqlQuery buscaCitas;
     buscaCitas.prepare("select fechaCita from citasquirofano where idQuirofano = '"+numQuiro+"' and fechaCita = '"+fechaInter+"'");
     buscaCitas.exec();
-    if(!buscaCitas.next()){
+    if(buscaCitas.next()){
         ui->label_5->show();
     }
 
+}
+
+void OrdenarIntervencion::on_intervencionFecha_dateChanged(const QDate &date)
+{
+    on_comboQuiro_currentIndexChanged(ui->comboQuiro->currentIndex());
+}
+
+void OrdenarIntervencion::insertarArt()
+{
+    QString nombreItem = ui->lineServ->text();
+    QString costo = ui->lineCosto->text();
+    QString cantidad = ui->lineCantidad->text();
+
+    double costoInt = costo.toDouble();
+    double cantidadDoub = cantidad.toDouble();
+    double total = costoInt * cantidadDoub;
+
+    QString Total = "$ " + QString::number(total);
+    QTableWidgetItem *nombre = new QTableWidgetItem(nombreItem);
+
+    QTableWidgetItem *numero = new QTableWidgetItem(cantidad);
+    numero->setTextAlignment(Qt::AlignHCenter);
+    numero->setTextAlignment(Qt::AlignVCenter);
+
+    QTableWidgetItem *precioTotal = new QTableWidgetItem(Total);
+    precioTotal->setTextAlignment(Qt::AlignHCenter);
+    precioTotal->setTextAlignment(Qt::AlignVCenter);
+
+    QWidget* pWidget = new QWidget();
+
+    QLabel* btnEliminar = new QLabel();
+    QIcon icon(":/imgs/x-button.png");
+    QPixmap pixmap = icon.pixmap(QSize(64, 64));
+    btnEliminar->setPixmap(pixmap);
+    btnEliminar->show();
+    btnEliminar->setMinimumWidth(30);
+    btnEliminar->setMinimumHeight(30);
+    btnEliminar->setMaximumWidth(30);
+    btnEliminar->setMaximumHeight(30);
+    btnEliminar->setScaledContents(true);
+    btnEliminar->setStyleSheet("background-color: transparent; border:none;");
+
+    QHBoxLayout* pLayout = new QHBoxLayout(pWidget);
+    pLayout->addWidget(btnEliminar);
+    pLayout->setAlignment(Qt::AlignCenter);
+    pLayout->setContentsMargins(0, 0, 0, 0);
+    pWidget->setLayout(pLayout);
+
+    QWidget* vacio = new QWidget();
+    QLabel* vacia = new QLabel();
+    QHBoxLayout* vacioLayout = new QHBoxLayout(vacio);
+    vacioLayout->addWidget(vacia);
+    vacioLayout->setAlignment(Qt::AlignCenter);
+    vacioLayout->setContentsMargins(0, 0, 0, 0);
+    vacio->setLayout(vacioLayout);
+
+    ui->tablaArticulos->insertRow(ui->tablaArticulos->rowCount());
+    int fila = ui->tablaArticulos->rowCount()-1;
+    ui->tablaArticulos->setItem(fila, 0, nombre);
+    ui->tablaArticulos->setItem(fila, 1, numero);
+    ui->tablaArticulos->setItem(fila, 2, precioTotal);
+    ui->tablaArticulos->setCellWidget(fila, 3, vacio);
+    ui->tablaArticulos->setCellWidget(fila, 4, btnEliminar);
+
+    //connect(btnEliminar, &QPushButton::clicked, this, &OrdenarIntervencion::eliminarFila);
+
+    ui->lineServ->clear();
+    ui->lineCosto->clear();
+    ui->lineCantidad->setText("1");
+    cuenta->stop();
+
+    subtotal = 0;
+    for(int i = 0; i <= ui->tablaArticulos->rowCount()-1;i++)
+    {
+        //obtenemos el precio del artículo
+        QString price = ui->tablaArticulos->item(i, 2)->text();
+        QStringList listPrice = price.split(QRegExp("\\s+"));
+        subtotal = subtotal + listPrice.at(1).toDouble();
+        qDebug() << "Subto: " << subtotal;
+    }
+    ui->lblSubtotal->setText(QString::number(subtotal));
+    iva = (subtotal*16)/100;
+    CostoTotal = 0;
+    CostoTotal = iva+subtotal;
+    ui->lblTotal->setText(QString::number(CostoTotal));
+}
+
+void OrdenarIntervencion::on_tablaArticulos_cellPressed(int row, int column)
+{
+    qDebug() << "yolo bruh";
+    if(column == 4){
+        eliminarFila(row);
+    }
+    else {
+        qDebug() << "fuck you bruh: " << column;
+    }
+}
+
+void OrdenarIntervencion::on_tablaArticulos_itemClicked(QTableWidgetItem *item)
+{
+
+}
+
+void OrdenarIntervencion::on_tablaArticulos_cellClicked(int row, int column)
+{
+
+}
+
+void OrdenarIntervencion::on_btnAgendarQuiro_clicked()
+{
+    // '"++"'
+
+    QString fechaCita = ui->intervencionFecha->text();
+    QString idQuiro = ui->comboQuiro->currentText();
+    QString idDoc = datosDoctor->value(1).toString();;
+    QString idPac = datosPaciente->value(1).toString();
+    QString horaIni = ui->intervencionHora->text();
+    QString desc = ui->intervencionDesc->toPlainText();
+    QString diasSolic = ui->diasRecup->text();
+
+    QSqlQuery agendarCita;
+    agendarCita.prepare("INSERT INTO citasquirofano(fechaCita, idQuirofano, idDoctor, idPaciente, horaInicio, descripcion) VALUES ('"+fechaCita+"','"+idQuiro+"','"+idDoc+"','"+idPac+"','"+horaIni+"','"+desc+"')");
+    agendarCita.exec();
+    qDebug() << "INSERT INTO citasquirofano(fechaCita, idQuirofano, idDoctor, idPaciente, horaInicio, descripcion) VALUES ('"+fechaCita+"','"+idQuiro+"','"+idDoc+"','"+idPac+"','"+horaIni+"','"+desc+"')";
+
+    QSqlQuery solicitudEstancia;
+    solicitudEstancia.prepare("INSERT INTO soliestancia(idDoctor, idPaciente, descripcion, fechaIntervencion, DiasSolicitados, idCitaQ) VALUES ('"+idDoc+"','"+idPac+"','"+desc+"','"+fechaCita+"','"+diasSolic+"','"+idCita1+"')");
+    solicitudEstancia.exec();
+
+    QSqlQuery artiServ;
+    for(int i = 0; i <= ui->tablaArticulos->rowCount()-1;i++)
+    {
+        //obtenemos el precio del artículo
+        QString nombre = ui->tablaArticulos->item(i, 0)->text();
+        QString howmany = ui->tablaArticulos->item(i, 1)->text();
+        QString howmuch = ui->tablaArticulos->item(i, 2)->text();
+        QStringList listPrice = howmuch.split(QRegExp("\\s+"));
+        artiServ.prepare("INSERT INTO artiserv(idCitaQ, DescSerArt, Cantidad, Costo) VALUES ('"+agendarCita.lastInsertId().toString()+"','"+nombre+"','"+howmany+"','"+listPrice.at(1)+"')");
+        artiServ.exec();
+    }
+
+    QSqlQuery costoServ;
+    costoServ.prepare("INSERT INTO `costoservicio`(`idCitaQ`, `Subtotal`, `importeIva`, `Total`) VALUES ('"+agendarCita.lastInsertId().toString()+"','"+QString::number(subtotal)+"','"+QString::number(iva)+"','"+QString::number(CostoTotal)+"')");
+    costoServ.exec();
+    this->close();
 }

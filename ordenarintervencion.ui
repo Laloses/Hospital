@@ -38,7 +38,7 @@ QLabel{
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabDetalles">
      <attribute name="title">
@@ -200,6 +200,12 @@ QLabel{
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
             <widget class="QLabel" name="label_7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
               <string>Fecha:</string>
              </property>
@@ -237,6 +243,12 @@ QLabel{
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="QLabel" name="label_8">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
               <string>Hora de inicio:</string>
              </property>
@@ -379,7 +391,7 @@ QLabel{
           </layout>
          </item>
          <item>
-          <widget class="QTextBrowser" name="textBrowser">
+          <widget class="QPlainTextEdit" name="intervencionDesc">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -454,7 +466,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="btnContinuarInter">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -954,7 +966,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="QPushButton" name="btnAgendarQuiro">
            <property name="minimumSize">
             <size>
              <width>100</width>

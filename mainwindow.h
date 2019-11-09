@@ -279,6 +279,8 @@ private slots:
 
     void on_pb_ordenarI_clicked();
 
+    void on_btnEstudios_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

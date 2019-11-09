@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui sql
+QT += printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -37,7 +38,8 @@ SOURCES += \
         registrostaff.cpp \
         login.cpp \
         tipdeldia.cpp \
-    ordenarintervencion.cpp
+    ordenarintervencion.cpp \
+    ordenarestudios.cpp
 
 HEADERS += \
         agregaractividaddoctor.h \
@@ -51,7 +53,8 @@ HEADERS += \
         registrostaff.h \
         login.h \
         tipdeldia.h \
-    ordenarintervencion.h
+    ordenarintervencion.h \
+    ordenarestudios.h
 
 FORMS += \
         agregaractividaddoctor.ui \
@@ -59,7 +62,8 @@ FORMS += \
         mostrarhistoclinico.ui \
         pagarcitaspaciente.ui \
         tipdeldia.ui \
-    ordenarintervencion.ui
+    ordenarintervencion.ui \
+    ordenarestudios.ui
 
 RC_ICONS = icono.ico
 

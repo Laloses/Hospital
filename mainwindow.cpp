@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "pagarcitaspaciente.h"
 #include "ordenarintervencion.h"
+#include "ordenarestudios.h"
 #include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -4598,4 +4599,10 @@ void MainWindow::on_pb_ordenarI_clicked()
 {
     OrdenarIntervencion* ventanaIntervencion = new OrdenarIntervencion(ui->le_folioCita->text(), this);
     ventanaIntervencion->show();
+}
+
+void MainWindow::on_btnEstudios_clicked()
+{
+    OrdenarEstudios* ventanaEstudios = new OrdenarEstudios(this);
+    ventanaEstudios->show();
 }
