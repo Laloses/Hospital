@@ -7096,21 +7096,28 @@ border:none</string>
           </widget>
           <widget class="QWidget" name="page_15">
            <layout class="QGridLayout" name="gridLayout_69">
-            <item row="0" column="0">
+            <item row="0" column="0" rowspan="2">
              <widget class="QLabel" name="label_37">
               <property name="text">
                <string>Paciente</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1" rowspan="7">
+            <item row="0" column="1" rowspan="11" colspan="2">
              <widget class="Line" name="line_11">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
+            <item row="1" column="2">
+             <widget class="QLabel" name="label_41">
+              <property name="text">
+               <string>Acompañante</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" rowspan="2">
              <layout class="QGridLayout" name="gridLayout_58">
               <item row="0" column="0">
                <widget class="QLabel" name="label_36">
@@ -7128,7 +7135,21 @@ border:none</string>
               </item>
              </layout>
             </item>
-            <item row="2" column="0">
+            <item row="3" column="2">
+             <layout class="QGridLayout" name="gridLayout_62">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_42">
+                <property name="text">
+                 <string>Nombre:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_nombreAcom"/>
+              </item>
+             </layout>
+            </item>
+            <item row="4" column="0">
              <layout class="QGridLayout" name="gridLayout_59">
               <item row="0" column="0">
                <widget class="QLabel" name="label_38">
@@ -7142,7 +7163,7 @@ border:none</string>
               </item>
              </layout>
             </item>
-            <item row="3" column="0">
+            <item row="5" column="0" rowspan="2">
              <layout class="QGridLayout" name="gridLayout_68">
               <item row="0" column="0">
                <spacer name="horizontalSpacer_117">
@@ -7179,7 +7200,21 @@ border:none</string>
               </item>
              </layout>
             </item>
-            <item row="4" column="0">
+            <item row="6" column="2">
+             <layout class="QGridLayout" name="gridLayout_63">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_43">
+                <property name="text">
+                 <string>Teléfono:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_telefonoAcomp"/>
+              </item>
+             </layout>
+            </item>
+            <item row="7" column="0">
              <layout class="QGridLayout" name="gridLayout_65">
               <item row="2" column="3">
                <widget class="QRadioButton" name="radioButton_naranja">
@@ -7280,7 +7315,7 @@ border:none</string>
               </item>
              </layout>
             </item>
-            <item row="5" column="0">
+            <item row="8" column="0" rowspan="2">
              <layout class="QGridLayout" name="gridLayout_60">
               <item row="0" column="0">
                <widget class="QLabel" name="label_39">
@@ -7294,7 +7329,35 @@ border:none</string>
               </item>
              </layout>
             </item>
-            <item row="6" column="0">
+            <item row="8" column="2">
+             <layout class="QGridLayout" name="gridLayout_64">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_44">
+                <property name="text">
+                 <string>Dirección:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_dirrecion"/>
+              </item>
+             </layout>
+            </item>
+            <item row="9" column="2" rowspan="2">
+             <layout class="QGridLayout" name="gridLayout_66">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_46">
+                <property name="text">
+                 <string>Parentesco:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_parentesco"/>
+              </item>
+             </layout>
+            </item>
+            <item row="10" column="0">
              <layout class="QGridLayout" name="gridLayout_61">
               <item row="0" column="0">
                <widget class="QLabel" name="label_40">
@@ -7308,7 +7371,7 @@ border:none</string>
               </item>
              </layout>
             </item>
-            <item row="7" column="2">
+            <item row="11" column="1" colspan="2">
              <layout class="QGridLayout" name="gridLayout_67">
               <item row="0" column="0">
                <spacer name="horizontalSpacer_110">
@@ -7341,73 +7404,6 @@ border:none</string>
                  <string>Guardar</string>
                 </property>
                </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="0" column="2" rowspan="7">
-             <layout class="QVBoxLayout" name="verticalLayout_39">
-              <item>
-               <widget class="QLabel" name="label_41">
-                <property name="text">
-                 <string>Acompañante</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <layout class="QGridLayout" name="gridLayout_62">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_42">
-                  <property name="text">
-                   <string>Nombre:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="lineEdit_nombreAcom"/>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QGridLayout" name="gridLayout_63">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_43">
-                  <property name="text">
-                   <string>Teléfono:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="lineEdit_telefonoAcomp"/>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QGridLayout" name="gridLayout_64">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_44">
-                  <property name="text">
-                   <string>Dirección:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="lineEdit_dirrecion"/>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QGridLayout" name="gridLayout_66">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_46">
-                  <property name="text">
-                   <string>Parentesco:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="lineEdit_parentesco"/>
-                </item>
-               </layout>
               </item>
              </layout>
             </item>

@@ -369,6 +369,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
              ui->line_12->hide();
              ui->line_13->hide();
              ui->line_14->hide();
+             id_doctor=lo.getIdDoctor();
             }else {
             qDebug()<<"eres un doctor";
 
@@ -4635,7 +4636,36 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_guardaUrgencia_clicked()
 {
-    QString nombre,llegada,color,causas,signos,nombreAcom,telefono,direccion,parentescos;
+    QString nombre,llegada,color,causas,signos,nombreAcom,telefono,direccion,parentescos,hora,idEspecialidad;
+    //saber la fecha
+    QDate fecha=QDate::currentDate();
+    QString fecha_text=fecha.toString("yyyy-MM-dd");
+    // ----------------------------------------------
+    //saber la hora
+    QTime time=QTime::currentTime();
+    QString time_text=time.toString("hh:mm:s ap");
+
+    if((time.second() % 3)==0){
+    time_text[6]=' ';
+    time_text[6]=' ';
+    }
+    qDebug()<<"fecha"<<fecha_text;
+    qDebug()<<"hora"<<time_text;
+    // ---------------------------------------------
+    // mensaje
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Seguro de guardar los datos?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+   // -------------------------------------------------------------------------
+   // mensaje de faltan campos
+
+    QMessageBox messageBox(QMessageBox::Warning,
+                                     tr("Warning"), tr("Por favor,ingrese los datos necesarios."), QMessageBox::Yes);
+             messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+
+   // -------------------------------------------------------------------------
     nombre=ui->lineEdit_nombreEmergencia->text();
     llegada=ui->lineEdit_formaLLegada->text();
     causas=ui->plainTextEdit_causas->toPlainText();
@@ -4645,7 +4675,114 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
     direccion=ui->lineEdit_dirrecion->text();
     parentescos=ui->lineEdit_parentesco->text();
 
+    QSqlQuery registroEmergencia,query;
+    if(ui->lineEdit_nombreEmergencia->text()=="" || ui->lineEdit_formaLLegada->text()=="" || ui->plainTextEdit_causas->toPlainText()=="" || ui->plainTextEdit_vitales->toPlainText()=="" || ui->lineEdit_nombreAcom->text()==" " || ui->lineEdit_telefonoAcomp->text()=="" || ui->lineEdit_dirrecion->text()=="" || ui->lineEdit_parentesco->text()==""){
+        if (messageBox.exec() == QMessageBox::Yes){
 
+         }
+     }else {
 
+    if(ui->radioButton_azul->isChecked()){
+        if (message.exec() == QMessageBox::Yes){
+      qDebug()<<"entre azul";
+      color="azul";
+    registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
+                            " values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
+    registroEmergencia.next();
 
+     query.exec("SELECT MAX(idEmergencia)FROM urgencias");
+     query.next();
+     idEspecialidad=query.value(0).toString();
+     qDebug()<<"id especialidad"<<idEspecialidad;
+
+    registroEmergencia.exec("insert into acompanante(nombre,telefono,direcion,parentescos,idEmergencia)"
+                            "values('"+nombreAcom+"','"+telefono+"','"+direccion+"','"+parentescos+"','"+idEspecialidad+"')");
+    registroEmergencia.next();
+     ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
+     ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+    return;
+    }
+        }if(ui->radioButton_verde->isChecked()){
+        if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"entre verde";
+         color="verde";
+        registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
+                                "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
+        registroEmergencia.next();
+
+         query.exec("SELECT MAX(idEmergencia)FROM urgencias");
+         query.next();
+         idEspecialidad=query.value(0).toString();
+         qDebug()<<"id especialidad"<<idEspecialidad;
+
+        registroEmergencia.exec("insert into acompanante(nombre,telefono,direcion,parentescos,idEmergencia)"
+                                "values('"+nombreAcom+"','"+telefono+"','"+direccion+"','"+parentescos+"','"+idEspecialidad+"')");
+        registroEmergencia.next();
+        ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
+        ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+    return;
+    }
+    }if(ui->radioButton_amarillo->isChecked()){
+        if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"entre amarillo";
+         color="amarillo";
+        registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
+                                "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
+        registroEmergencia.next();
+
+         query.exec("SELECT MAX(idEmergencia)FROM urgencias");
+         query.next();
+         idEspecialidad=query.value(0).toString();
+         qDebug()<<"id especialidad"<<idEspecialidad;
+
+        registroEmergencia.exec("insert into acompanante(nombre,telefono,direcion,parentescos,idEmergencia)"
+                                "values('"+nombreAcom+"','"+telefono+"','"+direccion+"','"+parentescos+"','"+idEspecialidad+"')");
+        registroEmergencia.next();
+        ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
+        ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        return;
+    }
+        }if(ui->radioButton_naranja->isChecked()){
+        if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"entre naranja";
+         color="naranja";
+        registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
+                                "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
+        registroEmergencia.next();
+
+         query.exec("SELECT MAX(idEmergencia)FROM urgencias");
+         query.next();
+         idEspecialidad=query.value(0).toString();
+         qDebug()<<"id especialidad"<<idEspecialidad;
+
+        registroEmergencia.exec("insert into acompanante(nombre,telefono,direcion,parentescos,idEmergencia)"
+                                "values('"+nombreAcom+"','"+telefono+"','"+direccion+"','"+parentescos+"','"+idEspecialidad+"')");
+        registroEmergencia.next();
+        ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
+        ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        return;
+    }
+     }if(ui->radioButton_rojo->isChecked()){
+        if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"entre rojo";
+         color="rojo";
+        registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
+                                "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
+        registroEmergencia.next();
+
+         query.exec("SELECT MAX(idEmergencia)FROM urgencias");
+         query.next();
+         idEspecialidad=query.value(0).toString();
+         qDebug()<<"id especialidad"<<idEspecialidad;
+
+        registroEmergencia.exec("insert into acompanante(nombre,telefono,direcion,parentescos,idEmergencia)"
+                                "values('"+nombreAcom+"','"+telefono+"','"+direccion+"','"+parentescos+"','"+idEspecialidad+"')");
+        registroEmergencia.next();
+        ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
+        ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        return;
+             }
+        }
+
+    }
 }
