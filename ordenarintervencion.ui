@@ -38,7 +38,7 @@ QLabel{
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tabDetalles">
      <attribute name="title">
@@ -175,7 +175,7 @@ QLabel{
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox"/>
+            <widget class="QComboBox" name="comboQuiro"/>
            </item>
           </layout>
          </item>
@@ -310,7 +310,7 @@ QLabel{
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox">
+          <widget class="QSpinBox" name="diasRecup">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -609,7 +609,11 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineCosto"/>
+                <widget class="QLineEdit" name="lineCosto">
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -756,7 +760,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
             <bool>true</bool>
            </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>20</number>
+            <number>39</number>
            </attribute>
            <attribute name="horizontalHeaderMinimumSectionSize">
             <number>20</number>
@@ -809,14 +813,14 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
            <item>
             <widget class="QLabel" name="label_13">
              <property name="text">
-              <string>Subtotal:</string>
+              <string>Subtotal: $</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_16">
+            <widget class="QLabel" name="lblSubtotal">
              <property name="text">
-              <string>TextLabel</string>
+              <string>0</string>
              </property>
             </widget>
            </item>
@@ -882,9 +886,9 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_18">
+            <widget class="QLabel" name="lblTotal">
              <property name="text">
-              <string>COSTO_TOTAL</string>
+              <string>0</string>
              </property>
             </widget>
            </item>

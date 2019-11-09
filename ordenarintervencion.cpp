@@ -5,6 +5,7 @@
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlQuery>
 #include <QSignalMapper>
+#include <QDebug>
 
 OrdenarIntervencion::OrdenarIntervencion(QString idCita, QWidget *parent) :
     QMainWindow(parent),
@@ -71,6 +72,15 @@ OrdenarIntervencion::OrdenarIntervencion(QString idCita, QWidget *parent) :
     ui->tablaArticulos->setColumnWidth(2,92);
     ui->tablaArticulos->setColumnWidth(3,59);
     ui->tablaArticulos->setColumnWidth(4,32);
+
+    QSqlQuery listaQuirofanos;
+    listaQuirofanos.prepare("select NumQ from quirofano");
+    listaQuirofanos.exec();
+    while(listaQuirofanos.next()){
+        ui->comboQuiro->addItem(listaQuirofanos.value(0).toString());
+    }
+
+    ui->label_5->hide();
 
 }
 
@@ -188,6 +198,23 @@ void OrdenarIntervencion::on_btnAgregarArticulo_clicked()
         ui->lineServ->clear();
         ui->lineCosto->clear();
         ui->lineCantidad->setText("1");
+        cuenta->stop();
+
+        double subtotal = 0;
+        for(int i = 0; i <= ui->tablaArticulos->rowCount()-1;i++)
+        {
+            //obtenemos el precio del artículo
+            QString price = ui->tablaArticulos->item(i, 2)->text();
+            QStringList listPrice = price.split(QRegExp("\\s+"));
+            subtotal = subtotal + listPrice.at(1).toDouble();
+            qDebug() << "Subto: " << subtotal;
+        }
+        ui->lblSubtotal->setText(QString::number(subtotal));
+        double iva = 0;
+        iva = (subtotal*16)/100;
+        double CostoTotal = 0;
+        CostoTotal = iva+subtotal;
+        ui->lblTotal->setText(QString::number(CostoTotal));
     }
 
 }
@@ -205,12 +232,37 @@ void OrdenarIntervencion::eliminarFila()
             ui->tablaArticulos->removeRow(row);
             ui->tablaArticulos->setCurrentCell(0, 0);
         }
+        double subtotal = 0;
+        for(int i = 0; i <= ui->tablaArticulos->rowCount()-1;i++)
+        {
+            //obtenemos el precio del artículo
+            QString price = ui->tablaArticulos->item(i, 2)->text();
+            QStringList listPrice = price.split(QRegExp("\\s+"));
+            subtotal = subtotal + listPrice.at(1).toDouble();
+            qDebug() << "Subto: " << subtotal;
+        }
+        ui->lblSubtotal->setText(QString::number(subtotal));
+        double iva = 0;
+        iva = (subtotal*16)/100;
+        double CostoTotal = 0;
+        CostoTotal = iva+subtotal;
+        ui->lblTotal->setText(QString::number(CostoTotal));
     }
     else{
         message.close();
     }
 }
 
-void OrdenarIntervencion::actualizaPrecios(){
+
+void OrdenarIntervencion::on_comboQuiro_currentIndexChanged(int index)
+{
+    QString numQuiro = ui->comboQuiro->itemText(index);
+    QString fechaInter = ui->intervencionFecha->text();
+    QSqlQuery buscaCitas;
+    buscaCitas.prepare("select fechaCita from citasquirofano where idQuirofano = '"+numQuiro+"' and fechaCita = '"+fechaInter+"'");
+    buscaCitas.exec();
+    if(!buscaCitas.next()){
+        ui->label_5->show();
+    }
 
 }

@@ -41,7 +41,7 @@ private slots:
 
     void eliminarFila();
 
-    void actualizaPrecios();
+    void on_comboQuiro_currentIndexChanged(int index);
 
 private:
     Ui::OrdenarIntervencion *ui;
