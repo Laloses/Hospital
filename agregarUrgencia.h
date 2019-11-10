@@ -2,6 +2,8 @@
 #define AGREGARURGENCIA_H
 
 #include <QWidget>
+#include <QtSql>
+#include <QtWidgets>
 
 namespace Ui {
 class agregarUrgencia;
@@ -17,6 +19,10 @@ public:
 
 private:
     Ui::agregarUrgencia *ui;
+    QSqlQuery *urgencias;
+    void buscarUrgencias();
+    void crearBotones(QList<QSqlRecord> datos);
+    void verDetalles(QString);
 };
 
 #endif // AGREGARURGENCIA_H

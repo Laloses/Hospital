@@ -5825,7 +5825,7 @@ background-color:transparent;</string>
                     <x>0</x>
                     <y>0</y>
                     <width>848</width>
-                    <height>314</height>
+                    <height>283</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_37">
@@ -8253,8 +8253,8 @@ background:transparent;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>409</width>
-                      <height>321</height>
+                      <width>20</width>
+                      <height>20</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_14">
@@ -8644,8 +8644,8 @@ background:transparent;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>411</width>
-                    <height>392</height>
+                    <width>20</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
@@ -9152,8 +9152,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>478</width>
-                        <height>302</height>
+                        <width>461</width>
+                        <height>20</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
