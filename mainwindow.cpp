@@ -4650,3 +4650,353 @@ void MainWindow::on_pb_inter_clicked()
     }
 
 }
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    ui->stackedWidget_admin->setCurrentIndex(7);
+    ui->Estancia->setCurrentIndex(0);
+    verSoliEstancia();
+}
+
+void MainWindow::on_regresarAdmin_clicked()
+{
+    ui->Estancia->setCurrentIndex(0);
+}
+
+
+void MainWindow::PonerCuarto(QString num)
+{
+    ui->estCuarto->setText(num);
+}
+
+void MainWindow::CuartosDisponibles(QDate inicio,QDate fin)
+{
+    clearLayout(ui->cuartos);
+    QString cuarto;
+    QSqlQuery cuarto1;
+    cuarto="select *from Cuarto";
+    cuarto1.exec(cuarto);
+    int r=0;
+    int c=0;
+    while(cuarto1.next())
+    {
+        QString reservado,idCuarto;
+        idCuarto=cuarto1.value(0).toString();
+
+        QSqlQuery reservado1;
+        reservado="select fecha_llega,fecha_salida from Estancia where idCuarto='"+idCuarto+"'; ";
+        reservado1.exec(reservado);
+        qDebug()<<reservado;
+        bool libre=true;
+        while(reservado1.next())
+        {
+            QDate in,fi;
+            in=reservado1.value(0).toDate();
+            fi=reservado1.value(1).toDate();
+
+            if(inicio>in)
+            {
+
+                if(inicio>fi)
+                {
+
+                    libre=true;
+                    break;
+                }
+                else
+                {
+
+                    libre=false;
+
+                    break;
+                }
+            }
+            else
+            {
+
+             if(fin<in)
+             {
+
+                libre=true;
+                break;
+             }
+             else
+             {
+
+                 libre=false;
+
+                 break;
+             }
+            }
+
+
+
+        }
+
+        if(libre==true)
+        {
+
+            QPushButton* Asignar = new QPushButton();
+            Asignar->setText(cuarto1.value(1).toString());
+            Asignar->setStyleSheet("border:solid 1px #5d80b6;border-radius:5px;background-color: #5d80b6;color: white;font: 11pt 'MS Shell Dlg 2';");
+            Asignar->setFixedSize(60,60);
+            ui->cuartos->addWidget(Asignar,r,c,1,1);
+
+
+            QSignalMapper *mapper2=new QSignalMapper(this);
+            connect(Asignar,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
+            mapper2->setMapping(Asignar,cuarto1.value(1).toString());
+            connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(PonerCuarto(QString)));
+
+
+            c++;
+            if(c==3)
+            {
+                r++;
+                c=0;
+            }
+        }
+        else
+        {
+
+        }
+
+
+
+    }
+
+
+
+}
+
+
+void MainWindow::AsginarCuartos(QString idSoli1)
+{
+    idSolicitudEstancia=idSoli1;
+    QString folio,idDoc,idPa,fechaInter,idSeQ,SoliEst,dias,nombreD,nombreP,idD1,idP1;
+    QDate fechai,fechaf;
+    int fechaff;
+    SoliEst="select * from SoliEstancia where idSoli='"+idSoli1+"';";
+    QSqlQuery soli,idD2,idP2,nombreD1,nombreP1;
+    soli.exec(SoliEst);
+    soli.next();
+    idDoc=soli.value(1).toString();
+    idPa=soli.value(2).toString();
+    idSoliQuirofano=soli.value(6).toString();
+
+    idD1="select idUser from doctor where iddoctor='"+idDoc+"'; ";
+    idP1="select idUSer from paciente where idpaciente='"+idPa+"'; ";
+    idD2.exec(idD1);
+    idD2.next();
+    idP2.exec(idP1);
+    idP2.next();
+
+    nombreD="select nombre, appaterno,apmaterno from usuario where matricula='"+idD2.value(0).toString()+"'; ";
+    nombreP="select nombre, appaterno,apmaterno from usuario where matricula='"+idP2.value(0).toString()+"'; ";
+    nombreD1.exec(nombreD);
+    nombreP1.exec(nombreP);
+    nombreD1.next();
+    nombreP1.next();
+
+    QString nombreD2,nombreP2;
+    nombreD2=nombreD1.value(0).toString()+" "+nombreD1.value(1).toString()+" "+nombreD1.value(2).toString();
+    nombreP2=nombreP1.value(0).toString()+" "+nombreP1.value(1).toString()+" "+nombreP1.value(2).toString();
+
+    ui->estDoctor->setText(nombreD2);
+    ui->estPaciente->setText(nombreP2);
+
+        ui->estCuarto->clear();
+
+    QString fecha1,fecha2;
+
+    fechai=soli.value(4).toDate();
+    fecha1=soli.value(4).toString();
+    dias=soli.value(5).toString();
+    fechaff=soli.value(5).toInt();
+
+    ui->estFechasoli->setText(fecha1);
+    ui->estDias->setText(dias);
+    fechaf=fechai.addDays(fechaff);
+    int years,months,days;
+    years=fechaf.year();
+    months=fechaf.month();
+    days=fechaf.day();
+    fecha2=QString::number(years)+"-"+QString::number(months)+"-"+QString::number(days);
+    ui->estFechaFin->setText(fecha2);
+    ui->Estancia->setCurrentIndex(1);
+    CuartosDisponibles(fechai,fechaf);
+
+
+
+}
+
+
+void MainWindow::verSoliEstancia()
+{
+    clearLayout(ui->estanciaPa);
+    QString folio,idDoc,idPa,fechaInter,idSeQ,SoliEst;
+    SoliEst="select * from SoliEstancia;";
+    QSqlQuery soli;
+    soli.exec(SoliEst);
+    int r=0;
+    int c=0;
+
+    QLabel *folio1 = new QLabel;
+    folio1->setAlignment(Qt::AlignCenter);
+    folio1->setText("Folio de Solicitud");
+    folio1->setFixedSize(130,25);
+   ui->estanciaPa->addWidget(folio1,r,0,1,1);
+
+
+    QLabel *iddoc1 = new QLabel;
+    iddoc1->setAlignment(Qt::AlignCenter);
+    iddoc1->setText("ID Doctor");
+    iddoc1->setFixedSize(80,25);
+    ui->estanciaPa->addWidget(iddoc1,r,1,1,1);
+
+    QLabel *idpa1 = new QLabel;
+    idpa1->setAlignment(Qt::AlignCenter);
+    idpa1->setText("ID Paciente");
+    idpa1->setFixedSize(80,25);
+   ui->estanciaPa->addWidget(idpa1,r,2,1,1);
+
+    QLabel *fecha1 = new QLabel;
+    fecha1->setAlignment(Qt::AlignCenter);
+    fecha1->setText("Fecha Solicitada");
+    fecha1->setFixedSize(130,25);
+    ui->estanciaPa->addWidget(fecha1,r,3,1,1);
+
+    QLabel *idQ = new QLabel;
+    idQ->setAlignment(Qt::AlignCenter);
+    idQ->setText("ID Cita Quirofano");
+    idQ->setFixedSize(150,25);
+    ui->estanciaPa->addWidget(idQ,r,4,1,1);
+
+    while(soli.next())
+    {
+        r++;
+        folio=soli.value(0).toString();
+        idDoc=soli.value(1).toString();
+        idPa=soli.value(2).toString();
+        fechaInter=soli.value(4).toString();
+        idSeQ=soli.value(6).toString();
+
+        QLabel *folio1 = new QLabel;
+        folio1->setAlignment(Qt::AlignCenter);
+        folio1->setText(folio);
+        folio1->setFixedSize(130,25);
+       ui->estanciaPa->addWidget(folio1,r,0,1,1);
+
+
+        QLabel *iddoc1 = new QLabel;
+        iddoc1->setAlignment(Qt::AlignCenter);
+        iddoc1->setText(idDoc);
+        iddoc1->setFixedSize(80,25);
+        ui->estanciaPa->addWidget(iddoc1,r,1,1,1);
+
+        QLabel *idpa1 = new QLabel;
+        idpa1->setAlignment(Qt::AlignCenter);
+        idpa1->setText(idPa);
+        idpa1->setFixedSize(80,25);
+       ui->estanciaPa->addWidget(idpa1,r,2,1,1);
+
+        QLabel *fecha1 = new QLabel;
+        fecha1->setAlignment(Qt::AlignCenter);
+        fecha1->setText(fechaInter);
+        fecha1->setFixedSize(130,25);
+        ui->estanciaPa->addWidget(fecha1,r,3,1,1);
+
+        QLabel *idQ = new QLabel;
+        idQ->setAlignment(Qt::AlignCenter);
+        idQ->setText(idSeQ);
+        idQ->setFixedSize(150,25);
+        ui->estanciaPa->addWidget(idQ,r,4,1,1);
+
+        QPushButton* Asignar = new QPushButton();
+        Asignar->setText("Asignar Cuarto");
+        Asignar->setStyleSheet("border:solid 1px #5d80b6;border-radius:5px;background-color: #5d80b6;color: white;font: 11pt 'MS Shell Dlg 2';");
+        Asignar->setFixedSize(130, 30);
+        ui->estanciaPa->addWidget(Asignar,r,5,1,1);
+
+        QSignalMapper *mapper2=new QSignalMapper(this);
+        connect(Asignar,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
+        mapper2->setMapping(Asignar,folio);
+        connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(AsginarCuartos(QString)));
+
+
+
+    }
+
+    QLabel *nombre1=new QLabel();
+
+    ui->estanciaPa->addWidget(nombre1,r,c,1,1);
+
+    QLabel *nombre2=new QLabel();
+    r=r+1;
+    ui->estanciaPa->addWidget(nombre2,r,c,1,1);
+
+    QLabel *nombr3=new QLabel();
+     r=r+1;
+    ui->estanciaPa->addWidget(nombr3,r,c,1,1);
+
+    QLabel *nombr4=new QLabel();
+     r=r+1;
+    ui->estanciaPa->addWidget(nombr4,r,c,1,1);
+
+    QLabel *nombre5=new QLabel();
+    r=r+1;
+    ui->estanciaPa->addWidget(nombre5,r,c,1,1);
+
+
+}
+
+void MainWindow::on_agregarCuarto_clicked()
+{
+    QMessageBox informacion;
+    QString cuarto,numero,idCuarto;
+    numero=ui->estCuarto->text();
+    QSqlQuery cuarto1;
+    cuarto="select *from Cuarto where NumCuarto='"+numero+"'; ";
+    cuarto1.exec(cuarto);
+    cuarto1.next();
+    idCuarto=cuarto1.value(0).toString();
+
+    if(ui->estCuarto->text()=="")
+    {
+        informacion.setWindowTitle("Informacion");
+        informacion.setText ("Seleccione un Cuarto");
+        informacion.setStandardButtons( QMessageBox::Ok) ;
+        informacion.setDefaultButton (QMessageBox ::Ok ) ;
+        informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+        informacion.exec();
+    }
+    else
+    {
+
+
+
+
+    QString estanciaN;
+    QSqlQuery estanciaN1;
+    estanciaN="insert into Estancia(idCitaQ,NDias,fecha_llega,fecha_salida,idCuarto) values('"+idSoliQuirofano+"','"+ui->estDias->text()+"','"+ui->estFechasoli->text()+"','"+ui->estFechaFin->text()+"','"+idCuarto+"');";
+    estanciaN1.exec(estanciaN);
+
+    QString del;
+    QSqlQuery del1;
+    del="delete from SoliEstancia where idSoli='"+idSolicitudEstancia+"'; ";
+    del1.exec(del);
+    verSoliEstancia();
+    informacion.setWindowTitle("Informacion");
+    informacion.setText ("EL proceso se ejecuto correctamente");
+    informacion.setStandardButtons( QMessageBox::Ok) ;
+    informacion.setDefaultButton (QMessageBox ::Ok ) ;
+    informacion.setButtonText( QMessageBox::Ok,"Aceptar");
+    informacion.exec();
+
+    ui->Estancia->setCurrentIndex(0);
+
+    }
+
+
+
+}

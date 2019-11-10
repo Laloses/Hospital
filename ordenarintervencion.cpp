@@ -372,7 +372,7 @@ void OrdenarIntervencion::on_btnAgendarQuiro_clicked()
     qDebug() << "INSERT INTO citasquirofano(fechaCita, idQuirofano, idDoctor, idPaciente, horaInicio, descripcion) VALUES ('"+fechaCita+"','"+idQuiro+"','"+idDoc+"','"+idPac+"','"+horaIni+"','"+desc+"')";
 
     QSqlQuery solicitudEstancia;
-    solicitudEstancia.prepare("INSERT INTO soliestancia(idDoctor, idPaciente, descripcion, fechaIntervencion, DiasSolicitados, idCitaQ) VALUES ('"+idDoc+"','"+idPac+"','"+desc+"','"+fechaCita+"','"+diasSolic+"','"+idCita1+"')");
+    solicitudEstancia.prepare("INSERT INTO soliestancia(idDoctor, idPaciente, descripcion, fechaIntervencion, DiasSolicitados, idCitaQ) VALUES ('"+idDoc+"','"+idPac+"','"+desc+"','"+fechaCita+"','"+diasSolic+"','"+agendarCita.lastInsertId().toString()+"')");
     solicitudEstancia.exec();
 
     QSqlQuery artiServ;

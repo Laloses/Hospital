@@ -283,6 +283,17 @@ private slots:
 
     void on_pb_inter_clicked();
 
+    void on_pushButton_3_clicked();
+
+    void on_regresarAdmin_clicked();
+    void verSoliEstancia();
+    void AsginarCuartos(QString);
+    void CuartosDisponibles(QDate,QDate);
+    void PonerCuarto(QString);
+
+
+    void on_agregarCuarto_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -294,6 +305,8 @@ public:
    void mostrarZonas();
    void mostrasConsultorios();
    int verNoti;
+    QString idSolicitudEstancia;
+   QString idSoliQuirofano;
 
 };
 
