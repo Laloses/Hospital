@@ -4682,7 +4682,7 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
     parentescos=ui->lineEdit_parentesco->text();
 
     QSqlQuery registroEmergencia,query;
-    if(ui->lineEdit_nombreEmergencia->text()=="" || ui->lineEdit_formaLLegada->text()=="" || ui->plainTextEdit_causas->toPlainText()=="" || ui->plainTextEdit_vitales->toPlainText()=="" || ui->lineEdit_nombreAcom->text()=="" || ui->lineEdit_telefonoAcomp->text()=="" || ui->lineEdit_dirrecion->text()=="" || ui->lineEdit_parentesco->text()=="" || ui->lineEdit_nombreEmergencia->text().contains(re) || ui->lineEdit_formaLLegada->text().contains(re) || ui->lineEdit_nombreAcom->text().contains(re) || ui->lineEdit_telefonoAcomp->text().contains(re2) || ui->lineEdit_dirrecion->text().contains(re) || ui->lineEdit_parentesco->text().contains(re)){
+    if(ui->lineEdit_nombreEmergencia->text()=="" || ui->lineEdit_formaLLegada->text()=="" || ui->plainTextEdit_causas->toPlainText()=="" || ui->plainTextEdit_vitales->toPlainText()=="" || ui->lineEdit_nombreAcom->text()=="" || ui->lineEdit_telefonoAcomp->text()=="" || ui->lineEdit_dirrecion->text()=="" || ui->lineEdit_parentesco->text()=="" ){
 
         if (messageBox.exec() == QMessageBox::Yes){
 
