@@ -203,3 +203,15 @@ void OrdenarEstudios::on_tipoEst_currentTextChanged(const QString &arg1)
             ui->nombreEst->addItem(nom1.value(0).toString());
         }
 }
+
+void OrdenarEstudios::on_btnCancelar_clicked()
+{
+    QMessageBox message(QMessageBox::Question,
+    tr("Confirmación"), tr("¿Desea cancelar la operación?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+        this->close();
+    }
+    else{}
+}

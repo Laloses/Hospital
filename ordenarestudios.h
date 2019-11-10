@@ -40,6 +40,8 @@ private slots:
 
     void on_tipoEst_currentTextChanged(const QString &arg1);
 
+    void on_btnCancelar_clicked();
+
 private:
     Ui::OrdenarEstudios *ui;
 };

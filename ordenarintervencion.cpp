@@ -6,6 +6,7 @@
 #include <QtSql/QSqlQuery>
 #include <QSignalMapper>
 #include <QDebug>
+#include <QDate>
 
 OrdenarIntervencion::OrdenarIntervencion(QString idCita, QWidget *parent) :
     QMainWindow(parent),
@@ -83,6 +84,7 @@ OrdenarIntervencion::OrdenarIntervencion(QString idCita, QWidget *parent) :
 
     ui->label_5->hide();
     iva = 0;
+    ui->intervencionFecha->setDate(QDate::currentDate());
 }
 
 OrdenarIntervencion::~OrdenarIntervencion()
@@ -92,7 +94,23 @@ OrdenarIntervencion::~OrdenarIntervencion()
 
 void OrdenarIntervencion::on_btnContinuarInter_clicked()
 {
-    ui->tabWidget->setCurrentIndex(1);
+    if(ui->label_5->isVisible()){
+        qDebug() << "no puede continuar";
+        QMessageBox messageBox(QMessageBox::Critical,tr("Error"), tr("Seleccione un quirófano o fecha disponible para continuar."), QMessageBox::Yes);
+        messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+        messageBox.exec();
+    }
+    else{
+        QString desc = ui->intervencionDesc->toPlainText();
+        if(desc == ""){
+            QMessageBox messageBox(QMessageBox::Warning,tr("Advertencia"), tr("Ingrese la descripción de la intervención para continuar."), QMessageBox::Yes);
+                     messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                     messageBox.exec();
+        }
+        else{
+            ui->tabWidget->setCurrentIndex(1);
+        }
+    }
 }
 
 void OrdenarIntervencion::on_btnBackInter_clicked()
@@ -102,7 +120,14 @@ void OrdenarIntervencion::on_btnBackInter_clicked()
 
 void OrdenarIntervencion::on_btnCancelarInter_clicked()
 {
-    this->close();
+    QMessageBox message(QMessageBox::Question,
+    tr("Confirmación"), tr("¿Desea cancelar la operación?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+        this->close();
+    }
+    else{}
 }
 
 void OrdenarIntervencion::precio()
@@ -219,6 +244,9 @@ void OrdenarIntervencion::on_comboQuiro_currentIndexChanged(int index)
     if(buscaCitas.next()){
         ui->label_5->show();
     }
+    else{
+        ui->label_5->hide();
+    }
 
 }
 
@@ -242,11 +270,9 @@ void OrdenarIntervencion::insertarArt()
 
     QTableWidgetItem *numero = new QTableWidgetItem(cantidad);
     numero->setTextAlignment(Qt::AlignHCenter);
-    numero->setTextAlignment(Qt::AlignVCenter);
 
     QTableWidgetItem *precioTotal = new QTableWidgetItem(Total);
     precioTotal->setTextAlignment(Qt::AlignHCenter);
-    precioTotal->setTextAlignment(Qt::AlignVCenter);
 
     QWidget* pWidget = new QWidget();
 

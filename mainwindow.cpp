@@ -8,6 +8,7 @@
 #include <QHBoxLayout>
 #include <QSignalMapper>
 #include <QTimer>
+#include <QDate>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -4605,4 +4606,47 @@ void MainWindow::on_btnEstudios_clicked()
 {
     OrdenarEstudios* ventanaEstudios = new OrdenarEstudios(this);
     ventanaEstudios->show();
+}
+
+void MainWindow::on_pb_inter_clicked()
+{
+    ui->tablaInterProgs->setColumnWidth(1, 100);
+    ui->tablaInterProgs->setColumnWidth(2, 60);
+    ui->tablaInterProgs->setColumnWidth(3, 80);
+
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(8);
+    QSqlQuery quirofanoCitas;
+    QString idDoc = datosDoc->value(0).toString();
+    quirofanoCitas.prepare("SELECT `fechaCita`, `idQuirofano`, `idDoctor`, CONCaT_WS(' ', usuario.nombre, usuario.appaterno, usuario.apmaterno) as Paciente, `horaInicio`, `descripcion` FROM `citasquirofano` inner JOIN paciente on paciente.idpaciente = citasquirofano.idPaciente INNER JOIN usuario on usuario.matricula = paciente.idUser WHERE idDoctor = '"+idDoc+"'");
+    quirofanoCitas.exec();
+    while(quirofanoCitas.next()){
+        QString nomPaciente = quirofanoCitas.value(3).toString();
+        QString fech = quirofanoCitas.value(0).toString();
+        QString timeIni = quirofanoCitas.value(4).toString();
+        QString idQuir = quirofanoCitas.value(1).toString();
+        QString desc = quirofanoCitas.value(5).toString();
+
+        QTableWidgetItem *paciente = new QTableWidgetItem(nomPaciente);
+        paciente->setTextAlignment(Qt::AlignCenter);
+
+        QTableWidgetItem *fecha = new QTableWidgetItem(fech);
+        fecha->setTextAlignment(Qt::AlignCenter);
+
+        QTableWidgetItem *horaIni = new QTableWidgetItem(timeIni);
+        horaIni->setTextAlignment(Qt::AlignCenter);
+
+        QTableWidgetItem *quirofano = new QTableWidgetItem(idQuir);
+        quirofano->setTextAlignment(Qt::AlignCenter);
+
+        QTableWidgetItem *descripcion = new QTableWidgetItem(desc);
+
+        ui->tablaInterProgs->insertRow(ui->tablaInterProgs->rowCount());
+        int fila = ui->tablaInterProgs->rowCount()-1;
+        ui->tablaInterProgs->setItem(fila, 0, paciente);
+        ui->tablaInterProgs->setItem(fila, 1, fecha);
+        ui->tablaInterProgs->setItem(fila, 2, horaIni);
+        ui->tablaInterProgs->setItem(fila, 3, quirofano);
+        ui->tablaInterProgs->setItem(fila, 4, descripcion);
+    }
+
 }
