@@ -4659,13 +4659,19 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
     message.setButtonText(QMessageBox::No, tr("Cancelar"));
    // -------------------------------------------------------------------------
    // mensaje de faltan campos
-
     QMessageBox messageBox(QMessageBox::Warning,
                                      tr("Warning"), tr("Por favor,ingrese los datos necesarios."), QMessageBox::Yes);
              messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
-
-
    // -------------------------------------------------------------------------
+    //mensaje de informacion guardada
+    QMessageBox mensaje(QMessageBox::Question,
+     tr("Information"), tr("Datos guardadas"), QMessageBox::Yes);
+    mensaje.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+  // -----------------------------------------------------------------------------------
+   // expreciones regulares
+     QRegExp re("^[a-zZ-A]*$"), re2("^[0-9]*$");
+  // ------------------------------------------------------------------------------------
     nombre=ui->lineEdit_nombreEmergencia->text();
     llegada=ui->lineEdit_formaLLegada->text();
     causas=ui->plainTextEdit_causas->toPlainText();
@@ -4676,14 +4682,16 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
     parentescos=ui->lineEdit_parentesco->text();
 
     QSqlQuery registroEmergencia,query;
-    if(ui->lineEdit_nombreEmergencia->text()=="" || ui->lineEdit_formaLLegada->text()=="" || ui->plainTextEdit_causas->toPlainText()=="" || ui->plainTextEdit_vitales->toPlainText()=="" || ui->lineEdit_nombreAcom->text()==" " || ui->lineEdit_telefonoAcomp->text()=="" || ui->lineEdit_dirrecion->text()=="" || ui->lineEdit_parentesco->text()==""){
+    if(ui->lineEdit_nombreEmergencia->text()=="" || ui->lineEdit_formaLLegada->text()=="" || ui->plainTextEdit_causas->toPlainText()=="" || ui->plainTextEdit_vitales->toPlainText()=="" || ui->lineEdit_nombreAcom->text()=="" || ui->lineEdit_telefonoAcomp->text()=="" || ui->lineEdit_dirrecion->text()=="" || ui->lineEdit_parentesco->text()=="" || ui->lineEdit_nombreEmergencia->text().contains(re) || ui->lineEdit_formaLLegada->text().contains(re) || ui->lineEdit_nombreAcom->text().contains(re) || ui->lineEdit_telefonoAcomp->text().contains(re2) || ui->lineEdit_dirrecion->text().contains(re) || ui->lineEdit_parentesco->text().contains(re)){
+
         if (messageBox.exec() == QMessageBox::Yes){
 
          }
+
      }else {
 
-    if(ui->radioButton_azul->isChecked()){
-        if (message.exec() == QMessageBox::Yes){
+    if(ui->radioButton_azul->isChecked() ){
+        if (message.exec() == QMessageBox::Yes ){
       qDebug()<<"entre azul";
       color="azul";
     registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
@@ -4700,6 +4708,12 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
     registroEmergencia.next();
      ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
      ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+     ui->radioButton_azul->setCheckable(false);
+     ui->radioButton_azul->setCheckable(true);
+
+     if (mensaje.exec() == QMessageBox::Yes){
+
+      }
     return;
     }
         }if(ui->radioButton_verde->isChecked()){
@@ -4720,6 +4734,11 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         registroEmergencia.next();
         ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
         ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        ui->radioButton_verde->setCheckable(false);
+        ui->radioButton_verde->setCheckable(true);
+        if (mensaje.exec() == QMessageBox::Yes){
+
+         }
     return;
     }
     }if(ui->radioButton_amarillo->isChecked()){
@@ -4740,6 +4759,11 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         registroEmergencia.next();
         ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
         ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        ui->radioButton_amarillo->setCheckable(false);
+        ui->radioButton_amarillo->setCheckable(true);
+        if (mensaje.exec() == QMessageBox::Yes){
+
+         }
         return;
     }
         }if(ui->radioButton_naranja->isChecked()){
@@ -4760,6 +4784,11 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         registroEmergencia.next();
         ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
         ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        ui->radioButton_naranja->setCheckable(false);
+        ui->radioButton_naranja->setCheckable(true);
+        if (mensaje.exec() == QMessageBox::Yes){
+
+         }
         return;
     }
      }if(ui->radioButton_rojo->isChecked()){
@@ -4780,6 +4809,11 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         registroEmergencia.next();
         ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
         ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        ui->radioButton_rojo->setCheckable(false);
+        ui->radioButton_rojo->setCheckable(true);
+        if (mensaje.exec() == QMessageBox::Yes){
+
+                 }
         return;
              }
         }
