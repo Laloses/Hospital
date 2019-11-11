@@ -55,6 +55,8 @@ MainWindow::MainWindow(QWidget *parent) :
     toggleVision1 = 0;
     contMedicinas=0;
     ui->tv_listaDocCitas->horizontalHeader()->setHidden(false);
+    ui->pb_urg->setHidden(true);
+    ui->nofi_2->hide();
 }
 
 MainWindow::~MainWindow()
@@ -372,7 +374,13 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
              ui->line_12->hide();
              ui->line_13->hide();
              ui->line_14->hide();
+
+             ui->pushButton_miPerfil->setHidden(false);
+             ui->pb_urg->setHidden(false);
+             id_usuario=lo.getIdUser();
              id_doctor=lo.getIdDoctor();
+             ocultarMenuP();
+
             }else {
             qDebug()<<"eres un doctor";
 
@@ -541,6 +549,7 @@ void MainWindow::on_pushButton_salir_clicked()
     ui->line_12->show();
     ui->line_13->show();
     ui->line_14->show();
+    ui->pb_urg->hide();
     mostrarMenuP();
 }
 
@@ -820,7 +829,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
             }
 
             if(datosStaff->next()){
-                id_paciente=datosStaff->value(0).toString();
+                id_staff=datosStaff->value(0).toString();
                 cargarDatosUsuarios();
                 //Pagina de staff
                 ui->stackedWidget_principal->setCurrentIndex(4);
@@ -828,7 +837,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
             }
 
             if(datosDoc->next()){
-                id_paciente=datosDoc->value(0).toString();
+                id_doctor=datosDoc->value(0).toString();
                 cargarDatosUsuarios();
                 cargarHorarioDoc();
                 //Pagina de doctor
@@ -5225,4 +5234,9 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         }
 
     }
+}
+
+void MainWindow::on_pb_urg_clicked()
+{
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(9);
 }

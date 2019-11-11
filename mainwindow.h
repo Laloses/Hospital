@@ -295,6 +295,8 @@ private slots:
     void on_agregarCuarto_clicked();
     void on_pushButton_guardaUrgencia_clicked();
 
+    void on_pb_urg_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
