@@ -18,6 +18,7 @@
 #include "agregarcitaspaciente.h"
 #include "agregartipremedio.h"
 #include "pagarcitaspaciente.h"
+#include "pagointervenciones.h"
 #include <QTimer>
 #include "mostrarhistoclinico.h"
 #include <QtPrintSupport/QPrinter>
@@ -57,6 +58,7 @@ private:
     int contMedicinas;
     QString idCita1;
     pagarCitasPaciente *pagar;
+    pagoIntervenciones *pagoIt;
     QTimer *ocultar;
     int contador;
 
@@ -231,9 +233,6 @@ private slots:
     void on_btnMostrarContrasena_6_clicked();
 
     void PonerCitas(QString);
-    void PagarCitas(QString);
-    void pagarCitasEfect(QString);
-
 
     void mostrarCitas();
 
@@ -284,7 +283,24 @@ private slots:
 
     void on_pushButton_horarioDoc_2_clicked();
 
+    void PagarCitas(QString);
+
     void on_radioButton_clicked();
+
+
+    void on_radioButton_4_clicked();
+
+    void pagarUrgenciasV(QString);
+
+    void on_radioButton_2_clicked();
+
+    void pagarIntervencion(QString);
+
+
+    void on_pushButton_intervenciones_clicked();
+
+    void pagarCitasEfect(QString);
+    void pagarIntervencionTarjeta(QString);
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

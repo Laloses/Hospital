@@ -1,6 +1,7 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "pagarcitaspaciente.h"
+#include "pagointervenciones.h"
 #include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -3615,6 +3616,7 @@ void MainWindow::PagarCitas(QString folio){
 void MainWindow::mostrarCitas(){
 
     clearLayout(ui->citasLay_2);
+    clearLayout(ui->encabezadoCitas_2);
     QString citas,est,preparada;
     QSqlQuery consulta,consulta2;
     est="1";
@@ -3790,6 +3792,8 @@ void MainWindow::mostrarCitas(){
 void MainWindow::on_pushButton_Cancelar_Cita_clicked()
 {
     ui->stackedWidget_perfilPaciente->setCurrentIndex(2);
+    clearLayout(ui->citasLay_2);
+    clearLayout(ui->encabezadoCitas_2);
     mostrarCitas();
 }
 
@@ -4729,13 +4733,15 @@ void MainWindow::pagarCitasEfect(QString folio)
 
     //querys para hacer actualizaciones de pago
     QSqlQuery update,insert,mandarNoti;
-    QString mensaj,tipo,cita,user1,notificacion;
+    QString mensaj,tipo,cita,user1,notificacion,descrip,total;
     QSqlQuery cita1;
     cita1.exec(cita);
     cita1.next();
     mensaj="Se le informa que su cita con el no. de folio:"+folio+" ha sido pagada con éxito.";
     tipo="1";
-    notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+usernoti+"');";
+    notificacion="insert into notificacion(tipo,texto,UserP) values("+tipo+",'"+mensaj+"',"+usernoti+");";
+    descrip="Consulta";
+    total="320";
 
     if(update.exec("UPDATE cita SET pagada=1 WHERE idCita='"+folio+"'"))
     {
@@ -4752,47 +4758,32 @@ void MainWindow::pagarCitasEfect(QString folio)
              message.setButtonText(QMessageBox::No, tr("Cancelar"));
              if (message.exec() == QMessageBox::Yes){
 
-                 html="<H1 align=center> Comprobante de pago </H1>"
+                 html=
+                         "<H1 align=center> Comprobante de pago </H1>"
                          "<H6 align=center>*LOBOHOSPITAL* A.C DE C.V se deslinda de cualquier mal uso de este comprobante*</H6>"
                          "<H5 align=center>25 pte #1230, colonia Volcanes, Puebla,Pue</H5>"
                          "<br><br><br><br>"
 
-                         "<H5 align=left>NOMBRE Y APELLIDO: "+nombreUser+"</H5>"
-                         "<H5 align=left>MÉDICO RESPONSABLE:"+nombreDoc+"</H5>"
-                         "<H5 align=left>FECHA DE EMISIÓN DE PAGO: "+fechaPago+" </H5>"
-                         "<H5 align=left>FORMA DE PAGO: EFECTIVO</H5>"
-
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> NOMBRE Y APELLIDO:"+nombreUser+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> MÉDICO RESPONSABLE:"+nombreDoc+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> FECHA DE EMISIÓN DE PAGO:"+fechaPago+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> FORMA DE PAGO:  EFECTIVO </div>"
+                         "<br><br><br>"
                          "<hr style=color: #0056b2; />"
-
-                         "<table>"
-                         "<tr align=center>"
-                           "<label style=margin:7%;>FOLIO </label>"
-                           "<label style=margin:11%;>FECHA DE CITA </label>"
-                           "<label style=margin:15%;>DESCRIPCION </label>"
-                           "<label style=margin:15%;>PRECIO UNITARIO </label>"
-                           "<label style=margin:9%;>IMPORTE </label>"
-                         "</tr>"
-                         "</table>"
+                         "<pre>"
+                         "NO.FOLIO     FECHA DE CITA    DESCRIPCION      PRECIO UNITARIO        IMPORTE"
+                         "</pre>"
                          "<hr style=color: #0056b2; />"
-                           "<table>"
-                             "<tr align=center>"
-                             "<label style=margin-left:7%;>"+folio+"</label>"
-                             "<label style=margin-left:21%;>"+fechaCita+" </label>"
-                             "<label style=margin-left:31%;>DESCRIPCION </label>"
-                             "<label style=margin-left:45%;>PRECIO UNITARIO </label>"
-                             "<label style=margin-left:60%;>IMPORTE </label>"
-                             "</tr>"
-                          "</table> <br><br><br><br><br><br><br><br><br><br><br><br><br>"
-                         "<table>"
-                           "<tr align=right>"
-                              "<label style=margin-left:68%;>SUBTOTAL</label>"
-                            "</tr>"
-                         "</table>"
-                         "<table>"
-                          "<tr align=right>"
-                            "<label style=margin-left:68%;>TOTAL</label>"
-                            "</tr>"
-                          "</table>";
+                         "<pre>"
+                         ""+folio+"         "+fechaCita+"        "+descrip+"        "+total+"         "+total+""
+                          "<br><br><br><br><br><br><br><br><br><br><br><br><br>"
+                         "<pre>"
+                         "                                                                      SUBTOTAL:"+total+""
+                         "</pre>"
+                         "<br><br>"
+                         "<pre>"
+                         "                                                                      TOTAL:   "+total+""
+                        ;
                  QTextDocument document;
                  document.setHtml(html);
 
@@ -4830,4 +4821,569 @@ void MainWindow::pagarCitasEfect(QString folio)
               }else
                {
             }
+}
+
+void MainWindow::on_radioButton_4_clicked()
+{
+    clearLayout(ui->pagosConfirmados);
+    QString citas,est,preparada;
+    QSqlQuery consulta,consulta2;
+    est="1";
+    int f=0;
+    int ban=1;
+    QString r1,g1,b1;
+    r1="172,189,211";
+    QString r2,g2,b2;
+    r2="221,221,221";
+    QString rgb="";
+    QString folio,doctor,fecha,hora,nomDoct,nombrePac;
+    int i=0;
+    int l=0;
+    citas="select ur.idEmergencia,us.nombre,us.appaterno,us.apmaterno,ur.nombre_pacinete,ur.hora,ur.fecha from usuario as "
+          "us inner join doctor as doc on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor";
+    if(!consulta2.exec(citas)) consulta2.lastError().text();
+    while(consulta2.next()){
+        folio=consulta2.value(0).toString();
+        doctor=consulta2.value(1).toString()+" "+consulta2.value(2).toString()+" "+consulta2.value(3).toString();
+        nombrePac=consulta2.value(4).toString();
+        hora=consulta2.value(5).toString();
+        fecha=consulta2.value(6).toString();
+        if(ban==1)
+        {
+            rgb=r1;
+            ban=2;
+        }
+        else
+        {
+            rgb=r2;
+            ban=1;
+        }
+
+        QLabel *fol=new QLabel;
+        fol->setText(folio);
+        fol->setFixedSize(QSize(100,25));
+        fol->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagosConfirmados->addWidget(fol,l,0,Qt::AlignTop);
+
+
+        QLabel *m=new QLabel;
+        m->setText(doctor);
+        m->setFixedSize(QSize(115,25));
+        m->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagosConfirmados->addWidget(m,l,1,Qt::AlignTop);
+
+        QLabel *np=new QLabel;
+        np->setText(nombrePac);
+        np->setFixedSize(QSize(140,25));
+        np->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagosConfirmados->addWidget(np,l,2,Qt::AlignTop);
+
+
+        QLabel *r=new QLabel;
+        r->setText(fecha);
+        r->setStyleSheet("background-color: rgb("+rgb+")");
+        r->setFixedSize(QSize(100,25));
+        ui->pagosConfirmados->addWidget(r,l,3,Qt::AlignTop);
+
+
+        QLabel *h=new QLabel;
+        h->setText(hora);
+        h->setFixedSize(QSize(100,25));
+        h->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagosConfirmados->addWidget(h,l,4,Qt::AlignTop);
+
+        QLabel *ss=new QLabel;
+        ss->setText(" ");
+        ss->setFixedSize(QSize(40,25));
+        ui->pagosConfirmados->addWidget(ss,l,5,Qt::AlignTop);
+
+        QPushButton *p= new QPushButton();
+        p->setText("Pagar");
+        p->setFixedSize(QSize(100,25));
+        p->setStyleSheet("background-color: rgb(138,198,242)");
+        QSignalMapper *mapper3=new QSignalMapper(this);
+        connect(p,SIGNAL(clicked(bool)),mapper3,SLOT(map()));
+        mapper3->setMapping(p,folio);
+        connect(mapper3,SIGNAL(mapped(QString)),this,SLOT(pagarUrgenciasV(QString)));
+        ui->pagosConfirmados->addWidget(p,l,7,Qt::AlignTop);
+
+        l++;
+    }
+}
+
+void MainWindow::pagarUrgenciasV(QString folio)
+{
+    //parte para generar datos de pdf//
+    QSqlQuery user,fecha,doc,usuarionoti,fol,datosacomp;
+    QString html,d,nombrePac,fechaPago,nombreDoc,fechaCita,usernoti,id_doc,horaEmer,descripcion,total,nombreacomp,telacomp,
+            parentezcoacomp,direccionacomp;
+    user.exec("select ur.idEmergencia,ur.idDoctor,us.nombre,us.appaterno,us.apmaterno,ur.nombre_pacinete,ur.hora,ur.fecha,ur.Causas from usuario as "
+              "us inner join doctor as doc on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor;");
+    user.next();
+    fecha.exec("select CURRENT_DATE()");
+    fecha.next();
+    doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc "
+             "on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor ;");
+    doc.next();
+    datosacomp.exec("select nombre,telefono,parentescos,direcion from acompanante where idEmergencia="+folio+"");
+    datosacomp.next();
+
+
+    nombrePac=user.value(5).toString();
+    fechaPago=fecha.value(0).toString();
+    nombreDoc=doc.value(0).toString();
+    fechaCita=user.value(7).toString();
+    folio=user.value(0).toString();
+    id_doc=user.value(1).toString();
+    horaEmer=user.value(6).toString();
+    descripcion=user.value(8).toString();
+    total="15320";
+    nombreacomp=datosacomp.value(0).toString();
+    telacomp=datosacomp.value(1).toString();
+    parentezcoacomp=datosacomp.value(2).toString();
+    direccionacomp=datosacomp.value(3).toString();
+    //termina parte de generar datos de pdf//
+
+    //inicia parte para actualizar pago y enviar notificacion//
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Desea realizar el pago de la urgencia?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+
+    //querys para hacer actualizaciones de pago
+    QSqlQuery update,insert,mandarNoti;
+    QString mensaj,tipo,cita,user1,notificacion;
+
+    if(insert.exec("insert into pagoUrgencia(fecha,hora,total,nombrePac,idEmergencia) "
+                   "value('"+fechaPago+"','"+horaEmer+"',"+total+",'"+nombrePac+"',"+folio+")"))
+    {
+            insert.next();
+            qDebug()<<"pago efectuado";
+
+
+             //inicia parte para generar pdf de pago"
+             QMessageBox message(QMessageBox::Question,
+             tr("Information"), tr("¿Desea generar comprobante de pago?"), QMessageBox::Yes | QMessageBox::No);
+             message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+             message.setButtonText(QMessageBox::No, tr("Cancelar"));
+             if (message.exec() == QMessageBox::Yes){
+
+                 html=
+                         "<H1 align=center> Comprobante de pago </H1>"
+                         "<H6 align=center>*LOBOHOSPITAL* A.C DE C.V se deslinda de cualquier mal uso de este comprobante*</H6>"
+                         "<H5 align=center>25 pte #1230, colonia Volcanes, Puebla,Pue</H5>"
+                         "<br><br><br><br>"
+
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> NOMBRE Y APELLIDO DE PACIENTE INGRESADO :  "+nombrePac+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> NOMBRE Y APELLIDO DE ACOMPAÑANTE DEL PACIENTE :  "+nombreacomp+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> NO. DE TELEFONO : "+telacomp+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> PARENTEZCO :  '"+parentezcoacomp+"' </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> DIRECCIÓN DOMICILIARIA : '"+direccionacomp+"' </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> MÉDICO RESPONSABLE : "+nombreDoc+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> FECHA DE EMISIÓN DE PAGO : "+fechaPago+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> FORMA DE PAGO :  EFECTIVO </div>"
+                         "<br><br><br>"
+                         "<hr style=color: #0056b2; />"
+                        "<pre>"
+                        "NO.FOLIO     FECHA DE HOSPITALIZACIÓN    DESCRIPCION      PRECIO UNITARIO        IMPORTE"
+                        "</pre>"
+                         "<hr style=color: #0056b2; />"
+                         "<pre>"
+                        ""+folio+"                "+fechaCita+"            "+descripcion+"           "+total+"               "+total+" "
+                         "</pre>"
+                           " <br><br><br><br><br><br><br><br><br><br><br><br><br>"
+                         "<hr style=color: #0056b2; />"
+                         "<pre>"
+                         "                                                                             SUBTOTAL:"+total+""
+                         "</pre>"
+                          "<pre>"
+                         "                                                                              TOTAL:   "+total+"";
+                 QTextDocument document;
+                 document.setHtml(html);
+
+                 QPrinter printer(QPrinter::HighResolution);
+                  printer.setOutputFormat(QPrinter::PdfFormat);
+                  printer.setPaperSize(QPrinter::A4);
+                  auto nombreArchivo=QFileDialog::getSaveFileName(this,"Guardar archivo",QDir::rootPath(),"Archivos (*.pdf);;");
+                  if(nombreArchivo==""){
+
+                                      }
+                                      else{
+
+                                          printer.setOutputFileName(nombreArchivo);
+                                      }
+
+                  printer.setPageMargins(QMarginsF(15, 15, 15, 15));
+                                      document.print(&printer);
+
+             }
+             else
+             {
+
+             }
+
+             //termina parte para generar pdf//
+
+
+        }else
+        {
+                qDebug()<<"Error al enviar el pago"<<update.lastError().text();
+
+        }
+              }else
+               {
+            }
+}
+
+void MainWindow::on_radioButton_2_clicked()
+{
+    clearLayout(ui->pagosConfirmados);
+    QString citas,est,pacNom;
+    QSqlQuery consulta,consulta2,pac;
+    est="1";
+    int f=0;
+    int ban=1;
+    QString r1,g1,b1;
+    r1="172,189,211";
+    QString r2,g2,b2;
+    r2="221,221,221";
+    QString rgb="";
+    QString folio,doctor,fecha,hora,nomDoct,descripc;
+    int i=0;
+    int l=0;
+    citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as "
+          "us inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on doc.iddoctor=inter.idDoctor";
+
+    if(!consulta2.exec(citas)) consulta2.lastError().text();
+    while(consulta2.next()){
+
+        folio=consulta2.value(0).toString();
+        doctor=consulta2.value(6).toString();
+        descripc=consulta2.value(5).toString();
+        hora=consulta2.value(3).toString();
+        fecha=consulta2.value(4).toString();
+        if(ban==1)
+        {
+            rgb=r1;
+            ban=2;
+        }
+        else
+        {
+            rgb=r2;
+            ban=1;
+        }
+
+        QLabel *fol=new QLabel;
+        fol->setText(folio);
+        fol->setFixedSize(QSize(100,25));
+        fol->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagosConfirmados->addWidget(fol,l,0,Qt::AlignTop);
+
+
+        QLabel *m=new QLabel;
+        m->setText(doctor);
+        m->setFixedSize(QSize(115,25));
+        m->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagosConfirmados->addWidget(m,l,1,Qt::AlignTop);
+
+        QLabel *np=new QLabel;
+        np->setText(descripc);
+        np->setFixedSize(QSize(140,25));
+        np->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagosConfirmados->addWidget(np,l,2,Qt::AlignTop);
+
+
+        QLabel *r=new QLabel;
+        r->setText(fecha);
+        r->setStyleSheet("background-color: rgb("+rgb+")");
+        r->setFixedSize(QSize(100,25));
+        ui->pagosConfirmados->addWidget(r,l,3,Qt::AlignTop);
+
+
+        QLabel *h=new QLabel;
+        h->setText(hora);
+        h->setFixedSize(QSize(100,25));
+        h->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagosConfirmados->addWidget(h,l,4,Qt::AlignTop);
+
+        QLabel *ss=new QLabel;
+        ss->setText(" ");
+        ss->setFixedSize(QSize(40,25));
+        ui->pagosConfirmados->addWidget(ss,l,5,Qt::AlignTop);
+
+        QPushButton *p= new QPushButton();
+        p->setText("Pagar");
+        p->setFixedSize(QSize(100,25));
+        p->setStyleSheet("background-color: rgb(138,198,242)");
+        QSignalMapper *mapper3=new QSignalMapper(this);
+        connect(p,SIGNAL(clicked(bool)),mapper3,SLOT(map()));
+        mapper3->setMapping(p,folio);
+        connect(mapper3,SIGNAL(mapped(QString)),this,SLOT(pagarIntervencion(QString)));
+        ui->pagosConfirmados->addWidget(p,l,7,Qt::AlignTop);
+
+        l++;
+    }
+}
+
+void MainWindow::pagarIntervencion(QString folio)
+{
+    //parte para generar datos de pdf//
+    QSqlQuery user,fecha,doc,usuarionoti,fol,datosacomp,paciente,pago;
+    QString html,d,nombrePac,fechaPago,nombreDoc,fechaCita,usernoti,id_doc,horaEmer,descripcion,total,nombredc,iva,subtotal;
+
+    user.exec("select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as "
+              "us inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on doc.iddoctor=inter.idDoctor");
+    user.next();
+    paciente.exec("select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,"
+                  "CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as us inner join paciente as p on "
+                  "us.matricula=p.idUser inner join citasQuirofano as inter on p.idpaciente=inter.idPaciente");
+    paciente.next();
+
+    fecha.exec("select CURRENT_DATE()");
+    fecha.next();
+
+    doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc "
+             "on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor ;");
+    doc.next();
+
+
+    pago.exec("select inter.idCita,cs.idCitaQ,cs.Subtotal,cs.total,cs.importeIva from citasQuirofano as "
+              "inter inner join CostoServicio as cs on inter.idCita=cs.idCitaQ where idCitaQ="+folio+"");
+    pago.next();
+
+
+    nombredc=user.value(6).toString();
+    fechaPago=fecha.value(0).toString();
+    nombrePac=paciente.value(6).toString();
+    fechaCita=user.value(4).toString();
+    folio=user.value(0).toString();
+    horaEmer=user.value(3).toString();
+    descripcion=user.value(5).toString();
+    total=pago.value(3).toString();
+    iva=pago.value(4).toString();
+    subtotal=pago.value(2).toString();
+
+    //termina parte de generar datos de pdf//
+
+    //inicia parte para actualizar pago y enviar notificacion//
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Desea realizar el pago de la urgencia?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+    if (message.exec() == QMessageBox::Yes){
+
+    //querys para hacer actualizaciones de pago
+    QSqlQuery update,insert,mandarNoti;
+    QString mensaj,tipo,cita,user1,notificacion;
+
+    if(insert.exec("UPDATE cita SET pagada=1 WHERE idCita='"+folio+"'"))
+    {
+            insert.next();
+            qDebug()<<"pago efectuado";
+
+
+             //inicia parte para generar pdf de pago"
+             QMessageBox message(QMessageBox::Question,
+             tr("Information"), tr("¿Desea generar comprobante de pago?"), QMessageBox::Yes | QMessageBox::No);
+             message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+             message.setButtonText(QMessageBox::No, tr("Cancelar"));
+             if (message.exec() == QMessageBox::Yes){
+
+                 html=
+                         "<H1 align=center> Comprobante de pago </H1>"
+                         "<H6 align=center>*LOBOHOSPITAL* A.C DE C.V se deslinda de cualquier mal uso de este comprobante*</H6>"
+                         "<H5 align=center>25 pte #1230, colonia Volcanes, Puebla,Pue</H5>"
+                         "<br><br><br><br>"
+
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> NOMBRE Y APELLIDO DE PACIENTE INGRESADO :  "+nombrePac+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> MÉDICO RESPONSABLE : "+nombredc+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> FECHA DE INTERVENCIÓN : "+fechaCita+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> HORA ASIGNADA : "+horaEmer+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> FECHA DE EMISIÓN DE PAGO : "+fechaPago+" </div>"
+                         "<div align=left style='font-family: serif; font-weight: 600; font-size: 1.5em'> FORMA DE PAGO :  EFECTIVO </div>"
+                         "<br><br><br>"
+                         "<hr style=color: #0056b2; />"
+                         "<pre>"
+                         "NO.FOLIO     FECHA DE HOSPITALIZACIÓN    DESCRIPCION      PRECIO UNITARIO        IMPORTE"
+                         "</pre>"
+                         "<hr style=color: #0056b2; />"
+                         "<pre>"
+                          ""+folio+"                     "+fechaCita+"             "+descripcion+"         "+total+"  "+total+""
+                         "</pre>"
+                         "<hr style=color: #0056b2; />"
+                          "<br><br><br><br><br><br><br><br><br><br><br><br><br>"
+                         "<hr style=color: #0056b2; />"
+                         "<pre>"
+                         "                                                                              SUBTOTAL:"+subtotal+""
+                        "<br><br>"
+                         "                                                                              IVA:     "+iva+""
+                         "</pre>";
+
+                 QTextDocument document;
+                 document.setHtml(html);
+
+                 QPrinter printer(QPrinter::HighResolution);
+                  printer.setOutputFormat(QPrinter::PdfFormat);
+                  printer.setPaperSize(QPrinter::A4);
+                  auto nombreArchivo=QFileDialog::getSaveFileName(this,"Guardar archivo",QDir::rootPath(),"Archivos (*.pdf);;");
+                  if(nombreArchivo==""){
+
+                                      }
+                                      else{
+
+                                          printer.setOutputFileName(nombreArchivo);
+                                      }
+
+                  printer.setPageMargins(QMarginsF(15, 15, 15, 15));
+                                      document.print(&printer);
+
+             }
+             else
+             {
+
+             }
+
+             //termina parte para generar pdf//
+
+
+        }else
+        {
+                qDebug()<<"Error al enviar el pago"<<update.lastError().text();
+
+        }
+              }else
+               {
+            }
+}
+
+
+void MainWindow::on_pushButton_intervenciones_clicked()
+{
+    ui->stackedWidget_perfilPaciente->setCurrentIndex(3);
+    clearLayout(ui->pagoIntervenciones);
+    QString citas,est,pacNom;
+    QSqlQuery consulta,consulta2,pac;
+    est="1";
+    int f=0;
+    int ban=1;
+    QString r1,g1,b1;
+    r1="172,189,211";
+    QString r2,g2,b2;
+    r2="221,221,221";
+    QString rgb="";
+    QString folio,doctor,fecha,hora,nomDoct,descripc;
+    int i=0;
+    int l=0;
+    citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as "
+          "us inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on doc.iddoctor=inter.idDoctor";
+
+    if(!consulta2.exec(citas)) consulta2.lastError().text();
+    while(consulta2.next()){
+
+        folio=consulta2.value(0).toString();
+        doctor=consulta2.value(6).toString();
+        descripc=consulta2.value(5).toString();
+        hora=consulta2.value(3).toString();
+        fecha=consulta2.value(4).toString();
+        if(ban==1)
+        {
+            rgb=r1;
+            ban=2;
+        }
+        else
+        {
+            rgb=r2;
+            ban=1;
+        }
+
+        QLabel *fol=new QLabel;
+        fol->setText(folio);
+        fol->setFixedSize(QSize(100,25));
+        fol->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagoIntervenciones->addWidget(fol,l,0,Qt::AlignTop);
+
+
+        QLabel *m=new QLabel;
+        m->setText(doctor);
+        m->setFixedSize(QSize(115,25));
+        m->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagoIntervenciones->addWidget(m,l,1,Qt::AlignTop);
+
+        QLabel *np=new QLabel;
+        np->setText(descripc);
+        np->setFixedSize(QSize(140,25));
+        np->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagoIntervenciones->addWidget(np,l,2,Qt::AlignTop);
+
+
+        QLabel *r=new QLabel;
+        r->setText(fecha);
+        r->setStyleSheet("background-color: rgb("+rgb+")");
+        r->setFixedSize(QSize(100,25));
+        ui->pagoIntervenciones->addWidget(r,l,3,Qt::AlignTop);
+
+
+        QLabel *h=new QLabel;
+        h->setText(hora);
+        h->setFixedSize(QSize(100,25));
+        h->setStyleSheet("background-color: rgb("+rgb+")");
+        ui->pagoIntervenciones->addWidget(h,l,4,Qt::AlignTop);
+
+        QLabel *ss=new QLabel;
+        ss->setText(" ");
+        ss->setFixedSize(QSize(40,25));
+        ui->pagoIntervenciones->addWidget(ss,l,5,Qt::AlignTop);
+
+        QPushButton *p= new QPushButton();
+        p->setText("Pagar con Tarjeta");
+        p->setFixedSize(QSize(120,25));
+        p->setStyleSheet("background-color: rgb(138,198,242)");
+        QSignalMapper *mapper3=new QSignalMapper(this);
+        connect(p,SIGNAL(clicked(bool)),mapper3,SLOT(map()));
+        mapper3->setMapping(p,folio);
+        connect(mapper3,SIGNAL(mapped(QString)),this,SLOT(pagarIntervencionTarjeta(QString)));
+        ui->pagoIntervenciones->addWidget(p,l,7,Qt::AlignTop);
+
+        l++;
+    }
+}
+
+void MainWindow::pagarIntervencionTarjeta(QString folio)
+{
+    QString consulta;
+    QSqlQuery query;
+    query.exec("select inter.idCita,us.matricula from usuario as  us inner join paciente as p "
+           "on us.matricula=p.idUser inner join citasQuirofano as inter on inter.idCita='"+folio+"'");
+    query.next();
+    folio=query.value(0).toString();
+    qDebug()<<"folio:"<<folio;
+    QMessageBox messageBox(QMessageBox::Warning,
+                           tr(""), tr("Cita cancelada"), QMessageBox::Yes);
+    messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+    QMessageBox message(QMessageBox::Question,
+                        tr("Warning"), tr("¿Estas seguro de pagar tu cita?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+    QMessageBox metodo(QMessageBox::Question,
+                        tr("Warning"), tr("¿Como quiere pagar?"), QMessageBox::Yes | QMessageBox::No);
+    metodo.setButtonText(QMessageBox::Yes, tr("Ventanilla"));
+    metodo.setButtonText(QMessageBox::No, tr("Tarjeta de Crédito"));
+    if (message.exec() == QMessageBox::Yes){
+
+        //Preguntar método de pago
+        if (metodo.exec() == QMessageBox::Yes){
+            //Notificar al cajero
+            QMessageBox::information(this,"Ventanilla","Pase a pagar a ventanilla con su folio de intervencion.");
+        }
+        else{
+                pagoIt = new pagoIntervenciones(folio,this);
+                pagoIt->show();
+                ocultar=new QTimer(this);
+                connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaCitas()));
+                ocultar->start(1000);
+        }
+    }
 }

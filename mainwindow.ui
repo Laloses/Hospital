@@ -141,7 +141,7 @@ padding-top:0;</string>
             <string/>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="imgs/imgs.qrc">
              <normaloff>:/imgs/logofinal1.png</normaloff>:/imgs/logofinal1.png</iconset>
            </property>
            <property name="iconSize">
@@ -480,7 +480,7 @@ border:none
 </string>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -1996,7 +1996,7 @@ border:none;</string>
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="imgs/imgs.qrc">
                     <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -2203,6 +2203,20 @@ QPushButton:focus{
             </widget>
            </item>
            <item>
+            <widget class="Line" name="line_11">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_intervenciones">
+             <property name="text">
+              <string>Intervenciones</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer_31">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -2251,7 +2265,7 @@ QPushButton:focus{
                <string/>
               </property>
               <property name="icon">
-               <iconset>
+               <iconset resource="imgs/imgs.qrc">
                 <normaloff>:/imgs/notification2.png</normaloff>:/imgs/notification2.png</iconset>
               </property>
               <property name="iconSize">
@@ -2327,7 +2341,7 @@ color:red;
 </string>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="page_miPerfilPac">
            <layout class="QGridLayout" name="gridLayout_39">
@@ -2578,7 +2592,7 @@ background-color:transparent;</string>
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap>:/imgs/email.png</pixmap>
+                           <pixmap resource="imgs/imgs.qrc">:/imgs/email.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>true</bool>
@@ -2628,7 +2642,7 @@ background-color:transparent</string>
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap>:/imgs/phone.png</pixmap>
+                           <pixmap resource="imgs/imgs.qrc">:/imgs/phone.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>true</bool>
@@ -2681,7 +2695,7 @@ background-color:transparent</string>
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap>:/imgs/calendar.png</pixmap>
+                           <pixmap resource="imgs/imgs.qrc">:/imgs/calendar.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>true</bool>
@@ -2747,7 +2761,7 @@ background-color:transparent</string>
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap>:/imgs/password.png</pixmap>
+                           <pixmap resource="imgs/imgs.qrc">:/imgs/password.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>true</bool>
@@ -2819,7 +2833,7 @@ background-color:transparent;</string>
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset>
+                           <iconset resource="imgs/imgs.qrc">
                             <normaloff>:/imgs/NoView.png</normaloff>:/imgs/NoView.png</iconset>
                           </property>
                           <property name="iconSize">
@@ -2852,7 +2866,7 @@ background-color:transparent;</string>
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap>:/imgs/passwordConf.png</pixmap>
+                           <pixmap resource="imgs/imgs.qrc">:/imgs/passwordConf.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>true</bool>
@@ -2921,7 +2935,7 @@ background-color:transparent;</string>
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset>
+                           <iconset resource="imgs/imgs.qrc">
                             <normaloff>:/imgs/NoView.png</normaloff>:/imgs/NoView.png</iconset>
                           </property>
                           <property name="iconSize">
@@ -3606,7 +3620,7 @@ background-color:transparent;</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset>
+                     <iconset resource="imgs/imgs.qrc">
                       <normaloff>:/imgs/search.png</normaloff>:/imgs/search.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -3962,6 +3976,52 @@ background-color:transparent;</string>
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="page_16">
+           <widget class="QWidget" name="widget_13" native="true">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>851</width>
+              <height>351</height>
+             </rect>
+            </property>
+            <widget class="QScrollArea" name="scrollArea_12">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>9</y>
+               <width>831</width>
+               <height>341</height>
+              </rect>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_13">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>829</width>
+                <height>339</height>
+               </rect>
+              </property>
+              <widget class="QWidget" name="gridLayoutWidget_2">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>9</y>
+                 <width>811</width>
+                 <height>321</height>
+                </rect>
+               </property>
+               <layout class="QGridLayout" name="pagoIntervenciones"/>
+              </widget>
+             </widget>
+            </widget>
+           </widget>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -4180,7 +4240,7 @@ QPushButton:focus{
                <string/>
               </property>
               <property name="icon">
-               <iconset>
+               <iconset resource="imgs/imgs.qrc">
                 <normaloff>:/imgs/notification2.png</normaloff>:/imgs/notification2.png</iconset>
               </property>
               <property name="iconSize">
@@ -4298,7 +4358,7 @@ QPushButton:focus{
                     <x>0</x>
                     <y>0</y>
                     <width>230</width>
-                    <height>382</height>
+                    <height>80</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -4441,7 +4501,7 @@ background-color:transparent;</string>
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>:/imgs/diploma.png</pixmap>
+                   <pixmap resource="imgs/imgs.qrc">:/imgs/diploma.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -4508,7 +4568,7 @@ background-color:transparent</string>
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>:/imgs/horario.png</pixmap>
+                   <pixmap resource="imgs/imgs.qrc">:/imgs/horario.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -4561,7 +4621,7 @@ background-color:transparent</string>
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>:/imgs/consultorio.png</pixmap>
+                   <pixmap resource="imgs/imgs.qrc">:/imgs/consultorio.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -4611,7 +4671,7 @@ background-color:transparent</string>
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>:/imgs/email.png</pixmap>
+                   <pixmap resource="imgs/imgs.qrc">:/imgs/email.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -4667,7 +4727,7 @@ background-color:transparent</string>
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>:/imgs/phone.png</pixmap>
+                   <pixmap resource="imgs/imgs.qrc">:/imgs/phone.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -4720,7 +4780,7 @@ background-color:transparent</string>
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>:/imgs/calendar.png</pixmap>
+                   <pixmap resource="imgs/imgs.qrc">:/imgs/calendar.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -4786,7 +4846,7 @@ background-color:transparent</string>
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>:/imgs/password.png</pixmap>
+                   <pixmap resource="imgs/imgs.qrc">:/imgs/password.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -4858,7 +4918,7 @@ background-color:transparent</string>
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="imgs/imgs.qrc">
                     <normaloff>:/imgs/NoView.png</normaloff>:/imgs/NoView.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -4891,7 +4951,7 @@ background-color:transparent</string>
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap>:/imgs/passwordConf.png</pixmap>
+                   <pixmap resource="imgs/imgs.qrc">:/imgs/passwordConf.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -4960,7 +5020,7 @@ background-color:transparent</string>
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="imgs/imgs.qrc">
                     <normaloff>:/imgs/NoView.png</normaloff>:/imgs/NoView.png</iconset>
                   </property>
                   <property name="iconSize">
@@ -5281,8 +5341,8 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>301</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -5689,7 +5749,7 @@ background-color:transparent;</string>
                  <string>Regresar</string>
                 </property>
                 <property name="icon">
-                 <iconset>
+                 <iconset resource="imgs/imgs.qrc">
                   <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5824,8 +5884,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>314</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_37">
@@ -6395,7 +6455,7 @@ p, li { white-space: pre-wrap; }
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>402</width>
+                     <width>354</width>
                      <height>412</height>
                     </rect>
                    </property>
@@ -6494,7 +6554,7 @@ p, li { white-space: pre-wrap; }
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset>
+                         <iconset resource="imgs/imgs.qrc">
                           <normaloff>:/imgs/mas.png</normaloff>:/imgs/mas.png</iconset>
                         </property>
                         <property name="iconSize">
@@ -6614,7 +6674,7 @@ p, li { white-space: pre-wrap; }
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset>
+                 <iconset resource="imgs/imgs.qrc">
                   <normaloff>:/imgs/search.png</normaloff>:/imgs/search.png</iconset>
                 </property>
                </widget>
@@ -6757,7 +6817,7 @@ border:none</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset>
+                 <iconset resource="imgs/imgs.qrc">
                   <normaloff>:/imgs/search.png</normaloff>:/imgs/search.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6802,7 +6862,7 @@ border:none</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>849</width>
+                 <width>202</width>
                  <height>1092</height>
                 </rect>
                </property>
@@ -7433,7 +7493,7 @@ background-color:transparent;</string>
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap>:/imgs/email.png</pixmap>
+                           <pixmap resource="imgs/imgs.qrc">:/imgs/email.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>true</bool>
@@ -7483,7 +7543,7 @@ background-color:transparent</string>
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap>:/imgs/phone.png</pixmap>
+                           <pixmap resource="imgs/imgs.qrc">:/imgs/phone.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>true</bool>
@@ -7536,7 +7596,7 @@ background-color:transparent</string>
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap>:/imgs/calendar.png</pixmap>
+                           <pixmap resource="imgs/imgs.qrc">:/imgs/calendar.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>true</bool>
@@ -7586,7 +7646,7 @@ background-color:transparent</string>
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap>:/imgs/password.png</pixmap>
+                           <pixmap resource="imgs/imgs.qrc">:/imgs/password.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>true</bool>
@@ -7641,7 +7701,7 @@ background-color:transparent</string>
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset>
+                           <iconset resource="imgs/imgs.qrc">
                             <normaloff>:/imgs/NoView.png</normaloff>:/imgs/NoView.png</iconset>
                           </property>
                           <property name="iconSize">
@@ -7690,7 +7750,7 @@ background-color:transparent</string>
                            <string/>
                           </property>
                           <property name="pixmap">
-                           <pixmap>:/imgs/passwordConf.png</pixmap>
+                           <pixmap resource="imgs/imgs.qrc">:/imgs/passwordConf.png</pixmap>
                           </property>
                           <property name="scaledContents">
                            <bool>true</bool>
@@ -7742,7 +7802,7 @@ background-color:transparent</string>
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset>
+                           <iconset resource="imgs/imgs.qrc">
                             <normaloff>:/imgs/NoView.png</normaloff>:/imgs/NoView.png</iconset>
                           </property>
                           <property name="iconSize">
@@ -7996,7 +8056,7 @@ background-color:transparent</string>
            <widget class="QLabel" name="label_35">
             <property name="geometry">
              <rect>
-              <x>250</x>
+              <x>290</x>
               <y>-10</y>
               <width>886</width>
               <height>41</height>
@@ -8270,7 +8330,7 @@ background:transparent;</string>
                  <string>Menú</string>
                 </property>
                 <property name="icon">
-                 <iconset>
+                 <iconset resource="imgs/imgs.qrc">
                   <normaloff>:/imgs/home.png</normaloff>:/imgs/home.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -8329,8 +8389,8 @@ background:transparent;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>409</width>
-                      <height>321</height>
+                      <width>20</width>
+                      <height>20</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_14">
@@ -8681,7 +8741,7 @@ background:transparent;
                  <string>Regresar</string>
                 </property>
                 <property name="icon">
-                 <iconset>
+                 <iconset resource="imgs/imgs.qrc">
                   <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -9011,7 +9071,7 @@ background:transparent;
                <string>Menu</string>
               </property>
               <property name="icon">
-               <iconset>
+               <iconset resource="imgs/imgs.qrc">
                 <normaloff>:/imgs/home.png</normaloff>:/imgs/home.png</iconset>
               </property>
               <property name="iconSize">
@@ -9484,7 +9544,7 @@ background:transparent;</string>
                <string>Menu</string>
               </property>
               <property name="icon">
-               <iconset>
+               <iconset resource="imgs/imgs.qrc">
                 <normaloff>:/imgs/home.png</normaloff>:/imgs/home.png</iconset>
               </property>
               <property name="iconSize">
@@ -10364,7 +10424,7 @@ background:transparent;
              <string>Menu</string>
             </property>
             <property name="icon">
-             <iconset>
+             <iconset resource="imgs/imgs.qrc">
               <normaloff>:/imgs/home.png</normaloff>:/imgs/home.png</iconset>
             </property>
             <property name="iconSize">
@@ -10815,7 +10875,7 @@ font-size:10pt;</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset>
+                     <iconset resource="imgs/imgs.qrc">
                       <normaloff>:/imgs/search.png</normaloff>:/imgs/search.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -10972,6 +11032,8 @@ font-size:10pt;</string>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="imgs/imgs.qrc"/>
+ </resources>
  <connections/>
 </ui>

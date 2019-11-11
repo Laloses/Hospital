@@ -33,6 +33,7 @@ SOURCES += \
         mainwindow.cpp \
         mostrarhistoclinico.cpp \
         pagarcitaspaciente.cpp \
+        pagointervenciones.cpp \
         registrodoctor.cpp \
         registropaciente.cpp \
         registrostaff.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
         mainwindow.h \
         mostrarhistoclinico.h \
         pagarcitaspaciente.h \
+        pagointervenciones.h \
         registrodoctor.h \
         registropaciente.h \
         registrostaff.h \
@@ -57,6 +59,7 @@ FORMS += \
         mainwindow.ui \
         mostrarhistoclinico.ui \
         pagarcitaspaciente.ui \
+        pagointervenciones.ui \
         tipdeldia.ui
 
 RC_ICONS = icono.ico
