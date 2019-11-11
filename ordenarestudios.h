@@ -28,7 +28,7 @@ class OrdenarEstudios : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit OrdenarEstudios(QWidget *parent = nullptr);
+    explicit OrdenarEstudios(QString, QWidget *parent = nullptr);
     ~OrdenarEstudios();
     void imprimirOrden(QPrinter* printer,QSqlQuery& Query,QString,QString,QString,QString,QString);
 
@@ -44,6 +44,18 @@ private slots:
 
 private:
     Ui::OrdenarEstudios *ui;
+
+    QString idCita1;
+
+    QSqlDatabase database;
+    QSqlQueryModel *model;
+
+    QSqlQuery *datosPaciente;
+    QSqlQuery *datosDoctor;
+
+    QString paciente;
+    QString doctor;
+
 };
 
 #endif // ORDENARESTUDIOS_H

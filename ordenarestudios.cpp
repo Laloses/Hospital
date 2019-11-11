@@ -1,11 +1,41 @@
 #include "ordenarestudios.h"
 #include "ui_ordenarestudios.h"
 
-OrdenarEstudios::OrdenarEstudios(QWidget *parent) :
+OrdenarEstudios::OrdenarEstudios(QString idCita, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::OrdenarEstudios)
 {
     ui->setupUi(this);
+
+    idCita1 = idCita;
+
+    //Conexion a la base de datos
+    database= QSqlDatabase::addDatabase("QMYSQL");
+    database.setHostName("localhost");
+    database.setPort(3306);
+    database.setDatabaseName("lobohospital");
+    database.setUserName("root");
+    database.setPassword("");
+    if(!database.open()){
+        qDebug()<<database.lastError().text();
+    }
+    else {
+        qDebug()<<"Base de datos conectada";
+    }
+
+    datosPaciente = new QSqlQuery;
+    datosPaciente->prepare("SELECT CONCAT_WS( ' ', usuario.nombre, usuario.appaterno, usuario.apmaterno ) AS Paciente, paciente.idpaciente FROM cita INNER JOIN paciente ON paciente.idpaciente = cita.doctor INNER JOIN usuario ON paciente.idUser = usuario.matricula WHERE cita.idCita ='"+idCita+"'");
+    datosPaciente->exec();
+    datosPaciente->next();
+    paciente = datosPaciente->value(0).toString();
+    datosDoctor = new QSqlQuery;
+    datosDoctor->prepare("SELECT CONCAT_WS( ' ', usuario.nombre, usuario.appaterno, usuario.apmaterno ) AS Doctor, doctor.iddoctor FROM cita INNER JOIN doctor ON doctor.iddoctor = cita.doctor INNER JOIN usuario ON doctor.idUser = usuario.matricula WHERE cita.idCita ='"+idCita+"'");
+    datosDoctor->exec();
+    datosDoctor->next();
+    doctor = datosDoctor->value(0).toString();
+
+    ui->nombrePa->setText(paciente);
+
     QString tipoEst;
         QSqlQuery tipo;
         tipoEst="select DISTINCT tipoEst from EstudiosMedicos;";
@@ -67,12 +97,14 @@ void OrdenarEstudios::on_agregaEst_clicked()
 
 void OrdenarEstudios::on_btnPrint_clicked()
 {
-    QPrinter printer(QPrinter::HighResolution);
+    QPrinter printer(QPrinter::ScreenResolution);
               printer.setOrientation(QPrinter::Landscape);
               printer.setPageSize(QPrinter::A5);
               printer.setOutputFormat(QPrinter::PdfFormat);
               auto nombreArchivo=QFileDialog::getSaveFileName(this,"Guardar archivo",QDir::rootPath(),"Archivos (*.pdf);;");
               printer.setOutputFileName(nombreArchivo);
+              printer.setPageMargins(20,20,20,20,QPrinter::Millimeter);
+
 
               QString estu,nombrePac,docN,cedula,descripcion;
                 descripcion=ui->recomendacion->toPlainText();
@@ -145,18 +177,17 @@ void OrdenarEstudios::imprimirOrden(QPrinter *printer, QSqlQuery &Query, QString
              const int rowCount = Query.size();
              const int columnCount = Query.record().count();
 
-
-
              out <<  "<html>\n"
                  "<head>\n"
+                 "<link rel='stylesheet' type='text/css' href='format.css'>"
                  "<meta Content=\"Text/html; charset=Windows-1251\">\n"
                  <<  QString("<title>%1</title>\n").arg("TITLE OF TABLE")
                  <<  "</head>\n"
                   "<body>"
                      "<h2>Orden de Estudios de Laboratorio</h2>"
-                 "<p> <b>Doctor: </b><samp>"+DocN+"</samp>   </p>"
+                 "<p> <b>Doctor: </b><samp>"+doctor+"</samp>   </p>"
                      "<p> <b>Cedula Profesional: </b> <samp>"+Cedula+"</samp>    </p> "
-                     "<p> <b>Paciente: </b> <samp>"+Paciente+"</samp>    </p>"
+                     "<p> <b>Paciente: </b> <samp>"+paciente+"</samp>    </p>"
                      "<p> <b>Fecha: </b><samp>"+Fecha+"</samp>   </p> "
                  "</body>"
                      "<BR>"
@@ -181,16 +212,19 @@ void OrdenarEstudios::imprimirOrden(QPrinter *printer, QSqlQuery &Query, QString
              out <<  "</table>\n";
              out << "<p> <h3>Indicaciones: </h3></p>";
              out <<"<p>"+indicaciones+" </p>";
-             //out << "<BR>";
+             out << "<BR>";
+             out << "<BR>";
              out <<"<center><p>__________________________________ </p></center>"
                    "<center><h4>Firma del doctor </h4></center>"
                  "</body>\n"
                  "</html>\n";
 
-
-
+             QSizeF paperSize;
+             paperSize.setWidth(printer->width());
+             paperSize.setHeight(printer->height());
              QTextDocument document;
              document.setHtml(strStream);
+             document.setPageSize(paperSize);
              document.print(printer);
 }
 

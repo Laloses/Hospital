@@ -4654,7 +4654,7 @@ void MainWindow::on_pb_ordenarI_clicked()
 
 void MainWindow::on_btnEstudios_clicked()
 {
-    OrdenarEstudios* ventanaEstudios = new OrdenarEstudios(this);
+    OrdenarEstudios* ventanaEstudios = new OrdenarEstudios(ui->le_folioCita->text(), this);
     ventanaEstudios->show();
 }
 
