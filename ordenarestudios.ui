@@ -20,12 +20,12 @@
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>13</x>
       <y>10</y>
-      <width>591</width>
+      <width>594</width>
       <height>361</height>
      </rect>
     </property>
@@ -116,7 +116,7 @@
                <property name="minimumSize">
                 <size>
                  <width>170</width>
-                 <height>0</height>
+                 <height>25</height>
                 </size>
                </property>
               </widget>
@@ -160,7 +160,7 @@
                <property name="minimumSize">
                 <size>
                  <width>170</width>
-                 <height>0</height>
+                 <height>25</height>
                 </size>
                </property>
               </widget>
@@ -239,7 +239,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>Recomendaciones:</string>
+                <string>Indicaciones:</string>
                </property>
               </widget>
              </item>
@@ -276,13 +276,13 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
         <widget class="QWidget" name="widget" native="true">
          <property name="minimumSize">
           <size>
-           <width>250</width>
+           <width>280</width>
            <height>300</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>250</width>
+           <width>280</width>
            <height>330</height>
           </size>
          </property>
@@ -297,7 +297,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>230</width>
+               <width>260</width>
                <height>299</height>
               </rect>
              </property>

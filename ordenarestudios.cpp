@@ -68,8 +68,8 @@ void OrdenarEstudios::on_agregaEst_clicked()
 void OrdenarEstudios::on_btnPrint_clicked()
 {
     QPrinter printer(QPrinter::HighResolution);
-              printer.setOrientation(QPrinter::Portrait);
-              printer.setPageSize(QPrinter::A4);
+              printer.setOrientation(QPrinter::Landscape);
+              printer.setPageSize(QPrinter::A5);
               printer.setOutputFormat(QPrinter::PdfFormat);
               auto nombreArchivo=QFileDialog::getSaveFileName(this,"Guardar archivo",QDir::rootPath(),"Archivos (*.pdf);;");
               printer.setOutputFileName(nombreArchivo);
@@ -82,6 +82,7 @@ void OrdenarEstudios::on_btnPrint_clicked()
               Estudios.exec(estu);
 
               imprimirOrden(&printer,Estudios,docN,cedula,nombrePac,QDate::currentDate().toString(),descripcion);
+              this->close();
 }
 
 
@@ -152,10 +153,10 @@ void OrdenarEstudios::imprimirOrden(QPrinter *printer, QSqlQuery &Query, QString
                  <<  QString("<title>%1</title>\n").arg("TITLE OF TABLE")
                  <<  "</head>\n"
                   "<body>"
-                     "<h1>Orden de Estudios de Laboratorio</h1>"
+                     "<h2>Orden de Estudios de Laboratorio</h2>"
                  "<p> <b>Doctor: </b><samp>"+DocN+"</samp>   </p>"
-                     "<p> <b>Cedula: Profesional </b> <samp>"+Cedula+"</samp>    </p> "
-                     "<p> <b>Pacient:e </b> <samp>"+Paciente+"</samp>    </p>"
+                     "<p> <b>Cedula Profesional: </b> <samp>"+Cedula+"</samp>    </p> "
+                     "<p> <b>Paciente: </b> <samp>"+Paciente+"</samp>    </p>"
                      "<p> <b>Fecha: </b><samp>"+Fecha+"</samp>   </p> "
                  "</body>"
                      "<BR>"
@@ -178,9 +179,11 @@ void OrdenarEstudios::imprimirOrden(QPrinter *printer, QSqlQuery &Query, QString
              }
 
              out <<  "</table>\n";
+             out << "<p> <h3>Indicaciones: </h3></p>";
              out <<"<p>"+indicaciones+" </p>";
-             out <<"<p>_____ </p>"
-                   "<p>firma del doctor </p>"
+             //out << "<BR>";
+             out <<"<center><p>__________________________________ </p></center>"
+                   "<center><h4>Firma del doctor </h4></center>"
                  "</body>\n"
                  "</html>\n";
 
