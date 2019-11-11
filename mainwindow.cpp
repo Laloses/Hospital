@@ -5275,8 +5275,12 @@ void MainWindow::on_pushButton_intervenciones_clicked()
     QString folio,doctor,fecha,hora,nomDoct,descripc;
     int i=0;
     int l=0;
-    citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as "
-          "us inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on doc.iddoctor=inter.idDoctor";
+    citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) "
+          "from usuario as us "
+          "inner join doctor as doc "
+          "on us.matricula=doc.idUser "
+          "inner join citasQuirofano as inter"
+          " on doc.iddoctor=inter.idDoctor";
 
     if(!consulta2.exec(citas)) consulta2.lastError().text();
     while(consulta2.next()){
