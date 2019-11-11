@@ -619,7 +619,7 @@ QString MainWindow::calcularEdad(QString fechaN){
     QSqlQuery fechaActual;
     qDebug()<<"fecha: "+fechaN;
     //Restamos los años, pero comparamos si ya paso el mes de su fecha de nacimiento
-    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR("+fechaN+") + IF( DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT("+fechaN+",'%m-%d'),0, -1)") ){
+    if( fechaActual.exec("SELECT YEAR(CURDATE())-YEAR('"+fechaN+"') + IF( DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT('"+fechaN+"','%m-%d'),0, -1)") ){
         fechaActual.next();
         edad=fechaActual.value(0).toString();
         qDebug()<<"Edad: "+edad;
@@ -698,7 +698,8 @@ void MainWindow::on_pushButton_respuesta_clicked()
                               ui->lineEdit_telefono->text(),
                               imgRoute,
                              idPregunta,
-                              ui->lineEdit_respuesta->text());
+                              ui->lineEdit_respuesta->text(),
+                                ui->le_sexo->text());
 
        }
        if(ui->radioButton_doc->isChecked()){
