@@ -347,6 +347,33 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
         }
         else if(tipo==3)
         {
+            especialidad=lo.getEspecialidad();
+            qDebug()<<"especialidad"<<especialidad;
+            if(especialidad=="19"){
+             qDebug()<<"eres un doctor pero tu eres el triar";
+             ui->lineEdit_idUsuario->clear();
+             ui->lineEdit_passwordLogin->clear();
+             ui->stackedWidget_principal->setCurrentIndex(3);
+             ui->stackedWidget_perfilDoctor->setCurrentIndex(9);
+             ui->pushButton_salir->setHidden(false);
+             ui->pushButton_login->setHidden(true);
+             ui->pushButton_registro->setHidden(true);
+
+             ui->pushButton_horarioDoc->hide();
+             ui->pb_rechazarCitas->hide();
+             ui->pb_realizarConsulta->hide();
+             ui->pushButton_historial->hide();
+             ui->pb_inter->hide();
+             ui->pushButton_4->hide();
+             ui->butonNotifi_4->hide();
+             ui->notificacionL_4->hide();
+             ui->line_10->hide();
+             ui->line_7->hide();
+             ui->line_12->hide();
+             ui->line_13->hide();
+             ui->line_14->hide();
+             id_doctor=lo.getIdDoctor();
+            }else {
             qDebug()<<"eres un doctor";
 
             ui->pushButton_salir->setHidden(false);
@@ -426,8 +453,10 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
                 ui->notificacionL_4->setText(num);
                 ui->notificacionL_4->show();
             }
+
+          }
             on_pushButton_miPerfil_clicked();
-        }
+       }
         else if(tipo==4)
         {
             qDebug()<<"eres de staff";
@@ -499,6 +528,19 @@ void MainWindow::on_pushButton_salir_clicked()
     ui->tableHorario->clear();
     //mostramos cosas del menu de arriba
     ui->pb_remedios->setHidden(true);
+    ui->pushButton_horarioDoc->show();
+    ui->pb_rechazarCitas->show();
+    ui->pb_realizarConsulta->show();
+    ui->pushButton_historial->show();
+    ui->pb_inter->show();
+    ui->pushButton_4->show();
+    ui->butonNotifi_4->show();
+    ui->notificacionL_4->show();
+    ui->line_10->show();
+    ui->line_7->show();
+    ui->line_12->show();
+    ui->line_13->show();
+    ui->line_14->show();
     mostrarMenuP();
 }
 
@@ -4589,7 +4631,6 @@ void MainWindow::actTablaCitas()
     clearLayout(ui->citasLay_2);
     mostrarCitas();
 }
-// ///
 
 void MainWindow::on_pushButton_2_clicked()
 {
@@ -4998,5 +5039,190 @@ void MainWindow::on_agregarCuarto_clicked()
     }
 
 
+}
+void MainWindow::on_pushButton_guardaUrgencia_clicked()
+{
+    QString nombre,llegada,color,causas,signos,nombreAcom,telefono,direccion,parentescos,hora,idEspecialidad;
+    //saber la fecha
+    QDate fecha=QDate::currentDate();
+    QString fecha_text=fecha.toString("yyyy-MM-dd");
+    // ----------------------------------------------
+    //saber la hora
+    QTime time=QTime::currentTime();
+    QString time_text=time.toString("hh:mm:s ap");
 
+    if((time.second() % 3)==0){
+    time_text[6]=' ';
+    time_text[6]=' ';
+    }
+    qDebug()<<"fecha"<<fecha_text;
+    qDebug()<<"hora"<<time_text;
+    // ---------------------------------------------
+    // mensaje
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Seguro de guardar los datos?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+   // -------------------------------------------------------------------------
+   // mensaje de faltan campos
+    QMessageBox messageBox(QMessageBox::Warning,
+                                     tr("Warning"), tr("Por favor,ingrese los datos necesarios."), QMessageBox::Yes);
+             messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+   // -------------------------------------------------------------------------
+    //mensaje de informacion guardada
+    QMessageBox mensaje(QMessageBox::Question,
+     tr("Information"), tr("Datos guardadas"), QMessageBox::Yes);
+    mensaje.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+  // -----------------------------------------------------------------------------------
+   // expreciones regulares
+     QRegExp re("^[a-zZ-A]*$"), re2("^[0-9]*$");
+  // ------------------------------------------------------------------------------------
+    nombre=ui->lineEdit_nombreEmergencia->text();
+    llegada=ui->lineEdit_formaLLegada->text();
+    causas=ui->plainTextEdit_causas->toPlainText();
+    signos=ui->plainTextEdit_vitales->toPlainText();
+    nombreAcom=ui->lineEdit_nombreAcom->text();
+    telefono=ui->lineEdit_telefonoAcomp->text();
+    direccion=ui->lineEdit_dirrecion->text();
+    parentescos=ui->lineEdit_parentesco->text();
+
+    QSqlQuery registroEmergencia,query;
+    if(ui->lineEdit_nombreEmergencia->text()=="" || ui->lineEdit_formaLLegada->text()=="" || ui->plainTextEdit_causas->toPlainText()=="" || ui->plainTextEdit_vitales->toPlainText()=="" || ui->lineEdit_nombreAcom->text()=="" || ui->lineEdit_telefonoAcomp->text()=="" || ui->lineEdit_dirrecion->text()=="" || ui->lineEdit_parentesco->text()=="" ){
+
+        if (messageBox.exec() == QMessageBox::Yes){
+
+         }
+
+     }else {
+
+    if(ui->radioButton_azul->isChecked() ){
+        if (message.exec() == QMessageBox::Yes ){
+      qDebug()<<"entre azul";
+      color="azul";
+    registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
+                            " values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
+    registroEmergencia.next();
+
+     query.exec("SELECT MAX(idEmergencia)FROM urgencias");
+     query.next();
+     idEspecialidad=query.value(0).toString();
+     qDebug()<<"id especialidad"<<idEspecialidad;
+
+    registroEmergencia.exec("insert into acompanante(nombre,telefono,direcion,parentescos,idEmergencia)"
+                            "values('"+nombreAcom+"','"+telefono+"','"+direccion+"','"+parentescos+"','"+idEspecialidad+"')");
+    registroEmergencia.next();
+     ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
+     ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+     ui->radioButton_azul->setCheckable(false);
+     ui->radioButton_azul->setCheckable(true);
+
+     if (mensaje.exec() == QMessageBox::Yes){
+
+      }
+    return;
+    }
+        }if(ui->radioButton_verde->isChecked()){
+        if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"entre verde";
+         color="verde";
+        registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
+                                "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
+        registroEmergencia.next();
+
+         query.exec("SELECT MAX(idEmergencia)FROM urgencias");
+         query.next();
+         idEspecialidad=query.value(0).toString();
+         qDebug()<<"id especialidad"<<idEspecialidad;
+
+        registroEmergencia.exec("insert into acompanante(nombre,telefono,direcion,parentescos,idEmergencia)"
+                                "values('"+nombreAcom+"','"+telefono+"','"+direccion+"','"+parentescos+"','"+idEspecialidad+"')");
+        registroEmergencia.next();
+        ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
+        ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        ui->radioButton_verde->setCheckable(false);
+        ui->radioButton_verde->setCheckable(true);
+        if (mensaje.exec() == QMessageBox::Yes){
+
+         }
+    return;
+    }
+    }if(ui->radioButton_amarillo->isChecked()){
+        if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"entre amarillo";
+         color="amarillo";
+        registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
+                                "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
+        registroEmergencia.next();
+
+         query.exec("SELECT MAX(idEmergencia)FROM urgencias");
+         query.next();
+         idEspecialidad=query.value(0).toString();
+         qDebug()<<"id especialidad"<<idEspecialidad;
+
+        registroEmergencia.exec("insert into acompanante(nombre,telefono,direcion,parentescos,idEmergencia)"
+                                "values('"+nombreAcom+"','"+telefono+"','"+direccion+"','"+parentescos+"','"+idEspecialidad+"')");
+        registroEmergencia.next();
+        ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
+        ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        ui->radioButton_amarillo->setCheckable(false);
+        ui->radioButton_amarillo->setCheckable(true);
+        if (mensaje.exec() == QMessageBox::Yes){
+
+         }
+        return;
+    }
+        }if(ui->radioButton_naranja->isChecked()){
+        if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"entre naranja";
+         color="naranja";
+        registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
+                                "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
+        registroEmergencia.next();
+
+         query.exec("SELECT MAX(idEmergencia)FROM urgencias");
+         query.next();
+         idEspecialidad=query.value(0).toString();
+         qDebug()<<"id especialidad"<<idEspecialidad;
+
+        registroEmergencia.exec("insert into acompanante(nombre,telefono,direcion,parentescos,idEmergencia)"
+                                "values('"+nombreAcom+"','"+telefono+"','"+direccion+"','"+parentescos+"','"+idEspecialidad+"')");
+        registroEmergencia.next();
+        ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
+        ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        ui->radioButton_naranja->setCheckable(false);
+        ui->radioButton_naranja->setCheckable(true);
+        if (mensaje.exec() == QMessageBox::Yes){
+
+         }
+        return;
+    }
+     }if(ui->radioButton_rojo->isChecked()){
+        if (message.exec() == QMessageBox::Yes){
+        qDebug()<<"entre rojo";
+         color="rojo";
+        registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
+                                "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
+        registroEmergencia.next();
+
+         query.exec("SELECT MAX(idEmergencia)FROM urgencias");
+         query.next();
+         idEspecialidad=query.value(0).toString();
+         qDebug()<<"id especialidad"<<idEspecialidad;
+
+        registroEmergencia.exec("insert into acompanante(nombre,telefono,direcion,parentescos,idEmergencia)"
+                                "values('"+nombreAcom+"','"+telefono+"','"+direccion+"','"+parentescos+"','"+idEspecialidad+"')");
+        registroEmergencia.next();
+        ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
+        ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+        ui->radioButton_rojo->setCheckable(false);
+        ui->radioButton_rojo->setCheckable(true);
+        if (mensaje.exec() == QMessageBox::Yes){
+
+                 }
+        return;
+             }
+        }
+
+    }
 }

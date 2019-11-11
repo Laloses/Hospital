@@ -14,8 +14,9 @@ public:
     QString getIdStaff();
     QString getIdPaciente();
     QString getIdDoctor();
+    QString getEspecialidad();
     QSqlDatabase recurso;
-    QString idUser, idStaff, idPaciente, idDoctor;
+    QString idUser, idStaff, idPaciente, idDoctor,especialidad;
 };
 
 #endif // LOGIN_H

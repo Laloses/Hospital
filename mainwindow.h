@@ -33,7 +33,7 @@ private:
     Ui::MainWindow *ui;
     QSqlDatabase database;
     QSqlQueryModel *model;
-    QString id_usuario,id_staff,id_doctor,id_paciente;
+    QString id_usuario,id_staff,id_doctor,id_paciente,especialidad;
     QByteArray foto;
     QString imgRoute,matric,idremedios,idtip,idtipeditar;
     QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser;
@@ -293,6 +293,7 @@ private slots:
 
 
     void on_agregarCuarto_clicked();
+    void on_pushButton_guardaUrgencia_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

@@ -32,7 +32,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
     QString userval,claveval;
 
     //aqui hare los querys para encontrar el tipo de usuario
-    doctor1="select iddoctor,idUser,estado from doctor where idUser="+user;
+    doctor1="select iddoctor,idUser,estado,idEspecialidad from doctor where idUser="+user;
     staff1="select idstaff,idUser,estado from staff where idUser="+user;
     paciente1="select idpaciente,idUser from paciente where idUser="+user;
 
@@ -87,6 +87,7 @@ int login::ingresar(QString user, QString clave,QSqlDatabase base)
                             tipo=false;
                             idDoctor=doctor.value(0).toString();
                             idUser=userval;
+                            especialidad=doctor.value(3).toString();
                             return 3;
                         }
                         else {
@@ -157,6 +158,10 @@ QString login::getIdPaciente(){
 
 QString login::getIdDoctor(){
     return idDoctor;
+}
+
+QString login::getEspecialidad(){
+    return especialidad;
 }
 
 
