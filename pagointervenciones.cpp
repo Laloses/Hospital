@@ -10,7 +10,7 @@ pagoIntervenciones::pagoIntervenciones(QString p,QWidget *parent) :
     qDebug()<<"entre contructor";
     folioR=p;
     ui->label_inter->setText(folioR);
-
+	//oli
     QSqlQuery p2;
     p2.exec("select us.matricula from usuario as  us inner join paciente as p "
             "on us.matricula=p.idUser inner join citasQuirofano as inter on inter.idCita='"+folioR+"'");
