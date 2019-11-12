@@ -27,9 +27,10 @@ private slots:
 
     void on_pushButton_3_clicked();
 
-    void on_pb_agregar_clicked(QString id);
-
     void on_pushButton_2_clicked();
+
+    void on_pushButton_4_clicked();
+
 
 private:
     Ui::agregarUrgencia *ui;
@@ -39,8 +40,11 @@ private:
     void verDetalles(QSqlRecord datos);
     void verCompa(QString id);
     void nuevoExp();
-    void agregarExistente(QSqlRecord datos);
+    void agregarExistente(QString idE);
+    void llenarHistorial(QString id,QString idE);
     QString idPac;
+    void on_pb_llenarHistorial_clicked(QString idPac, QString idE);
+    void on_pb_agregar_clicked(QString id);
 };
 
 #endif // AGREGARURGENCIA_H
