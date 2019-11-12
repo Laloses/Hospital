@@ -48,7 +48,7 @@ padding-top:1px;
 border:1px solid black;}</string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="todas">
       <property name="styleSheet">
@@ -1304,14 +1304,14 @@ color:blue;</string>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_11">
              <item>
-              <widget class="QLabel" name="label_17">
+              <widget class="QLabel" name="label_19">
                <property name="text">
-                <string>Estado de llegada</string>
+                <string>Signos vitales</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPlainTextEdit" name="formaLlegada_2">
+              <widget class="QPlainTextEdit" name="signosVitales_2">
                <property name="enabled">
                 <bool>true</bool>
                </property>
@@ -1324,14 +1324,14 @@ color:blue;</string>
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_9">
                <item>
-                <widget class="QLabel" name="label_19">
+                <widget class="QLabel" name="label_17">
                  <property name="text">
-                  <string>Signos vitales</string>
+                  <string>Forma de llegada</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPlainTextEdit" name="signosVitales_2">
+                <widget class="QPlainTextEdit" name="formaLlegada_2">
                  <property name="enabled">
                   <bool>true</bool>
                  </property>
