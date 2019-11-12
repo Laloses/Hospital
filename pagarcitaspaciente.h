@@ -26,6 +26,8 @@ private slots:
 
     void on_cb_tarjetas_currentTextChanged(const QString &arg1);
 
+
+
 private:
     Ui::pagarCitasPaciente *ui;
     QString folioR;

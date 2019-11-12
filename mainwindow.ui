@@ -2223,6 +2223,20 @@ QPushButton:focus{
             </widget>
            </item>
            <item>
+            <widget class="Line" name="line_11">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_intervenciones">
+             <property name="text">
+              <string>Intervenciones</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer_31">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -2347,7 +2361,7 @@ color:red;
 </string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="page_miPerfilPac">
            <layout class="QGridLayout" name="gridLayout_39">
@@ -3982,6 +3996,52 @@ background-color:transparent;</string>
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="page_16">
+           <widget class="QWidget" name="widget_13" native="true">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>851</width>
+              <height>351</height>
+             </rect>
+            </property>
+            <widget class="QScrollArea" name="scrollArea_12">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>9</y>
+               <width>831</width>
+               <height>341</height>
+              </rect>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_13">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>829</width>
+                <height>339</height>
+               </rect>
+              </property>
+              <widget class="QWidget" name="gridLayoutWidget_2">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>9</y>
+                 <width>811</width>
+                 <height>321</height>
+                </rect>
+               </property>
+               <layout class="QGridLayout" name="pagoIntervenciones"/>
+              </widget>
+             </widget>
+            </widget>
+           </widget>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -5256,11 +5316,11 @@ background -color: red;
               <attribute name="horizontalHeaderCascadingSectionResizes">
                <bool>true</bool>
               </attribute>
-              <attribute name="horizontalHeaderDefaultSectionSize">
-               <number>119</number>
-              </attribute>
               <attribute name="horizontalHeaderMinimumSectionSize">
                <number>30</number>
+              </attribute>
+              <attribute name="horizontalHeaderDefaultSectionSize">
+               <number>119</number>
               </attribute>
               <attribute name="horizontalHeaderStretchLastSection">
                <bool>true</bool>
@@ -6225,7 +6285,7 @@ background-color:transparent;</string>
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                       </property>
                      </widget>
                     </item>
@@ -8317,17 +8377,109 @@ background-color:transparent</string>
            </layout>
           </widget>
           <widget class="QWidget" name="pagos">
-           <widget class="QLabel" name="label_35">
+           <widget class="QWidget" name="widget_12" native="true">
             <property name="geometry">
              <rect>
-              <x>240</x>
-              <y>80</y>
-              <width>191</width>
-              <height>121</height>
+              <x>10</x>
+              <y>50</y>
+              <width>861</width>
+              <height>341</height>
+             </rect>
+            </property>
+            <widget class="QScrollArea" name="scrollArea_11">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>0</y>
+               <width>841</width>
+               <height>331</height>
+              </rect>
+             </property>
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_12">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>839</width>
+                <height>329</height>
+               </rect>
+              </property>
+              <widget class="QWidget" name="gridLayoutWidget">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>821</width>
+                 <height>311</height>
+                </rect>
+               </property>
+               <layout class="QGridLayout" name="pagosConfirmados"/>
+              </widget>
+             </widget>
+            </widget>
+           </widget>
+           <widget class="QRadioButton" name="radioButton">
+            <property name="geometry">
+             <rect>
+              <x>160</x>
+              <y>30</y>
+              <width>82</width>
+              <height>17</height>
              </rect>
             </property>
             <property name="text">
-             <string>PAGOS abraham</string>
+             <string>Cita Médica</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_2">
+            <property name="geometry">
+             <rect>
+              <x>360</x>
+              <y>30</y>
+              <width>131</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Intervención Médica</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_4">
+            <property name="geometry">
+             <rect>
+              <x>640</x>
+              <y>30</y>
+              <width>82</width>
+              <height>17</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Urgencias</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_35">
+            <property name="geometry">
+             <rect>
+              <x>290</x>
+              <y>-10</y>
+              <width>886</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <family>MS Shell Dlg 2</family>
+              <pointsize>11</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>*Seleccione el tipo de pago correspondiente*</string>
             </property>
            </widget>
           </widget>
