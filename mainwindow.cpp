@@ -4606,6 +4606,9 @@ void MainWindow::actTablaCitas()
     }
     clearLayout(ui->citasLay_2);
     mostrarCitas();
+    clearLayout(ui->pagoIntervenciones);
+    on_pushButton_intervenciones_clicked();
+
 }
 // ///
 
@@ -5247,7 +5250,18 @@ void MainWindow::pagarIntervencion(QString folio)
             }
 }
 
+void MainWindow::actTablaInter()
+{
+    contador++;
+    if(contador==180){
+        ocultar->stop();
 
+    }
+
+    clearLayout(ui->pagoIntervenciones);
+    on_pushButton_intervenciones_clicked();
+
+}
 void MainWindow::on_pushButton_intervenciones_clicked()
 {
     ui->stackedWidget_perfilPaciente->setCurrentIndex(3);
@@ -5376,8 +5390,10 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
              pagoIntervenciones *pagoIt = new pagoIntervenciones(folio,this);
              pagoIt->show();
              ocultar=new QTimer(this);
-             connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaCitas()));
+             connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaInter()));
              ocultar->start(1000);
         }
     }
 }
+
+

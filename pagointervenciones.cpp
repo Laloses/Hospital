@@ -43,14 +43,16 @@ bool pagoIntervenciones::pagarIntervenciones(QString idUser, QString titular, QS
         if(insertar.exec("insert into tarjeta(idUser,titular,digitos,fechaV,codigsec) values("+idUser+",'"+ titular +"','"+digitos+"','"+fechaV+"','"+codigsec+"')") )
         {
             insertar.next();
-            if(update.exec("UPDATE cita SET pagada=1 WHERE idCita='"+ui->label_inter->text()+"'") ){
+            if(update.exec("update CostoServicio set estado=1 where idCitaQ='"+ui->label_inter->text()+"'") ){
+                qDebug()<<"pago actualizado";
                 return true;
             }
             else qDebug()<<"Error al actualizar el pago"<<insertar.lastError().text();
         } else qDebug()<<"Error al realizar pago"<<insertar.lastError().text();
     }
     else{
-        if(update.exec("UPDATE cita SET pagada=1 WHERE idCita='"+ui->label_inter->text()+"'") ){
+        if(update.exec("update CostoServicio set estado=1 where idCitaQ='"+ui->label_inter->text()+"'") ){
+
             return true;
         }
     }
@@ -127,7 +129,7 @@ void pagoIntervenciones::on_comboBox_currentTextChanged(const QString &arg1)
             if( tarjetas.at(i).value(3).toString() == arg1 ){
                 ui->lineEdit_titular->setText(tarjetas.at(i).value(2).toString());
                 ui->lineEdit_noTarjeta->setText(tarjetas.at(i).value(3).toString());
-                ui->dateEditVencimiento->setDate(tarjetas.at(i).value(4).toDate());
+                ui->dateEditVencimiento->setText(tarjetas.at(i).value(4).toString());
                 ui->lineEdit_cv->setText(tarjetas.at(i).value(5).toString());
                 ui->lineEdit_titular->setEnabled(false);
                 ui->lineEdit_noTarjeta->setEnabled(false);

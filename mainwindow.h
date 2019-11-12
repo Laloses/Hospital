@@ -270,6 +270,8 @@ private slots:
 
     void actTablaCitas();
 
+    void actTablaInter();
+
     void on_pushButton_historial_clicked();
 
     void on_pushButton_buscarHistMedico_clicked();
