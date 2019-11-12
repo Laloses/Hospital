@@ -27,5 +27,6 @@
         <file>rojo.png</file>
         <file>verde.png</file>
         <file>logoFinal_FondoEstudios.png</file>
+        <file>refresh.png</file>
     </qresource>
 </RCC>

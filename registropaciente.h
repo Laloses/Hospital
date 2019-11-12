@@ -12,11 +12,13 @@ private:
     QSqlQuery queryRegistro,queryYear;
      QString generarMatricula();
       QSqlDatabase database;
+      QString idUser,idPac;
 
 public:
     registropaciente();
     registropaciente(QString, int, QString, QString, QString);
-    QString registroPaciente(QString,QString,QString,QString,QString,QString,QString,QString,QString,QString,QString);
+    QString registroPaciente(QString,QString,QString,QString,QString,QString,QString,QString,QString,QString,QString,QString);
+    QString getIdPac();
 
 };
 
