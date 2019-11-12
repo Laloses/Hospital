@@ -1,10 +1,9 @@
 #include "pagarcitaspaciente.h"
 #include "ui_pagarcitaspaciente.h"
 #include "mainwindow.h"
-
-
 #include <QDebug>
 #include <QSqlQuery>
+
 pagarCitasPaciente::pagarCitasPaciente(QString p,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::pagarCitasPaciente)
@@ -25,6 +24,7 @@ pagarCitasPaciente::pagarCitasPaciente(QString p,QWidget *parent) :
     }
 
 }
+
 pagarCitasPaciente::~pagarCitasPaciente()
 {
     delete ui;
@@ -56,7 +56,6 @@ bool pagarCitasPaciente::pagarCitas(QString idUser, QString titular, QString dig
     }
     return false;
 }
-
 
 
 bool pagarCitasPaciente::on_pushButton_pagarC_clicked()

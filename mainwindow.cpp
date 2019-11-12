@@ -5255,7 +5255,7 @@ void MainWindow::on_pushButton_intervenciones_clicked()
     QString citas,est,pacNom;
     QSqlQuery consulta,consulta2,pac;
     est="1";
-    int f=0;
+    //int f=0;
     int ban=1;
     QString r1,g1,b1;
     r1="172,189,211";
@@ -5263,7 +5263,7 @@ void MainWindow::on_pushButton_intervenciones_clicked()
     r2="221,221,221";
     QString rgb="";
     QString folio,doctor,fecha,hora,nomDoct,descripc;
-    int i=0;
+    //int i=0;
     int l=0;
     citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) "
           "from usuario as us "
@@ -5373,11 +5373,11 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
             QMessageBox::information(this,"Ventanilla","Pase a pagar a ventanilla con su folio de intervencion.");
         }
         else{
-                pagoIt = new pagoIntervenciones(folio,this);
-                pagoIt->show();
-                ocultar=new QTimer(this);
-                connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaCitas()));
-                ocultar->start(1000);
+             pagoIntervenciones *pagoIt = new pagoIntervenciones(folio,this);
+             pagoIt->show();
+             ocultar=new QTimer(this);
+             connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaCitas()));
+             ocultar->start(1000);
         }
     }
 }

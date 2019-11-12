@@ -24,6 +24,7 @@
 #include <QtPrintSupport/QPrinter>
 
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -58,7 +59,7 @@ private:
     int contMedicinas;
     QString idCita1;
     pagarCitasPaciente *pagar;
-    pagoIntervenciones *pagoIt;
+    //pagoIntervenciones *pagoIt;
     QTimer *ocultar;
     int contador;
 

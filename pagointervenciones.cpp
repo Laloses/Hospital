@@ -7,8 +7,8 @@ pagoIntervenciones::pagoIntervenciones(QString p,QWidget *parent) :
     ui(new Ui::pagoIntervenciones)
 {
     ui->setupUi(this);
+    qDebug()<<"entre contructor";
     folioR=p;
-    ui->setupUi(this);
     ui->label_inter->setText(folioR);
 
     QSqlQuery p2;
@@ -59,6 +59,7 @@ bool pagoIntervenciones::pagarIntervenciones(QString idUser, QString titular, QS
 
 bool pagoIntervenciones::on_pushButton_PI_clicked()
 {
+    qDebug()<<"entre boton";
     bool flag=false;
     QRegExp letras("^[a-zZ-A ]*$"), numeros("^[0-9]*$");
     QString estiloMalo, estiloBueno;
@@ -91,6 +92,7 @@ bool pagoIntervenciones::on_pushButton_PI_clicked()
     {
           ui->lineEdit_noTarjeta->setStyleSheet(estiloMalo);
     }
+
     QString idUser,titular,digitos,fechaV,codigsec;
     QSqlQuery d;
     d.exec("select us.matricula from usuario as  us inner join paciente as p "
@@ -106,7 +108,7 @@ bool pagoIntervenciones::on_pushButton_PI_clicked()
         QMessageBox::warning(this,"Faltan campos","Por favor verifique los campos.");
     }else
     {
-        if ( pagarIntervenciones(idUser,titular,digitos,fechaV,codigsec) ){
+        if ( pagarIntervenciones(idUser,titular,digitos,fechaV,codigsec)==true){
             QMessageBox::information(this,"Correcto", "Pago realizado");
             this->close();
         }else{
@@ -119,6 +121,7 @@ bool pagoIntervenciones::on_pushButton_PI_clicked()
 
 void pagoIntervenciones::on_comboBox_currentTextChanged(const QString &arg1)
 {
+    qDebug()<<"entre";
     if(arg1!= "Nueva"){
         for(int i=0; i<tarjetas.size(); i++){
             if( tarjetas.at(i).value(3).toString() == arg1 ){
@@ -144,3 +147,4 @@ void pagoIntervenciones::on_comboBox_currentTextChanged(const QString &arg1)
         ui->lineEdit_cv->setEnabled(true);
     }
 }
+
