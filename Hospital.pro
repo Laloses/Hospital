@@ -40,8 +40,8 @@ SOURCES += \
         registrostaff.cpp \
         login.cpp \
         tipdeldia.cpp \
-    ordenarintervencion.cpp \
-    ordenarestudios.cpp
+        ordenarintervencion.cpp \
+        ordenarestudios.cpp
 
 HEADERS += \
         agregarUrgencia.h \
@@ -57,8 +57,8 @@ HEADERS += \
         registrostaff.h \
         login.h \
         tipdeldia.h \
-    ordenarintervencion.h \
-    ordenarestudios.h
+        ordenarintervencion.h \
+        ordenarestudios.h
 
 FORMS += \
         agregarUrgencia.ui \
@@ -67,10 +67,9 @@ FORMS += \
         mostrarhistoclinico.ui \
         pagarcitaspaciente.ui \
         tipdeldia.ui \
-    ordenarintervencion.ui \
-    ordenarestudios.ui
-        pagointervenciones.ui \
-        tipdeldia.ui
+        ordenarintervencion.ui \
+        ordenarestudios.ui \
+        pagointervenciones.ui
 
 RC_ICONS = icono.ico
 

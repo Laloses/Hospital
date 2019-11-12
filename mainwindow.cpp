@@ -5189,40 +5189,9 @@ void MainWindow::pagarUrgenciasV(QString folio)
                                       document.print(&printer);
 
              }
-             else
-             {
-
-                 libre=false;
-             }
     }
     }
-
-        if(libre==true)
-        {
-
-            QPushButton* Asignar = new QPushButton();
-            Asignar->setText(cuarto1.value(1).toString());
-            Asignar->setStyleSheet("border:solid 1px #5d80b6;border-radius:5px;background-color: #5d80b6;color: white;font: 11pt 'MS Shell Dlg 2';");
-            Asignar->setFixedSize(60,60);
-            ui->cuartos->addWidget(Asignar,r,c,1,1);
-
-
-            QSignalMapper *mapper2=new QSignalMapper(this);
-            connect(Asignar,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
-            mapper2->setMapping(Asignar,cuarto1.value(1).toString());
-            connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(PonerCuarto(QString)));
-
-            c++;
-            if(c==3)
-            {
-                r++;
-                c=0;
-            }
-        }
-
-
-
-    }
+}
 
 
 void MainWindow::AsginarCuartos(QString idSoli1)
