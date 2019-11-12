@@ -4707,6 +4707,8 @@ void MainWindow::on_radioButton_clicked()
 void MainWindow::pagarCitasEfect(QString folio)
 {
     //parte para generar datos de pdf//
+    qDebug()<<"folio"<<folio;
+
     QSqlQuery user,fecha,doc,usuarionoti;
     QString html,d,nombreUser,fechaPago,nombreDoc,fechaCita,usernoti;
     user.exec("select cit.idCita,CONCAT(' ', us.nombre,' ',us.appaterno,' ',us.apmaterno),cit.hora,cit.fecha from usuario as us inner join paciente as p on us.matricula=p.idUser inner join cita as cit on p.idUser=cit.matricula where cit.estado=1 and cit.pagada=0 and cit.preparada='Completada';");
@@ -4715,13 +4717,13 @@ void MainWindow::pagarCitasEfect(QString folio)
     fecha.next();
     doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.estado=1 and cit.pagada=0 and cit.preparada='Completada'");
     doc.next();
-    usuarionoti.exec("select matricula from cita where idCita="+folio+"");
 
     nombreUser=user.value(1).toString();
     fechaPago=fecha.value(0).toString();
     nombreDoc=doc.value(0).toString();
     fechaCita=user.value(3).toString();
     usernoti=usuarionoti.value(0).toString();
+    folio=user.value(0).toString();
     //termina parte de generar datos de pdf//
 
     //inicia parte para actualizar pago y enviar notificacion//
@@ -4733,24 +4735,13 @@ void MainWindow::pagarCitasEfect(QString folio)
 
     //querys para hacer actualizaciones de pago
     QSqlQuery update,insert,mandarNoti;
-    QString mensaj,tipo,cita,user1,notificacion,descrip,total;
-    QSqlQuery cita1;
-    cita1.exec(cita);
-    cita1.next();
-    mensaj="Se le informa que su cita con el no. de folio:"+folio+" ha sido pagada con éxito.";
-    tipo="1";
-    notificacion="insert into notificacion(tipo,texto,UserP) values("+tipo+",'"+mensaj+"',"+usernoti+");";
+    QString cita,user1,descrip,total;
     descrip="Consulta";
-    total="320";
-
+    total="500";
     if(update.exec("UPDATE cita SET pagada=1 WHERE idCita='"+folio+"'"))
-    {
-        update.next();
-        if(mandarNoti.exec(notificacion))
-        {
-            mandarNoti.next();
-             qDebug()<<"notificacion enviada bien";
-
+    {       
+            update.next();
+            qDebug()<<"pago actualizado";
              //inicia parte para generar pdf de pago"
              QMessageBox message(QMessageBox::Question,
              tr("Information"), tr("¿Desea generar comprobante de pago?"), QMessageBox::Yes | QMessageBox::No);
@@ -4775,14 +4766,15 @@ void MainWindow::pagarCitasEfect(QString folio)
                          "</pre>"
                          "<hr style=color: #0056b2; />"
                          "<pre>"
-                         ""+folio+"         "+fechaCita+"        "+descrip+"        "+total+"         "+total+""
+                         ""+folio+"            "+fechaCita+"        "+descrip+"           "+total+".00                "+total+".00"
                           "<br><br><br><br><br><br><br><br><br><br><br><br><br>"
+                         "<hr style=color: #0056b2; />"
                          "<pre>"
-                         "                                                                      SUBTOTAL:"+total+""
+                         "                                                                SUBTOTAL:   "+total+".00 MXN"
                          "</pre>"
                          "<br><br>"
                          "<pre>"
-                         "                                                                      TOTAL:   "+total+""
+                         "                                                                TOTAL:      "+total+".00 MXN"
                         ;
                  QTextDocument document;
                  document.setHtml(html);
@@ -4810,10 +4802,6 @@ void MainWindow::pagarCitasEfect(QString folio)
 
              //termina parte para generar pdf//
 
-            }else
-                {
-                    qDebug()<<"Error al enviar la notificacion"<<mandarNoti.lastError().text();
-                }
         }else
         {
                 qDebug()<<"Error al actualizar el pago"<<update.lastError().text();
@@ -4959,6 +4947,7 @@ void MainWindow::pagarUrgenciasV(QString folio)
                    "value('"+fechaPago+"','"+horaEmer+"',"+total+",'"+nombrePac+"',"+folio+")"))
     {
             insert.next();
+            qDebug()<<folio;
             qDebug()<<"pago efectuado";
 
 
@@ -4990,15 +4979,15 @@ void MainWindow::pagarUrgenciasV(QString folio)
                         "</pre>"
                          "<hr style=color: #0056b2; />"
                          "<pre>"
-                        ""+folio+"                "+fechaCita+"            "+descripcion+"           "+total+"               "+total+" "
+                        ""+folio+"                "+fechaCita+"             "+descripcion+"           "+total+"               "+total+" "
                          "</pre>"
                            " <br><br><br><br><br><br><br><br><br><br><br><br><br>"
                          "<hr style=color: #0056b2; />"
                          "<pre>"
-                         "                                                                             SUBTOTAL:"+total+""
+                         "                                                                           SUBTOTAL: "+total+""
                          "</pre>"
                           "<pre>"
-                         "                                                                              TOTAL:   "+total+"";
+                         "                                                                           TOTAL:   "+total+"";
                  QTextDocument document;
                  document.setHtml(html);
 
@@ -5164,11 +5153,12 @@ void MainWindow::pagarIntervencion(QString folio)
     iva=pago.value(4).toString();
     subtotal=pago.value(2).toString();
 
+
     //termina parte de generar datos de pdf//
 
     //inicia parte para actualizar pago y enviar notificacion//
     QMessageBox message(QMessageBox::Question,
-    tr("Information"), tr("¿Desea realizar el pago de la urgencia?"), QMessageBox::Yes | QMessageBox::No);
+    tr("Information"), tr("¿Desea realizar el pago de la intervencion?"), QMessageBox::Yes | QMessageBox::No);
     message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
     message.setButtonText(QMessageBox::No, tr("Cancelar"));
     if (message.exec() == QMessageBox::Yes){
@@ -5177,11 +5167,11 @@ void MainWindow::pagarIntervencion(QString folio)
     QSqlQuery update,insert,mandarNoti;
     QString mensaj,tipo,cita,user1,notificacion;
 
-    if(insert.exec("UPDATE cita SET pagada=1 WHERE idCita='"+folio+"'"))
+    if(insert.exec("update CostoServicio set estado=1 where idCitaQ='"+folio+"'"))
     {
             insert.next();
+            qDebug()<<folio;
             qDebug()<<"pago efectuado";
-
 
              //inicia parte para generar pdf de pago"
              QMessageBox message(QMessageBox::Question,
@@ -5209,15 +5199,15 @@ void MainWindow::pagarIntervencion(QString folio)
                          "</pre>"
                          "<hr style=color: #0056b2; />"
                          "<pre>"
-                          ""+folio+"                     "+fechaCita+"             "+descripcion+"         "+total+"  "+total+""
+                         ""+folio+"              "+fechaCita+"                "+descripcion+"       "+total+"             "+total+""
                          "</pre>"
                          "<hr style=color: #0056b2; />"
                           "<br><br><br><br><br><br><br><br><br><br><br><br><br>"
                          "<hr style=color: #0056b2; />"
                          "<pre>"
-                         "                                                                              SUBTOTAL:"+subtotal+""
+                         "                                                                           SUBTOTAL:"+subtotal+" MXN"
                         "<br><br>"
-                         "                                                                              IVA:     "+iva+""
+                         "                                                                           IVA:     "+iva+" %"
                          "</pre>";
 
                  QTextDocument document;
