@@ -110,7 +110,7 @@ border:none
 </string>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -1991,7 +1991,7 @@ color:red;
 </string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="page_miPerfilPac">
            <layout class="QGridLayout" name="gridLayout_39">
@@ -3627,50 +3627,36 @@ background-color:transparent;</string>
            </layout>
           </widget>
           <widget class="QWidget" name="page_16">
-           <widget class="QWidget" name="widget_13" native="true">
-            <property name="geometry">
-             <rect>
-              <x>10</x>
-              <y>40</y>
-              <width>851</width>
-              <height>351</height>
-             </rect>
-            </property>
-            <widget class="QScrollArea" name="scrollArea_12">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>9</y>
-               <width>831</width>
-               <height>341</height>
-              </rect>
-             </property>
-             <property name="widgetResizable">
-              <bool>true</bool>
-             </property>
-             <widget class="QWidget" name="scrollAreaWidgetContents_13">
-              <property name="geometry">
-               <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>829</width>
-                <height>339</height>
-               </rect>
-              </property>
-              <widget class="QWidget" name="gridLayoutWidget_2">
-               <property name="geometry">
-                <rect>
-                 <x>10</x>
-                 <y>9</y>
-                 <width>811</width>
-                 <height>321</height>
-                </rect>
-               </property>
-               <layout class="QGridLayout" name="pagoIntervenciones"/>
-              </widget>
+           <layout class="QVBoxLayout" name="verticalLayout_50">
+            <item>
+             <widget class="QWidget" name="widget_13" native="true">
+              <layout class="QVBoxLayout" name="verticalLayout_51">
+               <item>
+                <widget class="QScrollArea" name="scrollArea_12">
+                 <property name="widgetResizable">
+                  <bool>true</bool>
+                 </property>
+                 <widget class="QWidget" name="scrollAreaWidgetContents_13">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>848</width>
+                    <height>421</height>
+                   </rect>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_52">
+                   <item>
+                    <layout class="QGridLayout" name="pagoIntervenciones"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
              </widget>
-            </widget>
-           </widget>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
@@ -3787,20 +3773,6 @@ QPushButton:focus{
            </item>
            <item>
             <widget class="Line" name="line_12">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pb_realizarConsulta">
-             <property name="text">
-              <string>Realizar Consulta</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="Line" name="line_13">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -3966,7 +3938,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>4</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_40">
@@ -4014,8 +3986,8 @@ QPushButton:focus{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>230</width>
-                    <height>439</height>
+                    <width>98</width>
+                    <height>28</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -4998,8 +4970,8 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>358</height>
+                    <width>98</width>
+                    <height>28</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -5507,6 +5479,20 @@ background-color:transparent;</string>
                </widget>
               </item>
               <item>
+               <widget class="QPushButton" name="pushButton_citasDoc">
+                <property name="text">
+                 <string> Citas Pendientes </string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pb_realizarConsulta">
+                <property name="text">
+                 <string> Realizar Consulta </string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <spacer name="horizontalSpacer_109">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
@@ -5518,13 +5504,6 @@ background-color:transparent;</string>
                  </size>
                 </property>
                </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_citasDoc">
-                <property name="text">
-                 <string>Citas Pendientes</string>
-                </property>
-               </widget>
               </item>
              </layout>
             </item>
@@ -5819,7 +5798,7 @@ background-color:transparent;</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>402</width>
+                     <width>314</width>
                      <height>1114</height>
                     </rect>
                    </property>
@@ -6526,7 +6505,7 @@ border:none</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>849</width>
+                 <width>202</width>
                  <height>1092</height>
                 </rect>
                </property>
@@ -6716,176 +6695,248 @@ border:none</string>
            </layout>
           </widget>
           <widget class="QWidget" name="page_5">
-           <widget class="QWidget" name="mostrarClinico" native="true">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>80</y>
-              <width>830</width>
-              <height>310</height>
-             </rect>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>100</height>
-             </size>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_50">
-             <item row="0" column="0">
-              <widget class="QScrollArea" name="scrollArea_10">
-               <property name="widgetResizable">
-                <bool>true</bool>
-               </property>
-               <widget class="QWidget" name="scrollAreaWidgetContents_11">
-                <property name="geometry">
-                 <rect>
-                  <x>0</x>
-                  <y>0</y>
-                  <width>810</width>
-                  <height>290</height>
-                 </rect>
+           <layout class="QVBoxLayout" name="verticalLayout_53">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_118">
+              <item>
+               <spacer name="horizontalSpacer_132">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
                 </property>
-                <layout class="QGridLayout" name="gridLayout_52">
-                 <item row="0" column="0">
-                  <layout class="QGridLayout" name="barraclinico"/>
-                 </item>
-                </layout>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_29">
+                <property name="text">
+                 <string> Historial clinico </string>
+                </property>
                </widget>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QLabel" name="label_29">
-            <property name="geometry">
-             <rect>
-              <x>350</x>
-              <y>10</y>
-              <width>100</width>
-              <height>18</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string> Historial clinico </string>
-            </property>
-           </widget>
-           <widget class="QWidget" name="layoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>140</x>
-              <y>50</y>
-              <width>350</width>
-              <height>24</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_31">
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_133">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_119">
+              <item>
+               <spacer name="horizontalSpacer_134">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>128</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_4">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_31">
+                  <property name="minimumSize">
+                   <size>
+                    <width>112</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>112</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Doctor</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLabel" name="label_30">
+                  <property name="minimumSize">
+                   <size>
+                    <width>112</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>112</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Fecha</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QLabel" name="label_32">
+                  <property name="minimumSize">
+                   <size>
+                    <width>112</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>112</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string> Hora</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_135">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>368</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QWidget" name="mostrarClinico" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>100</height>
+               </size>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_50">
+               <item row="0" column="0">
+                <widget class="QScrollArea" name="scrollArea_10">
+                 <property name="widgetResizable">
+                  <bool>true</bool>
+                 </property>
+                 <widget class="QWidget" name="scrollAreaWidgetContents_11">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>98</width>
+                    <height>28</height>
+                   </rect>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_52">
+                   <item row="0" column="0">
+                    <layout class="QGridLayout" name="barraclinico"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="intervenciones">
+           <layout class="QVBoxLayout" name="verticalLayout_54">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_99">
+              <item>
+               <widget class="QLabel" name="label_34">
+                <property name="styleSheet">
+                 <string notr="true">font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Intervenciones Programadas</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_110">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QTableWidget" name="tablaInterProgs">
+              <attribute name="horizontalHeaderDefaultSectionSize">
+               <number>165</number>
+              </attribute>
+              <attribute name="horizontalHeaderMinimumSectionSize">
+               <number>50</number>
+              </attribute>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="verticalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
+              <column>
                <property name="text">
-                <string>Doctor</string>
+                <string>Paciente</string>
                </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLabel" name="label_30">
+              </column>
+              <column>
                <property name="text">
                 <string>Fecha</string>
                </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="label_32">
+              </column>
+              <column>
                <property name="text">
-                <string> Hora</string>
+                <string>Hora</string>
                </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </widget>
-          <widget class="QWidget" name="intervenciones">
-           <widget class="QTableWidget" name="tablaInterProgs">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>70</y>
-              <width>831</width>
-              <height>271</height>
-             </rect>
-            </property>
-            <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>165</number>
-            </attribute>
-            <attribute name="horizontalHeaderMinimumSectionSize">
-             <number>50</number>
-            </attribute>
-            <attribute name="horizontalHeaderStretchLastSection">
-             <bool>true</bool>
-            </attribute>
-            <attribute name="verticalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
-            <column>
-             <property name="text">
-              <string>Paciente</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Fecha</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Hora</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Quirófano</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Detalles</string>
-             </property>
-            </column>
-           </widget>
-           <widget class="QWidget" name="layoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>20</y>
-              <width>831</width>
-              <height>27</height>
-             </rect>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_99">
-             <item>
-              <widget class="QLabel" name="label_34">
-               <property name="styleSheet">
-                <string notr="true">font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
-               </property>
+              </column>
+              <column>
                <property name="text">
-                <string>Intervenciones Programadas</string>
+                <string>Quirófano</string>
                </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_110">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+              </column>
+              <column>
+               <property name="text">
+                <string>Detalles</string>
                </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
+              </column>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="page_15">
            <layout class="QGridLayout" name="gridLayout_69">
@@ -8191,7 +8242,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;
 }</string>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="pagePrincipalAdmin">
            <layout class="QGridLayout" name="gridLayout_36">
@@ -8276,6 +8327,19 @@ QGroupBox{
                     </property>
                    </widget>
                   </item>
+                  <item row="4" column="0">
+                   <widget class="QPushButton" name="pb_modificarUser">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Editar Usuario</string>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="3" column="0">
                    <widget class="QPushButton" name="pb_agregarUser">
                     <property name="maximumSize">
@@ -8289,19 +8353,6 @@ QGroupBox{
                     </property>
                    </widget>
                   </item>
-                  <item row="5" column="0">
-                   <widget class="QPushButton" name="pb_eliminarUser">
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>Eliminar Usuario</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="2" column="0">
                    <widget class="QPushButton" name="pushButton_3">
                     <property name="maximumSize">
@@ -8312,19 +8363,6 @@ QGroupBox{
                     </property>
                     <property name="text">
                      <string>Solicitudes Estancias</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="0">
-                   <widget class="QPushButton" name="pb_modificarUser">
-                    <property name="maximumSize">
-                     <size>
-                      <width>16777215</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>Modificar Informacion</string>
                     </property>
                    </widget>
                   </item>
@@ -8553,8 +8591,8 @@ background:transparent;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>409</width>
-                      <height>387</height>
+                      <width>98</width>
+                      <height>28</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_14">
@@ -8944,8 +8982,8 @@ background:transparent;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>411</width>
-                    <height>458</height>
+                    <width>98</width>
+                    <height>28</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
@@ -9453,7 +9491,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                         <x>0</x>
                         <y>0</y>
                         <width>478</width>
-                        <height>368</height>
+                        <height>28</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -9551,8 +9589,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
-                        <height>20</height>
+                        <width>478</width>
+                        <height>28</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -10001,8 +10039,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>98</width>
+                          <height>28</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -10135,8 +10173,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>98</width>
+                          <height>28</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
@@ -10250,8 +10288,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>98</width>
+                          <height>28</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -10425,8 +10463,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>98</width>
+                          <height>28</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
@@ -10568,64 +10606,71 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
            </layout>
           </widget>
           <widget class="QWidget" name="reagendarCitas">
-           <widget class="QPushButton" name="pushButton_menu_admin_3">
-            <property name="geometry">
-             <rect>
-              <x>9</x>
-              <y>9</y>
-              <width>69</width>
-              <height>25</height>
-             </rect>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">border:none;
+           <layout class="QVBoxLayout" name="verticalLayout_49">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_117">
+              <item>
+               <widget class="QPushButton" name="pushButton_menu_admin_3">
+                <property name="styleSheet">
+                 <string notr="true">border:none;
 font: 13pt &quot;MS Shell Dlg 2&quot;;
 color: rgb(68, 94, 134);
 background:transparent;
 </string>
-            </property>
-            <property name="text">
-             <string>Menu</string>
-            </property>
-            <property name="icon">
-             <iconset resource="imgs/imgs.qrc">
-              <normaloff>:/imgs/home.png</normaloff>:/imgs/home.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-           </widget>
-           <widget class="QScrollArea" name="scrollCitas">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>50</y>
-              <width>851</width>
-              <height>341</height>
-             </rect>
-            </property>
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_7">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>849</width>
-               <height>339</height>
-              </rect>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_37">
-              <item row="0" column="0">
-               <layout class="QGridLayout" name="reagendas"/>
+                </property>
+                <property name="text">
+                 <string>Menu</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="imgs/imgs.qrc">
+                  <normaloff>:/imgs/home.png</normaloff>:/imgs/home.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_131">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
-            </widget>
-           </widget>
+            </item>
+            <item>
+             <widget class="QScrollArea" name="scrollCitas">
+              <property name="widgetResizable">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="scrollAreaWidgetContents_7">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>98</width>
+                 <height>28</height>
+                </rect>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_37">
+                <item row="0" column="0">
+                 <layout class="QGridLayout" name="reagendas"/>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="page_5">
            <layout class="QGridLayout" name="gridLayout_53">
@@ -11138,299 +11183,284 @@ font-size:10pt;</string>
            </layout>
           </widget>
           <widget class="QWidget" name="paginaSolInterv">
-           <widget class="QLabel" name="label_14">
-            <property name="geometry">
-             <rect>
-              <x>280</x>
-              <y>0</y>
-              <width>271</width>
-              <height>41</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Solicitudes de Estancia para Pacientes.</string>
-            </property>
-           </widget>
-           <widget class="QStackedWidget" name="Estancia">
-            <property name="geometry">
-             <rect>
-              <x>10</x>
-              <y>49</y>
-              <width>871</width>
-              <height>381</height>
-             </rect>
-            </property>
-            <property name="currentIndex">
-             <number>1</number>
-            </property>
-            <widget class="QWidget" name="page_16">
-             <widget class="QWidget" name="widget_12" native="true">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>10</y>
-                <width>831</width>
-                <height>371</height>
-               </rect>
+           <layout class="QVBoxLayout" name="verticalLayout_47">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_115">
+              <item>
+               <widget class="QPushButton" name="regresarAdmin">
+                <property name="styleSheet">
+                 <string notr="true">background:transparent;
+border:none;
+color: blue;</string>
+                </property>
+                <property name="text">
+                 <string>Regresar</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="imgs/imgs.qrc">
+                  <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_127">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_14">
+                <property name="text">
+                 <string>Solicitudes de Estancia para Pacientes.</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_128">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QStackedWidget" name="Estancia">
+              <property name="currentIndex">
+               <number>0</number>
               </property>
-              <layout class="QGridLayout" name="gridLayout_58">
-               <item row="0" column="0">
-                <widget class="QScrollArea" name="scrollArea_11">
-                 <property name="widgetResizable">
-                  <bool>true</bool>
-                 </property>
-                 <widget class="QWidget" name="scrollAreaWidgetContents_12">
-                  <property name="geometry">
-                   <rect>
-                    <x>0</x>
-                    <y>0</y>
-                    <width>811</width>
-                    <height>351</height>
-                   </rect>
-                  </property>
-                  <layout class="QGridLayout" name="gridLayout_60">
+              <widget class="QWidget" name="page_16">
+               <layout class="QVBoxLayout" name="verticalLayout_48">
+                <item>
+                 <widget class="QWidget" name="widget_12" native="true">
+                  <layout class="QGridLayout" name="gridLayout_58">
                    <item row="0" column="0">
-                    <layout class="QGridLayout" name="estanciaPa"/>
+                    <widget class="QScrollArea" name="scrollArea_11">
+                     <property name="widgetResizable">
+                      <bool>true</bool>
+                     </property>
+                     <widget class="QWidget" name="scrollAreaWidgetContents_12">
+                      <property name="geometry">
+                       <rect>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>98</width>
+                        <height>28</height>
+                       </rect>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_60">
+                       <item row="0" column="0">
+                        <layout class="QGridLayout" name="estanciaPa"/>
+                       </item>
+                      </layout>
+                     </widget>
+                    </widget>
                    </item>
                   </layout>
                  </widget>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </widget>
-            <widget class="QWidget" name="page_17">
-             <widget class="QWidget" name="widget_13" native="true">
-              <property name="geometry">
-               <rect>
-                <x>510</x>
-                <y>30</y>
-                <width>351</width>
-                <height>351</height>
-               </rect>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_59">
-               <item row="0" column="0">
-                <widget class="QScrollArea" name="scrollArea_12">
-                 <property name="widgetResizable">
-                  <bool>true</bool>
-                 </property>
-                 <widget class="QWidget" name="scrollAreaWidgetContents_13">
-                  <property name="geometry">
-                   <rect>
-                    <x>0</x>
-                    <y>0</y>
-                    <width>331</width>
-                    <height>331</height>
-                   </rect>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="page_17">
+               <layout class="QGridLayout" name="gridLayout_72">
+                <item row="0" column="1">
+                 <widget class="QLabel" name="label_43">
+                  <property name="text">
+                   <string>Selecciones el Cuarto a asignar</string>
                   </property>
-                  <layout class="QGridLayout" name="gridLayout_62">
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_100">
+                  <item>
+                   <widget class="QLabel" name="label_36">
+                    <property name="text">
+                     <string>Nombre Doctor:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="estDoctor">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="1" column="1" rowspan="7">
+                 <widget class="QWidget" name="widget_13" native="true">
+                  <layout class="QGridLayout" name="gridLayout_59">
                    <item row="0" column="0">
-                    <layout class="QGridLayout" name="cuartos"/>
+                    <widget class="QScrollArea" name="scrollArea_12">
+                     <property name="widgetResizable">
+                      <bool>true</bool>
+                     </property>
+                     <widget class="QWidget" name="scrollAreaWidgetContents_13">
+                      <property name="geometry">
+                       <rect>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>98</width>
+                        <height>28</height>
+                       </rect>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_62">
+                       <item row="0" column="0">
+                        <layout class="QGridLayout" name="cuartos"/>
+                       </item>
+                      </layout>
+                     </widget>
+                    </widget>
                    </item>
                   </layout>
                  </widget>
-                </widget>
-               </item>
-              </layout>
+                </item>
+                <item row="2" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_101">
+                  <item>
+                   <widget class="QLabel" name="label_38">
+                    <property name="text">
+                     <string>Nombre Paciente:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="estPaciente">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="3" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_102">
+                  <item>
+                   <widget class="QLabel" name="label_39">
+                    <property name="text">
+                     <string>Fecha Solicitada:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="estFechasoli">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="4" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_103">
+                  <item>
+                   <widget class="QLabel" name="label_40">
+                    <property name="text">
+                     <string>Dias Solicitados:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="estDias">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="5" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_104">
+                  <item>
+                   <widget class="QLabel" name="label_41">
+                    <property name="text">
+                     <string>Fecha fin de estancia:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="estFechaFin">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="6" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_105">
+                  <item>
+                   <widget class="QLabel" name="label_42">
+                    <property name="text">
+                     <string>Cuarto Seleccionado:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="estCuarto">
+                    <property name="enabled">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="7" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_116">
+                  <item>
+                   <spacer name="horizontalSpacer_129">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="agregarCuarto">
+                    <property name="text">
+                     <string>Asignar Cuarto</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_130">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
              </widget>
-             <widget class="QPushButton" name="agregarCuarto">
-              <property name="geometry">
-               <rect>
-                <x>130</x>
-                <y>350</y>
-                <width>171</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>Asignar Cuarto</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_43">
-              <property name="geometry">
-               <rect>
-                <x>520</x>
-                <y>5</y>
-                <width>241</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>Selecciones el Cuarto a asignar</string>
-              </property>
-             </widget>
-             <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>60</y>
-                <width>431</width>
-                <height>24</height>
-               </rect>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_100">
-               <item>
-                <widget class="QLabel" name="label_36">
-                 <property name="text">
-                  <string>Nombre Doctor:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="estDoctor">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>90</y>
-                <width>441</width>
-                <height>24</height>
-               </rect>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_101">
-               <item>
-                <widget class="QLabel" name="label_38">
-                 <property name="text">
-                  <string>Nombre Paciente:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="estPaciente">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>130</y>
-                <width>268</width>
-                <height>24</height>
-               </rect>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_102">
-               <item>
-                <widget class="QLabel" name="label_39">
-                 <property name="text">
-                  <string>Fecha Solicitada:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="estFechasoli">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>170</y>
-                <width>266</width>
-                <height>24</height>
-               </rect>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_103">
-               <item>
-                <widget class="QLabel" name="label_40">
-                 <property name="text">
-                  <string>Dias Solicitados:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="estDias">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>210</y>
-                <width>302</width>
-                <height>24</height>
-               </rect>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_104">
-               <item>
-                <widget class="QLabel" name="label_41">
-                 <property name="text">
-                  <string>Fecha fin de estancia:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="estFechaFin">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>260</y>
-                <width>299</width>
-                <height>24</height>
-               </rect>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_105">
-               <item>
-                <widget class="QLabel" name="label_42">
-                 <property name="text">
-                  <string>Cuarto Seleccionado:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="estCuarto">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </widget>
-           </widget>
-           <widget class="QPushButton" name="regresarAdmin">
-            <property name="geometry">
-             <rect>
-              <x>30</x>
-              <y>10</y>
-              <width>80</width>
-              <height>21</height>
-             </rect>
-            </property>
-            <property name="text">
-             <string>Regresar</string>
-            </property>
-           </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="agregarUrge">
            <widget class="QLabel" name="label_33">
@@ -11519,8 +11549,8 @@ font-size:10pt;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>866</width>
-             <height>453</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_46">
@@ -11595,8 +11625,8 @@ font-size:10pt;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>866</width>
-             <height>453</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_13">

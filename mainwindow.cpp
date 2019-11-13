@@ -379,7 +379,6 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
              ui->line_10->hide();
              ui->line_7->hide();
              ui->line_12->hide();
-             ui->line_13->hide();
              ui->line_14->hide();
 
              ui->pushButton_miPerfil->setHidden(false);
@@ -554,7 +553,6 @@ void MainWindow::on_pushButton_salir_clicked()
     ui->line_10->show();
     ui->line_7->show();
     ui->line_12->show();
-    ui->line_13->show();
     ui->line_14->show();
     ui->pb_urg->hide();
     mostrarMenuP();
@@ -4684,6 +4682,7 @@ void MainWindow::on_btnEstudios_clicked()
 
 void MainWindow::on_pb_inter_clicked()
 {
+    ui->tablaInterProgs->clear();
     ui->tablaInterProgs->setColumnWidth(1, 100);
     ui->tablaInterProgs->setColumnWidth(2, 60);
     ui->tablaInterProgs->setColumnWidth(3, 80);
@@ -4734,6 +4733,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_regresarAdmin_clicked()
 {
+    ui->stackedWidget_admin->setCurrentIndex(0);
     ui->Estancia->setCurrentIndex(0);
 }
 
@@ -5851,11 +5851,10 @@ void MainWindow::pagarIntervencion(QString folio)
 
 void MainWindow::actTablaInter()
 {
-    contador++;
+    /*contador++;
     if(contador==180){
         ocultar->stop();
-
-    }
+    }*/
 
     clearLayout(ui->pagoIntervenciones);
     on_pushButton_intervenciones_clicked();
@@ -5879,11 +5878,14 @@ void MainWindow::on_pushButton_intervenciones_clicked()
     //int i=0;
     int l=0;
     citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) "
-          "from usuario as us "
-          "inner join doctor as doc "
-          "on us.matricula=doc.idUser "
-          "inner join citasQuirofano as inter"
-          " on doc.iddoctor=inter.idDoctor";
+                        "from usuario as us "
+                      "inner join doctor as doc "
+                      "on us.matricula=doc.idUser "
+                     "inner join citasQuirofano as inter "
+                       "on doc.iddoctor=inter.idDoctor "
+                      "inner join CostoServicio as costo "
+                       "on inter.idCita = costo.idCitaQ "
+                      "where costo.estado=0";
 
     if(!consulta2.exec(citas)) consulta2.lastError().text();
     while(consulta2.next()){
@@ -5988,9 +5990,12 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
         else{
              pagoIntervenciones *pagoIt = new pagoIntervenciones(folio,this);
              pagoIt->show();
-             ocultar=new QTimer(this);
-             connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaInter()));
-             ocultar->start(1000);
+             //ocultar=new QTimer(this);
+             //connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaInter()));
+             //ocultar->start(1000);
+             while(pagoIt->exec()){
+             }
+             actTablaInter();
         }
     }
 }
