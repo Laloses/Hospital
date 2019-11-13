@@ -2502,6 +2502,7 @@ void MainWindow::on_regresar_citasDoc_clicked()
 
 void MainWindow::on_butonNotifi_clicked()
 {
+    ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
     if(verNoti==1)
     {
         if(ui->notificacionL->text()!="")
@@ -3851,6 +3852,7 @@ void MainWindow::on_pushButton_Cancelar_Cita_clicked()
 
 void MainWindow::on_butonNotifi_4_clicked()
 {
+    ui->stackedWidget_perfilDoctor->setCurrentIndex(0);
     if(verNoti==1)
     {
         if(ui->notificacionL_4->text()!="")
@@ -5482,7 +5484,7 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
     if(ui->radioButton_azul->isChecked() ){
         if (message.exec() == QMessageBox::Yes ){
       qDebug()<<"entre azul";
-      color="azul";
+      color="blue";
     registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
                             " values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
     registroEmergencia.next();
@@ -5497,6 +5499,7 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
     registroEmergencia.next();
      ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
      ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+     ui->plainTextEdit_causas->clear();
      ui->radioButton_azul->setCheckable(false);
      ui->radioButton_azul->setCheckable(true);
 
@@ -5508,7 +5511,7 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         }if(ui->radioButton_verde->isChecked()){
         if (message.exec() == QMessageBox::Yes){
         qDebug()<<"entre verde";
-         color="verde";
+         color="green";
         registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
                                 "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
         registroEmergencia.next();
@@ -5524,6 +5527,7 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
         ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
         ui->radioButton_verde->setCheckable(false);
+        ui->plainTextEdit_causas->clear();
         ui->radioButton_verde->setCheckable(true);
         if (mensaje.exec() == QMessageBox::Yes){
 
@@ -5533,7 +5537,7 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
     }if(ui->radioButton_amarillo->isChecked()){
         if (message.exec() == QMessageBox::Yes){
         qDebug()<<"entre amarillo";
-         color="amarillo";
+         color="yellow";
         registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
                                 "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
         registroEmergencia.next();
@@ -5549,6 +5553,7 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
         ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
         ui->radioButton_amarillo->setCheckable(false);
+           ui->plainTextEdit_causas->clear();
         ui->radioButton_amarillo->setCheckable(true);
         if (mensaje.exec() == QMessageBox::Yes){
 
@@ -5558,7 +5563,7 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         }if(ui->radioButton_naranja->isChecked()){
         if (message.exec() == QMessageBox::Yes){
         qDebug()<<"entre naranja";
-         color="naranja";
+         color="orange";
         registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
                                 "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
         registroEmergencia.next();
@@ -5573,7 +5578,8 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         registroEmergencia.next();
         ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
         ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
-        ui->radioButton_naranja->setCheckable(false);
+
+           ui->plainTextEdit_causas->clear();ui->radioButton_naranja->setCheckable(false);
         ui->radioButton_naranja->setCheckable(true);
         if (mensaje.exec() == QMessageBox::Yes){
 
@@ -5583,7 +5589,7 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
      }if(ui->radioButton_rojo->isChecked()){
         if (message.exec() == QMessageBox::Yes){
         qDebug()<<"entre rojo";
-         color="rojo";
+         color="red";
         registroEmergencia.exec("insert into urgencias(idDoctor,forma_llegada,Causas,colorEmergencia,signos_vitales,nombre_pacinete,hora,fecha)"
                                 "values('"+id_doctor+"','"+llegada+"','"+causas+"','"+color+"','"+signos+"','"+nombre+"','"+time_text+"','"+fecha_text+"')");
         registroEmergencia.next();
@@ -5598,6 +5604,7 @@ void MainWindow::on_pushButton_guardaUrgencia_clicked()
         registroEmergencia.next();
         ui->lineEdit_nombreEmergencia->clear();ui->lineEdit_formaLLegada->clear();ui->plainTextEdit_causas->toPlainText();ui->plainTextEdit_vitales->clear();
         ui->lineEdit_nombreAcom->clear();ui->lineEdit_telefonoAcomp->clear();ui->lineEdit_dirrecion->clear();ui->lineEdit_parentesco->clear();
+          ui->plainTextEdit_causas->clear();
         ui->radioButton_rojo->setCheckable(false);
         ui->radioButton_rojo->setCheckable(true);
         if (mensaje.exec() == QMessageBox::Yes){

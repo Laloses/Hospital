@@ -50,381 +50,6 @@ padding-top:1px;
     <property name="verticalSpacing">
      <number>0</number>
     </property>
-    <item row="0" column="0">
-     <widget class="QWidget" name="widget_menuP" native="true">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>886</width>
-        <height>75</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>75</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">#label_informacion, #label_urgencias{
-	color: rgb(255, 0, 0);
-}
-#label_telefono1, #label_telefono2{
-	color: rgb(255, 255, 255);
-}
-#pushButton_login, #pushButton_registro, #pushButton_salir,#pushButton_miPerfil{
-	background-color: transparent;
-	border-radius:6px;
-	border:none;
-	color:#fff;
-	padding:6px;
-	text-decoration:none;
-}
-#pushButton_login:hover, #pushButton_registro:hover, #pushButton_salir:hover,#pushButton_miPerfil:hover{
-	color: rgb(111, 157, 183);
-}
-#pushButton_login:focus, #pushButton_registro:focus, #pushButton_miPerfil:focus{
-	background: rgb(51, 97, 123);
-	color: rgb(255, 255, 255);
-}
-#pb_servicios, #pushButton_especialidades, #pushButton__dirMedico, #pushButton_infoHospital,#pb_remedios{
-	background-color: transparent;
-	border-radius:6px;
-	color:#fff;
-	padding:6px;
-	text-decoration:none;
-}
-#pb_servicios:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover, #pushButton_infoHospital:hover,#pb_remedios:hover{
-	color: rgb(111, 157, 183);
-}</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_11">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <property name="spacing">
-        <number>6</number>
-       </property>
-       <item row="0" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_29">
-         <item>
-          <widget class="QPushButton" name="pushButton_logo">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>80</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">border:none;
-background-color:transparent;
-padding-top:0;</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="imgs/imgs.qrc">
-             <normaloff>:/imgs/logofinal1.png</normaloff>:/imgs/logofinal1.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>80</width>
-             <height>50</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <property name="bottomMargin">
-            <number>5</number>
-           </property>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>200</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout">
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QLabel" name="label_informacion">
-                 <property name="minimumSize">
-                  <size>
-                   <width>66</width>
-                   <height>16</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>9</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Informacion</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_telefono1">
-                 <property name="minimumSize">
-                  <size>
-                   <width>61</width>
-                   <height>16</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>61</width>
-                   <height>16</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>222 456 879</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>30</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_2">
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QLabel" name="label_urgencias">
-                 <property name="minimumSize">
-                  <size>
-                   <width>91</width>
-                   <height>16</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>9</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Urgencias 24 hrs</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_telefono2">
-                 <property name="minimumSize">
-                  <size>
-                   <width>61</width>
-                   <height>16</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>81</width>
-                   <height>16</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>222 456 810</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_login">
-               <property name="text">
-                <string>Iniciar Sesión</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_registro">
-               <property name="text">
-                <string>Registrarme</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_miPerfil">
-               <property name="text">
-                <string>Mi Perfil</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_salir">
-               <property name="text">
-                <string>Salir</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_26">
-             <item>
-              <spacer name="horizontalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>140</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pb_servicios">
-               <property name="text">
-                <string>SERVICIOS</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="Line" name="line">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_especialidades">
-               <property name="text">
-                <string>ESPECIALIDADES</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="Line" name="line_2">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton__dirMedico">
-               <property name="text">
-                <string>DIRECTORIO MÉDICO</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="Line" name="line_3">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_infoHospital">
-               <property name="text">
-                <string>INFORMACIÓN HOSPITAL</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="Line" name="line_8">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pb_remedios">
-               <property name="text">
-                <string>REMEDIOS</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>252</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-    </item>
     <item row="1" column="0">
      <widget class="QStackedWidget" name="stackedWidget_principal">
       <property name="minimumSize">
@@ -485,7 +110,7 @@ border:none
 </string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -2366,7 +1991,7 @@ color:red;
 </string>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="page_miPerfilPac">
            <layout class="QGridLayout" name="gridLayout_39">
@@ -3108,7 +2733,7 @@ background-color:transparent;</string>
                         <x>0</x>
                         <y>0</y>
                         <width>230</width>
-                        <height>80</height>
+                        <height>280</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -3984,8 +3609,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
-                    <height>20</height>
+                    <width>848</width>
+                    <height>374</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -4341,7 +3966,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_40">
@@ -4390,7 +4015,7 @@ QPushButton:focus{
                     <x>0</x>
                     <y>0</y>
                     <width>230</width>
-                    <height>80</height>
+                    <height>439</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -5373,8 +4998,8 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
-                    <height>20</height>
+                    <width>848</width>
+                    <height>358</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -5916,8 +5541,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
-                    <height>20</height>
+                    <width>848</width>
+                    <height>371</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_37">
@@ -6901,7 +6526,7 @@ border:none</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>202</width>
+                 <width>849</width>
                  <height>1092</height>
                 </rect>
                </property>
@@ -8566,7 +8191,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <widget class="QWidget" name="pagePrincipalAdmin">
            <layout class="QGridLayout" name="gridLayout_36">
@@ -8928,8 +8553,8 @@ background:transparent;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>20</width>
-                      <height>20</height>
+                      <width>409</width>
+                      <height>387</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_14">
@@ -9319,8 +8944,8 @@ background:transparent;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>411</width>
+                    <height>458</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
@@ -9827,8 +9452,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
-                        <height>20</height>
+                        <width>478</width>
+                        <height>368</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -11984,6 +11609,381 @@ font-size:10pt;</string>
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QWidget" name="widget_menuP" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>886</width>
+        <height>75</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>75</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#label_informacion, #label_urgencias{
+	color: rgb(255, 0, 0);
+}
+#label_telefono1, #label_telefono2{
+	color: rgb(255, 255, 255);
+}
+#pushButton_login, #pushButton_registro, #pushButton_salir,#pushButton_miPerfil{
+	background-color: transparent;
+	border-radius:6px;
+	border:none;
+	color:#fff;
+	padding:6px;
+	text-decoration:none;
+}
+#pushButton_login:hover, #pushButton_registro:hover, #pushButton_salir:hover,#pushButton_miPerfil:hover{
+	color: rgb(111, 157, 183);
+}
+#pushButton_login:focus, #pushButton_registro:focus, #pushButton_miPerfil:focus{
+	background: rgb(51, 97, 123);
+	color: rgb(255, 255, 255);
+}
+#pb_servicios, #pushButton_especialidades, #pushButton__dirMedico, #pushButton_infoHospital,#pb_remedios{
+	background-color: transparent;
+	border-radius:6px;
+	color:#fff;
+	padding:6px;
+	text-decoration:none;
+}
+#pb_servicios:hover, #pushButton_especialidades:hover, #pushButton__dirMedico:hover, #pushButton_infoHospital:hover,#pb_remedios:hover{
+	color: rgb(111, 157, 183);
+}</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_11">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_29">
+         <item>
+          <widget class="QPushButton" name="pushButton_logo">
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>80</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border:none;
+background-color:transparent;
+padding-top:0;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="imgs/imgs.qrc">
+             <normaloff>:/imgs/logofinal1.png</normaloff>:/imgs/logofinal1.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>80</width>
+             <height>50</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <property name="bottomMargin">
+            <number>5</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>200</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_informacion">
+                 <property name="minimumSize">
+                  <size>
+                   <width>66</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>9</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Informacion</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_telefono1">
+                 <property name="minimumSize">
+                  <size>
+                   <width>61</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>61</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>222 456 879</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>30</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_urgencias">
+                 <property name="minimumSize">
+                  <size>
+                   <width>91</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>9</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Urgencias 24 hrs</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_telefono2">
+                 <property name="minimumSize">
+                  <size>
+                   <width>61</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>81</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>222 456 810</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_login">
+               <property name="text">
+                <string>Iniciar Sesión</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_registro">
+               <property name="text">
+                <string>Registrarme</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_miPerfil">
+               <property name="text">
+                <string>Mi Perfil</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_salir">
+               <property name="text">
+                <string>Salir</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_26">
+             <item>
+              <spacer name="horizontalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>140</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pb_servicios">
+               <property name="text">
+                <string>SERVICIOS</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_especialidades">
+               <property name="text">
+                <string>ESPECIALIDADES</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton__dirMedico">
+               <property name="text">
+                <string>DIRECTORIO MÉDICO</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_infoHospital">
+               <property name="text">
+                <string>INFORMACIÓN HOSPITAL</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_8">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pb_remedios">
+               <property name="text">
+                <string>REMEDIOS</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>252</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
