@@ -6,51 +6,101 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>784</width>
-    <height>499</height>
+    <width>732</width>
+    <height>518</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QRadioButton" name="radioButton_doc">
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>100</y>
+     <width>681</width>
+     <height>371</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>657</width>
+         <height>347</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_eliminar"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>60</y>
+     <width>201</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string> Usuario:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="lineEdit"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>50</y>
-     <width>95</width>
-     <height>20</height>
+     <y>60</y>
+     <width>310</width>
+     <height>22</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Doctor</string>
-   </property>
-  </widget>
-  <widget class="QRadioButton" name="radioButton_staff">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>50</y>
-     <width>95</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Staff</string>
-   </property>
-  </widget>
-  <widget class="QRadioButton" name="radioButton_pac">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>50</y>
-     <width>95</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string> Pacientes</string>
-   </property>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
+     <widget class="QRadioButton" name="radioButton_doc">
+      <property name="text">
+       <string>Doctor</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QRadioButton" name="radioButton_staff">
+      <property name="text">
+       <string>Staff</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QRadioButton" name="radioButton_pac">
+      <property name="text">
+       <string> Pacientes</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

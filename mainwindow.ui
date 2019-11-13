@@ -110,7 +110,7 @@ border:none
 </string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -3609,7 +3609,7 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>33</width>
+                    <width>54</width>
                     <height>24</height>
                    </rect>
                   </property>
@@ -4970,7 +4970,7 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>33</width>
+                    <width>54</width>
                     <height>24</height>
                    </rect>
                   </property>
@@ -9490,7 +9490,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>457</width>
+                        <width>478</width>
                         <height>24</height>
                        </rect>
                       </property>
@@ -9589,7 +9589,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>457</width>
+                        <width>478</width>
                         <height>24</height>
                        </rect>
                       </property>
@@ -10658,7 +10658,7 @@ background:transparent;
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>55</width>
+                 <width>76</width>
                  <height>24</height>
                 </rect>
                </property>
@@ -11257,7 +11257,7 @@ color: blue;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>24</width>
+                        <width>32</width>
                         <height>24</height>
                        </rect>
                       </property>
@@ -11549,8 +11549,8 @@ color: blue;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>862</width>
-             <height>442</height>
+             <width>76</width>
+             <height>24</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_46">
@@ -11625,8 +11625,8 @@ color: blue;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>862</width>
-             <height>442</height>
+             <width>76</width>
+             <height>24</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_13">
