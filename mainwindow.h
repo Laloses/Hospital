@@ -23,6 +23,7 @@
 #include "mostrarhistoclinico.h"
 #include "agregarUrgencia.h"
 #include <QtPrintSupport/QPrinter>
+#include "agregarusuario.h"
 
 
 
@@ -205,6 +206,9 @@ private slots:
     void on_pushButton_intervenciones_clicked();
     void pagarCitasEfect(QString);
     void pagarIntervencionTarjeta(QString);
+
+    void on_pb_agregarUser_clicked();
+
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

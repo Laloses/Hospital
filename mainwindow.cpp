@@ -10,7 +10,6 @@
 #include <QSignalMapper>
 #include <QTimer>
 #include <QDate>
-
 #include <QFileDialog>
 #include <QFile>
 #include <QFileSystemModel>
@@ -5998,6 +5997,15 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
              actTablaInter();
         }
     }
+}
+
+
+
+void MainWindow::on_pb_agregarUser_clicked()
+{
+    static AgregarUsuario usuario;
+    usuario.show();
+
 }
 
 
