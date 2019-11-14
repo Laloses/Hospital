@@ -23,6 +23,14 @@ public:
 private slots:
     void on_radioButton_doc_clicked();
 
+    void on_radioButton_staff_clicked();
+
+    void eliminarusuarios(QString);
+
+    void on_radioButton_pac_clicked();
+
+    void ModificarUsuario(QString);
+
 private:
     Ui::eliminarUsuarios *ui;
 };
