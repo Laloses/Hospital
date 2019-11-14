@@ -6013,6 +6013,6 @@ void MainWindow::on_pb_agregarUser_clicked()
 
 void MainWindow::on_pb_modificarUser_clicked()
 {
-    EditarUsuario* ventanaEditar = new EditarUsuario();
-    ventanaEditar->show();
+    //static eliminarUsuarios eliminar();
+    //eliminar.sohow();
 }

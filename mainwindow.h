@@ -24,8 +24,7 @@
 #include "agregarUrgencia.h"
 #include <QtPrintSupport/QPrinter>
 #include "agregarusuario.h"
-
-
+#include "eliminarusuarios.h"
 
 namespace Ui {
 class MainWindow;

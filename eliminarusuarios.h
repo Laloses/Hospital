@@ -2,7 +2,12 @@
 #define ELIMINARUSUARIOS_H
 
 #include <QDialog>
-
+#include <QDebug>
+#include <QSqlQuery>
+#include <QSignalMapper>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QPushButton>
 namespace Ui {
 class eliminarUsuarios;
 }
@@ -14,6 +19,9 @@ class eliminarUsuarios : public QDialog
 public:
     explicit eliminarUsuarios(QWidget *parent = nullptr);
     ~eliminarUsuarios();
+
+private slots:
+    void on_radioButton_doc_clicked();
 
 private:
     Ui::eliminarUsuarios *ui;
