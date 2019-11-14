@@ -43,7 +43,9 @@ SOURCES += \
         login.cpp \
         tipdeldia.cpp \
         ordenarintervencion.cpp \
-        ordenarestudios.cpp
+        ordenarestudios.cpp \
+    editarusuario.cpp \
+    cambiarcontrasenia.cpp
 
 HEADERS += \
         agregarUrgencia.h \
@@ -62,7 +64,9 @@ HEADERS += \
         login.h \
         tipdeldia.h \
         ordenarintervencion.h \
-        ordenarestudios.h
+        ordenarestudios.h \
+    editarusuario.h \
+    cambiarcontrasenia.h
 
 FORMS += \
         agregarUrgencia.ui \
@@ -75,7 +79,9 @@ FORMS += \
         tipdeldia.ui \
         ordenarintervencion.ui \
         ordenarestudios.ui \
-        pagointervenciones.ui
+        pagointervenciones.ui \
+    editarusuario.ui \
+    cambiarcontrasenia.ui
 
 RC_ICONS = icono.ico
 

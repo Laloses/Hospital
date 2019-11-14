@@ -4,6 +4,7 @@
 #include "ordenarintervencion.h"
 #include "ordenarestudios.h"
 #include "pagointervenciones.h"
+#include "editarusuario.h"
 #include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -6009,3 +6010,9 @@ void MainWindow::on_pb_agregarUser_clicked()
 }
 
 
+
+void MainWindow::on_pb_modificarUser_clicked()
+{
+    EditarUsuario* ventanaEditar = new EditarUsuario();
+    ventanaEditar->show();
+}
