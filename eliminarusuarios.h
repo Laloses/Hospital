@@ -25,7 +25,11 @@ private slots:
 
     void on_radioButton_staff_clicked();
 
-    void eliminarusuarios(QString);
+    void eliminarDoc(QString);
+
+    void eliminarStaff(QString);
+
+    void eliminarPaciente(QString);
 
     void on_radioButton_pac_clicked();
 

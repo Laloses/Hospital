@@ -28,9 +28,21 @@ void clearLayou(QLayout *layout) {
 }
 
 
-void eliminarUsuarios::eliminarusuarios(QString matricula){
+void eliminarUsuarios::eliminarDoc(QString matricula){
 
-    qDebug()<<"eliminar";
+    qDebug()<<"eliminar doctor";
+
+
+}
+
+void eliminarUsuarios::eliminarStaff(QString matricula){
+
+    qDebug()<<"eliminar staff";
+
+}
+void eliminarUsuarios::eliminarPaciente(QString matricula){
+
+    qDebug()<<"eliminar Paciente";
 
 
 }
@@ -69,15 +81,8 @@ void eliminarUsuarios::on_radioButton_doc_clicked()
                 p->setText("Modificar Doctor");
                 QLabel *l=new QLabel;
                 l->setText(nombre);
-                b->setFixedSize(QSize(120,40));
-                QSignalMapper *mapper=new QSignalMapper(this);
-                connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
-                mapper->setMapping(b,matricula);
-                connect(mapper,SIGNAL(mapped(QString)),this,SLOT(eliminarusuarios(QString)));
-                QSignalMapper *mapper2=new QSignalMapper(this);
-                connect(b,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
-                mapper2->setMapping(b,matricula);
-                connect(mapper,SIGNAL(mapped(QString)),this,SLOT(ModificarUsuario(QString)));
+                connect(b,&QPushButton::clicked,[=](){emit eliminarDoc(matricula);});
+                connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula);});
                 QLabel *espacio=new QLabel();
                 QLabel *esp=new QLabel();
                 esp->setText(espec);
@@ -119,19 +124,12 @@ void eliminarUsuarios::on_radioButton_staff_clicked()
 
             QPushButton *b=new QPushButton();
             QPushButton *p=new QPushButton();
-            b->setText("Eliminar Staff");
+            b->setText(" Eliminar Staff ");
             p->setText("Modificar Staff");
             QLabel *l=new QLabel;
             l->setText(nombre);
-            b->setFixedSize(QSize(120,40));
-            QSignalMapper *mapper=new QSignalMapper(this);
-            connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
-            mapper->setMapping(b,matricula);
-            connect(mapper,SIGNAL(mapped(QString)),this,SLOT(eliminarusuarios(QString)));
-            QSignalMapper *mapper2=new QSignalMapper(this);
-            connect(b,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
-            mapper2->setMapping(b,matricula);
-            connect(mapper,SIGNAL(mapped(QString)),this,SLOT(ModificarUsuario(QString)));
+            connect(b,&QPushButton::clicked,[=](){emit eliminarStaff(matricula);});
+            connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula);});
             QLabel *espacio=new QLabel();
             QLabel *esp=new QLabel();
             esp->setText(espec);
@@ -167,15 +165,9 @@ void eliminarUsuarios::on_radioButton_pac_clicked()
             p->setText("Modificar Paciente");
             QLabel *l=new QLabel;
             l->setText(nombre);
-            //b->setFixedSize(QSize(120,40));
-            QSignalMapper *mapper=new QSignalMapper(this);
-            connect(b,SIGNAL(clicked(bool)),mapper,SLOT(map()));
-            mapper->setMapping(b,matricula);
-            connect(mapper,SIGNAL(mapped(QString)),this,SLOT(eliminarusuarios(QString)));
-            QSignalMapper *mapper2=new QSignalMapper(this);
-            connect(b,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
-            mapper2->setMapping(b,matricula);
-            connect(mapper,SIGNAL(mapped(QString)),this,SLOT(ModificarUsuario(QString)));
+
+            connect(b,&QPushButton::clicked,[=](){emit eliminarPaciente(matricula);});
+            connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula);});
             ui->gridLayout_eliminar->addWidget(b,cont,0,1,1);
             ui->gridLayout_eliminar->addWidget(p,cont,1,1,1);
             ui->gridLayout_eliminar->addWidget(l,cont,2,1,1);
