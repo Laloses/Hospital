@@ -1,5 +1,6 @@
 #include "eliminarusuarios.h"
 #include "ui_eliminarusuarios.h"
+#include "editarusuario.h"
 
 eliminarUsuarios::eliminarUsuarios(QWidget *parent) :
     QDialog(parent),
@@ -47,9 +48,10 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
 
 }
 
-void eliminarUsuarios::ModificarUsuario(QString){
-
+void eliminarUsuarios::ModificarUsuario(QString matri, QString tipoUsr){
     qDebug()<<"modificar";
+    EditarUsuario* editarVentana = new EditarUsuario(matri, tipoUsr);
+    editarVentana->show();
 
 }
 
@@ -82,7 +84,7 @@ void eliminarUsuarios::on_radioButton_doc_clicked()
                 QLabel *l=new QLabel;
                 l->setText(nombre);
                 connect(b,&QPushButton::clicked,[=](){emit eliminarDoc(matricula);});
-                connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula);});
+                connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula, "doctor");});
                 QLabel *espacio=new QLabel();
                 QLabel *esp=new QLabel();
                 esp->setText(espec);
@@ -129,7 +131,7 @@ void eliminarUsuarios::on_radioButton_staff_clicked()
             QLabel *l=new QLabel;
             l->setText(nombre);
             connect(b,&QPushButton::clicked,[=](){emit eliminarStaff(matricula);});
-            connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula);});
+            connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula, "staff");});
             QLabel *espacio=new QLabel();
             QLabel *esp=new QLabel();
             esp->setText(espec);
@@ -167,7 +169,7 @@ void eliminarUsuarios::on_radioButton_pac_clicked()
             l->setText(nombre);
 
             connect(b,&QPushButton::clicked,[=](){emit eliminarPaciente(matricula);});
-            connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula);});
+            connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula, "paciente");});
             ui->gridLayout_eliminar->addWidget(b,cont,0,1,1);
             ui->gridLayout_eliminar->addWidget(p,cont,1,1,1);
             ui->gridLayout_eliminar->addWidget(l,cont,2,1,1);

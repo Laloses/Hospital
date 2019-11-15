@@ -28,7 +28,7 @@ class EditarUsuario : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit EditarUsuario(QWidget *parent = nullptr);
+    explicit EditarUsuario(QString, QString, QWidget *parent = nullptr);
     ~EditarUsuario();
 
 private:
@@ -38,6 +38,9 @@ private:
     QSqlQueryModel *model;
 
     QSqlQuery *datosUsr;
+
+    QString mat;
+    QString tipoUsur;
 };
 
 #endif // EDITARUSUARIO_H

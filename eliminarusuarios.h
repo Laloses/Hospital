@@ -33,7 +33,7 @@ private slots:
 
     void on_radioButton_pac_clicked();
 
-    void ModificarUsuario(QString);
+    void ModificarUsuario(QString, QString);
 
 private:
     Ui::eliminarUsuarios *ui;
