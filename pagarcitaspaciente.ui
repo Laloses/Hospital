@@ -193,11 +193,7 @@ QLabel{
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="lineEdit_vencim">
-            <property name="displayFormat">
-             <string>yyyy/MM/dd</string>
-            </property>
-           </widget>
+           <widget class="QLineEdit" name="lineEdit_vencim"/>
           </item>
          </layout>
         </item>

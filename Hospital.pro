@@ -39,6 +39,7 @@ SOURCES += \
         registropaciente.cpp \
         registrostaff.cpp \
         login.cpp \
+        remedios.cpp \
         tipdeldia.cpp \
         ordenarintervencion.cpp \
         ordenarestudios.cpp
@@ -56,6 +57,7 @@ HEADERS += \
         registropaciente.h \
         registrostaff.h \
         login.h \
+        remedios.h \
         tipdeldia.h \
         ordenarintervencion.h \
         ordenarestudios.h
@@ -66,6 +68,7 @@ FORMS += \
         mainwindow.ui \
         mostrarhistoclinico.ui \
         pagarcitaspaciente.ui \
+        remedios.ui \
         tipdeldia.ui \
         ordenarintervencion.ui \
         ordenarestudios.ui \

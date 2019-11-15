@@ -206,6 +206,12 @@ private slots:
     void pagarCitasEfect(QString);
     void pagarIntervencionTarjeta(QString);
 
+    void on_pb_remedios_clicked();
+
+    void on_pushButton__dirMedico_clicked();
+
+    void llenarTablaR(QString);
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

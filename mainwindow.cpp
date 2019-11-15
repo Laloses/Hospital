@@ -11,10 +11,12 @@
 #include <QTimer>
 #include <QDate>
 
+
 #include <QFileDialog>
 #include <QFile>
 #include <QFileSystemModel>
 #include <QPrinter>
+#include "remedios.h"
 
 
 
@@ -48,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //Ocultamos el boton salir
     ui->pushButton_salir->setHidden(true);
     ui->pushButton_miPerfil->setHidden(true);
-    ui->pb_remedios->setHidden(true);
 
     //Modo de contraseñas
     ui->lineEdit_password1->setEchoMode(QLineEdit::Password);
@@ -3635,6 +3636,7 @@ void MainWindow::PagarCitas(QString folio){
     QString consulta;
     QSqlQuery query;
     qDebug()<<"folio:"<<folio;
+    clearLayout(ui->pagoIntervenciones);
     QMessageBox messageBox(QMessageBox::Warning,
                            tr(""), tr("Cita cancelada"), QMessageBox::Yes);
     messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
@@ -3656,8 +3658,10 @@ void MainWindow::PagarCitas(QString folio){
             QMessageBox::information(this,"Ventanilla","Pase a pagar a ventanilla con su folio de cita.");
         }
         else{
+                clearLayout(ui->pagoIntervenciones);
                 pagar = new pagarCitasPaciente(folio,this);
                 pagar->show();
+
                 ocultar=new QTimer(this);
                 connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaCitas()));
                 ocultar->start(1000);
@@ -3834,6 +3838,7 @@ void MainWindow::mostrarCitas(){
         mapper2->setMapping(p,folio);
         connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(PagarCitas(QString)));
         ui->citasLay_2->addWidget(p,l,9,Qt::AlignTop);
+        clearLayout(ui->pagoIntervenciones);
 
         l++;
     }
@@ -3845,6 +3850,7 @@ void MainWindow::on_pushButton_Cancelar_Cita_clicked()
     ui->stackedWidget_perfilPaciente->setCurrentIndex(2);
     clearLayout(ui->citasLay_2);
     clearLayout(ui->encabezadoCitas_2);
+    clearLayout(ui->pagoIntervenciones);
     mostrarCitas();
 }
 
@@ -5960,6 +5966,7 @@ void MainWindow::on_pushButton_intervenciones_clicked()
 
 void MainWindow::pagarIntervencionTarjeta(QString folio)
 {
+    clearLayout(ui->pagoIntervenciones);
     QString consulta;
     QSqlQuery query;
     query.exec("select inter.idCita,us.matricula from usuario as  us inner join paciente as p "
@@ -6001,3 +6008,32 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
 }
 
 
+
+void MainWindow::on_pushButton__dirMedico_clicked()
+{
+     ui->stackedWidget_principal->setCurrentIndex(8);
+}
+
+void MainWindow::on_pb_remedios_clicked()
+{
+      ui->stackedWidget_principal->setCurrentIndex(10);
+}
+
+void MainWindow::llenarTablaR(QString r)
+{
+     QSqlQuery qr;
+     QString nombre,ingr,proc;
+        QByteArray foto1;
+
+     qr.exec("select nombreRemedio,ingredientes,procedimiento,fotoRemedio from remedios");
+     while(qr.next())
+     {
+        nombre=qr.value(0).toString();
+        ingr=qr.value(1).toString();
+        proc=qr.value(2).toString();
+        foto1=qr.value(3).toByteArray();
+        remedios *r = new remedios(nombre,ingr,proc,foto1);
+        r->llenarInformacion();
+     }
+
+}
