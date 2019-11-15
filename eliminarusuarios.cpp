@@ -31,21 +31,44 @@ void clearLayou(QLayout *layout) {
 void eliminarUsuarios::eliminarDoc(QString matricula){
 
     qDebug()<<"eliminar doctor";
+    //datos que debo modificar para enviar una cita con el admin para reasignar
+    //estado = 1 AND preparada = 'Cancelada'
 
 
 }
 
 void eliminarUsuarios::eliminarStaff(QString matricula){
 
-    qDebug()<<"eliminar staff";
+    qDebug()<<"eliminar staff"<<matricula;
+    QSqlQuery query;
+    query.exec("update staff set estado='2',idArea='0',tipoUser='5' where idUser='"+matricula+"'");
+    query.next();
+    query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
+    query.next();
 
 }
+
 void eliminarUsuarios::eliminarPaciente(QString matricula){
 
     qDebug()<<"eliminar Paciente";
+    QString preparada;
+    preparada="Pendiente";
+    QSqlQuery query;
 
+    query.exec("select *from cita where matricula='"+matricula+"' and preparada='"+preparada+"'");
+    while(query.next()){
+    query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
+    query.next();
+    query.exec("update cita set estado='2', preparada='pasiente eliminado' where matricula='"+matricula+"'");
+    query.next();
+    //liberar el dia de la consulta
+   }
+    //matricula
+    //estado bool not null,
+    //preparada  Pendiente y Completada
 
 }
+
 
 void eliminarUsuarios::ModificarUsuario(QString){
 
@@ -66,9 +89,6 @@ void eliminarUsuarios::on_radioButton_doc_clicked()
             {
                 if(queryDoc.value(5).toString()=="1")
                 {
-
-                }
-                else {
                 nombre=queryDoc.value(0).toString()+" "+queryDoc.value(1).toString()+" "+queryDoc.value(2).toString();
                 espec=queryDoc.value(4).toString();
                 espera="en espera";
@@ -113,9 +133,6 @@ void eliminarUsuarios::on_radioButton_staff_clicked()
     {
         if(queryStaff.value(5).toString()=="1")
         {
-
-        }
-        else {
             nombre=queryStaff.value(0).toString()+" "+queryStaff.value(1).toString()+" "+queryStaff.value(2).toString();
             espec=queryStaff.value(4).toString();
             espera="en espera";
