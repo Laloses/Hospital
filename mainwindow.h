@@ -211,6 +211,8 @@ private slots:
 
     void on_pb_modificarUser_clicked();
 
+    void on_pushButton_forgotPass_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
