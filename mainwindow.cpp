@@ -1227,7 +1227,7 @@ void MainWindow::on_pushButton_AceptarSoli_clicked()
 }
 
 //----------------------------------------------------------------------------
-//metodo para mostrar arias de trabajo
+//metodo para mostrar areas de trabajo
 void MainWindow::mostrarZonas(){
     QSqlQueryModel *queryPuestos;
     queryPuestos= new QSqlQueryModel;
@@ -2201,6 +2201,7 @@ void MainWindow::on_horaCita_activated(const QString &arg1)
 {
         on_btnBuscarDoctor_clicked();
 }
+
 void MainWindow::SolicitudCitas()
 {
     QString citas,est,idD,idD2;
@@ -2380,7 +2381,7 @@ void MainWindow::aceptarCita(QString folio)
     }
 
 }
-
+//MENSAJE SI EL DOCTOR RECHAZA UNA CITA DE PACIENTE
 void MainWindow::rechazarCita(QString folio)
 {
     QMessageBox message(QMessageBox::Question,
@@ -2497,7 +2498,7 @@ void MainWindow::on_regresar_citasDoc_clicked()
     ui->pushButton_horarioDoc->show();
     ui->pushButton_citasDoc->show();
 }
-
+//BOTON DE NOTIFICACIONES QUE TIENE EL PACIENTE
 void MainWindow::on_butonNotifi_clicked()
 {
     ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
@@ -3300,13 +3301,7 @@ void MainWindow::CancelarCita(QString folio)
 
         clearLayout(ui->citasAceptadas);
         CitasAceptadas();
-
-
-
-
     }
-    //else
-    //{}
 }
 
 void MainWindow::on_btnEditarDoctor_clicked()
@@ -3589,7 +3584,7 @@ void MainWindow::on_btnMostrarContrasena_6_clicked()
         toggleVision1 = 0;
     }
 }
-
+//MENSAJE DE CANCELACION DE CITA POR PARTE DE UN PACINETE
 void MainWindow::PonerCitas(QString folio){
     QString consulta;
     QSqlQuery query;
@@ -3607,7 +3602,7 @@ void MainWindow::PonerCitas(QString folio){
         if (messageBox.exec() == QMessageBox::Yes){
             QString fech,hor,tipo;
             QString cita,user1;
-            cita="select *from  cita where idCita='"+folio+"';  ";
+            cita="select *from  cita where idCita='"+folio+"'";
             QSqlQuery cita1;
             cita1.exec(cita);
             cita1.next();
@@ -3847,7 +3842,7 @@ void MainWindow::on_pushButton_Cancelar_Cita_clicked()
     clearLayout(ui->encabezadoCitas_2);
     mostrarCitas();
 }
-
+//BOTON DE NOTIFICACIONES QUE TIENE EL DOCTOR
 void MainWindow::on_butonNotifi_4_clicked()
 {
     ui->stackedWidget_perfilDoctor->setCurrentIndex(0);

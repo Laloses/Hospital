@@ -110,7 +110,7 @@ border:none
 </string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -3938,7 +3938,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>5</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_40">
@@ -5798,7 +5798,7 @@ background-color:transparent;</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>373</width>
+                     <width>394</width>
                      <height>1264</height>
                     </rect>
                    </property>
