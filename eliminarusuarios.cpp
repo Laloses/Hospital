@@ -34,8 +34,8 @@ void eliminarUsuarios::eliminarDoc(QString matricula){
     QString preparada,consulta,fech,hor,tipo,cita,user1;
     preparada="Pendiente";
     QSqlQuery query;
-
-    query.exec("select usu.nombre,usu.appaterno,usu.apmaterno,usu.matricula,doc.estado,cit.estado as estadoCita,cit.preparada from usuario as usu inner join doctor as doc on usu.matricula=doc.idUser inner join  especialidad as esp on doc.idEspecialidad=esp.idEsp inner join cita as cit on doc.iddoctor=cit.doctor where usu.matricula='"+matricula+"'");
+    clearLayou(ui->gridLayout_eliminar);
+    query.exec("select usu.nombre,usu.appaterno,usu.apmaterno,usu.matricula,doc.estado,cit.estado as estadoCita,cit.preparada,cit.hora,cit.fecha,cit.matricula from usuario as usu inner join doctor as doc on usu.matricula=doc.idUser inner join  especialidad as esp on doc.idEspecialidad=esp.idEsp inner join cita as cit on doc.iddoctor=cit.doctor where usu.matricula='"+matricula+"' and cit.preparada='Pendiente'");
     while(query.next()){
          qDebug()<<"modificar:"<<query.value(6).toString();
         //IF PARA NOTIFICAR AL PACIENTE PARA DE QUE LE AN CANCELADO LAS CITAS.
@@ -43,31 +43,29 @@ void eliminarUsuarios::eliminarDoc(QString matricula){
         qDebug()<<"notificar al paciente y modificando citas que fueron aceptadas";
 
         //NOTIFICAMOS AL DOCTOR DE LAS CITAS QUE SE CANCELARON
-        //falta en el select principal agregra la fecha, hora
-        user1=query.value(4).toString();
-        fech=query.value(2).toString();
-        hor=query.value(3).toString();
+        user1=query.value(9).toString();
+        fech=query.value(8).toString();
+        hor=query.value(7).toString();
         QString mensaj;
-        mensaj="Se le informa que su ------doctor ha cancelado la cita del dia: "+fech+" y con horario de: "+hor+" fue CANCELADA. Acuda o llame a nuestras oficinas para reagendar su cita";
+        mensaj="Se le informa que su Doctor ha cancelado la cita del dia: "+fech+" y con horario de: "+hor+" fue CANCELADA. Acuda o llame a nuestras oficinas para reagendar su cita";
         tipo="1";
         QString notificacion;
         notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+user1+"')";
         query.exec(notificacion);
         query.next();
      }
-
          /*PARA ACTUALIZAR EL PACIENTE ELIMINADO MODIFICAMOS LA CONTRASEÑA
           Y MODIFICAMOS CITAS QUE TENGA COMO ACEPTADAS EL DOCTOR PERO NO LAS A FINALIZADO*/
-
          query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
          query.next();
          query.exec("update doctor set tipoUser='5' where idUser='"+matricula+"'");
          query.next();
-         query.exec("update cita as cit inner join doctor as doc on cit.doctor=doc.iddoctor set cit.preparada='Cancelada' where doc.idUser'"+matricula+"'");
+         query.exec("update cita as cit inner join doctor as doc on cit.doctor=doc.iddoctor set cit.estado='1',cit.preparada='Cancelada' where doc.idUser='"+matricula+"' and cit.estado='1' or cit.estado='0'");
          query.next();
 
     }
-     clearLayou(ui->gridLayout_eliminar);
+
+
     on_radioButton_doc_clicked();
     //datos que debo modificar para enviar una cita con el admin para reasignar
     //estado = 1 AND preparada = 'Cancelada'
