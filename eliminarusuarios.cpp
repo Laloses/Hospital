@@ -48,7 +48,7 @@ void eliminarUsuarios::eliminarDoc(QString matricula){
         hor=query.value(7).toString();
         QString mensaj;
         mensaj="Se le informa que su Doctor ha cancelado la cita del dia: "+fech+" y con horario de: "+hor+" fue CANCELADA. Acuda o llame a nuestras oficinas para reagendar su cita";
-        tipo="1";
+        tipo="0";
         QString notificacion;
         notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+user1+"')";
         query.exec(notificacion);
@@ -56,11 +56,17 @@ void eliminarUsuarios::eliminarDoc(QString matricula){
      }
          /*PARA ACTUALIZAR EL PACIENTE ELIMINADO MODIFICAMOS LA CONTRASEÑA
           Y MODIFICAMOS CITAS QUE TENGA COMO ACEPTADAS EL DOCTOR PERO NO LAS A FINALIZADO*/
+        //CAMBIAMOS LA CONTRASEÑA
          query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
          query.next();
+         //CAMBIAMOS EL TIPO DE USUARIO PARA QUE NO LO RECONOZCA EL LOGIN Y LE EL NUMERO 5
          query.exec("update doctor set tipoUser='5' where idUser='"+matricula+"'");
          query.next();
+         //CAMBIAMOS EL ESTADO Y LA PREPACRACION
          query.exec("update cita as cit inner join doctor as doc on cit.doctor=doc.iddoctor set cit.estado='1',cit.preparada='Cancelada' where doc.idUser='"+matricula+"' and cit.estado='1' or cit.estado='0'");
+         query.next();
+         //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
+         query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
          query.next();
 
     }
@@ -84,6 +90,9 @@ void eliminarUsuarios::eliminarStaff(QString matricula){
     query.exec("update staff set estado='2',idArea='0',tipoUser='5' where idUser='"+matricula+"'");
     query.next();
     query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
+    query.next();
+    //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
+    query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
     query.next();
 }
 //METODO QUE SIRVE PARA DAR DE BAJA UN PACIENTE DEL SISTEMA
@@ -119,6 +128,9 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
          query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
          query.next();
          query.exec("update cita set estado='2', preparada='Paciente eliminado' where matricula='"+matricula+"'");
+         query.next();
+         //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
+         query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
          query.next();
 
          //liberar el dia de la consulta->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
