@@ -39,9 +39,7 @@ void eliminarUsuarios::eliminarDoc(QString matricula){
     while(query.next()){
          qDebug()<<"modificar:"<<query.value(6).toString();
         //IF PARA NOTIFICAR AL PACIENTE PARA DE QUE LE AN CANCELADO LAS CITAS.
-
         if(query.value(6).toString()=="Pendiente"){
-
         qDebug()<<"notificar al paciente y modificando citas que fueron aceptadas";
 
         //NOTIFICAMOS AL DOCTOR DE LAS CITAS QUE SE CANCELARON
@@ -56,8 +54,7 @@ void eliminarUsuarios::eliminarDoc(QString matricula){
         notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+user1+"')";
         query.exec(notificacion);
         query.next();
-
-        }
+     }
 
          /*PARA ACTUALIZAR EL PACIENTE ELIMINADO MODIFICAMOS LA CONTRASEÑA
           Y MODIFICAMOS CITAS QUE TENGA COMO ACEPTADAS EL DOCTOR PERO NO LAS A FINALIZADO*/
