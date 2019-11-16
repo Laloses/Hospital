@@ -212,6 +212,8 @@ private slots:
 
     void llenarTablaR(QString);
 
+    void on_buscarremedio_clicked();
+    void llenarTDoctores(QString);
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

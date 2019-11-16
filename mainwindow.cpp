@@ -17,6 +17,7 @@
 #include <QFileSystemModel>
 #include <QPrinter>
 #include "remedios.h"
+#include "dialogdoctor.h"
 
 
 
@@ -6012,19 +6013,32 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
 void MainWindow::on_pushButton__dirMedico_clicked()
 {
      ui->stackedWidget_principal->setCurrentIndex(8);
+     llenarTDoctores("puto daniel");
 }
 
 void MainWindow::on_pb_remedios_clicked()
 {
+    QSqlQuery cat;
       ui->stackedWidget_principal->setCurrentIndex(10);
+      llenarTablaR("Todas");
+      cat.exec("select nombreCategoria from tipoCategoriaRem");
+      ui->remedioscateg->addItem("Todas");
+      while(cat.next())
+      {
+          ui->remedioscateg->addItem(cat.value(0).toString());
+      }
+
 }
 
-void MainWindow::llenarTablaR(QString r)
+void MainWindow::llenarTablaR(QString rem)
 {
+    clearLayout(ui->gridRemedios);
      QSqlQuery qr;
-     QString nombre,ingr,proc;
+     QString nombre,ingr,proc,foto,idcateg;
         QByteArray foto1;
 
+        int conti=0;
+      if(rem=="Todas"){
      qr.exec("select nombreRemedio,ingredientes,procedimiento,fotoRemedio from remedios");
      while(qr.next())
      {
@@ -6034,6 +6048,69 @@ void MainWindow::llenarTablaR(QString r)
         foto1=qr.value(3).toByteArray();
         remedios *r = new remedios(nombre,ingr,proc,foto1);
         r->llenarInformacion();
+
+        ui->gridRemedios->addWidget(r,conti,0);
+        conti++;
      }
+      }
+      else
+      {
+
+          qr.exec("select * from tipoCategoriaRem where nombreCategoria='"+rem+"'");
+          qr.next();
+          idcateg=qr.value(0).toString();
+          qr.exec("select nombreRemedio,ingredientes,procedimiento,fotoRemedio from remedios where idcategoria='"+idcateg+"'");
+          while(qr.next())
+          {
+             nombre=qr.value(0).toString();
+             ingr=qr.value(1).toString();
+             proc=qr.value(2).toString();
+             foto1=qr.value(3).toByteArray();
+             remedios *r = new remedios(nombre,ingr,proc,foto1);
+             r->llenarInformacion();
+
+             ui->gridRemedios->addWidget(r,conti,0);
+             conti++;
+          }
+      }
+
+}
+
+void MainWindow::on_buscarremedio_clicked()
+{
+    QString nombrecat;
+    nombrecat=ui->remedioscateg->currentText();
+    llenarTablaR(nombrecat);
+}
+
+void MainWindow::llenarTDoctores(QString doc)
+{
+    //WHERE d.iddoctor = +QString::number((idDoc))+
+    int cont=0;
+    QSqlQuery doct,idcon;
+    QString idconsul,nombre,numcons,especid,nombreespec,tel;
+
+    doct.exec("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor,d.idconsultorio,u.telefono,e.idEsp"
+              " FROM doctor as d , especialidad as e , usuario as u where u.matricula = d.idUser AND d.idEspecialidad = e.idEsp");
+
+
+    while(doct.next()){
+    idconsul=doct.value(3).toString();
+    nombre=doct.value(0).toString();
+    tel=doct.value(4).toString();
+    nombreespec=doct.value(1).toString();
+
+
+        //num consultorio
+    idcon.exec("select numConsultorio from consultorio where idconsultorio='"+ idconsul+"'");
+    idcon.next();
+    numcons=idcon.value(0).toString();
+
+    DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+    d->llenarInfoDoc();
+    ui->gridDoctores->addWidget(d,cont,0);
+    cont++;
+    }
+
 
 }

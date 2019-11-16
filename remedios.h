@@ -19,7 +19,8 @@ public:
 
 private:
     Ui::remedios *ui;
-    QString titulo,ingredientes,procedimiento,foto;
+    QString titulo,ingredientes,procedimiento;
+    QByteArray foto;
 };
 
 #endif // REMEDIOS_H
