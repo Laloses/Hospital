@@ -8,6 +8,8 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include <QTimer>
+#include <QDate>
 namespace Ui {
 class eliminarUsuarios;
 }

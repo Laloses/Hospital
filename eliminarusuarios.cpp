@@ -35,6 +35,11 @@ void eliminarUsuarios::eliminarDoc(QString matricula){
     preparada="Pendiente";
     QSqlQuery query;
     clearLayou(ui->gridLayout_eliminar);
+
+    QDate fecha=QDate::currentDate();
+    QString fecha_escritorio=fecha.toString("yyyy-MM-dd");
+    QString fecha_inter;
+    //if(fecha_inter<fecha_escritorio){   }
     query.exec("select usu.nombre,usu.appaterno,usu.apmaterno,usu.matricula,doc.estado,cit.estado as estadoCita,cit.preparada,cit.hora,cit.fecha,cit.matricula from usuario as usu inner join doctor as doc on usu.matricula=doc.idUser inner join  especialidad as esp on doc.idEspecialidad=esp.idEsp inner join cita as cit on doc.iddoctor=cit.doctor where usu.matricula='"+matricula+"' and cit.preparada='Pendiente'");
     while(query.next()){
          qDebug()<<"modificar:"<<query.value(6).toString();
@@ -68,7 +73,6 @@ void eliminarUsuarios::eliminarDoc(QString matricula){
          //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
          query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
          query.next();
-
     }
 
 
@@ -95,6 +99,7 @@ void eliminarUsuarios::eliminarStaff(QString matricula){
     query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
     query.next();
 }
+
 //METODO QUE SIRVE PARA DAR DE BAJA UN PACIENTE DEL SISTEMA
 void eliminarUsuarios::eliminarPaciente(QString matricula){
 
@@ -130,6 +135,8 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
          query.exec("update cita set estado='2', preparada='Paciente eliminado' where matricula='"+matricula+"'");
          query.next();
          //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
+         query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
+         query.next();
          query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
          query.next();
 
