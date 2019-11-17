@@ -206,6 +206,8 @@ private slots:
     void pagarCitasEfect(QString);
     void pagarIntervencionTarjeta(QString);
 
+    void on_pb_bajaPaciente_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

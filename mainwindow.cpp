@@ -894,6 +894,7 @@ void MainWindow::cargarDatosUsuarios(){
             ui->btnMostrarContrasena_6->setHidden(true);
             ui->btnCancelarEditarPaciente->setHidden(true);
             ui->btnGuardarEditarPaciente->setHidden(true);
+            ui->pb_bajaPaciente->hide();
         }
         if(id_doctor!="0"){
             //Nombre
@@ -932,6 +933,7 @@ void MainWindow::cargarDatosUsuarios(){
             ui->btnMostrarContrasena_4->setHidden(true);
             ui->btnCancelarEditarDoctor->setHidden(true);
             ui->btnGuardarEditarDoctor->setHidden(true);
+            ui->pb_bajaDoctor->hide();
         }
         if(id_staff!="0"){
             //datos staff ----------------------------
@@ -3328,6 +3330,7 @@ void MainWindow::on_btnEditarDoctor_clicked()
     ui->btnMostrarContrasena_4->setHidden(false);
     ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
     ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+    ui->pb_bajaDoctor->show();
 }
 
 void MainWindow::on_btnCancelarEditarDoctor_clicked()
@@ -3347,6 +3350,7 @@ void MainWindow::on_btnCancelarEditarDoctor_clicked()
     ui->btnMostrarContrasena_4->setHidden(true);
     ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
     ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+    ui->pb_bajaDoctor->hide();
 }
 
 void MainWindow::on_btnGuardarEditarDoctor_clicked()
@@ -3404,6 +3408,7 @@ void MainWindow::on_btnGuardarEditarDoctor_clicked()
                 ui->btnGuardarEditarDoctor->setHidden(true);
                 ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+                ui->pb_bajaDoctor->hide();
                 on_pushButton_miPerfil_clicked();
             }
         }
@@ -3468,6 +3473,7 @@ void MainWindow::on_btnEditarPaciente_clicked()
     ui->btnMostrarContrasena_6->setHidden(false);
     ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
     ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+    ui->pb_bajaPaciente->show();
 }
 
 void MainWindow::on_btnCancelarEditarPaciente_clicked()
@@ -3487,6 +3493,7 @@ void MainWindow::on_btnCancelarEditarPaciente_clicked()
     ui->btnMostrarContrasena_6->setHidden(true);
     ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
     ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+    ui->pb_bajaPaciente->hide();
 }
 
 void MainWindow::on_btnGuardarEditarPaciente_clicked()
@@ -3546,6 +3553,7 @@ void MainWindow::on_btnGuardarEditarPaciente_clicked()
                 ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 on_pushButton_miPerfil_clicked();
+                ui->pb_bajaPaciente->hide();
             }
         }
     }
@@ -6000,4 +6008,11 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
     }
 }
 
+//
+void MainWindow::on_pb_bajaPaciente_clicked()
+{
+    QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está segurode eliminar su cuenta? \nEsto no se puede revertir.");
+    if(res == QMessageBox::Yes){
 
+    }
+}
