@@ -57,7 +57,7 @@ void eliminarUsuarios::ModificarUsuario(QString matri, QString tipoUsr){
 
 void eliminarUsuarios::on_radioButton_doc_clicked()
 {
-    qDebug()<<"entre:";
+    qDebug()<<"entre: doctor";
     clearLayou(ui->gridLayout_eliminar);
     int cont=0;
     QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
@@ -66,7 +66,7 @@ void eliminarUsuarios::on_radioButton_doc_clicked()
     queryDoc.exec(consultaDoc);
             while(queryDoc.next())
             {
-                if(queryDoc.value(5).toString()=="1")
+                if(queryDoc.value(5).toString()=="0")
                 {
 
                 }
@@ -104,12 +104,12 @@ void eliminarUsuarios::on_radioButton_doc_clicked()
 
 void eliminarUsuarios::on_radioButton_staff_clicked()
 {
-    qDebug()<<"entre:";
+    qDebug()<<"entre: staff";
     clearLayou(ui->gridLayout_eliminar);
     int cont=0;
     QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
     QSqlQuery queryStaff,userEst;
-    consultaDoc="select *from  Staffs";
+    consultaDoc="select * from  Staffs";
     queryStaff.exec(consultaDoc);
     while(queryStaff.next())
     {

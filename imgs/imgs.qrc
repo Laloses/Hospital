@@ -29,5 +29,6 @@
         <file>logoFinal_FondoEstudios.png</file>
         <file>refresh.png</file>
         <file>question.png</file>
+        <file>camera.png</file>
     </qresource>
 </RCC>

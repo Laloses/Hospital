@@ -970,7 +970,7 @@ font: 10pt &quot;MS Shell Dlg 2&quot;;</string>
            <item>
             <widget class="QLabel" name="label_11">
              <property name="text">
-              <string>Nueva contraseña:</string>
+              <string>Nueva contraseña</string>
              </property>
             </widget>
            </item>
@@ -983,6 +983,12 @@ font: 10pt &quot;MS Shell Dlg 2&quot;;</string>
                  <width>200</width>
                  <height>0</height>
                 </size>
+               </property>
+               <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>false</bool>
                </property>
               </widget>
              </item>
@@ -1034,7 +1040,7 @@ background-color:transparent;</string>
            <item>
             <widget class="QLabel" name="label_12">
              <property name="text">
-              <string>Confirmar contraseña:</string>
+              <string>Confirmar contraseña</string>
              </property>
             </widget>
            </item>
@@ -1047,6 +1053,9 @@ background-color:transparent;</string>
                  <width>200</width>
                  <height>0</height>
                 </size>
+               </property>
+               <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
                </property>
               </widget>
              </item>

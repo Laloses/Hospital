@@ -32,12 +32,18 @@ private slots:
 
     void on_btnRestablecerPass_clicked();
 
+    void on_btnVerNew_clicked();
+
+    void on_btnVerConf_clicked();
+
 private:
     Ui::CambiarContrasenia *ui;
     QString id;
     QSqlQuery obtenerPregunta;
     QString pregunta;
     QString respuesta;
+    int toggleVision;
+    int toggleVision1;
 
 };
 

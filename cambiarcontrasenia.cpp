@@ -7,6 +7,10 @@ CambiarContrasenia::CambiarContrasenia(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
+    toggleVision = 0;
+    toggleVision1 = 0;
+    ui->lineNewPass->setEchoMode(QLineEdit::Password);
+    ui->lineConfPass->setEchoMode(QLineEdit::Password);
 }
 
 CambiarContrasenia::~CambiarContrasenia()
@@ -89,18 +93,29 @@ void CambiarContrasenia::on_btnRestablecerPass_clicked()
     }
     else{
         if(newPass == confPass){
-            QSqlQuery actualizaPass;
-            actualizaPass.prepare("update usuario set clave='"+newPass+"' WHERE matricula='"+id+"'");
-            actualizaPass.exec();
-            QMessageBox messageBox(QMessageBox::Information,
-                                   tr(""), tr("La contraseña ha sido restablecida."), QMessageBox::Yes);
-            messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
-            messageBox.exec();
-            if(messageBox.exec() == QMessageBox::Yes)
+            QMessageBox message(QMessageBox::Question,
+                                tr("Warning"), tr("Se actualizará su contraseña. ¿Desea continuar?"), QMessageBox::Yes | QMessageBox::No);
+            message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+            message.setButtonText(QMessageBox::No, tr("Cancelar"));
+            if(message.exec() == QMessageBox::No)
             {
-                this->close();
                 ui->lineNewPass->clear();
                 ui->lineConfPass->clear();
+            }
+            else{
+                QSqlQuery actualizaPass;
+                actualizaPass.prepare("update usuario set clave='"+newPass+"' WHERE matricula='"+id+"'");
+                actualizaPass.exec();
+                QMessageBox messageBox(QMessageBox::Information,
+                                       tr(""), tr("La contraseña ha sido restablecida."), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+                if(messageBox.exec() == QMessageBox::Yes)
+                {
+                    this->close();
+                    ui->lineNewPass->clear();
+                    ui->lineConfPass->clear();
+                }
             }
         }
         else {
@@ -111,5 +126,41 @@ void CambiarContrasenia::on_btnRestablecerPass_clicked()
             ui->lineNewPass->clear();
             ui->lineConfPass->clear();
         }
+    }
+}
+
+void CambiarContrasenia::on_btnVerNew_clicked()
+{
+    if(toggleVision==0){
+        QPixmap pixmap(":/imgs/view.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnVerNew->setIcon(ButtonIcon);
+        ui->lineNewPass->setEchoMode(QLineEdit::Normal);
+        toggleVision = 1;
+    }
+    else if (toggleVision==1) {
+        QPixmap pixmap(":/imgs/NoView.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnVerNew->setIcon(ButtonIcon);
+        ui->lineNewPass->setEchoMode(QLineEdit::Password);
+        toggleVision = 0;
+    }
+}
+
+void CambiarContrasenia::on_btnVerConf_clicked()
+{
+    if(toggleVision1==0){
+        QPixmap pixmap(":/imgs/view.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnVerConf->setIcon(ButtonIcon);
+        ui->lineConfPass->setEchoMode(QLineEdit::Normal);
+        toggleVision1 = 1;
+    }
+    else if (toggleVision1==1) {
+        QPixmap pixmap(":/imgs/NoView.png");
+        QIcon ButtonIcon(pixmap);
+        ui->btnVerConf->setIcon(ButtonIcon);
+        ui->lineConfPass->setEchoMode(QLineEdit::Password);
+        toggleVision1 = 0;
     }
 }

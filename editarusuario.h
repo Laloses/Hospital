@@ -18,6 +18,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QDebug>
 
 namespace Ui {
 class EditarUsuario;
@@ -30,6 +31,9 @@ class EditarUsuario : public QMainWindow
 public:
     explicit EditarUsuario(QString, QString, QWidget *parent = nullptr);
     ~EditarUsuario();
+
+private slots:
+    void on_btnCancelar_clicked();
 
 private:
     Ui::EditarUsuario *ui;
