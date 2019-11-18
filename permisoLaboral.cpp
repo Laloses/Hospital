@@ -16,6 +16,7 @@ PermisoLaboral::PermisoLaboral(QWidget *parent, QString Staff) :
     QDialog(parent),
     ui(new Ui::PermisoLaboral)
 {
+    QSqlDatabase database = QSqlDatabase::database();
     ui->setupUi(this);
     idStaff=Staff;
     //Bloqueamos las fechas para hacer la solicitud, minimo 3 dias antes
@@ -60,10 +61,50 @@ void PermisoLaboral::on_buttonBox_accepted()
     if(!ui->te_motivos->toPlainText().isEmpty()){
         ui->te_motivos->setStyleSheet(estiloBueno);
 
+        //REVISAMOS QUE NO EXISTA UN PERMISO PARA ESOS DIAS, Y NO REPITA
+        QSqlQuery* existencia = new QSqlQuery;
+        QString * consulta;
+
+        //PARA UN DIA
+        if(ui->rb_1dia->isChecked()){
+            consulta = new QString("SELECT idPermiso FROM permisoLaboral "
+                                   "WHERE idStaff="+idStaff+" "
+                                   "AND fechaI='"+ui->de_fechaUnica->date().toString("yyyy-MM-dd")+"'");
+                    existencia->exec(*consulta);
+                    qDebug()<<*consulta;
+                    if( existencia->next() ){
+                        QMessageBox::critical(this,"Error","Ya tienes una solicitud pendiente de ese dia.");
+                        return;
+                    }
+        }
+        else{
+            //Si es el mismo dia
+            consulta = new QString("SELECT fechaI,fechaF FROM permisoLaboral "
+                                   "WHERE idStaff="+idStaff+" "
+                                   "AND fechaI='"+ui->de_fechaInicio->date().toString("yyyy-MM-dd")+"'");
+                    existencia->exec(*consulta);
+                    qDebug()<<*consulta;
+                    if( existencia->next() ){
+                        QMessageBox::critical(this,"Error","Ya tienes una solicitud pendiente de ese dia.");
+                        return;
+                    }
+            //Si es un intervalo dentro de otra reservacion
+            consulta = new QString("SELECT fechaI,fechaF FROM permisoLaboral "
+                                   "WHERE idStaff="+idStaff+" "
+                                   "AND fechaI<'"+ui->de_fechaInicio->date().toString("yyyy-MM-dd")+"' "
+                                   "AND fechaF>'"+ui->de_fechaFin->date().toString("yyyy-MM-dd")+"' ");
+                     existencia->exec(*consulta);
+                     qDebug()<<*consulta;
+                     if( existencia->next() ){
+                         QMessageBox::critical(this,"Error","Ya tienes una solicitud pendiente de ese dia.");
+                         return;
+                     }
+        }
+
+        //INSERTAMOS UNA NUEVA SOLICITUD
         QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está seguro de pedir permiso?");
         if(res == QMessageBox::Yes){
             //PARA UN DIA
-            QString * consulta;
             QSqlQuery* insert = new QSqlQuery;
             if(ui->rb_1dia->isChecked()){
                 //INSERT
@@ -71,6 +112,7 @@ void PermisoLaboral::on_buttonBox_accepted()
                                       "value("+idStaff+",'"+ui->te_motivos->toPlainText()+"','"+ui->de_fechaUnica->date().toString("yyyy-MM-dd")+"','"+ui->de_fechaUnica->date().toString("yyyy-MM-dd")+"')");
                 if ( insert->exec(*consulta) ){
                     QMessageBox::information(this,"Éxito","Solicitud enviada correctamente, espera a que la acepten.");
+                    this->close();
                 }
                 else {
                     qDebug()<<insert->lastError().text();
@@ -81,21 +123,26 @@ void PermisoLaboral::on_buttonBox_accepted()
             else{
                 //INSERT
                 consulta= new QString("INSERT INTO permisoLaboral(idStaff,motivos,fechaI,fechaF) "
-                                      "value("+idStaff+",'"+ui->te_motivos->toPlainText()+"','"+ui->de_fechaInicio->date().toString()+"','"+ui->de_fechaFin->date().toString("yyyy-MM-dd")+"')");
+                                      "value("+idStaff+",'"+ui->te_motivos->toPlainText()+"','"+ui->de_fechaInicio->date().toString("yyyy-MM-dd")+"','"+ui->de_fechaFin->date().toString("yyyy-MM-dd")+"')");
                 if ( insert->exec(*consulta) ){
                     QMessageBox::information(this,"Éxito","Solicitud enviada correctamente, espera a que la acepten.");
+                    this->close();
                 }
                 else {
                     qDebug()<<insert->lastError().text();
                     QMessageBox::critical(this,"Error","Solicitud no enviada.");
                 }
             }
-
         }
     }
     //No tiene nada escrito
     else {
         ui->te_motivos->setStyleSheet(estiloMalo);
+        this->show();
     }
 
+}
+
+void PermisoLaboral::closeEvent(QCloseEvent  *event) {
+    return event->ignore(); //to avoid closing.
 }

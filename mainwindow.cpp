@@ -178,16 +178,17 @@ void MainWindow::on_radioButton_staff_toggled(bool checked)
 }
 
 void clearLayout(QLayout *layout) {
-    QLayoutItem *item;
-    while((item = layout->takeAt(0))) {
-        if (item->layout()) {
-            clearLayout(item->layout());
-            delete item->layout();
-        }
-        if (item->widget()) {
-            delete item->widget();
-        }
-        delete item;
+    if (layout) {
+        QLayoutItem *item;
+            while((item = layout->takeAt(0))){
+                if (item->layout()) {
+                    clearLayout(item->layout());
+                    delete item->layout();
+                }
+                if(item->widget())
+                    item->widget();
+                delete item->widget();
+            }
     }
 }
 
@@ -6028,6 +6029,76 @@ void MainWindow::on_pb_bajaPaciente_clicked()
 
 void MainWindow::on_pb_PermisoLaboral_clicked()
 {
-    PermisoLaboral* permiso = new PermisoLaboral(this);
-    permiso->exec();
+    PermisoLaboral* permiso = new PermisoLaboral(this,id_staff);
+    permiso->show();
+}
+
+void MainWindow::on_pb_permisosStaff_clicked()
+{
+    clearLayout(ui->layPermisos);
+    QSqlQuery* permisos = new QSqlQuery;
+    permisos->exec("SELECT idPermiso,fechaI,fechaF,estado FROM permisoLaboral WHERE idStaff="+id_staff);
+
+    //Ciclo para poner botones y cosas
+    QLabel* lb;
+    QPushButton* pb;
+    QHBoxLayout* hlay;
+    QString *contenido;
+    while(permisos->next()){
+        hlay = new QHBoxLayout;
+
+        //fechaI
+        contenido = new QString(permisos->value("fechaI").toString());
+        lb = new QLabel(*contenido);
+        hlay->addWidget(lb);
+        //fechaF
+        contenido = new QString(permisos->value("fechaF").toString());
+        lb = new QLabel(*contenido);
+        hlay->addWidget(lb);
+        //estado
+        contenido = new QString(permisos->value("estado").toString());
+        if(*contenido == "0"){
+            *contenido = "En espera";
+        }
+        else{
+            *contenido = "Aceptada";
+        }
+        lb = new QLabel(*contenido);
+        hlay->addWidget(lb);
+
+        //Boton de eliminar sólo si aun no se acepta
+        if(permisos->value("estado").toString() == "0"){
+            pb= new QPushButton(" Cancelar ");
+            qDebug()<<permisos->value("idPermiso").toString();
+            QString* id =new QString(permisos->value("idPermiso").toString());
+            connect(pb,&QPushButton::clicked,[=](){emit eliminarPermisoLaboral(*id);});
+            hlay->addWidget(pb);
+        }
+        else {
+            pb= new QPushButton(" Cancelar ");
+            pb->setEnabled(0);
+            pb->setStyleSheet("background:grey");
+            hlay->addWidget(pb);
+        }
+        ui->layPermisos->addLayout(hlay);
+    }
+    //Cuando termine hay que agregar una barra espaciadora para empujar el contenido
+    QSpacerItem *barraVertical= new QSpacerItem(10,10,QSizePolicy::Ignored,QSizePolicy::Expanding);
+    ui->layPermisos->addSpacerItem(barraVertical);
+    ui->stackedWidget_PerfilStaff->setCurrentIndex(2);
+}
+
+void MainWindow::eliminarPermisoLaboral(QString idPermiso){
+    QMessageBox::StandardButton res = QMessageBox::question(this,"Cancelar solicitud","¿Está seguro de cancelar su solicitud?");
+    if(res == QMessageBox::Yes){
+        QSqlQuery* deletear = new QSqlQuery;
+        if( deletear->exec("DELETE FROM permisoLaboral WHERE idPermiso="+idPermiso) ){
+            QMessageBox::information(this, "Éxito","Borrado correctamente.");
+            on_pb_permisosStaff_clicked();
+        }
+        else{
+            qDebug()<<deletear->lastError().text();
+            QMessageBox::critical(this, "Error","Error al borrar.");
+        }
+    }
 }

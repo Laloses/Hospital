@@ -210,6 +210,9 @@ private slots:
 
     void on_pb_PermisoLaboral_clicked();
 
+    void on_pb_permisosStaff_clicked();
+    void eliminarPermisoLaboral(QString idP);
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
