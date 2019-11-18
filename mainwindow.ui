@@ -110,7 +110,7 @@ border:none
 </string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -2764,7 +2764,7 @@ background-color:transparent;</string>
                         <x>0</x>
                         <y>0</y>
                         <width>230</width>
-                        <height>318</height>
+                        <height>146</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_22">
@@ -3640,8 +3640,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>374</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -3672,8 +3672,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>421</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_52">
@@ -5026,8 +5026,8 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>358</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -5576,8 +5576,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>371</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_37">
@@ -7453,13 +7453,13 @@ QPushButton:focus{
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>170</width>
-                  <height>170</height>
+                  <width>200</width>
+                  <height>100</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>500</width>
+                  <width>800</width>
                   <height>500</height>
                  </size>
                 </property>
@@ -7971,7 +7971,7 @@ background-color:transparent</string>
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_5">
+               <widget class="QPushButton" name="pb_bajaStaff">
                 <property name="text">
                  <string> Baja definitiva </string>
                 </property>
@@ -8008,9 +8008,9 @@ background-color:transparent</string>
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_6">
+               <widget class="QPushButton" name="pb_PermisoLaboral">
                 <property name="text">
-                 <string> Baja temporal </string>
+                 <string> Permiso Laboral </string>
                 </property>
                </widget>
               </item>

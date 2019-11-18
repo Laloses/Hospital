@@ -958,6 +958,8 @@ void MainWindow::cargarDatosUsuarios(){
             ui->btnMostrarContrasena_2->setHidden(true);
             ui->btnCancelarEditarStaff->setHidden(true);
             ui->btnGuardarEditarStaff->setHidden(true);
+            ui->pb_bajaStaff->hide();
+            ui->pb_PermisoLaboral->show();
         }
 }
 
@@ -2553,6 +2555,8 @@ void MainWindow::on_btnEditarStaff_clicked()
     ui->btnMostrarContrasena_2->setHidden(false);
     ui->lineContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
     ui->lineConfirmaContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
+    ui->pb_bajaStaff->show();
+    ui->pb_PermisoLaboral->hide();
 }
 
 void MainWindow::on_btnCancelarEditarStaff_clicked()
@@ -2572,6 +2576,8 @@ void MainWindow::on_btnCancelarEditarStaff_clicked()
     ui->btnMostrarContrasena_2->setHidden(true);
     ui->lineContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
     ui->lineConfirmaContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+    ui->pb_bajaStaff->hide();
+    ui->pb_PermisoLaboral->show();
 }
 
 void MainWindow::on_btnGuardarEditarStaff_clicked()
@@ -2629,6 +2635,8 @@ void MainWindow::on_btnGuardarEditarStaff_clicked()
                 ui->btnGuardarEditarStaff->setHidden(true);
                 ui->lineContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
+                ui->pb_bajaStaff->hide();
+                ui->pb_PermisoLaboral->show();
             }
         }
     }
