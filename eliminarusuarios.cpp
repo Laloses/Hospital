@@ -167,18 +167,40 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
 
 
     QMessageBox messag(QMessageBox::Question,
-    tr("Information"), tr("Staff eliminado"), QMessageBox::Yes);
+    tr("Information"), tr("Paciente eliminado"), QMessageBox::Yes);
     messag.setButtonText(QMessageBox::Yes, tr("Aceptar"));
 
     qDebug()<<"eliminar Paciente";
-    QString preparada,consulta,fech,hor,tipo,cita,user1;
+    QString preparada,consulta,fech,hor,tipo,cita,user1,final;
     preparada="Pendiente";
-    QSqlQuery query;
+    QSqlQuery query,query1;
+    QString fecha_inter;
+    QDate fecha=QDate::currentDate();
+    QString fecha_escritorio=fecha.toString("yyyy-MM-dd");
     if (message.exec() == QMessageBox::Yes ){
-    query.exec("select *from cita where matricula='"+matricula+"'");
-
-    while(query.next()){
-
+        query1.exec("select cq.fechaCita,cq.idDoctor,cq.estado,p.idUser,cq.horaInicio from CitasQuirofano as cq inner join paciente as p on cq.idPaciente=p.idpaciente where p.idUser='"+matricula+"'");
+       while(query1.next()){
+          if(query1.value(2).toString()=="Pendiente" && query1.value(0).toString()>fecha_escritorio){
+              qDebug()<<query1.value(0).toString()<<"ddddddddddddd"<<fecha_escritorio;
+              qDebug()<<"notificar al Doctor y modificando intervenciones que fueron aceptadas";
+              //NOTIFICAMOS AL DOCTOR DE LAS itervenciones QUE SE CANCELARON
+              user1=query1.value(1).toString();
+              fech=query1.value(0).toString();
+              hor=query1.value(4).toString();
+              QString mensaj;
+              mensaj="Se le informa que su paciente ha cancelado la intervenvion del dia: "+fech+" y con horario de: "+hor+" fue CANCELADA.";
+              tipo="0";
+              QString notificacion;
+              notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+user1+"')";
+              query1.exec(notificacion);
+              query1.next();
+              query1.exec("update CitasQuirofano as cq inner join paciente as p on cq.idPaciente=p.idpaciente set cq.estado='Cancelada' where p.idUser='"+matricula+"' and cq.estado='Pendiente'");
+              query1.next();
+          }
+       }
+       //funciona correctamente probado
+         query.exec("select *from cita where matricula='"+matricula+"'");
+        while(query.next()){
         //IF PARA NOTIFICAR AL DOCTOR PARA DE QUE LE AN CANCELADO LAS CITAS.
         if(query.value(8).toString()=="Pendiente"){
         qDebug()<<"notificar al Doctor y modificando citas que fueron aceptadas";
@@ -205,8 +227,6 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
          //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
          query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
          query.next();
-         query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
-         query.next();
 
          //liberar el dia de la consulta->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -219,7 +239,6 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
             query.exec(consulta);
             query.next();
 
-
             }
 
       }
@@ -227,22 +246,17 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
     }
     /*PARA ACTUALIZAR EL PACIENTE ELIMINADO MODIFICAMOS LA CONTRASEÑA
           Y MODIFICAMOS CITAS QUE TENGA COMO ACEPTADAS EL DOCTOR PERO NO LAS A FINALIZADO*/
-
+      //probado y funcionando
          query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
          query.next();
          //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
          query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
          query.next();
-         query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
-         query.next();
-
     if (messag.exec() == QMessageBox::Yes ){
         clearLayou(ui->gridLayout_eliminar);
         on_radioButton_pac_clicked();
         }
-
-
-   }
+      }
 
 }
 
