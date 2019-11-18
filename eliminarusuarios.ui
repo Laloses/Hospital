@@ -51,26 +51,33 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>40</y>
-     <width>201</width>
-     <height>51</height>
+     <y>60</y>
+     <width>265</width>
+     <height>26</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit"/>
-    </item>
-    <item row="0" column="0">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
      <widget class="QLabel" name="label">
       <property name="text">
        <string> Usuario:</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item>
+     <widget class="QLineEdit" name="lineEdit"/>
+    </item>
+    <item>
      <widget class="QPushButton" name="pushButton">
+      <property name="styleSheet">
+       <string notr="true">border:none</string>
+      </property>
       <property name="text">
        <string>Buscar</string>
+      </property>
+      <property name="icon">
+       <iconset resource="imgs/imgs.qrc">
+        <normaloff>:/imgs/search.png</normaloff>:/imgs/search.png</iconset>
       </property>
      </widget>
     </item>
@@ -79,9 +86,9 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>500</x>
      <y>60</y>
-     <width>310</width>
+     <width>201</width>
      <height>22</height>
     </rect>
    </property>
@@ -110,6 +117,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="imgs/imgs.qrc"/>
+ </resources>
  <connections/>
 </ui>
