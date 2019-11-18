@@ -4741,58 +4741,82 @@ void MainWindow::PonerCuarto(QString num)
 void MainWindow::CuartosDisponibles(QDate inicio,QDate fin)
 {
     clearLayout(ui->cuartos);
-    QString cuarto;
-    QSqlQuery cuarto1;
-    cuarto="select *from Cuarto";
-    cuarto1.exec(cuarto);
-    int r=0;
-    int c=0;
-    while(cuarto1.next())
-    {
-        QString reservado,idCuarto;
-        idCuarto=cuarto1.value(0).toString();
-
-        QSqlQuery reservado1;
-        reservado="select fecha_llega,fecha_salida from Estancia where idCuarto='"+idCuarto+"'; ";
-        reservado1.exec(reservado);
-        qDebug()<<reservado;
-        bool libre=true;
-        while(reservado1.next())
+        QString cuarto;
+        QSqlQuery cuarto1;
+        cuarto="select *from Cuarto";
+        cuarto1.exec(cuarto);
+        int r=0;
+        int c=0;
+        while(cuarto1.next())
         {
-            QDate in,fi;
-            in=reservado1.value(0).toDate();
-            fi=reservado1.value(1).toDate();
+            QString reservado,idCuarto,numCuarto;
+            idCuarto=cuarto1.value(0).toString();
+            numCuarto=cuarto1.value(1).toString();
 
-            if(inicio>in)
+            QSqlQuery reservado1;
+            reservado="select fecha_llega,fecha_salida from Estancia where idCuarto='"+idCuarto+"'; ";
+            reservado1.exec(reservado);
+            qDebug()<<reservado;
+            bool libre=true;
+
+
+            while(reservado1.next())
             {
+                QDate in,fi;
+                in=reservado1.value(0).toDate();
+                fi=reservado1.value(1).toDate();
 
-                if(inicio>fi)
+                if(inicio>in)
                 {
 
-                    libre=true;
-                    break;
+                    if(inicio>fi)
+                    {
+
+                        libre=true;
+                        break;
+                    }
+                    else
+                    {
+
+                        libre=false;
+
+                        break;
+                    }
                 }
                 else
                 {
 
-                    libre=false;
+                 if(fin<in)
+                 {
 
+                    libre=true;
                     break;
+                 }
+                }
+
+            }
+            //aqui va
+            if(libre==true)
+            {
+                QPushButton* cuartoo = new QPushButton();
+                cuartoo->setText(numCuarto);
+                cuartoo->setFixedSize(60, 40);
+
+                QSignalMapper *mapper1=new QSignalMapper(this);
+                connect(cuartoo,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
+                mapper1->setMapping(cuartoo,numCuarto);
+                connect(mapper1,SIGNAL(mapped(QString)),this,SLOT(PonerCuarto(QString)));
+                ui->cuartos->addWidget(cuartoo,r,c,1,1);
+                c++;
+                if(c==3)
+                {
+                    r++;
+                    c=0;
                 }
             }
-            else
-            {
-
-             if(fin<in)
-             {
-
-                libre=true;
-                break;
-             }
-            }
         }
-    }
 }
+
 void MainWindow::on_pushButton_horarioDoc_2_clicked()
 {
      ui->stackedWidget_PerfilStaff->setCurrentIndex(1);

@@ -10,6 +10,8 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QDate>
+#include <QMessageBox>
+
 namespace Ui {
 class eliminarUsuarios;
 }

@@ -31,22 +31,50 @@ void clearLayou(QLayout *layout) {
 void eliminarUsuarios::eliminarDoc(QString matricula){
 
     qDebug()<<"eliminar doctor";
+
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Estas seguro de eliminar al paciente?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+    QMessageBox messageBox(QMessageBox::Warning,
+    tr("Warning"), tr("no puedes eliminar el dotor tiene intervenciones pendientes."), QMessageBox::Yes);
+messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+    QMessageBox messag(QMessageBox::Question,
+    tr("Information"), tr("Doctor eliminado"), QMessageBox::Yes);
+    messag.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
     QString preparada,consulta,fech,hor,tipo,cita,user1;
     preparada="Pendiente";
-    QSqlQuery query;
-    clearLayou(ui->gridLayout_eliminar);
-
+    QSqlQuery query,query1;
+    QString fecha_inter;
     QDate fecha=QDate::currentDate();
     QString fecha_escritorio=fecha.toString("yyyy-MM-dd");
-    QString fecha_inter;
-    //if(fecha_inter<fecha_escritorio){   }
-    query.exec("select usu.nombre,usu.appaterno,usu.apmaterno,usu.matricula,doc.estado,cit.estado as estadoCita,cit.preparada,cit.hora,cit.fecha,cit.matricula from usuario as usu inner join doctor as doc on usu.matricula=doc.idUser inner join  especialidad as esp on doc.idEspecialidad=esp.idEsp inner join cita as cit on doc.iddoctor=cit.doctor where usu.matricula='"+matricula+"' and cit.preparada='Pendiente'");
+
+    if (message.exec() == QMessageBox::Yes ){
+        //CUANDO EL DOCTOR TIENE INTERVENCIONES PENDIENTES
+    query1.exec("select cq.idDoctor,e.fecha_llega,e.fecha_salida from CitasQuirofano as cq inner join Estancia as e on cq.idCita=e.idCitaQ  inner join doctor as d on cq.idDoctor=d.iddoctor where d.idUser='"+matricula+"'");
+   while(query1.next()){
+    fecha_inter=query1.value(2).toString();
+    qDebug()<<"llll"<<fecha_inter;
+    qDebug()<<"kkk"<<fecha_escritorio;
+
+     }
+      if(fecha_inter>fecha_escritorio){
+          qDebug()<<"entre fecha";
+        if (messageBox.exec() == QMessageBox::Yes){
+         }
+
+    }else {
+      //CASO DONDE TIENE CITAS EL DOCTOR PENDIENTES
+    query.exec("select usu.nombre,usu.appaterno,usu.apmaterno,usu.matricula,doc.estado,cit.estado as estadoCita,cit.preparada,cit.hora,cit.fecha,cit.matricula from usuario as usu inner join doctor as doc on usu.matricula=doc.idUser inner join  especialidad as esp on doc.idEspecialidad=esp.idEsp inner join cita as cit on doc.iddoctor=cit.doctor where usu.matricula='"+matricula+"'");
     while(query.next()){
          qDebug()<<"modificar:"<<query.value(6).toString();
         //IF PARA NOTIFICAR AL PACIENTE PARA DE QUE LE AN CANCELADO LAS CITAS.
+
         if(query.value(6).toString()=="Pendiente"){
         qDebug()<<"notificar al paciente y modificando citas que fueron aceptadas";
-
         //NOTIFICAMOS AL DOCTOR DE LAS CITAS QUE SE CANCELARON
         user1=query.value(9).toString();
         fech=query.value(8).toString();
@@ -62,26 +90,39 @@ void eliminarUsuarios::eliminarDoc(QString matricula){
          /*PARA ACTUALIZAR EL PACIENTE ELIMINADO MODIFICAMOS LA CONTRASEÑA
           Y MODIFICAMOS CITAS QUE TENGA COMO ACEPTADAS EL DOCTOR PERO NO LAS A FINALIZADO*/
         //CAMBIAMOS LA CONTRASEÑA
+          qDebug()<<"update";
          query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
          query.next();
          //CAMBIAMOS EL TIPO DE USUARIO PARA QUE NO LO RECONOZCA EL LOGIN Y LE EL NUMERO 5
          query.exec("update doctor set tipoUser='5' where idUser='"+matricula+"'");
          query.next();
-         //CAMBIAMOS EL ESTADO Y LA PREPACRACION
+         //CAMBIAMOS EL ESTADO Y LA PREPACRACION de sus citas
          query.exec("update cita as cit inner join doctor as doc on cit.doctor=doc.iddoctor set cit.estado='1',cit.preparada='Cancelada' where doc.idUser='"+matricula+"' and cit.estado='1' or cit.estado='0'");
          query.next();
          //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
          query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
          query.next();
+         if (messag.exec() == QMessageBox::Yes ){
+         clearLayou(ui->gridLayout_eliminar);
+         on_radioButton_doc_clicked();
+         }
+             }
+    //CUANDO EL COTOR NO TIENE CITAS PENDIENTES
+   query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
+   query.next();
+   //CAMBIAMOS EL TIPO DE USUARIO PARA QUE NO LO RECONOZCA EL LOGIN Y LE EL NUMERO 5
+   query.exec("update doctor set tipoUser='5' where idUser='"+matricula+"'");
+   query.next();
+   //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
+   query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
+   query.next();
+   if (messag.exec() == QMessageBox::Yes ){
+   clearLayou(ui->gridLayout_eliminar);
+   on_radioButton_doc_clicked();
+            }
+        }
     }
-
-
-    on_radioButton_doc_clicked();
-    //datos que debo modificar para enviar una cita con el admin para reasignar
-    //estado = 1 AND preparada = 'Cancelada'
-
-
-}
+ }
 
 
 
@@ -91,6 +132,17 @@ void eliminarUsuarios::eliminarStaff(QString matricula){
     qDebug()<<"eliminar staff"<<matricula;
     QSqlQuery query;
      clearLayou(ui->gridLayout_eliminar);
+     QMessageBox message(QMessageBox::Question,
+     tr("Information"), tr("¿Estas seguro de eliminar al staff?"), QMessageBox::Yes | QMessageBox::No);
+     message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+     message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+
+     QMessageBox messag(QMessageBox::Question,
+     tr("Information"), tr("Staff eliminado"), QMessageBox::Yes);
+     messag.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+     if (message.exec() == QMessageBox::Yes ){
     query.exec("update staff set estado='2',idArea='0',tipoUser='5' where idUser='"+matricula+"'");
     query.next();
     query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
@@ -98,17 +150,33 @@ void eliminarUsuarios::eliminarStaff(QString matricula){
     //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
     query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
     query.next();
+    if (messag.exec() == QMessageBox::Yes ){
+    clearLayou(ui->gridLayout_eliminar);
+      on_radioButton_staff_clicked();
+    }
+     }
 }
 
 //METODO QUE SIRVE PARA DAR DE BAJA UN PACIENTE DEL SISTEMA
 void eliminarUsuarios::eliminarPaciente(QString matricula){
 
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Estas seguro de eliminar al paciente?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+
+    QMessageBox messag(QMessageBox::Question,
+    tr("Information"), tr("Staff eliminado"), QMessageBox::Yes);
+    messag.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
     qDebug()<<"eliminar Paciente";
     QString preparada,consulta,fech,hor,tipo,cita,user1;
     preparada="Pendiente";
     QSqlQuery query;
- clearLayou(ui->gridLayout_eliminar);
+    if (message.exec() == QMessageBox::Yes ){
     query.exec("select *from cita where matricula='"+matricula+"'");
+
     while(query.next()){
 
         //IF PARA NOTIFICAR AL DOCTOR PARA DE QUE LE AN CANCELADO LAS CITAS.
@@ -151,15 +219,32 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
             query.exec(consulta);
             query.next();
 
+
             }
 
       }
 
+    }
+    /*PARA ACTUALIZAR EL PACIENTE ELIMINADO MODIFICAMOS LA CONTRASEÑA
+          Y MODIFICAMOS CITAS QUE TENGA COMO ACEPTADAS EL DOCTOR PERO NO LAS A FINALIZADO*/
+
+         query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
+         query.next();
+         //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
+         query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
+         query.next();
+         query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
+         query.next();
+
+    if (messag.exec() == QMessageBox::Yes ){
+        clearLayou(ui->gridLayout_eliminar);
+        on_radioButton_pac_clicked();
+        }
+
+
    }
-    on_radioButton_doc_clicked();
+
 }
-
-
 
 
 void eliminarUsuarios::ModificarUsuario(QString){
@@ -173,7 +258,7 @@ void eliminarUsuarios::ModificarUsuario(QString){
 
 void eliminarUsuarios::on_radioButton_doc_clicked()
 {
-    qDebug()<<"entre:";
+    qDebug()<<"entre radi:";
     int cont=0;
     clearLayou(ui->gridLayout_eliminar);
     QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
