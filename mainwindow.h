@@ -208,6 +208,8 @@ private slots:
 
     void on_pb_bajaPaciente_clicked();
 
+    void on_pb_PermisoLaboral_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

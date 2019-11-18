@@ -35,6 +35,7 @@ SOURCES += \
         mostrarhistoclinico.cpp \
         pagarcitaspaciente.cpp \
         pagointervenciones.cpp \
+        permisoLaboral.cpp \
         registrodoctor.cpp \
         registropaciente.cpp \
         registrostaff.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
         mostrarhistoclinico.h \
         pagarcitaspaciente.h \
         pagointervenciones.h \
+        permisoLaboral.h \
         registrodoctor.h \
         registropaciente.h \
         registrostaff.h \
@@ -66,6 +68,7 @@ FORMS += \
         mainwindow.ui \
         mostrarhistoclinico.ui \
         pagarcitaspaciente.ui \
+        permisoLaboral.ui \
         tipdeldia.ui \
         ordenarintervencion.ui \
         ordenarestudios.ui \

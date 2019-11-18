@@ -4,6 +4,7 @@
 #include "ordenarintervencion.h"
 #include "ordenarestudios.h"
 #include "pagointervenciones.h"
+#include "permisoLaboral.h"
 #include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -6021,6 +6022,12 @@ void MainWindow::on_pb_bajaPaciente_clicked()
 {
     QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está segurode eliminar su cuenta? \nEsto no se puede revertir.");
     if(res == QMessageBox::Yes){
-
+        //Hacer proceso de daniel
     }
+}
+
+void MainWindow::on_pb_PermisoLaboral_clicked()
+{
+    PermisoLaboral* permiso = new PermisoLaboral(this);
+    permiso->exec();
 }
