@@ -11,7 +11,6 @@ pagarCitasPaciente::pagarCitasPaciente(QString p,QWidget *parent) :
     folioR=p;
     ui->setupUi(this);
     ui->folio1->setText(folioR);
-
     QSqlQuery p2;
     p2.exec("select matricula from cita where idCita='"+folioR+"'");
     p2.next();
@@ -124,7 +123,7 @@ void pagarCitasPaciente::on_cb_tarjetas_currentTextChanged(const QString &arg1)
             if( tarjetas.at(i).value(3).toString() == arg1 ){
                 ui->line_titulart->setText(tarjetas.at(i).value(2).toString());
                 ui->line_noTarjeta->setText(tarjetas.at(i).value(3).toString());
-                ui->lineEdit_vencim->setDate(tarjetas.at(i).value(4).toDate());
+                ui->lineEdit_vencim->setText(tarjetas.at(i).value(4).toString());
                 ui->lineEdit_cvv->setText(tarjetas.at(i).value(5).toString());
                 ui->line_titulart->setEnabled(false);
                 ui->line_noTarjeta->setEnabled(false);

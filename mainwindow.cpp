@@ -16,6 +16,8 @@
 #include <QFile>
 #include <QFileSystemModel>
 #include <QPrinter>
+#include "remedios.h"
+#include "dialogdoctor.h"
 
 
 
@@ -49,7 +51,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //Ocultamos el boton salir
     ui->pushButton_salir->setHidden(true);
     ui->pushButton_miPerfil->setHidden(true);
-    ui->pb_remedios->setHidden(true);
 
     //Modo de contraseñas
     ui->lineEdit_password1->setEchoMode(QLineEdit::Password);
@@ -3631,6 +3632,7 @@ void MainWindow::PagarCitas(QString folio){
     QString consulta;
     QSqlQuery query;
     qDebug()<<"folio:"<<folio;
+    clearLayout(ui->pagoIntervenciones);
     QMessageBox messageBox(QMessageBox::Warning,
                            tr(""), tr("Cita cancelada"), QMessageBox::Yes);
     messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
@@ -3652,8 +3654,10 @@ void MainWindow::PagarCitas(QString folio){
             QMessageBox::information(this,"Ventanilla","Pase a pagar a ventanilla con su folio de cita.");
         }
         else{
+                clearLayout(ui->pagoIntervenciones);
                 pagar = new pagarCitasPaciente(folio,this);
                 pagar->show();
+
                 ocultar=new QTimer(this);
                 connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaCitas()));
                 ocultar->start(1000);
@@ -3830,6 +3834,7 @@ void MainWindow::mostrarCitas(){
         mapper2->setMapping(p,folio);
         connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(PagarCitas(QString)));
         ui->citasLay_2->addWidget(p,l,9,Qt::AlignTop);
+        clearLayout(ui->pagoIntervenciones);
 
         l++;
     }
@@ -3841,6 +3846,7 @@ void MainWindow::on_pushButton_Cancelar_Cita_clicked()
     ui->stackedWidget_perfilPaciente->setCurrentIndex(2);
     clearLayout(ui->citasLay_2);
     clearLayout(ui->encabezadoCitas_2);
+    clearLayout(ui->pagoIntervenciones);
     mostrarCitas();
 }
 //BOTON DE NOTIFICACIONES QUE TIENE EL DOCTOR
@@ -5983,6 +5989,7 @@ void MainWindow::on_pushButton_intervenciones_clicked()
 
 void MainWindow::pagarIntervencionTarjeta(QString folio)
 {
+    clearLayout(ui->pagoIntervenciones);
     QString consulta;
     QSqlQuery query;
     query.exec("select inter.idCita,us.matricula from usuario as  us inner join paciente as p "
@@ -6044,4 +6051,365 @@ void MainWindow::on_pushButton_forgotPass_clicked()
 {
     CambiarContrasenia* popup = new CambiarContrasenia();
     popup->show();
+}
+
+void MainWindow::on_pushButton__dirMedico_clicked()
+{
+     ui->stackedWidget_principal->setCurrentIndex(8);
+
+     QString especi;
+     QSqlQuery especiali;
+     especi="select *from especialidad;";
+     especiali.exec(especi);
+     ui->especialidades->addItem("Todas");
+     while(especiali.next())
+     {
+         ui->especialidades->addItem(especiali.value(1).toString());
+     }
+     //autocomplete de apellidos
+     QStringList wordList;
+
+         QString busqueda,valor,valor2;
+         QSqlQuery busq;
+         busqueda="SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor,d.idconsultorio,u.telefono,e.idEsp,u.apmaterno,u.appaterno"
+                  " FROM doctor as d , especialidad as e , usuario as u where u.matricula = d.idUser AND d.idEspecialidad = e.idEsp;";
+         busq.exec(busqueda);
+
+         while(busq.next())
+         {
+             valor=busq.value(6).toString();
+             valor2=busq.value(7).toString();
+             wordList << valor;
+         }
+
+         QCompleter *completer = new QCompleter(wordList, this);
+             completer->setCaseSensitivity(Qt::CaseInsensitive);
+
+             ui->apellidos->setCompleter(completer);
+
+
+
+
+
+     llenarTDoctores("","Todas");
+}
+
+void MainWindow::on_pb_remedios_clicked()
+{
+    QSqlQuery cat;
+      ui->stackedWidget_principal->setCurrentIndex(10);
+      llenarTablaR("Todas");
+      cat.exec("select nombreCategoria from tipoCategoriaRem");
+      ui->remedioscateg->addItem("Todas");
+      while(cat.next())
+      {
+          ui->remedioscateg->addItem(cat.value(0).toString());
+      }
+
+}
+
+void MainWindow::llenarTablaR(QString rem)
+{
+    clearLayout(ui->gridRemedios);
+     QSqlQuery qr;
+     QString nombre,ingr,proc,foto,idcateg;
+        QByteArray foto1;
+
+        int conti=0;
+      if(rem=="Todas"){
+     qr.exec("select nombreRemedio,ingredientes,procedimiento,fotoRemedio from remedios");
+     while(qr.next())
+     {
+        nombre=qr.value(0).toString();
+        ingr=qr.value(1).toString();
+        proc=qr.value(2).toString();
+        foto1=qr.value(3).toByteArray();
+        remedios *r = new remedios(nombre,ingr,proc,foto1);
+        r->llenarInformacion();
+
+        ui->gridRemedios->addWidget(r,conti,0);
+        conti++;
+     }
+      }
+      else
+      {
+
+          qr.exec("select * from tipoCategoriaRem where nombreCategoria='"+rem+"'");
+          qr.next();
+          idcateg=qr.value(0).toString();
+          qr.exec("select nombreRemedio,ingredientes,procedimiento,fotoRemedio from remedios where idcategoria='"+idcateg+"'");
+          while(qr.next())
+          {
+             nombre=qr.value(0).toString();
+             ingr=qr.value(1).toString();
+             proc=qr.value(2).toString();
+             foto1=qr.value(3).toByteArray();
+             remedios *r = new remedios(nombre,ingr,proc,foto1);
+             r->llenarInformacion();
+
+             ui->gridRemedios->addWidget(r,conti,0);
+             conti++;
+          }
+      }
+
+}
+
+void MainWindow::on_buscarremedio_clicked()
+{
+    QString nombrecat;
+    nombrecat=ui->remedioscateg->currentText();
+    llenarTablaR(nombrecat);
+}
+
+void MainWindow::llenarTDoctores(QString apellido,QString especialidad)
+{
+    //WHERE d.iddoctor = +QString::number((idDoc))+
+    clearLayout(ui->gridDoctores);
+    int cont=0;
+    QSqlQuery doct,idcon;
+    QString idconsul,nombre,numcons,especid,nombreespec,tel;
+
+
+    if(apellido=="" && especialidad=="Todas" )
+    {
+        doct.exec("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor,d.idconsultorio,u.telefono,e.idEsp"
+                  " FROM doctor as d , especialidad as e , usuario as u where u.matricula = d.idUser AND d.idEspecialidad = e.idEsp");
+
+        int vacio=0;
+        while(doct.next()){
+        idconsul=doct.value(3).toString();
+        nombre=doct.value(0).toString();
+        tel=doct.value(4).toString();
+        nombreespec=doct.value(1).toString();
+
+
+            //num consultorio
+        idcon.exec("select numConsultorio from consultorio where idconsultorio='"+ idconsul+"'");
+        idcon.next();
+        numcons=idcon.value(0).toString();
+
+        DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+        d->llenarInfoDoc();
+        ui->gridDoctores->addWidget(d,cont,0);
+        cont++;
+        vacio=1;
+        }
+
+    if(vacio==0)
+    {
+        QMessageBox messageBox(QMessageBox::Warning,
+                               tr(""), tr("No se encontro ningun resultado"), QMessageBox::Yes);
+        messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+        messageBox.exec();
+    }
+
+
+    }
+
+    if(apellido=="" && especialidad!="Todas" )
+    {
+        doct.exec("SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor,d.idconsultorio,u.telefono,e.idEsp"
+                  " FROM doctor as d , especialidad as e , usuario as u where u.matricula = d.idUser AND d.idEspecialidad = e.idEsp and e.nombre='"+especialidad+"' ");
+
+        int vacio=0;
+        while(doct.next()){
+        idconsul=doct.value(3).toString();
+        nombre=doct.value(0).toString();
+        tel=doct.value(4).toString();
+        nombreespec=doct.value(1).toString();
+
+
+            //num consultorio
+        idcon.exec("select numConsultorio from consultorio where idconsultorio='"+ idconsul+"'");
+        idcon.next();
+        numcons=idcon.value(0).toString();
+
+        DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+        d->llenarInfoDoc();
+        ui->gridDoctores->addWidget(d,cont,0);
+        cont++;
+        vacio=1;
+        }
+
+        if(vacio==0)
+        {
+            QMessageBox messageBox(QMessageBox::Warning,
+                                   tr(""), tr("No se encontro ningun resultado"), QMessageBox::Yes);
+            messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+            messageBox.exec();
+        }
+
+    }
+    else
+    {
+        if(apellido!="" && especialidad=="Todas")
+        {
+            QString busqueP;
+            QSqlQuery busqueP2;
+            int vacio=0;
+            busqueP="SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor,d.idconsultorio,u.telefono,e.idEsp,u.apmaterno,u.appaterno"
+                   " FROM doctor as d , especialidad as e , usuario as u where u.matricula = d.idUser AND d.idEspecialidad = e.idEsp and u.appaterno='"+apellido+"' ";
+
+
+            busqueP2.exec(busqueP);
+            bool bandera=false;
+                while(busqueP2.next())
+                {
+                    idconsul=busqueP2.value(3).toString();
+                    nombre=busqueP2.value(0).toString();
+                    tel=busqueP2.value(4).toString();
+                    nombreespec=busqueP2.value(1).toString();
+
+
+                        //num consultorio
+                    idcon.exec("select numConsultorio from consultorio where idconsultorio='"+ idconsul+"'");
+                    idcon.next();
+                    numcons=idcon.value(0).toString();
+
+                    DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+                    d->llenarInfoDoc();
+                    ui->gridDoctores->addWidget(d,cont,0);
+                    cont++;
+                    vacio=1;
+                    bandera=true;
+                }
+
+            if(bandera==false)
+            {
+                QString busqueP;
+                QSqlQuery busqueP2;
+
+                busqueP="SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor,d.idconsultorio,u.telefono,e.idEsp,u.apmaterno,u.appaterno"
+                       " FROM doctor as d , especialidad as e , usuario as u where u.matricula = d.idUser AND d.idEspecialidad = e.idEsp and u.apmaterno='"+apellido+"' ";
+
+                vacio=0;
+
+                busqueP2.exec(busqueP);
+                while(busqueP2.next())
+                {
+                    idconsul=busqueP2.value(3).toString();
+                    nombre=busqueP2.value(0).toString();
+                    tel=busqueP2.value(4).toString();
+                    nombreespec=busqueP2.value(1).toString();
+
+
+                        //num consultorio
+                    idcon.exec("select numConsultorio from consultorio where idconsultorio='"+ idconsul+"'");
+                    idcon.next();
+                    numcons=idcon.value(0).toString();
+
+                    DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+                    d->llenarInfoDoc();
+                    ui->gridDoctores->addWidget(d,cont,0);
+                    cont++;
+
+                    vacio=1;
+                 //   bandera=true;
+                }
+
+
+
+            }
+            if(vacio==0)
+            {
+                qDebug()<<"no encontrados 1";
+                //mensaje de no encontrado
+                QMessageBox messageBox(QMessageBox::Warning,
+                                       tr(""), tr("No se encontro ningun resultado"), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+            }
+
+
+        }
+        else if(apellido!="" && especialidad!="Todas")
+        {
+//aqui va la busqueda de apellido por especialidad
+            QString busqueP;
+            QSqlQuery busqueP2;
+            int vacio=0;
+            busqueP="SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor,d.idconsultorio,u.telefono,e.idEsp,u.apmaterno,u.appaterno"
+                   " FROM doctor as d , especialidad as e , usuario as u where u.matricula = d.idUser AND d.idEspecialidad = e.idEsp and u.appaterno='"+apellido+"' and e.nombre='"+especialidad+"' ";
+
+
+            busqueP2.exec(busqueP);
+            bool bandera=false;
+                while(busqueP2.next())
+                {
+                    idconsul=busqueP2.value(3).toString();
+                    nombre=busqueP2.value(0).toString();
+                    tel=busqueP2.value(4).toString();
+                    nombreespec=busqueP2.value(1).toString();
+
+
+                        //num consultorio
+                    idcon.exec("select numConsultorio from consultorio where idconsultorio='"+ idconsul+"'");
+                    idcon.next();
+                    numcons=idcon.value(0).toString();
+
+                    DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+                    d->llenarInfoDoc();
+                    ui->gridDoctores->addWidget(d,cont,0);
+                    cont++;
+                    vacio=1;
+                    bandera=true;
+                }
+
+            if(bandera==false)
+            {
+                QString busqueP;
+                QSqlQuery busqueP2;
+
+                busqueP="SELECT CONCAT(u.nombre,' ', u.apmaterno, ' ',u.appaterno) as Nombre, e.nombre as Especialidad , d.iddoctor,d.idconsultorio,u.telefono,e.idEsp,u.apmaterno,u.appaterno"
+                       " FROM doctor as d , especialidad as e , usuario as u where u.matricula = d.idUser AND d.idEspecialidad = e.idEsp and u.apmaterno='"+apellido+"' and e.nombre='"+especialidad+"' ";
+
+                vacio=0;
+
+                busqueP2.exec(busqueP);
+                while(busqueP2.next())
+                {
+                    idconsul=busqueP2.value(3).toString();
+                    nombre=busqueP2.value(0).toString();
+                    tel=busqueP2.value(4).toString();
+                    nombreespec=busqueP2.value(1).toString();
+
+
+                        //num consultorio
+                    idcon.exec("select numConsultorio from consultorio where idconsultorio='"+ idconsul+"'");
+                    idcon.next();
+                    numcons=idcon.value(0).toString();
+
+                    DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+                    d->llenarInfoDoc();
+                    ui->gridDoctores->addWidget(d,cont,0);
+                    cont++;
+
+                    vacio=1;
+                 //   bandera=true;
+                }
+
+
+
+            }
+            if(vacio==0)
+            {
+                qDebug()<<"no encontrados 2";
+                //mensaje de no encontrado
+                QMessageBox messageBox(QMessageBox::Warning,
+                                       tr(""), tr("No se encontro ningun resultado"), QMessageBox::Yes);
+                messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+                messageBox.exec();
+            }
+
+
+
+
+        }
+    }
+
+}
+
+void MainWindow::on_buscarDoctores_clicked()
+{
+    llenarTDoctores(ui->apellidos->text(),ui->especialidades->currentText());
 }

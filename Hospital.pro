@@ -32,6 +32,8 @@ SOURCES += \
         agregartipremedio.cpp \
         agregarusuario.cpp \
         eliminarusuarios.cpp \
+        dialogdoctor.cpp \
+        dialoginfodoc.cpp \
         main.cpp \
         mainwindow.cpp \
         mostrarhistoclinico.cpp \
@@ -41,6 +43,7 @@ SOURCES += \
         registropaciente.cpp \
         registrostaff.cpp \
         login.cpp \
+        remedios.cpp \
         tipdeldia.cpp \
         ordenarintervencion.cpp \
         ordenarestudios.cpp \
@@ -54,6 +57,8 @@ HEADERS += \
         agregartipremedio.h \
         agregarusuario.h \
         eliminarusuarios.h \
+        dialogdoctor.h \
+        dialoginfodoc.h \
         mainwindow.h \
         mostrarhistoclinico.h \
         pagarcitaspaciente.h \
@@ -62,6 +67,7 @@ HEADERS += \
         registropaciente.h \
         registrostaff.h \
         login.h \
+        remedios.h \
         tipdeldia.h \
         ordenarintervencion.h \
         ordenarestudios.h \
@@ -73,9 +79,12 @@ FORMS += \
         agregaractividaddoctor.ui \
         agregarusuario.ui \
         eliminarusuarios.ui \
+        dialogdoctor.ui \
+        dialoginfodoc.ui \
         mainwindow.ui \
         mostrarhistoclinico.ui \
         pagarcitaspaciente.ui \
+        remedios.ui \
         tipdeldia.ui \
         ordenarintervencion.ui \
         ordenarestudios.ui \

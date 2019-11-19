@@ -205,13 +205,15 @@ private slots:
     void on_pushButton_intervenciones_clicked();
     void pagarCitasEfect(QString);
     void pagarIntervencionTarjeta(QString);
-
     void on_pb_agregarUser_clicked();
-
-
     void on_pb_modificarUser_clicked();
-
     void on_pushButton_forgotPass_clicked();
+    void on_pb_remedios_clicked();
+    void on_pushButton__dirMedico_clicked();
+    void llenarTablaR(QString);
+    void on_buscarremedio_clicked();
+    void llenarTDoctores(QString,QString);
+    void on_buscarDoctores_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
