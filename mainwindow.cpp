@@ -492,6 +492,70 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 
             id_staff=lo.getIdStaff();
             id_usuario=lo.getIdUser();
+
+            //esto lo puse para habilitar las notificaciones
+            verNoti=1;
+            ui->nofi_staff->hide();
+
+            QString busca;
+            busca="select *from notificacion where UserP='"+id_usuario+"'";
+            QSqlQuery buscarNoti;
+            buscarNoti.exec(busca);
+
+            int contadorNoti=0;
+            int filas=0;
+
+            while(buscarNoti.next())
+            {
+                QString nueva;
+                nueva=buscarNoti.value(4).toString();
+                qDebug()<<"ya se vio: "<<nueva;
+                if(nueva=="0")
+                {
+
+                    contadorNoti++;
+                }
+            }
+
+            while(buscarNoti.previous()){
+                if(buscarNoti.value(1).toString()=="1")
+                {
+
+                    QPlainTextEdit *b=new QPlainTextEdit();
+                    // QPushButton *b=new QPushButton();
+                    b->setPlainText(buscarNoti.value(2).toString());
+                    b->setFixedSize(QSize(200,50));
+                    b->setStyleSheet("background-color: rgb(151,240,104); ");
+                    ui->barraDeNoti_5->addWidget(b,filas,0,Qt::AlignTop);
+                    filas++;
+                }else
+                {
+
+                    QPlainTextEdit *b=new QPlainTextEdit();
+                    //QPushButton *b=new QPushButton();
+                    b->setPlainText(buscarNoti.value(2).toString());
+                    b->setFixedSize(QSize(200,50));
+                    b->setStyleSheet("background-color: rgb(243,173,106); ");
+                    ui->barraDeNoti_5->addWidget(b,filas,0,Qt::AlignTop);
+                    filas++;
+                }
+            }
+
+            QString num=QString::number(contadorNoti);
+            qDebug()<<"este numero conte"<<num;
+            if(num=="0")
+            {
+                qDebug()<<"no encontre nada";
+                ui->notiStaff->hide();
+            }
+            else
+            {
+                qDebug()<<"encontre algo";
+                ui->notiStaff->setStyleSheet("background-color:red; border:solid 1px red; border-radius:500px; color: white;");
+                ui->notiStaff->setText(num);
+                ui->notiStaff->show();
+            }
+
             on_pushButton_miPerfil_clicked();
 
         }
