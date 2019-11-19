@@ -280,11 +280,11 @@ void eliminarUsuarios::on_radioButton_doc_clicked()
     clearLayou(ui->gridLayout_eliminar);
     QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
     QSqlQuery queryDoc,queryStaff,userEst;
-    consultaDoc="select *from Doctores";
+    consultaDoc="select * from Doctores";
     queryDoc.exec(consultaDoc);
             while(queryDoc.next())
             {
-                if(queryDoc.value(5).toString()=="0")
+                if(queryDoc.value(5).toString()=="1")
                 {
                 nombre=queryDoc.value(0).toString()+" "+queryDoc.value(1).toString()+" "+queryDoc.value(2).toString();
                 espec=queryDoc.value(4).toString();

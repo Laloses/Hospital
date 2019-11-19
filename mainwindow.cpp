@@ -18,6 +18,8 @@
 #include <QPrinter>
 #include "remedios.h"
 #include "dialogdoctor.h"
+#include "permisoLaboral.h"
+#include "verPermisosLaborales.h"
 
 
 
@@ -6412,4 +6414,129 @@ void MainWindow::llenarTDoctores(QString apellido,QString especialidad)
 void MainWindow::on_buscarDoctores_clicked()
 {
     llenarTDoctores(ui->apellidos->text(),ui->especialidades->currentText());
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    PermisoLaboral* permiso = new PermisoLaboral(this,id_staff);
+    permiso->show();
+}
+
+void MainWindow::on_pb_permisosStaff_clicked()
+{
+    clearLayout(ui->layPermisos);
+    QSqlQuery* permisos = new QSqlQuery;
+    permisos->exec("SELECT idPermiso,fechaI,fechaF,estado FROM permisoLaboral WHERE idStaff="+id_staff);
+
+    //Ciclo para poner botones y cosas
+    QLabel* lb;
+    QPushButton* pb;
+    QHBoxLayout* hlay;
+    QString *contenido;
+    while(permisos->next()){
+        hlay = new QHBoxLayout;
+
+        //fechaI
+        contenido = new QString(permisos->value("fechaI").toString());
+        lb = new QLabel(*contenido);
+        hlay->addWidget(lb);
+        //fechaF
+        contenido = new QString(permisos->value("fechaF").toString());
+        lb = new QLabel(*contenido);
+        hlay->addWidget(lb);
+        //estado
+        contenido = new QString(permisos->value("estado").toString());
+        if(*contenido == "0"){
+            *contenido = "En espera";
+        }
+        else{
+            *contenido = "Aceptada";
+        }
+        lb = new QLabel(*contenido);
+        hlay->addWidget(lb);
+
+        //Boton de eliminar sólo si aun no se acepta
+        if(permisos->value("estado").toString() == "0"){
+            pb= new QPushButton(" Cancelar ");
+            qDebug()<<permisos->value("idPermiso").toString();
+            QString* id =new QString(permisos->value("idPermiso").toString());
+            connect(pb,&QPushButton::clicked,[=](){emit eliminarPermisoLaboral(*id);});
+            hlay->addWidget(pb);
+        }
+        else {
+            pb= new QPushButton(" Cancelar ");
+            pb->setEnabled(0);
+            pb->setStyleSheet("background:grey");
+            hlay->addWidget(pb);
+        }
+        ui->layPermisos->addLayout(hlay);
+    }
+    //Cuando termine hay que agregar una barra espaciadora para empujar el contenido
+    QSpacerItem *barraVertical= new QSpacerItem(10,10,QSizePolicy::Ignored,QSizePolicy::Expanding);
+    ui->layPermisos->addSpacerItem(barraVertical);
+    ui->stackedWidget_PerfilStaff->setCurrentIndex(2);
+}
+
+
+void MainWindow::eliminarPermisoLaboral(QString idPermiso){
+    QMessageBox::StandardButton res = QMessageBox::question(this,"Cancelar solicitud","¿Está seguro de cancelar su solicitud?");
+    if(res == QMessageBox::Yes){
+        QSqlQuery* deletear = new QSqlQuery;
+        if( deletear->exec("DELETE FROM permisoLaboral WHERE idPermiso="+idPermiso) ){
+            QMessageBox::information(this, "Éxito","Borrado correctamente.");
+            on_pb_permisosStaff_clicked();
+        }
+        else{
+            qDebug()<<deletear->lastError().text();
+            QMessageBox::critical(this, "Error","Error al borrar.");
+        }
+    }
+}
+
+void MainWindow::on_pb_adminPermisos_clicked()
+{
+    VerPermisosLaborales* permisos = new VerPermisosLaborales(this);
+    permisos->show();
+}
+
+
+void MainWindow::on_pb_notiStaff_clicked()
+{
+    ui->stackedWidget_PerfilStaff->setCurrentIndex(0);
+    if(verNoti==1)
+    {
+        if(ui->notiStaff->text()!="")
+        {
+            ui->notiStaff->hide();
+        }
+        ui->nofi_staff->show();
+        verNoti=0;
+    }
+    else
+    {
+      ui->nofi_staff->hide();
+
+      QString idNoti,id,update1;
+      idNoti="select idNoti from notificacion where UserP="+id_usuario;
+      QSqlQuery upNoti,upNoti1;
+      upNoti.exec(idNoti);
+
+      while(upNoti.next())
+      {
+          id=upNoti.value(0).toString();
+          update1="update notificacion set vista=true where idNoti='"+id+"';";
+          upNoti1.exec(update1);
+            qDebug()<<id;
+            qDebug()<<update1;
+      }
+      verNoti=1;
+    }
+}
+
+void MainWindow::on_pb_bajaPaciente_clicked()
+{
+    QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está segurode eliminar su cuenta? \nEsto no se puede revertir.");
+    if(res == QMessageBox::Yes){
+        //Hacer proceso de daniel
+    }
 }

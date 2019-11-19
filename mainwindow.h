@@ -215,6 +215,17 @@ private slots:
     void llenarTDoctores(QString,QString);
     void on_buscarDoctores_clicked();
 
+    void on_pushButton_6_clicked();
+
+    void on_pb_permisosStaff_clicked();
+    void eliminarPermisoLaboral(QString idPermiso);
+
+    void on_pb_adminPermisos_clicked();
+
+    void on_pb_notiStaff_clicked();
+
+    void on_pb_bajaPaciente_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
