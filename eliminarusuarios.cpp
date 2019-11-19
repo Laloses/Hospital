@@ -1,5 +1,6 @@
 #include "eliminarusuarios.h"
 #include "ui_eliminarusuarios.h"
+#include "editarusuario.h"
 
 eliminarUsuarios::eliminarUsuarios(QWidget *parent) :
     QDialog(parent),
@@ -261,10 +262,10 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
 
 }
 
-
-void eliminarUsuarios::ModificarUsuario(QString){
-
+void eliminarUsuarios::ModificarUsuario(QString matri, QString tipoUsr){
     qDebug()<<"modificar";
+    EditarUsuario* editarVentana = new EditarUsuario(matri, tipoUsr);
+    editarVentana->show();
 
     clearLayou(ui->gridLayout_eliminar);
 
@@ -273,7 +274,8 @@ void eliminarUsuarios::ModificarUsuario(QString){
 
 void eliminarUsuarios::on_radioButton_doc_clicked()
 {
-    qDebug()<<"entre radi:";
+    qDebug()<<"entre: doctor";
+    clearLayou(ui->gridLayout_eliminar);
     int cont=0;
     clearLayou(ui->gridLayout_eliminar);
     QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
@@ -282,7 +284,7 @@ void eliminarUsuarios::on_radioButton_doc_clicked()
     queryDoc.exec(consultaDoc);
             while(queryDoc.next())
             {
-                if(queryDoc.value(5).toString()=="1")
+                if(queryDoc.value(5).toString()=="0")
                 {
                 nombre=queryDoc.value(0).toString()+" "+queryDoc.value(1).toString()+" "+queryDoc.value(2).toString();
                 espec=queryDoc.value(4).toString();
@@ -297,7 +299,8 @@ void eliminarUsuarios::on_radioButton_doc_clicked()
                 QLabel *l=new QLabel;
                 l->setText(nombre);
                 connect(b,&QPushButton::clicked,[=](){emit eliminarDoc(matricula);});
-                connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula);});
+                connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula, "doctor");});
+                QLabel *espacio=new QLabel();
                 QLabel *esp=new QLabel();
                 esp->setText(espec);
                 QLabel *estado=new QLabel();
@@ -316,12 +319,13 @@ void eliminarUsuarios::on_radioButton_doc_clicked()
 
 void eliminarUsuarios::on_radioButton_staff_clicked()
 {
-    qDebug()<<"entre:";
+    qDebug()<<"entre: staff";
+    clearLayou(ui->gridLayout_eliminar);
     int cont=0;
     clearLayou(ui->gridLayout_eliminar);
     QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
     QSqlQuery queryStaff,userEst;
-    consultaDoc="select *from  Staffs";
+    consultaDoc="select * from  Staffs";
     queryStaff.exec(consultaDoc);
     while(queryStaff.next())
     {
@@ -340,7 +344,8 @@ void eliminarUsuarios::on_radioButton_staff_clicked()
             QLabel *l=new QLabel;
             l->setText(nombre);
             connect(b,&QPushButton::clicked,[=](){emit eliminarStaff(matricula);});
-            connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula);});
+            connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula, "staff");});
+            QLabel *espacio=new QLabel();
             QLabel *esp=new QLabel();
             esp->setText(espec);
             QLabel *estado=new QLabel();
@@ -362,7 +367,7 @@ void eliminarUsuarios::on_radioButton_pac_clicked()
     clearLayou(ui->gridLayout_eliminar);
     QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
     QSqlQuery queryPac;
-    consultaDoc="select *from pacientes";
+    consultaDoc="select * from pacientes";
     queryPac.exec(consultaDoc);
     while(queryPac.next())
     {
@@ -377,11 +382,10 @@ void eliminarUsuarios::on_radioButton_pac_clicked()
             l->setText(nombre);
 
             connect(b,&QPushButton::clicked,[=](){emit eliminarPaciente(matricula);});
-            connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula);});
+            connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula, "paciente");});
             ui->gridLayout_eliminar->addWidget(b,cont,0,1,1);
             ui->gridLayout_eliminar->addWidget(p,cont,1,1,1);
             ui->gridLayout_eliminar->addWidget(l,cont,2,1,1);
             cont++;
         }
 }
-

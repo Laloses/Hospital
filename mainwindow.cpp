@@ -5,6 +5,7 @@
 #include "ordenarestudios.h"
 #include "pagointervenciones.h"
 #include "editarusuario.h"
+#include "cambiarcontrasenia.h"
 #include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -6037,4 +6038,10 @@ void MainWindow::on_pb_modificarUser_clicked()
 {
     static eliminarUsuarios eliminar;
     eliminar.show();
+}
+
+void MainWindow::on_pushButton_forgotPass_clicked()
+{
+    CambiarContrasenia* popup = new CambiarContrasenia();
+    popup->show();
 }

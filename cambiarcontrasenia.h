@@ -2,6 +2,12 @@
 #define CAMBIARCONTRASENIA_H
 
 #include <QMainWindow>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlError>
+#include <QtSql/QSqlQueryModel>
+#include <QtSql/QSqlQuery>
+#include <QMessageBox>
+#include <QDebug>
 
 namespace Ui {
 class CambiarContrasenia;
@@ -15,8 +21,30 @@ public:
     explicit CambiarContrasenia(QWidget *parent = nullptr);
     ~CambiarContrasenia();
 
+private slots:
+    void on_btnCancelar_clicked();
+
+    void on_btnContinuar_clicked();
+
+    void on_btnEnviarRepuesta_clicked();
+
+    void on_btnRegresar_clicked();
+
+    void on_btnRestablecerPass_clicked();
+
+    void on_btnVerNew_clicked();
+
+    void on_btnVerConf_clicked();
+
 private:
     Ui::CambiarContrasenia *ui;
+    QString id;
+    QSqlQuery obtenerPregunta;
+    QString pregunta;
+    QString respuesta;
+    int toggleVision;
+    int toggleVision1;
+
 };
 
 #endif // CAMBIARCONTRASENIA_H
