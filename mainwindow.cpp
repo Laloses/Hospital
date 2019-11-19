@@ -6,8 +6,6 @@
 #include "pagointervenciones.h"
 #include "editarusuario.h"
 #include "cambiarcontrasenia.h"
-#include "permisoLaboral.h"
-#include "verPermisosLaborales.h"
 #include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -181,17 +179,16 @@ void MainWindow::on_radioButton_staff_toggled(bool checked)
 }
 
 void clearLayout(QLayout *layout) {
-    if (layout) {
-        QLayoutItem *item;
-            while((item = layout->takeAt(0))){
-                if (item->layout()) {
-                    clearLayout(item->layout());
-                    delete item->layout();
-                }
-                if(item->widget())
-                    item->widget();
-                delete item->widget();
-            }
+    QLayoutItem *item;
+    while((item = layout->takeAt(0))) {
+        if (item->layout()) {
+            clearLayout(item->layout());
+            delete item->layout();
+        }
+        if (item->widget()) {
+            delete item->widget();
+        }
+        delete item;
     }
 }
 
@@ -493,70 +490,6 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 
             id_staff=lo.getIdStaff();
             id_usuario=lo.getIdUser();
-
-            //esto lo puse para habilitar las notificaciones
-            verNoti=1;
-            ui->nofi_staff->hide();
-
-            QString busca;
-            busca="select *from notificacion where UserP='"+id_usuario+"'";
-            QSqlQuery buscarNoti;
-            buscarNoti.exec(busca);
-
-            int contadorNoti=0;
-            int filas=0;
-
-            while(buscarNoti.next())
-            {
-                QString nueva;
-                nueva=buscarNoti.value(4).toString();
-                qDebug()<<"ya se vio: "<<nueva;
-                if(nueva=="0")
-                {
-
-                    contadorNoti++;
-                }
-            }
-
-            while(buscarNoti.previous()){
-                if(buscarNoti.value(1).toString()=="1")
-                {
-
-                    QPlainTextEdit *b=new QPlainTextEdit();
-                    // QPushButton *b=new QPushButton();
-                    b->setPlainText(buscarNoti.value(2).toString());
-                    b->setFixedSize(QSize(200,50));
-                    b->setStyleSheet("background-color: rgb(151,240,104); ");
-                    ui->barraDeNoti_5->addWidget(b,filas,0,Qt::AlignTop);
-                    filas++;
-                }else
-                {
-
-                    QPlainTextEdit *b=new QPlainTextEdit();
-                    //QPushButton *b=new QPushButton();
-                    b->setPlainText(buscarNoti.value(2).toString());
-                    b->setFixedSize(QSize(200,50));
-                    b->setStyleSheet("background-color: rgb(243,173,106); ");
-                    ui->barraDeNoti_5->addWidget(b,filas,0,Qt::AlignTop);
-                    filas++;
-                }
-            }
-
-            QString num=QString::number(contadorNoti);
-            qDebug()<<"este numero conte"<<num;
-            if(num=="0")
-            {
-                qDebug()<<"no encontre nada";
-                ui->notiStaff->hide();
-            }
-            else
-            {
-                qDebug()<<"encontre algo";
-                ui->notiStaff->setStyleSheet("background-color:red; border:solid 1px red; border-radius:500px; color: white;");
-                ui->notiStaff->setText(num);
-                ui->notiStaff->show();
-            }
-
             on_pushButton_miPerfil_clicked();
 
         }
@@ -963,7 +896,6 @@ void MainWindow::cargarDatosUsuarios(){
             ui->btnMostrarContrasena_6->setHidden(true);
             ui->btnCancelarEditarPaciente->setHidden(true);
             ui->btnGuardarEditarPaciente->setHidden(true);
-            ui->pb_bajaPaciente->hide();
         }
         if(id_doctor!="0"){
             //Nombre
@@ -1002,7 +934,6 @@ void MainWindow::cargarDatosUsuarios(){
             ui->btnMostrarContrasena_4->setHidden(true);
             ui->btnCancelarEditarDoctor->setHidden(true);
             ui->btnGuardarEditarDoctor->setHidden(true);
-            ui->pb_bajaDoctor->hide();
         }
         if(id_staff!="0"){
             //datos staff ----------------------------
@@ -1027,8 +958,6 @@ void MainWindow::cargarDatosUsuarios(){
             ui->btnMostrarContrasena_2->setHidden(true);
             ui->btnCancelarEditarStaff->setHidden(true);
             ui->btnGuardarEditarStaff->setHidden(true);
-            ui->pb_bajaStaff->hide();
-            ui->pb_PermisoLaboral->show();
         }
 }
 
@@ -2625,8 +2554,6 @@ void MainWindow::on_btnEditarStaff_clicked()
     ui->btnMostrarContrasena_2->setHidden(false);
     ui->lineContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
     ui->lineConfirmaContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
-    ui->pb_bajaStaff->show();
-    ui->pb_PermisoLaboral->hide();
 }
 
 void MainWindow::on_btnCancelarEditarStaff_clicked()
@@ -2646,8 +2573,6 @@ void MainWindow::on_btnCancelarEditarStaff_clicked()
     ui->btnMostrarContrasena_2->setHidden(true);
     ui->lineContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
     ui->lineConfirmaContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-    ui->pb_bajaStaff->hide();
-    ui->pb_PermisoLaboral->show();
 }
 
 void MainWindow::on_btnGuardarEditarStaff_clicked()
@@ -2705,8 +2630,6 @@ void MainWindow::on_btnGuardarEditarStaff_clicked()
                 ui->btnGuardarEditarStaff->setHidden(true);
                 ui->lineContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-                ui->pb_bajaStaff->hide();
-                ui->pb_PermisoLaboral->show();
             }
         }
     }
@@ -3402,7 +3325,6 @@ void MainWindow::on_btnEditarDoctor_clicked()
     ui->btnMostrarContrasena_4->setHidden(false);
     ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
     ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
-    ui->pb_bajaDoctor->show();
 }
 
 void MainWindow::on_btnCancelarEditarDoctor_clicked()
@@ -3422,7 +3344,6 @@ void MainWindow::on_btnCancelarEditarDoctor_clicked()
     ui->btnMostrarContrasena_4->setHidden(true);
     ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
     ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-    ui->pb_bajaDoctor->hide();
 }
 
 void MainWindow::on_btnGuardarEditarDoctor_clicked()
@@ -3480,7 +3401,6 @@ void MainWindow::on_btnGuardarEditarDoctor_clicked()
                 ui->btnGuardarEditarDoctor->setHidden(true);
                 ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-                ui->pb_bajaDoctor->hide();
                 on_pushButton_miPerfil_clicked();
             }
         }
@@ -3545,7 +3465,6 @@ void MainWindow::on_btnEditarPaciente_clicked()
     ui->btnMostrarContrasena_6->setHidden(false);
     ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
     ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
-    ui->pb_bajaPaciente->show();
 }
 
 void MainWindow::on_btnCancelarEditarPaciente_clicked()
@@ -3565,7 +3484,6 @@ void MainWindow::on_btnCancelarEditarPaciente_clicked()
     ui->btnMostrarContrasena_6->setHidden(true);
     ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
     ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-    ui->pb_bajaPaciente->hide();
 }
 
 void MainWindow::on_btnGuardarEditarPaciente_clicked()
@@ -3625,7 +3543,6 @@ void MainWindow::on_btnGuardarEditarPaciente_clicked()
                 ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 on_pushButton_miPerfil_clicked();
-                ui->pb_bajaPaciente->hide();
             }
         }
     }
@@ -6113,111 +6030,6 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
     }
 }
 
-//
-void MainWindow::on_pb_bajaPaciente_clicked()
-{
-    QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está segurode eliminar su cuenta? \nEsto no se puede revertir.");
-    if(res == QMessageBox::Yes){
-        //Hacer proceso de daniel
-    }
-}
-
-void MainWindow::on_pb_PermisoLaboral_clicked()
-{
-    PermisoLaboral* permiso = new PermisoLaboral(this,id_staff);
-    permiso->show();
-}
-
-void MainWindow::on_pb_permisosStaff_clicked()
-{
-    clearLayout(ui->layPermisos);
-    QSqlQuery* permisos = new QSqlQuery;
-    permisos->exec("SELECT idPermiso,fechaI,fechaF,estado FROM permisoLaboral WHERE idStaff="+id_staff);
-
-    //Ciclo para poner botones y cosas
-    QLabel* lb;
-    QPushButton* pb;
-    QHBoxLayout* hlay;
-    QString *contenido;
-    while(permisos->next()){
-        hlay = new QHBoxLayout;
-
-        //fechaI
-        contenido = new QString(permisos->value("fechaI").toString());
-        lb = new QLabel(*contenido);
-        hlay->addWidget(lb);
-        //fechaF
-        contenido = new QString(permisos->value("fechaF").toString());
-        lb = new QLabel(*contenido);
-        hlay->addWidget(lb);
-        //estado
-        contenido = new QString(permisos->value("estado").toString());
-        if(*contenido == "0"){
-            *contenido = "En espera";
-        }
-        else{
-            *contenido = "Aceptada";
-        }
-        lb = new QLabel(*contenido);
-        hlay->addWidget(lb);
-
-        //Boton de eliminar sólo si aun no se acepta
-        if(permisos->value("estado").toString() == "0"){
-            pb= new QPushButton(" Cancelar ");
-            qDebug()<<permisos->value("idPermiso").toString();
-            QString* id =new QString(permisos->value("idPermiso").toString());
-            connect(pb,&QPushButton::clicked,[=](){emit eliminarPermisoLaboral(*id);});
-            hlay->addWidget(pb);
-        }
-        else {
-            pb= new QPushButton(" Cancelar ");
-            pb->setEnabled(0);
-            pb->setStyleSheet("background:grey");
-            hlay->addWidget(pb);
-        }
-        ui->layPermisos->addLayout(hlay);
-    }
-    //Cuando termine hay que agregar una barra espaciadora para empujar el contenido
-    QSpacerItem *barraVertical= new QSpacerItem(10,10,QSizePolicy::Ignored,QSizePolicy::Expanding);
-    ui->layPermisos->addSpacerItem(barraVertical);
-    ui->stackedWidget_PerfilStaff->setCurrentIndex(2);
-}
-
-void MainWindow::eliminarPermisoLaboral(QString idPermiso){
-    QMessageBox::StandardButton res = QMessageBox::question(this,"Cancelar solicitud","¿Está seguro de cancelar su solicitud?");
-    if(res == QMessageBox::Yes){
-        QSqlQuery* deletear = new QSqlQuery;
-        if( deletear->exec("DELETE FROM permisoLaboral WHERE idPermiso="+idPermiso) ){
-            QMessageBox::information(this, "Éxito","Borrado correctamente.");
-            on_pb_permisosStaff_clicked();
-        }
-        else{
-            qDebug()<<deletear->lastError().text();
-            QMessageBox::critical(this, "Error","Error al borrar.");
-        }
-    }
-}
-
-void MainWindow::on_pb_adminPermisos_clicked(){
-    VerPermisosLaborales* permisos = new VerPermisosLaborales(this);
-    permisos->show();
-}
-
-void MainWindow::on_pb_notiStaff_clicked()
-{
-    ui->stackedWidget_PerfilStaff->setCurrentIndex(0);
-    if(verNoti==1)
-    {
-        if(ui->notiStaff->text()!="")
-        {
-            ui->notiStaff->hide();
-        }
-        ui->nofi_staff->show();
-        verNoti=0;
-    }
-    else
-    {
-      ui->nofi_staff->hide();
 
 
 void MainWindow::on_pb_agregarUser_clicked()
@@ -6600,20 +6412,4 @@ void MainWindow::llenarTDoctores(QString apellido,QString especialidad)
 void MainWindow::on_buscarDoctores_clicked()
 {
     llenarTDoctores(ui->apellidos->text(),ui->especialidades->currentText());
-}
-      QString idNoti,id,update1;
-      idNoti="select idNoti from notificacion where UserP="+id_usuario;
-      QSqlQuery upNoti,upNoti1;
-      upNoti.exec(idNoti);
-
-      while(upNoti.next())
-      {
-          id=upNoti.value(0).toString();
-          update1="update notificacion set vista=true where idNoti='"+id+"';";
-          upNoti1.exec(update1);
-            qDebug()<<id;
-            qDebug()<<update1;
-      }
-      verNoti=1;
-    }
 }
