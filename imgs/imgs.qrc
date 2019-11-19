@@ -28,5 +28,7 @@
         <file>verde.png</file>
         <file>logoFinal_FondoEstudios.png</file>
         <file>refresh.png</file>
+        <file>camera.png</file>
+        <file>question.png</file>
     </qresource>
 </RCC>
