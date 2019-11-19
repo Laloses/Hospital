@@ -35,8 +35,6 @@ private slots:
 
     void ModificarUsuario(QString, QString);
 
-    void on_radioButton_doc_toggled(bool checked);
-
 private:
     Ui::eliminarUsuarios *ui;
 };

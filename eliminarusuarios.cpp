@@ -154,7 +154,7 @@ void eliminarUsuarios::on_radioButton_pac_clicked()
     int cont=0;
     QString consultaDoc,consultaStaff,nombre,espec,espera,matricula,useest1;
     QSqlQuery queryPac;
-    consultaDoc="select *from pacientes";
+    consultaDoc="select * from pacientes";
     queryPac.exec(consultaDoc);
     while(queryPac.next())
     {
@@ -176,4 +176,3 @@ void eliminarUsuarios::on_radioButton_pac_clicked()
             cont++;
         }
 }
-
