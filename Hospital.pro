@@ -39,6 +39,7 @@ SOURCES += \
         mostrarhistoclinico.cpp \
         pagarcitaspaciente.cpp \
         pagointervenciones.cpp \
+        permisoLaboral.cpp \
         registrodoctor.cpp \
         registropaciente.cpp \
         registrostaff.cpp \
@@ -47,8 +48,9 @@ SOURCES += \
         tipdeldia.cpp \
         ordenarintervencion.cpp \
         ordenarestudios.cpp \
-    editarusuario.cpp \
-    cambiarcontrasenia.cpp
+        editarusuario.cpp \
+        cambiarcontrasenia.cpp
+        verPermisosLaborales.cpp
 
 HEADERS += \
         agregarUrgencia.h \
@@ -63,6 +65,7 @@ HEADERS += \
         mostrarhistoclinico.h \
         pagarcitaspaciente.h \
         pagointervenciones.h \
+        permisoLaboral.h \
         registrodoctor.h \
         registropaciente.h \
         registrostaff.h \
@@ -71,8 +74,9 @@ HEADERS += \
         tipdeldia.h \
         ordenarintervencion.h \
         ordenarestudios.h \
-    editarusuario.h \
-    cambiarcontrasenia.h
+        editarusuario.h \
+        cambiarcontrasenia.h
+        verPermisosLaborales.h
 
 FORMS += \
         agregarUrgencia.ui \
@@ -85,12 +89,14 @@ FORMS += \
         mostrarhistoclinico.ui \
         pagarcitaspaciente.ui \
         remedios.ui \
+        permisoLaboral.ui \
         tipdeldia.ui \
         ordenarintervencion.ui \
         ordenarestudios.ui \
         pagointervenciones.ui \
-    editarusuario.ui \
-    cambiarcontrasenia.ui
+        editarusuario.ui \
+        cambiarcontrasenia.ui
+        verPermisosLaborales.ui
 
 RC_ICONS = icono.ico
 
