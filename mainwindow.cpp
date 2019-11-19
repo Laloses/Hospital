@@ -5280,7 +5280,7 @@ void MainWindow::verSoliEstancia()
 {
     clearLayout(ui->estanciaPa);
     QString folio,idDoc,idPa,fechaInter,idSeQ,SoliEst;
-    SoliEst="select * from SoliEstancia;";
+    SoliEst="select se.idSoli,se.idDoctor,se.idPaciente,se.fechaIntervencion,idCitaQ from CitasQuirofano as cq inner join SoliEstancia as se on cq.idCita=se.idCitaQ where cq.estado='Pendiente'";
     QSqlQuery soli;
     soli.exec(SoliEst);
     int r=0;
@@ -5323,8 +5323,8 @@ void MainWindow::verSoliEstancia()
         folio=soli.value(0).toString();
         idDoc=soli.value(1).toString();
         idPa=soli.value(2).toString();
-        fechaInter=soli.value(4).toString();
-        idSeQ=soli.value(6).toString();
+        fechaInter=soli.value(3).toString();
+        idSeQ=soli.value(4).toString();
 
         QLabel *folio1 = new QLabel;
         folio1->setAlignment(Qt::AlignCenter);
@@ -5430,6 +5430,9 @@ void MainWindow::on_agregarCuarto_clicked()
     QSqlQuery del1;
     del="delete from SoliEstancia where idSoli='"+idSolicitudEstancia+"'; ";
     del1.exec(del);
+    QSqlQuery query2;
+    query2.exec("update CitasQuirofano as cq inner join Estancia as e on cq.idCita=e.idCitaQ set estado='Completa' where cq.idCita='"+idSoliQuirofano+"'");
+    query2.next();
     verSoliEstancia();
     informacion.setWindowTitle("Informacion");
     informacion.setText ("EL proceso se ejecuto correctamente");

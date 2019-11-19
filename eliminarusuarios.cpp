@@ -178,6 +178,7 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
     QDate fecha=QDate::currentDate();
     QString fecha_escritorio=fecha.toString("yyyy-MM-dd");
     if (message.exec() == QMessageBox::Yes ){
+
         query1.exec("select cq.fechaCita,cq.idDoctor,cq.estado,p.idUser,cq.horaInicio from CitasQuirofano as cq inner join paciente as p on cq.idPaciente=p.idpaciente where p.idUser='"+matricula+"'");
        while(query1.next()){
           if(query1.value(2).toString()=="Pendiente" && query1.value(0).toString()>fecha_escritorio){
