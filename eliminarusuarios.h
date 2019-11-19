@@ -23,17 +23,16 @@ class eliminarUsuarios : public QDialog
 public:
     explicit eliminarUsuarios(QWidget *parent = nullptr);
     ~eliminarUsuarios();
-
-private slots:
-    void on_radioButton_doc_clicked();
-
-    void on_radioButton_staff_clicked();
-
     void eliminarDoc(QString);
 
     void eliminarStaff(QString);
 
     void eliminarPaciente(QString);
+
+private slots:
+    void on_radioButton_doc_clicked();
+
+    void on_radioButton_staff_clicked();
 
     void on_radioButton_pac_clicked();
 

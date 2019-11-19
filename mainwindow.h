@@ -226,6 +226,10 @@ private slots:
 
     void on_pb_bajaPaciente_clicked();
 
+    void on_pb_bajaDoctor_clicked();
+
+    void on_pushButton_5_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
