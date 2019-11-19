@@ -5,6 +5,7 @@
 #include "ordenarestudios.h"
 #include "pagointervenciones.h"
 #include "permisoLaboral.h"
+#include "verPermisosLaborales.h"
 #include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -490,6 +491,70 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 
             id_staff=lo.getIdStaff();
             id_usuario=lo.getIdUser();
+
+            //esto lo puse para habilitar las notificaciones
+            verNoti=1;
+            ui->nofi_staff->hide();
+
+            QString busca;
+            busca="select *from notificacion where UserP='"+id_usuario+"'";
+            QSqlQuery buscarNoti;
+            buscarNoti.exec(busca);
+
+            int contadorNoti=0;
+            int filas=0;
+
+            while(buscarNoti.next())
+            {
+                QString nueva;
+                nueva=buscarNoti.value(4).toString();
+                qDebug()<<"ya se vio: "<<nueva;
+                if(nueva=="0")
+                {
+
+                    contadorNoti++;
+                }
+            }
+
+            while(buscarNoti.previous()){
+                if(buscarNoti.value(1).toString()=="1")
+                {
+
+                    QPlainTextEdit *b=new QPlainTextEdit();
+                    // QPushButton *b=new QPushButton();
+                    b->setPlainText(buscarNoti.value(2).toString());
+                    b->setFixedSize(QSize(200,50));
+                    b->setStyleSheet("background-color: rgb(151,240,104); ");
+                    ui->barraDeNoti_5->addWidget(b,filas,0,Qt::AlignTop);
+                    filas++;
+                }else
+                {
+
+                    QPlainTextEdit *b=new QPlainTextEdit();
+                    //QPushButton *b=new QPushButton();
+                    b->setPlainText(buscarNoti.value(2).toString());
+                    b->setFixedSize(QSize(200,50));
+                    b->setStyleSheet("background-color: rgb(243,173,106); ");
+                    ui->barraDeNoti_5->addWidget(b,filas,0,Qt::AlignTop);
+                    filas++;
+                }
+            }
+
+            QString num=QString::number(contadorNoti);
+            qDebug()<<"este numero conte"<<num;
+            if(num=="0")
+            {
+                qDebug()<<"no encontre nada";
+                ui->notiStaff->hide();
+            }
+            else
+            {
+                qDebug()<<"encontre algo";
+                ui->notiStaff->setStyleSheet("background-color:red; border:solid 1px red; border-radius:500px; color: white;");
+                ui->notiStaff->setText(num);
+                ui->notiStaff->show();
+            }
+
             on_pushButton_miPerfil_clicked();
 
         }
@@ -6100,5 +6165,43 @@ void MainWindow::eliminarPermisoLaboral(QString idPermiso){
             qDebug()<<deletear->lastError().text();
             QMessageBox::critical(this, "Error","Error al borrar.");
         }
+    }
+}
+
+void MainWindow::on_pb_adminPermisos_clicked(){
+    VerPermisosLaborales* permisos = new VerPermisosLaborales(this);
+    permisos->show();
+}
+
+void MainWindow::on_pb_notiStaff_clicked()
+{
+    ui->stackedWidget_PerfilStaff->setCurrentIndex(0);
+    if(verNoti==1)
+    {
+        if(ui->notiStaff->text()!="")
+        {
+            ui->notiStaff->hide();
+        }
+        ui->nofi_staff->show();
+        verNoti=0;
+    }
+    else
+    {
+      ui->nofi_staff->hide();
+
+      QString idNoti,id,update1;
+      idNoti="select idNoti from notificacion where UserP="+id_usuario;
+      QSqlQuery upNoti,upNoti1;
+      upNoti.exec(idNoti);
+
+      while(upNoti.next())
+      {
+          id=upNoti.value(0).toString();
+          update1="update notificacion set vista=true where idNoti='"+id+"';";
+          upNoti1.exec(update1);
+            qDebug()<<id;
+            qDebug()<<update1;
+      }
+      verNoti=1;
     }
 }

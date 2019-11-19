@@ -213,6 +213,10 @@ private slots:
     void on_pb_permisosStaff_clicked();
     void eliminarPermisoLaboral(QString idP);
 
+    void on_pb_adminPermisos_clicked();
+
+    void on_pb_notiStaff_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
