@@ -935,6 +935,7 @@ void MainWindow::on_pushButton_tip_clicked()
 {
     static tipdeldia tip(this);
       tip.mostrarTip();
+      tip.setModal(true);
       tip.show();
 }
 
@@ -6020,7 +6021,7 @@ void MainWindow::cancelarIntervencion(QString folio){
 void MainWindow::on_pushButton_intervenciones_clicked()
 {
     ui->stackedWidget_perfilPaciente->setCurrentIndex(3);
-    clearLayout(ui->pagoIntervenciones);
+    //clearLayout(ui->pagoIntervenciones);
     QString citas,est,pacNom;
     QSqlQuery consulta,consulta2,pac;
     est="1";
@@ -6123,7 +6124,7 @@ void MainWindow::on_pushButton_intervenciones_clicked()
 
 void MainWindow::pagarIntervencionTarjeta(QString folio)
 {
-    clearLayout(ui->pagoIntervenciones);
+   // clearLayout(ui->pagoIntervenciones);
     QString consulta;
     QSqlQuery query;
     query.exec("select inter.idCita,us.matricula from usuario as  us inner join paciente as p "
@@ -6153,6 +6154,7 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
         }
         else{
              pagoIntervenciones *pagoIt = new pagoIntervenciones(folio,this);
+             pagoIt->setModal(true);
              pagoIt->show();
              //ocultar=new QTimer(this);
              //connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaInter()));
