@@ -574,7 +574,7 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 }
 
 void MainWindow::ocultarMenuP(){
-    ui->pb_servicios->setHidden(true);
+    //ui->pb_servicios->setHidden(true);
     ui->pushButton_especialidades->setHidden(true);
     ui->pushButton_infoHospital->setHidden(true);
     ui->pushButton__dirMedico->setHidden(true);
@@ -585,7 +585,7 @@ void MainWindow::ocultarMenuP(){
 }
 
 void MainWindow::mostrarMenuP(){
-    ui->pb_servicios->setHidden(false);
+    //ui->pb_servicios->setHidden(false);
     ui->pushButton_especialidades->setHidden(false);
     ui->pushButton_infoHospital->setHidden(false);
     ui->pushButton__dirMedico->setHidden(false);
@@ -6697,5 +6697,132 @@ void MainWindow::on_pushButton_5_clicked()
         del->eliminarStaff(id_usuario);
         on_pushButton_salir_clicked();
         delete del;
+    }
+}
+
+void MainWindow::info_ser(QString tipo)
+{
+    ui->foto1S->clear();
+    ui->foto2S->clear();
+
+    QString bus,titulo,info1,lema,info2;
+    QSqlQuery bus1;
+
+    bus="select *from Servicios where nombreS='"+tipo+"'; ";
+
+    bus1.exec(bus);
+    bus1.next();
+
+    titulo=bus1.value(1).toString();
+    info1=bus1.value(2).toString();
+    lema=bus1.value(3).toString();
+    info2=bus1.value(4).toString();
+
+    ui->tituloS->setText(titulo);
+    ui->info1->setPlainText(info1);
+    ui->lema->setPlainText(lema);
+    ui->info2->setPlainText(info2);
+
+    QString foto1,foto2;
+
+
+    if(tipo=="URGENCIAS")
+    {
+
+           foto1=":/fotoservi/hospifotos/urgencias1.jpg";
+           foto2=":/fotoservi/hospifotos/urgencias2.jpg";
+            QPixmap f1(foto1);
+            QPixmap f2(foto2);
+
+            int a=ui->foto1S->height();
+            int b=ui->foto1S->width();
+            int a1=ui->foto2S->height();
+            int b1=ui->foto2S->width();
+
+           ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
+            ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
+
+    }
+    else if(tipo=="QUIROFANOS")
+    {
+
+        foto1=":/fotoservi/hospifotos/quirofano1.jpeg";
+        foto2=":/fotoservi/hospifotos/quirofano2.jpeg";
+         QPixmap f1(foto1);
+         QPixmap f2(foto2);
+
+         int a=ui->foto1S->height();
+         int b=ui->foto1S->width();
+         int a1=ui->foto2S->height();
+         int b1=ui->foto2S->width();
+
+        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
+         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
+    }
+    else if(tipo=="TERAPIA INTENSIVA")
+    {
+        foto1=":/fotoservi/hospifotos/terapia1.jpg";
+        foto2=":/fotoservi/hospifotos/terapia2.jpg";
+         QPixmap f1(foto1);
+         QPixmap f2(foto2);
+
+         int a=ui->foto1S->height();
+         int b=ui->foto1S->width();
+         int a1=ui->foto2S->height();
+         int b1=ui->foto2S->width();
+
+        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
+         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
+    }
+    else if(tipo=="HOSPITALIZACION")
+    {
+        foto1=":/fotoservi/hospifotos/hospitalizacion1.jpg";
+        foto2=":/fotoservi/hospifotos/hospitalizacion2.jpg";
+         QPixmap f1(foto1);
+         QPixmap f2(foto2);
+
+         int a=ui->foto1S->height();
+         int b=ui->foto1S->width();
+         int a1=ui->foto2S->height();
+         int b1=ui->foto2S->width();
+
+        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
+         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
+    }
+    else if(tipo=="HEMODINAMIA")
+    {
+        foto1=":/fotoservi/hospifotos/hemodinamia1.png";
+        foto2=":/fotoservi/hospifotos/hemodinamia2.jpg";
+         QPixmap f1(foto1);
+         QPixmap f2(foto2);
+
+         int a=ui->foto1S->height();
+         int b=ui->foto1S->width();
+         int a1=ui->foto2S->height();
+         int b1=ui->foto2S->width();
+
+        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
+         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
+    }
+
+
+
+
+
+}
+
+
+
+void MainWindow::on_cb_servicios_currentTextChanged(const QString &arg1)
+{
+    if(arg1=="SERVICIOS")
+    {
+
+    }
+    else
+    {
+       ui->stackedWidget_principal->setCurrentIndex(6);
+       info_ser(arg1);
+       ui->cb_servicios->setCurrentIndex(0);
     }
 }
