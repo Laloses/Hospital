@@ -32,5 +32,6 @@
         <file>camera.png</file>
         <file>img_bg_5.jpg</file>
         <file>img_bg_6.jpg</file>
+        <file>bed.png</file>
     </qresource>
 </RCC>
