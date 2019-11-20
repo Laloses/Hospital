@@ -5969,6 +5969,53 @@ void MainWindow::actTablaInter()
     on_pushButton_intervenciones_clicked();
 
 }
+
+void MainWindow::cancelarIntervencion(QString folio){
+
+    QSqlQuery query,query2,query3,query4;
+    QString consulta,eliminacion,eliminarSoli,notifi;
+    QMessageBox message(QMessageBox::Question,
+    tr("Information"), tr("¿Estas seguro de Cancelar tu intervenion?"), QMessageBox::Yes | QMessageBox::No);
+    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+    message.setButtonText(QMessageBox::No, tr("Cancelar"));
+
+    QMessageBox messag(QMessageBox::Question,
+    tr("Information"), tr("Intervencion cancelada"), QMessageBox::Yes);
+    messag.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+    if (message.exec() == QMessageBox::Yes ){
+    eliminacion="update CitasQuirofano set estado='Cancelada' where idCita='"+folio+"'";
+    query2.exec(eliminacion);
+    query2.next();
+    qDebug()<<"folio:"<<folio;
+
+    eliminarSoli="delete from SoliEstancia where idCitaQ='"+folio+"'";
+    query3.exec(eliminarSoli);
+    query3.next();
+
+     if (messag.exec() == QMessageBox::Yes ){
+          clearLayout(ui->pagoIntervenciones);
+          notifi=" select  cq.fechaCita,cq.horaInicio,d.iddoctor from CitasQuirofano as cq inner join  doctor as d on cq.idDoctor=d.iddoctor where cq.idCita='"+folio+"'";
+          query4.exec(notifi);
+          query4.next();
+          QString fech,hor,user1;
+          fech=query.value(0).toString();
+          hor=query.value(1).toString();
+          user1=query.value(3).toString();
+          QString mensaj,tipo;
+          mensaj="Se le informa que su paciente ha cancelado su intervencion del dia: "+fech+" y con horario de: "+hor+" fue CANCELADA.";
+          tipo="0";
+          QString notificacion;
+          notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+user1+"')";
+          query.exec(notificacion);
+          query.next();
+          on_pushButton_intervenciones_clicked();
+         }
+    }
+
+}
+
+
 void MainWindow::on_pushButton_intervenciones_clicked()
 {
     ui->stackedWidget_perfilPaciente->setCurrentIndex(3);
@@ -5983,10 +6030,10 @@ void MainWindow::on_pushButton_intervenciones_clicked()
     QString r2,g2,b2;
     r2="221,221,221";
     QString rgb="";
-    QString folio,doctor,fecha,hora,nomDoct,descripc;
+    QString folio,doctor,fecha,hora,nomDoct,descripc,estado;
     //int i=0;
     int l=0;
-    citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) "
+    citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno),inter.estado "
                         "from usuario as us "
                       "inner join doctor as doc "
                       "on us.matricula=doc.idUser "
@@ -5996,9 +6043,12 @@ void MainWindow::on_pushButton_intervenciones_clicked()
                        "on inter.idCita = costo.idCitaQ "
                       "where costo.estado=0";
 
+
     if(!consulta2.exec(citas)) consulta2.lastError().text();
     while(consulta2.next()){
-
+        estado=consulta2.value(7).toString();
+        //qDebug()<<estado;
+        if(estado!="Cancelada"){
         folio=consulta2.value(0).toString();
         doctor=consulta2.value(6).toString();
         descripc=consulta2.value(5).toString();
@@ -6017,14 +6067,12 @@ void MainWindow::on_pushButton_intervenciones_clicked()
 
         QLabel *fol=new QLabel;
         fol->setText(folio);
-        fol->setFixedSize(QSize(100,25));
         fol->setStyleSheet("background-color: rgb("+rgb+")");
         ui->pagoIntervenciones->addWidget(fol,l,0,Qt::AlignTop);
 
 
         QLabel *m=new QLabel;
         m->setText(doctor);
-        m->setFixedSize(QSize(115,25));
         m->setStyleSheet("background-color: rgb("+rgb+")");
         ui->pagoIntervenciones->addWidget(m,l,1,Qt::AlignTop);
 
@@ -6038,32 +6086,37 @@ void MainWindow::on_pushButton_intervenciones_clicked()
         QLabel *r=new QLabel;
         r->setText(fecha);
         r->setStyleSheet("background-color: rgb("+rgb+")");
-        r->setFixedSize(QSize(100,25));
         ui->pagoIntervenciones->addWidget(r,l,3,Qt::AlignTop);
 
 
         QLabel *h=new QLabel;
         h->setText(hora);
-        h->setFixedSize(QSize(100,25));
         h->setStyleSheet("background-color: rgb("+rgb+")");
         ui->pagoIntervenciones->addWidget(h,l,4,Qt::AlignTop);
 
         QLabel *ss=new QLabel;
         ss->setText(" ");
-        ss->setFixedSize(QSize(40,25));
+        //ss->setFixedSize(QSize(40,25));
         ui->pagoIntervenciones->addWidget(ss,l,5,Qt::AlignTop);
-
+        }
+      if(estado=="Completa"){
         QPushButton *p= new QPushButton();
         p->setText("Pagar con Tarjeta");
-        p->setFixedSize(QSize(120,25));
         p->setStyleSheet("background-color: rgb(138,198,242)");
         QSignalMapper *mapper3=new QSignalMapper(this);
         connect(p,SIGNAL(clicked(bool)),mapper3,SLOT(map()));
         mapper3->setMapping(p,folio);
         connect(mapper3,SIGNAL(mapped(QString)),this,SLOT(pagarIntervencionTarjeta(QString)));
         ui->pagoIntervenciones->addWidget(p,l,7,Qt::AlignTop);
-
+        }
+        if(estado=="Pendiente"){
+        QPushButton *k= new QPushButton();
+        k->setText("Cancelar intervencion");
+        connect(k,&QPushButton::clicked,[=](){emit cancelarIntervencion(folio);});
+        ui->pagoIntervenciones->addWidget(k,l,8,Qt::AlignTop);
+       }
         l++;
+
     }
 }
 

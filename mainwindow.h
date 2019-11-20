@@ -229,6 +229,7 @@ private slots:
     void on_pb_bajaDoctor_clicked();
 
     void on_pushButton_5_clicked();
+    void cancelarIntervencion(QString);
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

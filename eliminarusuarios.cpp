@@ -154,6 +154,7 @@ void eliminarUsuarios::eliminarPaciente(QString matricula){
     QMessageBox messag(QMessageBox::Question,
     tr("Information"), tr("Paciente eliminado"), QMessageBox::Yes);
     messag.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
     QString preparada,consulta,fech,hor,tipo,cita,user1,final;
     preparada="Pendiente";
     QSqlQuery query,query1;
