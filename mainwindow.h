@@ -231,6 +231,8 @@ private slots:
     void on_pushButton_5_clicked();
     void cancelarIntervencion(QString);
 
+    void on_pushButton_infoHospital_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

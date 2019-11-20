@@ -2,6 +2,7 @@
 #define INFOHOSPITAL_H
 
 #include <QWidget>
+#include <QtSql>
 
 namespace Ui {
 class InfoHospital;
@@ -19,6 +20,8 @@ private slots:
     void on_pb_acerca_clicked();
 
     void on_pb_MyV_clicked();
+
+    void on_pb_valores_clicked();
 
 private:
     Ui::InfoHospital *ui;

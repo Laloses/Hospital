@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1007</width>
-    <height>542</height>
+    <width>995</width>
+    <height>692</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -180,6 +180,17 @@ height:40px;
           </item>
           <item>
            <widget class="QStackedWidget" name="sw_secciones">
+            <property name="minimumSize">
+             <size>
+              <width>718</width>
+              <height>320</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#acerca{
+background:white;
+}</string>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -187,10 +198,372 @@ height:40px;
              <enum>QFrame::Plain</enum>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>3</number>
             </property>
-            <widget class="QWidget" name="page"/>
-            <widget class="QWidget" name="page_2"/>
+            <widget class="QWidget" name="acerca">
+             <property name="styleSheet">
+              <string notr="true">font-size:10pt;</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <item>
+               <widget class="QPlainTextEdit" name="plainTextEdit">
+                <property name="maximumSize">
+                 <size>
+                  <width>151</width>
+                  <height>101</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:none;
+background: transparent;
+color:brown;</string>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAsNeeded</enum>
+                </property>
+                <property name="lineWrapMode">
+                 <enum>QPlainTextEdit::WidgetWidth</enum>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="plainText">
+                 <string>
+
+&quot;En Lobo Hospital tu salud y la de tu familia es lo más importante para nosotros&quot;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPlainTextEdit" name="acercaDe">
+                <property name="maximumSize">
+                 <size>
+                  <width>411</width>
+                  <height>181</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:none;
+background: transparent;</string>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="plainText">
+                 <string>Lobo Hospital le da la más cordial bienvenida y le agradece la confianza depositada en nosotros para atender el cuidado de su salud. 
+Nuestra razón de ser y prioridad son los pacientes y hacia ellos dirigimos todos nuestros esfuerzos para asegurarle una atención médica de calidad.
+Trabajamos por seguir siendo la mejor opción en Puebla y el Sureste del país en Servicios de Alta Especialidad; porque contamos con el mejor equipo Médico, Personal calificado y Tecnología de Vanguardia.</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="pmision">
+             <property name="styleSheet">
+              <string notr="true">font-size:10pt;
+background:white;</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <item>
+               <widget class="QPlainTextEdit" name="plainTextEdit_2">
+                <property name="maximumSize">
+                 <size>
+                  <width>151</width>
+                  <height>101</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:none;
+background: transparent;
+color:brown;</string>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAsNeeded</enum>
+                </property>
+                <property name="lineWrapMode">
+                 <enum>QPlainTextEdit::WidgetWidth</enum>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="plainText">
+                 <string>
+
+&quot;En Lobo Hospital, cuidamos lo que más amas&quot;
+</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_7">
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <item>
+                   <widget class="QLabel" name="label_2">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color:brown;
+border-top:none;
+border-bottom:2px solid  brown;</string>
+                    </property>
+                    <property name="text">
+                     <string>MISIÓN</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPlainTextEdit" name="mision">
+                    <property name="minimumSize">
+                     <size>
+                      <width>399</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>411</width>
+                      <height>181</height>
+                     </size>
+                    </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">border:none;
+background: transparent;</string>
+                    </property>
+                    <property name="verticalScrollBarPolicy">
+                     <enum>Qt::ScrollBarAlwaysOff</enum>
+                    </property>
+                    <property name="readOnly">
+                     <bool>true</bool>
+                    </property>
+                    <property name="plainText">
+                     <string>Somos un hospital de especialidades donde su personal, infraestructura, equipamiento y procesos están alineados en el compromiso con la calidad,
+seguridad y derechos del paciente, coadyuvando en la atención que brindan los médicos en la prevención, diagnóstico y la atención en salud de
+nuestra comunidad, buscando la auto-sustentabilidad con responsabilidad social y financiera.</string>
+                    </property>
+                    <property name="backgroundVisible">
+                     <bool>false</bool>
+                    </property>
+                    <property name="centerOnScroll">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_6">
+                  <item>
+                   <widget class="QLabel" name="label_3">
+                    <property name="font">
+                     <font>
+                      <pointsize>10</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color:brown;
+border-top:none;
+border-bottom:2px solid  brown;</string>
+                    </property>
+                    <property name="text">
+                     <string>VISION</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPlainTextEdit" name="vision">
+                    <property name="minimumSize">
+                     <size>
+                      <width>411</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>411</width>
+                      <height>154</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">border:none;
+background: transparent;</string>
+                    </property>
+                    <property name="verticalScrollBarPolicy">
+                     <enum>Qt::ScrollBarAlwaysOff</enum>
+                    </property>
+                    <property name="readOnly">
+                     <bool>true</bool>
+                    </property>
+                    <property name="plainText">
+                     <string>En 2021 somos el hospital posicionado como primera opción en Puebla y el Sur del país contando con las mayores certificaciones nacionales e
+internacionales reconocidas en el ramo de la salud donde nuestra infraestructura y talento humano hace la diferencia.</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="pvalores">
+             <property name="styleSheet">
+              <string notr="true">font-size:10pt;
+background:white;</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_11">
+              <item>
+               <widget class="QPlainTextEdit" name="plainTextEdit_3">
+                <property name="maximumSize">
+                 <size>
+                  <width>151</width>
+                  <height>71</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:none;
+background: transparent;
+color:brown;</string>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="plainText">
+                 <string>&quot;En Hospital Puebla tu salud y la de tu familia es lo más importante para nosotros&quot;
+</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPlainTextEdit" name="valores">
+                <property name="maximumSize">
+                 <size>
+                  <width>484</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:none;
+background: transparent;</string>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="plainText">
+                 <string>Honestidad: Proceder con rectitud, justicia, honradez y actuar conforme a la razón.
+Ética: Actuar con bondad y respeto por lo humano; promover el bien en general.
+Espíritu de equipo: Virtud que alienta al trabajo en grupo.
+Fidelidad: Ser leal y correspondiente con la institución.
+Responsabilidad social: Contribuir solidaria y subsidiariamente con el desarrollo de nuestros colaboradores y de la comunidad en la que estamos
+insertados.
+Sana competencia interna: Propiciar la rivalidad, de buena intención, entre departamentos o servicios.
+Liderazgo: Lograr el reconocimiento de nuestros colaboradores, clientes y competidores.
+</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="pcalidad">
+             <property name="styleSheet">
+              <string notr="true">font-size:10pt;
+background:white;</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
+              <item>
+               <widget class="QPlainTextEdit" name="plainTextEdit_4">
+                <property name="minimumSize">
+                 <size>
+                  <width>131</width>
+                  <height>81</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>131</width>
+                  <height>81</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:none;
+background: transparent;
+color:brown;</string>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAsNeeded</enum>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="plainText">
+                 <string>&quot;Nuestra Infraestructura y Talento humano hacen la diferencia&quot;
+</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPlainTextEdit" name="calidad">
+                <property name="maximumSize">
+                 <size>
+                  <width>451</width>
+                  <height>211</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border:none;
+background: transparent;</string>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="plainText">
+                 <string>Es política de Calidad el ofrecer servicios hospitalarios del más alto nivel para lo cual debemos:
+* Alinear elsistema de gestión al Modelo del Consejo de Salubridad General para la Atención en Salud con Calidad y Seguridad.
+* Contar con equipo biomédico de tecnología reciente.
+* Contar con personal comprometido y capacitado.
+* Contar con el 100% de los manuales de procesos y políticas de las áreas.
+* Resolver las necesidades de salud del 100% de nuestros pacientes de acuerdo a nuestro nivel de complejidad y estructura hospitalaria.
+* Alcanzar y mantener un nivel de satisfacción de nuestros pacientes y médicos no menor al 95%.
+</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </widget>
           </item>
          </layout>
