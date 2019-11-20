@@ -30,5 +30,6 @@
         <file>refresh.png</file>
         <file>question.png</file>
         <file>camera.png</file>
+        <file>fondoInfoHospital.jpg</file>
     </qresource>
 </RCC>

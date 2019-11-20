@@ -20,6 +20,7 @@
 #include "dialogdoctor.h"
 #include "permisoLaboral.h"
 #include "verPermisosLaborales.h"
+#include "infohospital.h"
 
 
 
@@ -6698,4 +6699,9 @@ void MainWindow::on_pushButton_5_clicked()
         on_pushButton_salir_clicked();
         delete del;
     }
+}
+
+void MainWindow::on_pushButton_infoHospital_clicked()
+{
+
 }

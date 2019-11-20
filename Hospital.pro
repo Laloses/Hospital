@@ -34,6 +34,7 @@ SOURCES += \
         eliminarusuarios.cpp \
         dialogdoctor.cpp \
         dialoginfodoc.cpp \
+    infohospital.cpp \
         main.cpp \
         mainwindow.cpp \
         mostrarhistoclinico.cpp \
@@ -61,6 +62,7 @@ HEADERS += \
         eliminarusuarios.h \
         dialogdoctor.h \
         dialoginfodoc.h \
+    infohospital.h \
         mainwindow.h \
         mostrarhistoclinico.h \
         pagarcitaspaciente.h \
@@ -85,6 +87,7 @@ FORMS += \
         eliminarusuarios.ui \
         dialogdoctor.ui \
         dialoginfodoc.ui \
+    infohospital.ui \
         mainwindow.ui \
         mostrarhistoclinico.ui \
         pagarcitaspaciente.ui \
