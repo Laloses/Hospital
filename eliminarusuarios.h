@@ -24,7 +24,7 @@ public:
     explicit eliminarUsuarios(QWidget *parent = nullptr);
     ~eliminarUsuarios();
     void eliminarDoc(QString);
-
+        QString idUser, idStaff, idPaciente, idDoctor,especialidad;
     void eliminarStaff(QString);
 
     void eliminarPaciente(QString);
@@ -38,8 +38,11 @@ private slots:
 
     void ModificarUsuario(QString, QString);
 
+    void on_pushButton_buscar_clicked();
+
 private:
     Ui::eliminarUsuarios *ui;
+
 };
 
 #endif // ELIMINARUSUARIOS_H

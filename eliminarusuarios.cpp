@@ -128,7 +128,7 @@ messageBox.setButtonText(QMessageBox::Yes, tr("Aceptar"));
    query.exec("update usuario set clave='0000' where matricula='"+matricula+"'");
    query.next();
    //CAMBIAMOS EL TIPO DE USUARIO PARA QUE NO LO RECONOZCA EL LOGIN Y LE EL NUMERO 5
-   query.exec("update doctor set tipoUser='5' where idUser='"+matricula+"'");
+   query.exec("update doctor set tipoUser='5',estado='8' where idUser='"+matricula+"'");
    query.next();
    //CAMBIAMOS LA RESPUESTA PARA QUE NO PUEDAN RECUPERAR SU CONTRASEÑA
    query.exec("update  usuario set respuesta='Usuario Eliminado' where matricula='"+matricula+"'");
@@ -398,3 +398,158 @@ void eliminarUsuarios::on_radioButton_pac_clicked()
             cont++;
         }
 }
+
+
+
+void eliminarUsuarios::on_pushButton_buscar_clicked()
+{
+        QString user=ui->lineEdit_matricula->text();
+
+
+
+        QMessageBox messag(QMessageBox::Question,
+        tr("Information"), tr("Usuarion no existente"), QMessageBox::Yes);
+        messag.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+        QMessageBox messaga(QMessageBox::Question,
+        tr("Information"), tr("Escriba la matricula del usuarion"), QMessageBox::Yes);
+        messaga.setButtonText(QMessageBox::Yes, tr("Aceptar"));
+
+        QSqlQuery doctor,staff,paciente,usuarios;
+        QString admi1,doctor1,staff1,paciente1,usuarios1;
+
+        //aqui hare los querys para encontrar el tipo de usuario
+
+        if(user!=""){
+
+         doctor.exec("select iddoctor,idUser,estado,idEspecialidad from doctor where estado='1' and idUser='"+user+"'");
+         doctor.next();
+         doctor1=doctor.value(1).toString();
+
+        staff.exec("select idstaff,idUser,estado from staff where estado='1' and idUser='"+user+"'");
+        staff.next();
+        staff1=staff.value(1).toString();
+
+        paciente.exec("select idpaciente,idUser from paciente where idUser="+user);
+        paciente.next();
+        paciente1=paciente.value(1).toString();
+
+        usuarios.exec("select *from usuario where clave!='0000' and matricula="+user);
+        usuarios.next();
+        usuarios1=usuarios.value(0).toString();
+
+      }else{
+            if (messaga.exec() == QMessageBox::Yes ){
+                     return ;
+                }
+
+        }
+        if(usuarios1==user){
+        if(usuarios1==doctor1){
+            qDebug()<<"es un doctor";
+            clearLayou(ui->gridLayout_eliminar);
+            int cont=0;
+            QString consultaDoc,nombre,espec,espera,matricula,useest1;
+            QSqlQuery queryDoc;
+            consultaDoc="select *from usuario where matricula='"+user+"'";
+
+            queryDoc.exec(consultaDoc);
+            queryDoc.next();
+
+            matricula=queryDoc.value(0).toString();
+             qDebug()<<matricula;
+            nombre=queryDoc.value(2).toString()+" "+queryDoc.value(3).toString()+" "+queryDoc.value(4).toString();
+            qDebug()<<nombre;
+                        QPushButton *b=new QPushButton();
+                        QPushButton *p=new QPushButton();
+                        b->setText("Eliminar Doctor");
+                        p->setText("Modificar Doctor");
+                        QLabel *l=new QLabel;
+                        l->setText(nombre);
+                        connect(b,&QPushButton::clicked,[=](){emit eliminarDoc(matricula);});
+                        connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula, "doctor");});
+                        ui->gridLayout_eliminar->addWidget(b,cont,0,1,1);
+                         ui->gridLayout_eliminar->addWidget(p,cont,1,1,1);
+                        ui->gridLayout_eliminar->addWidget(l,cont,2,1,1);
+                        cont++;
+                        return;
+
+        }
+
+
+        if(usuarios1==staff1){
+            qDebug()<<"es un staff";
+            clearLayou(ui->gridLayout_eliminar);
+            int cont=0;
+            QString consultaStaff,nombre,matricula,useest1;
+            QSqlQuery queryStaff,userEst;
+           consultaStaff="select *from usuario where matricula='"+user+"'";
+            queryStaff.exec(consultaStaff);
+            queryStaff.next();
+
+                    matricula=queryStaff.value(0).toString();
+                    nombre=queryStaff.value(2).toString()+" "+queryStaff.value(3).toString()+" "+queryStaff.value(4).toString();
+
+
+                    QPushButton *b=new QPushButton();
+                    QPushButton *p=new QPushButton();
+                    b->setText(" Eliminar Staff ");
+                    p->setText("Modificar Staff");
+                    QLabel *l=new QLabel;
+                    l->setText(nombre);
+                    connect(b,&QPushButton::clicked,[=](){emit eliminarStaff(matricula);});
+                    connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula, "staff");});
+
+                    ui->gridLayout_eliminar->addWidget(b,cont,0,1,1);
+                    ui->gridLayout_eliminar->addWidget(p,cont,1,1,1);
+                    ui->gridLayout_eliminar->addWidget(l,cont,2,1,1);
+
+                    cont++;
+                    return ;
+                }
+
+        if(usuarios1==paciente1){
+            qDebug()<<"es un pacinete";
+            int cont=0;
+            clearLayou(ui->gridLayout_eliminar);
+            QString consultaDoc,nombre,matricula,useest1;
+            QSqlQuery queryPac;
+            consultaDoc="select *from usuario where matricula='"+user+"'";
+            queryPac.exec(consultaDoc);
+            while(queryPac.next())
+            {
+                    matricula=queryPac.value(0).toString();
+                    nombre=queryPac.value(2).toString()+" "+queryPac.value(3).toString()+" "+queryPac.value(4).toString();
+
+
+                    QPushButton *b=new QPushButton();
+                    QPushButton *p=new QPushButton();
+                    b->setText("Eliminar Paciente");
+                    p->setText("Modificar Paciente");
+                    QLabel *l=new QLabel;
+                    l->setText(nombre);
+
+                    connect(b,&QPushButton::clicked,[=](){emit eliminarPaciente(matricula);});
+                    connect(p,&QPushButton::clicked,[=](){emit ModificarUsuario(matricula, "paciente");});
+                    ui->gridLayout_eliminar->addWidget(b,cont,0,1,1);
+                    ui->gridLayout_eliminar->addWidget(p,cont,1,1,1);
+                    ui->gridLayout_eliminar->addWidget(l,cont,2,1,1);
+                    cont++;
+                    return ;
+                }
+
+
+        }
+     }else {
+        if (messag.exec() == QMessageBox::Yes ){
+             ui->lineEdit_matricula->clear();
+            }
+
+        }
+
+
+
+   }
+
+
+
