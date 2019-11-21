@@ -583,6 +583,8 @@ void MainWindow::ocultarMenuP(){
     ui->line_2->setHidden(true);
     ui->line_3->setHidden(true);
     ui->line_8->setHidden(true);
+    ui->cb_servicios->hide();
+    ui->pb_remedios->hide();
 }
 
 void MainWindow::mostrarMenuP(){
@@ -594,6 +596,8 @@ void MainWindow::mostrarMenuP(){
     ui->line_2->setHidden(false);
     ui->line_3->setHidden(false);
     ui->line_8->setHidden(false);
+    ui->cb_servicios->show();
+    ui->pb_remedios->show();
 }
 
 //Salir
@@ -922,7 +926,7 @@ void MainWindow::on_pushButton_miPerfil_clicked()
             if(datosDoc->next()){
                 id_doctor=datosDoc->value(0).toString();
                 cargarDatosUsuarios();
-                cargarHorarioDoc();
+                //cargarHorarioDoc();
                 //Pagina de doctor
                 ui->stackedWidget_principal->setCurrentIndex(3);
                 ui->stackedWidget_perfilDoctor->setCurrentIndex(0);
@@ -1072,10 +1076,10 @@ void MainWindow::on_pb_agregarActividadDoc_clicked()
     //Mostramos el dialog de actividades
     agregarActividadDoctor *agreAct = new agregarActividadDoctor(this,id_doctor);
     agreAct->exec();
-    on_pushButton_horarioDoc_clicked();
+    cargarHorarioDoc_2();
 }
 
-void MainWindow::cargarHorarioDoc(){
+void MainWindow::cargarHorarioDoc_2(){
     QString turno;
     QStringList dias, horas;
     turno=datosDoc->value(3).toString();
@@ -1156,20 +1160,20 @@ void MainWindow::cargarHorarioDoc(){
             ui->tableHorario->setCellWidget(fil, col, waux);
             ui->tableHorario->setItem(fil, col, new QTableWidgetItem);
 
-            if(q.value(0).toString()=="Consulta"){
+            if(q.value("nombreAct").toString()=="Consulta"){
                 ui->tableHorario->item(fil, col)->setBackground(Qt::darkBlue);
             }
             else
-            if(q.value(0).toString()=="Descanso"){
+            if(q.value("nombreAct").toString()=="Descanso"){
                 ui->tableHorario->item(fil, col)->setBackground(Qt::green);
             }
-            else if(q.value(0).toString()=="Coordinación"){
+            else if(q.value("nombreAct").toString()=="Coordinación"){
                 ui->tableHorario->item(fil, col)->setBackground(Qt::magenta);
             }
-            else if(q.value(0).toString()=="Investigación"){
+            else if(q.value("nombreAct").toString()=="Investigación"){
                 ui->tableHorario->item(fil, col)->setBackground(Qt::darkCyan);
             }
-            else if(q.value(0).toString()=="Administración"){
+            else if(q.value("nombreAct").toString()=="Administración"){
                 ui->tableHorario->item(fil, col)->setBackground(Qt::black);
             }
             else{
@@ -1177,6 +1181,163 @@ void MainWindow::cargarHorarioDoc(){
             }
             ui->tableHorario->setEditTriggers(QAbstractItemView::NoEditTriggers);
             i++;
+        }//Fin while
+}
+
+void MainWindow::cargarHorarioDoc(){
+    QString turno;
+    QStringList dias, horas;
+    turno=datosDoc->value(3).toString();
+    int wTable = ui->tableHorario->width();
+    int hTable = ui->tableHorario->height();
+    ui->tableHorario->setColumnWidth(0,(wTable -ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(1,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(2,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(3,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(4,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(5,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+    ui->tableHorario->setColumnWidth(6,(wTable-ui->tableHorario->verticalHeader()->width())/7);
+
+    ui->tableHorario->setRowHeight(0,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(1,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(2,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(3,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(4,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(5,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(6,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    ui->tableHorario->setRowHeight(7,(hTable-ui->tableHorario->horizontalHeader()->height())/9);
+    dias<< "Lunes" << "Martes" << "Miércoles" << "Jueves" << "Viernes" << "Sábado" << "Domingo";
+    ui->tableHorario->setColumnCount(7);
+    ui->tableHorario->setRowCount(9);
+    //-------------------------------------- MATUTINO ----------------------------------
+    if(turno=="Matutino"){
+        //prueba tablaHorario
+        horas<< "05:00" << "06:00" << "07:00" << "08:00" << "09:00" << "10:00" << "11:00" << "12:00" << "13:00";
+        ui->tableHorario->setHorizontalHeaderLabels(dias);
+        ui->tableHorario->setVerticalHeaderLabels(horas);
+    }
+    //-------------------------------------- Vespertino ----------------------------------
+    else if(turno=="Vespertino"){
+        //prueba tablaHorario
+        horas<< "13:00" << "14:00" << "15:00" << "16:00" << "17:00" << "18:00" << "19:00" << "20:00" << "21:00";
+        ui->tableHorario->setHorizontalHeaderLabels(dias);
+        ui->tableHorario->setVerticalHeaderLabels(horas);
+    }
+    //-------------------------------------- Nocturno ----------------------------------
+    else if(turno=="Nocturno"){
+        //prueba tablaHorario
+        horas<< "21:00" << "22:00" << "23:00" << "00:00" << "01:00" << "02:00" << "03:00" << "04:00" << "05:00";
+        ui->tableHorario->setHorizontalHeaderLabels(dias);
+        ui->tableHorario->setVerticalHeaderLabels(horas);
+    }
+    QSqlQuery q;
+    int i=0, numConsultas=0;
+    q.exec("SELECT nombreAct,hora,dia FROM horarioDoc WHERE idDoc="+id_doctor);
+        //insertamos en la tabla (fila, columna, elemento a insertar)
+        while(q.next()){
+            QLabel *prueba = new QLabel();
+            prueba->setAlignment(Qt::AlignCenter);
+            prueba->setStyleSheet("color:white;");
+            prueba->setText(q.value(0).toString());
+
+            QWidget *waux = new QWidget();
+
+            QVBoxLayout *layout1 = new QVBoxLayout(waux);
+            layout1->addWidget(prueba);
+            waux->setLayout(layout1);
+
+            //hora
+            int col=0,fil=0;
+            for(int j=0; j<=8; j++){
+                if (horas.at(j) == q.value(1).toString()){
+                    fil=j;
+                    break;
+                }
+            }
+            //dia
+            for(int j=0; j<7; j++){
+                if (dias.at(j) == q.value(2).toString()){
+                    col=j;
+                    break;
+                }
+            }
+
+            ui->tableHorario->setCellWidget(fil, col, waux);
+            ui->tableHorario->setItem(fil, col, new QTableWidgetItem);
+
+            if(q.value("nombreAct").toString()=="Consulta"){
+                ui->tableHorario->item(fil, col)->setBackground(Qt::darkBlue);
+                numConsultas++;
+            }
+            else
+            if(q.value("nombreAct").toString()=="Descanso"){
+                ui->tableHorario->item(fil, col)->setBackground(Qt::green);
+            }
+            else if(q.value("nombreAct").toString()=="Coordinación"){
+                ui->tableHorario->item(fil, col)->setBackground(Qt::magenta);
+            }
+            else if(q.value("nombreAct").toString()=="Investigación"){
+                ui->tableHorario->item(fil, col)->setBackground(Qt::darkCyan);
+            }
+            else if(q.value("nombreAct").toString()=="Administración"){
+                ui->tableHorario->item(fil, col)->setBackground(Qt::black);
+            }
+            else{
+                ui->tableHorario->item(fil, col)->setBackground(Qt::red);
+            }
+            ui->tableHorario->setEditTriggers(QAbstractItemView::NoEditTriggers);
+            i++;
+        }//Fin while
+
+        if(numConsultas<25){
+            QMessageBox res(QMessageBox::Information,"Actividades faltantes","Por favor organice su horario para tener un mínimo de 25 horas de consulta.");
+            if(res.exec() == QMessageBox::Yes ){
+                ui->stackedWidget_principal->setCurrentIndex(3);
+                ui->stackedWidget_perfilDoctor->setCurrentIndex(1);
+            }
+            ui->pb_rechazarCitas->setEnabled(0);
+            ui->pushButton_historial->setEnabled(0);
+            ui->pb_inter->setEnabled(0);
+            ui->pushButton_4->setEnabled(0);
+            ui->pb_urg->setEnabled(0);
+            ui->pushButton_logo->setEnabled(0);
+            ui->pushButton_horarioDoc->setEnabled(0);
+            ui->butonNotifi_4->setEnabled(0);
+            ui->pushButton_miPerfil->setEnabled(0);
+            ui->pushButton_salir->setEnabled(0);
+
+            QPushButton* pb = new QPushButton(" Finalizar ");
+            pb->setStyleSheet("background-color:red; color:white;");
+            ui->layHorario->addWidget(pb);
+            connect(pb,&QPushButton::clicked,this,&MainWindow::verficarHorario);
+        }
+}
+
+void MainWindow::verficarHorario(){
+    QSqlQuery* q = new QSqlQuery;
+    int horas=0;
+    q->exec("SELECT nombreAct FROM horarioDoc WHERE idDoc="+id_doctor+" AND nombreAct='Consulta'");
+        while(q->next()){
+            horas++;
+        }
+        if(horas<25){
+            QMessageBox::information(this,"Actividades faltantes","Por favor organice su horario para tener un mínimo de 25 horas de consulta.");
+        }
+        else{
+            ui->pb_rechazarCitas->setEnabled(1);
+            ui->pushButton_historial->setEnabled(1);
+            ui->pb_inter->setEnabled(1);
+            ui->pushButton_4->setEnabled(1);
+            ui->pb_urg->setEnabled(1);
+            ui->pushButton_logo->setEnabled(1);
+            ui->pushButton_horarioDoc->setEnabled(1);
+            ui->butonNotifi_4->setEnabled(1);
+            ui->pushButton_miPerfil->setEnabled(1);
+            ui->pushButton_salir->setEnabled(1);
+
+            //Castear una señal y convertirla a un objeto
+            QPushButton* pb = qobject_cast<QPushButton*>(QObject::sender());
+            delete pb;
         }
 }
 

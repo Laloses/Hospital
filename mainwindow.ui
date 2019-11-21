@@ -529,7 +529,7 @@ border:none
 </string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -3659,7 +3659,7 @@ background-color:transparent;</string>
                       <x>0</x>
                       <y>0</y>
                       <width>230</width>
-                      <height>160</height>
+                      <height>419</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_22">
@@ -4520,8 +4520,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>48</width>
-                    <height>20</height>
+                    <width>848</width>
+                    <height>374</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -4552,8 +4552,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>48</width>
-                    <height>20</height>
+                    <width>848</width>
+                    <height>421</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_52">
@@ -4849,7 +4849,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_74">
@@ -5749,71 +5749,8 @@ background-color:transparent</string>
 background -color: red;
 }</string>
            </property>
-           <layout class="QGridLayout" name="gridLayout_2">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="pb_agregarActividadDoc">
-              <property name="minimumSize">
-               <size>
-                <width>130</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>130</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>Agregar actividad</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <spacer name="horizontalSpacer_32">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="3">
-             <spacer name="horizontalSpacer_99">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Fixed</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="0" colspan="4">
+           <layout class="QVBoxLayout" name="verticalLayout_58">
+            <item>
              <widget class="QTableWidget" name="tableHorario">
               <property name="enabled">
                <bool>false</bool>
@@ -5889,6 +5826,48 @@ background -color: red;
               <column/>
              </widget>
             </item>
+            <item>
+             <layout class="QHBoxLayout" name="layHorario">
+              <property name="spacing">
+               <number>6</number>
+              </property>
+              <item>
+               <spacer name="horizontalSpacer_32">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pb_agregarActividadDoc">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>130</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>Agregar actividad</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="page">
@@ -5906,7 +5885,7 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>48</width>
+                    <width>45</width>
                     <height>20</height>
                    </rect>
                   </property>
@@ -6456,7 +6435,7 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>48</width>
+                    <width>45</width>
                     <height>20</height>
                    </rect>
                   </property>
@@ -6734,8 +6713,8 @@ background-color:transparent;</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>357</width>
-                     <height>1113</height>
+                     <width>354</width>
+                     <height>1114</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_43">
@@ -7442,7 +7421,7 @@ border:none</string>
                  <x>0</x>
                  <y>0</y>
                  <width>202</width>
-                 <height>1082</height>
+                 <height>1092</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_45">
@@ -9378,8 +9357,8 @@ color:white;</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>66</width>
-                 <height>20</height>
+                 <width>866</width>
+                 <height>365</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_55">
@@ -10713,7 +10692,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>464</width>
+                        <width>461</width>
                         <height>20</height>
                        </rect>
                       </property>
@@ -10812,7 +10791,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>464</width>
+                        <width>461</width>
                         <height>20</height>
                        </rect>
                       </property>
@@ -11881,7 +11860,7 @@ background:transparent;
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>66</width>
+                 <width>63</width>
                  <height>20</height>
                 </rect>
                </property>
@@ -12480,7 +12459,7 @@ color: blue;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>30</width>
+                        <width>27</width>
                         <height>20</height>
                        </rect>
                       </property>
@@ -12735,7 +12714,7 @@ color: blue;</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>855</width>
+           <width>852</width>
            <height>630</height>
           </rect>
          </property>
@@ -12967,7 +12946,7 @@ color: blue;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>66</width>
+             <width>63</width>
              <height>46</height>
             </rect>
            </property>

@@ -63,6 +63,8 @@ private:
     //pagoIntervenciones *pagoIt;
     QTimer *ocultar;
     int contador;
+    void verficarHorario();
+    void cargarHorarioDoc_2();
 
 
 
