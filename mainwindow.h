@@ -231,6 +231,10 @@ private slots:
     void on_pushButton_5_clicked();
     void cancelarIntervencion(QString);
 
+    void on_cb_servicios_currentTextChanged(const QString &arg1);
+
+    void info_ser(QString);
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
