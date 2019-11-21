@@ -232,6 +232,9 @@ private slots:
     void cancelarIntervencion(QString);
 
     void on_pushButton_infoHospital_clicked();
+    void on_cb_servicios_currentTextChanged(const QString &arg1);
+
+    void info_ser(QString);
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

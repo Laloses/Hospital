@@ -334,63 +334,48 @@ padding-top:0;</string>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>140</width>
+                 <width>40</width>
                  <height>20</height>
                 </size>
                </property>
               </spacer>
              </item>
              <item>
-              <widget class="QFrame" name="frame_2">
-               <property name="minimumSize">
-                <size>
-                 <width>100</width>
-                 <height>0</height>
-                </size>
+              <widget class="QComboBox" name="cb_servicios">
+               <property name="styleSheet">
+                <string notr="true">background:transparent;
+border:none;</string>
                </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <widget class="QPushButton" name="pb_servicios">
-                <property name="geometry">
-                 <rect>
-                  <x>10</x>
-                  <y>0</y>
-                  <width>86</width>
-                  <height>28</height>
-                 </rect>
-                </property>
+               <item>
                 <property name="text">
                  <string>SERVICIOS</string>
                 </property>
-               </widget>
-               <widget class="QComboBox" name="cb_servicios">
-                <property name="geometry">
-                 <rect>
-                  <x>10</x>
-                  <y>0</y>
-                  <width>95</width>
-                  <height>30</height>
-                 </rect>
+               </item>
+               <item>
+                <property name="text">
+                 <string>URGENCIAS</string>
                 </property>
-                <property name="styleSheet">
-                 <string notr="true">background:transparent;
-border:none;</string>
+               </item>
+               <item>
+                <property name="text">
+                 <string>QUIROFANOS</string>
                 </property>
-                <item>
-                 <property name="text">
-                  <string>asasas</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>aassss</string>
-                 </property>
-                </item>
-               </widget>
+               </item>
+               <item>
+                <property name="text">
+                 <string>TERAPIA INTENSIVA</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>HOSPITALIZACION</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>HEMODINAMIA</string>
+                </property>
+               </item>
               </widget>
              </item>
              <item>
@@ -448,6 +433,19 @@ border:none;</string>
                 <string>REMEDIOS</string>
                </property>
               </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_145">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
               <spacer name="horizontalSpacer_3">
@@ -531,7 +529,7 @@ border:none
 </string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -540,15 +538,506 @@ border:none
        <widget class="QLabel" name="label_pagInicio">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>150</y>
-          <width>71</width>
-          <height>16</height>
+          <x>0</x>
+          <y>0</y>
+          <width>886</width>
+          <height>511</height>
          </rect>
         </property>
-        <property name="text">
-         <string>pagina inicio</string>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(206, 206, 206, 0.5);</string>
         </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="imgs/imgs.qrc">:/imgs/img_bg_6.jpg</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_47">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>886</width>
+          <height>511</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(100, 112, 130, 0.5);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>310</y>
+          <width>891</width>
+          <height>182</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_127">
+         <item>
+          <spacer name="horizontalSpacer_143">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QFrame" name="framePac">
+           <property name="minimumSize">
+            <size>
+             <width>240</width>
+             <height>180</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>180</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background: rgba(40, 53, 107,0.8)</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QLabel" name="label_60">
+            <property name="geometry">
+             <rect>
+              <x>46</x>
+              <y>15</y>
+              <width>149</width>
+              <height>150</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>140</width>
+              <height>140</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>149</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-image: url(:/imgs/bed.png);
+background-color: rgba(44, 56, 110,0.0);</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="imgs/imgs.qrc">:/imgs/bed.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+           <widget class="QTextBrowser" name="textBrowser_5">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>60</y>
+              <width>180</width>
+              <height>100</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:transparent;
+font: 26pt &quot;Segoe MDL2 Assets&quot;;
+border:none
+</string>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe MDL2 Assets'; font-size:26pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#ffffff;&quot;&gt;Ponemos a su disposición la última tecnología para que pueda acceder a nuestros servicios de una manera fácil y cómoda.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_56">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>20</y>
+              <width>168</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
+color:white;
+background-color:transparent;</string>
+            </property>
+            <property name="text">
+             <string>Servicios al Paciente</string>
+            </property>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_146">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>5</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QFrame" name="frameDoc">
+           <property name="minimumSize">
+            <size>
+             <width>240</width>
+             <height>160</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>180</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgba(10, 20, 59,0.8)
+</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QLabel" name="label_58">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>20</y>
+              <width>179</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
+color:white;
+background-color:transparent;</string>
+            </property>
+            <property name="text">
+             <string>Servicios Médicos</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_61">
+            <property name="geometry">
+             <rect>
+              <x>50</x>
+              <y>10</y>
+              <width>149</width>
+              <height>150</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>140</width>
+              <height>140</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>149</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgba(16, 26, 63,0.0);</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="imgs/imgs.qrc">:/imgs/first-aid-kit.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+           <widget class="QTextBrowser" name="textBrowser_3">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>50</y>
+              <width>180</width>
+              <height>100</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:transparent;
+font: 26pt &quot;Segoe MDL2 Assets&quot;;
+border:none
+</string>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe MDL2 Assets'; font-size:26pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#ffffff;&quot;&gt;Ofrecemos la máxima calidad en la prestación de tratamientos médicos, servicios sanitarios y unidades médicas.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+           <zorder>label_61</zorder>
+           <zorder>label_58</zorder>
+           <zorder>textBrowser_3</zorder>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_147">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>5</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QFrame" name="frameInst">
+           <property name="minimumSize">
+            <size>
+             <width>240</width>
+             <height>160</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>180</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgba(6, 12, 36,0.8)</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QLabel" name="label_59">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>20</y>
+              <width>179</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
+color:white;
+background-color:transparent;</string>
+            </property>
+            <property name="text">
+             <string>Comodidades</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_62">
+            <property name="geometry">
+             <rect>
+              <x>50</x>
+              <y>10</y>
+              <width>149</width>
+              <height>150</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>140</width>
+              <height>140</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>149</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgba(12, 18, 41,0.0);</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="imgs/imgs.qrc">:/imgs/hospital.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+           <widget class="QTextBrowser" name="textBrowser_4">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>50</y>
+              <width>180</width>
+              <height>100</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>180</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:transparent;
+font: 26pt &quot;Segoe MDL2 Assets&quot;;
+border:none
+</string>
+            </property>
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe MDL2 Assets'; font-size:26pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:11pt; color:#ffffff;&quot;&gt;Nos aseguramos de que nuestros huéspedes, ya sean pacientes o visitantes, tengan la mejor experiencia posible.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+           <zorder>label_62</zorder>
+           <zorder>label_59</zorder>
+           <zorder>textBrowser_4</zorder>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_144">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>80</y>
+          <width>521</width>
+          <height>133</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_57">
+         <item>
+          <widget class="QTextBrowser" name="textBrowser">
+           <property name="minimumSize">
+            <size>
+             <width>360</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>360</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color:transparent;
+font: 26pt &quot;Segoe MDL2 Assets&quot;;
+border:none
+</string>
+           </property>
+           <property name="html">
+            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe MDL2 Assets'; font-size:26pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:28pt; color:#ffffff;&quot;&gt;Soluciones al cuidado de tu salud&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_57">
+           <property name="styleSheet">
+            <string notr="true">color:white;
+font: 16pt &quot;MS Shell Dlg 2&quot;;</string>
+           </property>
+           <property name="text">
+            <string>Regístrate y accede a nuestros servicios y tratamientos.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </widget>
       <widget class="QWidget" name="page_login">
@@ -3170,7 +3659,7 @@ background-color:transparent;</string>
                       <x>0</x>
                       <y>0</y>
                       <width>230</width>
-                      <height>419</height>
+                      <height>160</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_22">
@@ -4031,7 +4520,7 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
+                    <width>48</width>
                     <height>20</height>
                    </rect>
                   </property>
@@ -4063,7 +4552,7 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
+                    <width>48</width>
                     <height>20</height>
                    </rect>
                   </property>
@@ -5238,7 +5727,7 @@ background-color:transparent</string>
                     <x>0</x>
                     <y>0</y>
                     <width>230</width>
-                    <height>278</height>
+                    <height>341</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -5417,7 +5906,7 @@ background -color: red;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
+                    <width>48</width>
                     <height>20</height>
                    </rect>
                   </property>
@@ -5967,7 +6456,7 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>45</width>
+                    <width>48</width>
                     <height>20</height>
                    </rect>
                   </property>
@@ -6245,8 +6734,8 @@ background-color:transparent;</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>354</width>
-                     <height>1114</height>
+                     <width>357</width>
+                     <height>1113</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_43">
@@ -6953,7 +7442,7 @@ border:none</string>
                  <x>0</x>
                  <y>0</y>
                  <width>202</width>
-                 <height>1092</height>
+                 <height>1082</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_45">
@@ -8390,7 +8879,7 @@ background-color:transparent</string>
                     <x>0</x>
                     <y>0</y>
                     <width>230</width>
-                    <height>80</height>
+                    <height>305</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_173">
@@ -8889,7 +9378,7 @@ color:white;</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>63</width>
+                 <width>66</width>
                  <height>20</height>
                 </rect>
                </property>
@@ -10224,7 +10713,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
+                        <width>464</width>
                         <height>20</height>
                        </rect>
                       </property>
@@ -10323,7 +10812,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>461</width>
+                        <width>464</width>
                         <height>20</height>
                        </rect>
                       </property>
@@ -11392,7 +11881,7 @@ background:transparent;
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>63</width>
+                 <width>66</width>
                  <height>20</height>
                 </rect>
                </property>
@@ -11991,7 +12480,7 @@ color: blue;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>27</width>
+                        <width>30</width>
                         <height>20</height>
                        </rect>
                       </property>
@@ -12219,8 +12708,8 @@ color: blue;</string>
        <widget class="QLabel" name="label_11">
         <property name="geometry">
          <rect>
-          <x>350</x>
-          <y>140</y>
+          <x>20</x>
+          <y>10</y>
           <width>101</width>
           <height>16</height>
          </rect>
@@ -12228,6 +12717,129 @@ color: blue;</string>
         <property name="text">
          <string>SERVICIOS</string>
         </property>
+       </widget>
+       <widget class="QScrollArea" name="scrollArea_14">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>30</y>
+          <width>871</width>
+          <height>471</height>
+         </rect>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_17">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>855</width>
+           <height>630</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_57">
+          <item>
+           <widget class="QLabel" name="foto1S">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>fOTO principal</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_16" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>250</height>
+             </size>
+            </property>
+            <widget class="QLabel" name="foto2S">
+             <property name="geometry">
+              <rect>
+               <x>640</x>
+               <y>20</y>
+               <width>201</width>
+               <height>211</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="tituloS">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>30</y>
+               <width>441</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Titulo</string>
+             </property>
+            </widget>
+            <widget class="QPlainTextEdit" name="info1">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>100</y>
+               <width>561</width>
+               <height>141</height>
+              </rect>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_17" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>200</height>
+             </size>
+            </property>
+            <widget class="QPlainTextEdit" name="lema">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>10</y>
+               <width>771</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPlainTextEdit" name="info2">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>70</y>
+               <width>771</width>
+               <height>121</height>
+              </rect>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="p_especi"/>
@@ -12355,7 +12967,7 @@ color: blue;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>63</width>
+             <width>66</width>
              <height>46</height>
             </rect>
            </property>
@@ -12483,22 +13095,5 @@ color: blue;</string>
  <resources>
   <include location="imgs/imgs.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>cb_servicios</sender>
-   <signal>activated(QString)</signal>
-   <receiver>pb_servicios</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>215</x>
-     <y>54</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>210</x>
-     <y>53</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

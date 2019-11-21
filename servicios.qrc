@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/fotoservi">
+        <file>hospifotos/hemodinamia1.png</file>
+        <file>hospifotos/hemodinamia2.jpg</file>
+        <file>hospifotos/hospitalizacion1.jpg</file>
+        <file>hospifotos/hospitalizacion2.jpg</file>
+        <file>hospifotos/quirofano1.jpeg</file>
+        <file>hospifotos/quirofano2.jpeg</file>
+        <file>hospifotos/terapia1.jpg</file>
+        <file>hospifotos/terapia2.jpg</file>
+        <file>hospifotos/urgencias1.jpg</file>
+        <file>hospifotos/urgencias2.jpg</file>
+    </qresource>
+</RCC>
