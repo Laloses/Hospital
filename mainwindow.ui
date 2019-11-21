@@ -626,7 +626,7 @@ border:none
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: #28356b;</string>
+            <string notr="true">background: rgba(40, 53, 107,0.8)</string>
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
@@ -656,7 +656,8 @@ border:none
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-image: url(:/imgs/bed.png);</string>
+             <string notr="true">background-image: url(:/imgs/bed.png);
+background-color: rgba(44, 56, 110,0.0);</string>
             </property>
             <property name="text">
              <string/>
@@ -672,7 +673,7 @@ border:none
             <property name="geometry">
              <rect>
               <x>30</x>
-              <y>50</y>
+              <y>60</y>
               <width>180</width>
               <height>100</height>
              </rect>
@@ -754,7 +755,8 @@ background-color:transparent;</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: #0b153f;</string>
+            <string notr="true">background-color: rgba(10, 20, 59,0.8)
+</string>
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
@@ -800,6 +802,9 @@ background-color:transparent;</string>
               <width>149</width>
               <height>150</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgba(16, 26, 63,0.0);</string>
             </property>
             <property name="text">
              <string/>
@@ -882,7 +887,7 @@ p, li { white-space: pre-wrap; }
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color:#060c24;</string>
+            <string notr="true">background-color: rgba(6, 12, 36,0.8)</string>
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
@@ -928,6 +933,9 @@ background-color:transparent;</string>
               <width>149</width>
               <height>150</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgba(12, 18, 41,0.0);</string>
             </property>
             <property name="text">
              <string/>
