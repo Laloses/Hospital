@@ -23,6 +23,8 @@ private slots:
 
     void on_pb_valores_clicked();
 
+    void on_pb_calidad_clicked();
+
 private:
     Ui::InfoHospital *ui;
     QString bienvenida, mision,valores, calidad;
