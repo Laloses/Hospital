@@ -575,22 +575,18 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 
 void MainWindow::ocultarMenuP(){
     //ui->pb_servicios->setHidden(true);
-    ui->pushButton_especialidades->setHidden(true);
     ui->pushButton_infoHospital->setHidden(true);
     ui->pushButton__dirMedico->setHidden(true);
     ui->line->setHidden(true);
-    ui->line_2->setHidden(true);
     ui->line_3->setHidden(true);
     ui->line_8->setHidden(true);
 }
 
 void MainWindow::mostrarMenuP(){
     //ui->pb_servicios->setHidden(false);
-    ui->pushButton_especialidades->setHidden(false);
     ui->pushButton_infoHospital->setHidden(false);
     ui->pushButton__dirMedico->setHidden(false);
     ui->line->setHidden(false);
-    ui->line_2->setHidden(false);
     ui->line_3->setHidden(false);
     ui->line_8->setHidden(false);
 }
