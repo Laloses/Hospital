@@ -238,6 +238,8 @@ private slots:
 
     void info_ser(QString);
 
+    void on_pb_adminServicios_clicked();
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
