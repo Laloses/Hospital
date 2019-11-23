@@ -69,6 +69,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tv_listaDocCitas->horizontalHeader()->setHidden(false);
     ui->pb_urg->setHidden(true);
     ui->nofi_2->hide();
+
+
+    ui->cb_servicios->clear();
+    ui->cb_servicios->addItem("SERVICIOS");
+
+    QString ser1;
+    QSqlQuery ser2;
+    ser1="select *from Servicios";
+    ser2.exec(ser1);
+    while(ser2.next())
+    {
+        ui->cb_servicios->addItem(ser2.value(1).toString());
+    }
+
+    ui->stackedWidget_principal->setCurrentIndex(0);
+
+
+
 }
 
 MainWindow::~MainWindow()
@@ -6704,7 +6722,14 @@ void MainWindow::info_ser(QString tipo)
     ui->foto1S->clear();
     ui->foto2S->clear();
 
+    if(tipo=="SERVICIOS")
+    {
+
+    }else
+    {
+
     QString bus,titulo,info1,lema,info2;
+    QByteArray img1,img2;
     QSqlQuery bus1;
 
     bus="select *from Servicios where nombreS='"+tipo+"'; ";
@@ -6716,22 +6741,18 @@ void MainWindow::info_ser(QString tipo)
     info1=bus1.value(2).toString();
     lema=bus1.value(3).toString();
     info2=bus1.value(4).toString();
+    img1=bus1.value(5).toByteArray();
+    img2=bus1.value(6).toByteArray();
 
     ui->tituloS->setText(titulo);
     ui->info1->setPlainText(info1);
     ui->lema->setPlainText(lema);
     ui->info2->setPlainText(info2);
 
-    QString foto1,foto2;
-
-
-    if(tipo=="URGENCIAS")
-    {
-
-           foto1=":/fotoservi/hospifotos/urgencias1.jpg";
-           foto2=":/fotoservi/hospifotos/urgencias2.jpg";
-            QPixmap f1(foto1);
-            QPixmap f2(foto2);
+            QPixmap f1;
+            QPixmap f2;
+            f1.loadFromData(img1);
+            f2.loadFromData(img2);
 
             int a=ui->foto1S->height();
             int b=ui->foto1S->width();
@@ -6741,73 +6762,9 @@ void MainWindow::info_ser(QString tipo)
            ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
             ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
 
-    }
-    else if(tipo=="QUIROFANOS")
-    {
-
-        foto1=":/fotoservi/hospifotos/quirofano1.jpeg";
-        foto2=":/fotoservi/hospifotos/quirofano2.jpeg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
-    else if(tipo=="TERAPIA INTENSIVA")
-    {
-        foto1=":/fotoservi/hospifotos/terapia1.jpg";
-        foto2=":/fotoservi/hospifotos/terapia2.jpg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
-    else if(tipo=="HOSPITALIZACION")
-    {
-        foto1=":/fotoservi/hospifotos/hospitalizacion1.jpg";
-        foto2=":/fotoservi/hospifotos/hospitalizacion2.jpg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
-    else if(tipo=="HEMODINAMIA")
-    {
-        foto1=":/fotoservi/hospifotos/hemodinamia1.png";
-        foto2=":/fotoservi/hospifotos/hemodinamia2.jpg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
 
 
-
-
-
+}
 }
 
 
