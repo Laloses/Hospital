@@ -26,6 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    administrarservicios.cpp \
         agregarUrgencia.cpp \
         agregaractividaddoctor.cpp \
         agregarcitaspaciente.cpp \
@@ -53,6 +54,7 @@ SOURCES += \
     verPermisosLaborales.cpp
 
 HEADERS += \
+    administrarservicios.h \
         agregarUrgencia.h \
         agregaractividaddoctor.h \
         agregarcitaspaciente.h \
@@ -79,6 +81,7 @@ HEADERS += \
     verPermisosLaborales.h
 
 FORMS += \
+    administrarservicios.ui \
         agregarUrgencia.ui \
         agregaractividaddoctor.ui \
         agregarusuario.ui \

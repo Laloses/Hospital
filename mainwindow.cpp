@@ -20,6 +20,7 @@
 #include "dialogdoctor.h"
 #include "permisoLaboral.h"
 #include "verPermisosLaborales.h"
+#include "administrarservicios.h"
 
 
 
@@ -6823,4 +6824,10 @@ void MainWindow::on_cb_servicios_currentTextChanged(const QString &arg1)
        info_ser(arg1);
        ui->cb_servicios->setCurrentIndex(0);
     }
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    AdministrarServicios* serv = new AdministrarServicios(this);
+    serv->show();
 }
