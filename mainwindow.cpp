@@ -6826,7 +6826,7 @@ void MainWindow::on_cb_servicios_currentTextChanged(const QString &arg1)
     }
 }
 
-void MainWindow::on_pushButton_7_clicked()
+void MainWindow::on_pb_adminServicios_clicked()
 {
     AdministrarServicios* serv = new AdministrarServicios(this);
     serv->show();
