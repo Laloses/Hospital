@@ -36,5 +36,6 @@
         <file>bed.png</file>
         <file>first-aid-kit.png</file>
         <file>hospital.png</file>
+        <file>picture.png</file>
     </qresource>
 </RCC>
