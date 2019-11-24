@@ -522,7 +522,7 @@ border:none
 }</string>
       </property>
       <property name="currentIndex">
-       <number>10</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -10959,8 +10959,8 @@ QScrollArea{background:rgba(255,255,255,0.8)}</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>387</width>
-                    <height>419</height>
+                    <width>20</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
@@ -12074,8 +12074,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>24</width>
-                          <height>24</height>
+                          <width>20</width>
+                          <height>20</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -12208,8 +12208,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>24</width>
-                          <height>24</height>
+                          <width>20</width>
+                          <height>20</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
@@ -13696,7 +13696,7 @@ background:rgba(255,255,255,0.8)</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">background:rgba(255,255,255,0.5)</string>
+           <string notr="true">background:rgba(255,255,255,0.0)</string>
           </property>
           <property name="widgetResizable">
            <bool>true</bool>
@@ -13706,7 +13706,7 @@ background:rgba(255,255,255,0.8)</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>818</width>
+             <width>851</width>
              <height>610</height>
             </rect>
            </property>
@@ -13988,6 +13988,9 @@ border:none;</string>
               <height>0</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Buscar</string>
             </property>
@@ -14011,7 +14014,7 @@ border:none;</string>
         <item>
          <widget class="QScrollArea" name="sa_doctores">
           <property name="styleSheet">
-           <string notr="true">background:rgba(255,255,255,0.5)</string>
+           <string notr="true">background:transparent;</string>
           </property>
           <property name="widgetResizable">
            <bool>true</bool>
@@ -14021,8 +14024,8 @@ border:none;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>65</width>
-             <height>46</height>
+             <width>868</width>
+             <height>449</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_46">
@@ -14040,6 +14043,9 @@ border:none;</string>
                 <height>50</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
              </widget>
             </item>
             <item>
@@ -14055,6 +14061,10 @@ border:none;</string>
        <layout class="QVBoxLayout" name="verticalLayout_35">
         <item>
          <widget class="QScrollArea" name="sa_infoHospi">
+          <property name="styleSheet">
+           <string notr="true">
+background:transparent;</string>
+          </property>
           <property name="horizontalScrollBarPolicy">
            <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
@@ -14170,7 +14180,7 @@ border:none;</string>
              <x>0</x>
              <y>0</y>
              <width>868</width>
-             <height>449</height>
+             <height>400</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_13">
