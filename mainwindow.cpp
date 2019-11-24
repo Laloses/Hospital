@@ -6863,6 +6863,12 @@ void MainWindow::on_pushButton_5_clicked()
 
 void MainWindow::on_pushButton_infoHospital_clicked()
 {
+    if( (!ui->layInfoHospi->takeAt(0)) ){
+        InfoHospital* info = new InfoHospital(this);
+        ui->layInfoHospi->addWidget(info);
+        info->show();
+    }
+    ui->stackedWidget_principal->setCurrentIndex(9);
 }
 
 void MainWindow::info_ser(QString tipo)
