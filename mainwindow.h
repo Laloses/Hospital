@@ -43,7 +43,6 @@ private:
     QString imgRoute,matric,idremedios,idtip,idtipeditar;
     QSqlQuery *datosPac, *datosDoc, *datosStaff, *datosUser ,d;
     QString concolor;
-    tipdeldia *tip;
     int UserTipo;
     bool verificarPasswordRegistro();
     QString calcularEdad(QString);

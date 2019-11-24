@@ -510,7 +510,7 @@ border:none
 }</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -3642,8 +3642,8 @@ background-color:transparent;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>198</width>
-                      <height>28</height>
+                      <width>226</width>
+                      <height>318</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_22">
@@ -4629,8 +4629,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>840</width>
+                    <height>412</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_52">
@@ -5856,8 +5856,8 @@ background-color:transparent</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>226</width>
+                    <height>337</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_48">
@@ -6019,8 +6019,8 @@ border:none;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>100</width>
-                    <height>30</height>
+                    <width>35</width>
+                    <height>24</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_19">
@@ -6569,8 +6569,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>33</width>
+                    <height>24</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_37">
@@ -7898,8 +7898,8 @@ border:none</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>176</width>
+                    <height>76</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_52">
@@ -9154,8 +9154,8 @@ background-color:transparent</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>98</width>
-                     <height>28</height>
+                     <width>226</width>
+                     <height>334</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_173">
@@ -9415,8 +9415,8 @@ border:none;</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>100</width>
-                     <height>30</height>
+                     <width>813</width>
+                     <height>306</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayout_77">
@@ -9610,8 +9610,8 @@ border:none;</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>100</width>
-                  <height>30</height>
+                  <width>849</width>
+                  <height>333</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_55">
@@ -10256,8 +10256,8 @@ border:none;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>100</width>
-                      <height>30</height>
+                      <width>405</width>
+                      <height>374</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_14">
@@ -10928,8 +10928,8 @@ background:transparent;
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>387</width>
+                    <height>419</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
@@ -11204,7 +11204,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                         <x>0</x>
                         <y>0</y>
                         <width>478</width>
-                        <height>28</height>
+                        <height>354</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_23">
@@ -11302,8 +11302,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>478</width>
-                        <height>28</height>
+                        <width>457</width>
+                        <height>24</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_21">
@@ -11756,8 +11756,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>98</width>
-                          <height>28</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -11890,8 +11890,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>98</width>
-                          <height>28</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
@@ -12005,8 +12005,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>98</width>
-                          <height>28</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -12180,8 +12180,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>98</width>
-                          <height>28</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">
@@ -12379,8 +12379,8 @@ border:none;</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>100</width>
-                 <height>30</height>
+                 <width>864</width>
+                 <height>435</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_37">
@@ -13059,8 +13059,8 @@ border:none;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>100</width>
-                        <height>30</height>
+                        <width>820</width>
+                        <height>391</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_60">
@@ -13206,8 +13206,8 @@ border:none;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>98</width>
-                        <height>28</height>
+                        <width>393</width>
+                        <height>336</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_62">
@@ -13654,8 +13654,8 @@ border:none;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>77</width>
-             <height>51</height>
+             <width>862</width>
+             <height>442</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_46">
@@ -13699,8 +13699,8 @@ border:none;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>28</height>
+             <width>862</width>
+             <height>481</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="layInfoHospi"/>
@@ -13800,7 +13800,7 @@ border:none;</string>
              <x>0</x>
              <y>0</y>
              <width>866</width>
-             <height>398</height>
+             <height>442</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_13">

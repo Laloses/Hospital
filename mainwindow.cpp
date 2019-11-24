@@ -944,10 +944,10 @@ void MainWindow::on_pushButton_miPerfil_clicked()
 //Cuando el usuario le da clic para ver su tip del día
 void MainWindow::on_pushButton_tip_clicked()
 {
-      tip= new tipdeldia(this);
-      tip->mostrarTip();
-      tip->setModal(true);
-      tip->show();
+    static tipdeldia tip(this);
+      tip.mostrarTip();
+      tip.setModal(true);
+      tip.show();
 }
 
 //Funcion para cargar los datos en el perfil del usuario

@@ -51,6 +51,8 @@ void tipdeldia::mostrarTip(){
     query.lastError().text();
     ui->label_nombretip->setText(nombretip);
     ui->label_descripcion->setText(descripcion);
+
+
 }
 //metodo que copia la direcion de una url que se encuentra en la base de datos
 void tipdeldia::on_pushButton_link_clicked()
