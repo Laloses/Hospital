@@ -4,23 +4,20 @@
 #include "ordenarintervencion.h"
 #include "ordenarestudios.h"
 #include "pagointervenciones.h"
-#include "editarusuario.h"
-#include "cambiarcontrasenia.h"
 #include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QSignalMapper>
 #include <QTimer>
 #include <QDate>
+
+
 #include <QFileDialog>
 #include <QFile>
 #include <QFileSystemModel>
 #include <QPrinter>
 #include "remedios.h"
 #include "dialogdoctor.h"
-#include "permisoLaboral.h"
-#include "verPermisosLaborales.h"
-#include "administrarservicios.h"
 
 
 
@@ -493,70 +490,6 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 
             id_staff=lo.getIdStaff();
             id_usuario=lo.getIdUser();
-
-            //esto lo puse para habilitar las notificaciones
-            verNoti=1;
-            ui->nofi_staff->hide();
-
-            QString busca;
-            busca="select *from notificacion where UserP='"+id_usuario+"'";
-            QSqlQuery buscarNoti;
-            buscarNoti.exec(busca);
-
-            int contadorNoti=0;
-            int filas=0;
-
-            while(buscarNoti.next())
-            {
-                QString nueva;
-                nueva=buscarNoti.value(4).toString();
-                qDebug()<<"ya se vio: "<<nueva;
-                if(nueva=="0")
-                {
-
-                    contadorNoti++;
-                }
-            }
-
-            while(buscarNoti.previous()){
-                if(buscarNoti.value(1).toString()=="1")
-                {
-
-                    QPlainTextEdit *b=new QPlainTextEdit();
-                    // QPushButton *b=new QPushButton();
-                    b->setPlainText(buscarNoti.value(2).toString());
-                    b->setFixedSize(QSize(200,50));
-                    b->setStyleSheet("background-color: rgb(151,240,104); ");
-                    ui->barraDeNoti_5->addWidget(b,filas,0,Qt::AlignTop);
-                    filas++;
-                }else
-                {
-
-                    QPlainTextEdit *b=new QPlainTextEdit();
-                    //QPushButton *b=new QPushButton();
-                    b->setPlainText(buscarNoti.value(2).toString());
-                    b->setFixedSize(QSize(200,50));
-                    b->setStyleSheet("background-color: rgb(243,173,106); ");
-                    ui->barraDeNoti_5->addWidget(b,filas,0,Qt::AlignTop);
-                    filas++;
-                }
-            }
-
-            QString num=QString::number(contadorNoti);
-            qDebug()<<"este numero conte"<<num;
-            if(num=="0")
-            {
-                qDebug()<<"no encontre nada";
-                ui->notiStaff->hide();
-            }
-            else
-            {
-                qDebug()<<"encontre algo";
-                ui->notiStaff->setStyleSheet("background-color:red; border:solid 1px red; border-radius:500px; color: white;");
-                ui->notiStaff->setText(num);
-                ui->notiStaff->show();
-            }
-
             on_pushButton_miPerfil_clicked();
 
         }
@@ -575,19 +508,23 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
 }
 
 void MainWindow::ocultarMenuP(){
-    //ui->pb_servicios->setHidden(true);
+    ui->pb_servicios->setHidden(true);
+    ui->pushButton_especialidades->setHidden(true);
     ui->pushButton_infoHospital->setHidden(true);
     ui->pushButton__dirMedico->setHidden(true);
     ui->line->setHidden(true);
+    ui->line_2->setHidden(true);
     ui->line_3->setHidden(true);
     ui->line_8->setHidden(true);
 }
 
 void MainWindow::mostrarMenuP(){
-    //ui->pb_servicios->setHidden(false);
+    ui->pb_servicios->setHidden(false);
+    ui->pushButton_especialidades->setHidden(false);
     ui->pushButton_infoHospital->setHidden(false);
     ui->pushButton__dirMedico->setHidden(false);
     ui->line->setHidden(false);
+    ui->line_2->setHidden(false);
     ui->line_3->setHidden(false);
     ui->line_8->setHidden(false);
 }
@@ -931,7 +868,6 @@ void MainWindow::on_pushButton_tip_clicked()
 {
     static tipdeldia tip(this);
       tip.mostrarTip();
-      tip.setModal(true);
       tip.show();
 }
 
@@ -960,7 +896,6 @@ void MainWindow::cargarDatosUsuarios(){
             ui->btnMostrarContrasena_6->setHidden(true);
             ui->btnCancelarEditarPaciente->setHidden(true);
             ui->btnGuardarEditarPaciente->setHidden(true);
-            ui->pb_bajaPaciente->hide();
         }
         if(id_doctor!="0"){
             //Nombre
@@ -999,7 +934,6 @@ void MainWindow::cargarDatosUsuarios(){
             ui->btnMostrarContrasena_4->setHidden(true);
             ui->btnCancelarEditarDoctor->setHidden(true);
             ui->btnGuardarEditarDoctor->setHidden(true);
-            ui->pb_bajaDoctor->hide();
         }
         if(id_staff!="0"){
             //datos staff ----------------------------
@@ -1024,9 +958,6 @@ void MainWindow::cargarDatosUsuarios(){
             ui->btnMostrarContrasena_2->setHidden(true);
             ui->btnCancelarEditarStaff->setHidden(true);
             ui->btnGuardarEditarStaff->setHidden(true);
-            ui->pushButton_5->hide();
-            ui->pushButton_6->show();
-
         }
 }
 
@@ -1298,7 +1229,7 @@ void MainWindow::on_pushButton_AceptarSoli_clicked()
 }
 
 //----------------------------------------------------------------------------
-//metodo para mostrar areas de trabajo
+//metodo para mostrar arias de trabajo
 void MainWindow::mostrarZonas(){
     QSqlQueryModel *queryPuestos;
     queryPuestos= new QSqlQueryModel;
@@ -2272,7 +2203,6 @@ void MainWindow::on_horaCita_activated(const QString &arg1)
 {
         on_btnBuscarDoctor_clicked();
 }
-
 void MainWindow::SolicitudCitas()
 {
     QString citas,est,idD,idD2;
@@ -2452,7 +2382,7 @@ void MainWindow::aceptarCita(QString folio)
     }
 
 }
-//MENSAJE SI EL DOCTOR RECHAZA UNA CITA DE PACIENTE
+
 void MainWindow::rechazarCita(QString folio)
 {
     QMessageBox message(QMessageBox::Question,
@@ -2569,7 +2499,7 @@ void MainWindow::on_regresar_citasDoc_clicked()
     ui->pushButton_horarioDoc->show();
     ui->pushButton_citasDoc->show();
 }
-//BOTON DE NOTIFICACIONES QUE TIENE EL PACIENTE
+
 void MainWindow::on_butonNotifi_clicked()
 {
     ui->stackedWidget_perfilPaciente->setCurrentIndex(0);
@@ -2623,7 +2553,6 @@ void MainWindow::on_btnEditarStaff_clicked()
     ui->btnMostrarContrasena_2->setHidden(false);
     ui->lineContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
     ui->lineConfirmaContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
-    ui->pushButton_5->show();
 }
 
 void MainWindow::on_btnCancelarEditarStaff_clicked()
@@ -2643,7 +2572,6 @@ void MainWindow::on_btnCancelarEditarStaff_clicked()
     ui->btnMostrarContrasena_2->setHidden(true);
     ui->lineContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
     ui->lineConfirmaContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-    ui->pushButton_5->hide();
 }
 
 void MainWindow::on_btnGuardarEditarStaff_clicked()
@@ -2701,7 +2629,6 @@ void MainWindow::on_btnGuardarEditarStaff_clicked()
                 ui->btnGuardarEditarStaff->setHidden(true);
                 ui->lineContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContrasenia->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-                ui->pushButton_5->hide();
             }
         }
     }
@@ -3375,7 +3302,13 @@ void MainWindow::CancelarCita(QString folio)
 
         clearLayout(ui->citasAceptadas);
         CitasAceptadas();
+
+
+
+
     }
+    //else
+    //{}
 }
 
 void MainWindow::on_btnEditarDoctor_clicked()
@@ -3397,7 +3330,6 @@ void MainWindow::on_btnEditarDoctor_clicked()
     ui->btnMostrarContrasena_4->setHidden(false);
     ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
     ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
-    ui->pb_bajaDoctor->show();
 }
 
 void MainWindow::on_btnCancelarEditarDoctor_clicked()
@@ -3417,7 +3349,6 @@ void MainWindow::on_btnCancelarEditarDoctor_clicked()
     ui->btnMostrarContrasena_4->setHidden(true);
     ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
     ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-    ui->pb_bajaDoctor->hide();
 }
 
 void MainWindow::on_btnGuardarEditarDoctor_clicked()
@@ -3475,7 +3406,6 @@ void MainWindow::on_btnGuardarEditarDoctor_clicked()
                 ui->btnGuardarEditarDoctor->setHidden(true);
                 ui->lineContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContraseniaDoc->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-                ui->pb_bajaDoctor->hide();
                 on_pushButton_miPerfil_clicked();
             }
         }
@@ -3540,7 +3470,6 @@ void MainWindow::on_btnEditarPaciente_clicked()
     ui->btnMostrarContrasena_6->setHidden(false);
     ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
     ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border-top:none; border-bottom: 1px solid #5d80b6; background-color:transparent");
-    ui->pb_bajaDoctor->show();
 }
 
 void MainWindow::on_btnCancelarEditarPaciente_clicked()
@@ -3560,7 +3489,6 @@ void MainWindow::on_btnCancelarEditarPaciente_clicked()
     ui->btnMostrarContrasena_6->setHidden(true);
     ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
     ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-    ui->pb_bajaDoctor->hide();
 }
 
 void MainWindow::on_btnGuardarEditarPaciente_clicked()
@@ -3619,7 +3547,6 @@ void MainWindow::on_btnGuardarEditarPaciente_clicked()
                 ui->btnGuardarEditarPaciente->setHidden(true);
                 ui->lineContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
                 ui->lineConfirmaContraseniaPaciente->setStyleSheet("font: 15pt MS Shell Dlg 2; border:none;background-color:transparent;");
-                ui->pb_bajaDoctor->hide();
                 on_pushButton_miPerfil_clicked();
             }
         }
@@ -3664,7 +3591,7 @@ void MainWindow::on_btnMostrarContrasena_6_clicked()
         toggleVision1 = 0;
     }
 }
-//MENSAJE DE CANCELACION DE CITA POR PARTE DE UN PACINETE
+
 void MainWindow::PonerCitas(QString folio){
     QString consulta;
     QSqlQuery query;
@@ -3682,7 +3609,7 @@ void MainWindow::PonerCitas(QString folio){
         if (messageBox.exec() == QMessageBox::Yes){
             QString fech,hor,tipo;
             QString cita,user1;
-            cita="select *from  cita where idCita='"+folio+"'";
+            cita="select *from  cita where idCita='"+folio+"';  ";
             QSqlQuery cita1;
             cita1.exec(cita);
             cita1.next();
@@ -3927,7 +3854,7 @@ void MainWindow::on_pushButton_Cancelar_Cita_clicked()
     clearLayout(ui->pagoIntervenciones);
     mostrarCitas();
 }
-//BOTON DE NOTIFICACIONES QUE TIENE EL DOCTOR
+
 void MainWindow::on_butonNotifi_4_clicked()
 {
     ui->stackedWidget_perfilDoctor->setCurrentIndex(0);
@@ -4826,82 +4753,58 @@ void MainWindow::PonerCuarto(QString num)
 void MainWindow::CuartosDisponibles(QDate inicio,QDate fin)
 {
     clearLayout(ui->cuartos);
-        QString cuarto;
-        QSqlQuery cuarto1;
-        cuarto="select *from Cuarto";
-        cuarto1.exec(cuarto);
-        int r=0;
-        int c=0;
-        while(cuarto1.next())
+    QString cuarto;
+    QSqlQuery cuarto1;
+    cuarto="select *from Cuarto";
+    cuarto1.exec(cuarto);
+    int r=0;
+    int c=0;
+    while(cuarto1.next())
+    {
+        QString reservado,idCuarto;
+        idCuarto=cuarto1.value(0).toString();
+
+        QSqlQuery reservado1;
+        reservado="select fecha_llega,fecha_salida from Estancia where idCuarto='"+idCuarto+"'; ";
+        reservado1.exec(reservado);
+        qDebug()<<reservado;
+        bool libre=true;
+        while(reservado1.next())
         {
-            QString reservado,idCuarto,numCuarto;
-            idCuarto=cuarto1.value(0).toString();
-            numCuarto=cuarto1.value(1).toString();
+            QDate in,fi;
+            in=reservado1.value(0).toDate();
+            fi=reservado1.value(1).toDate();
 
-            QSqlQuery reservado1;
-            reservado="select fecha_llega,fecha_salida from Estancia where idCuarto='"+idCuarto+"'; ";
-            reservado1.exec(reservado);
-            qDebug()<<reservado;
-            bool libre=true;
-
-
-            while(reservado1.next())
+            if(inicio>in)
             {
-                QDate in,fi;
-                in=reservado1.value(0).toDate();
-                fi=reservado1.value(1).toDate();
 
-                if(inicio>in)
+                if(inicio>fi)
                 {
 
-                    if(inicio>fi)
-                    {
-
-                        libre=true;
-                        break;
-                    }
-                    else
-                    {
-
-                        libre=false;
-
-                        break;
-                    }
+                    libre=true;
+                    break;
                 }
                 else
                 {
 
-                 if(fin<in)
-                 {
+                    libre=false;
 
-                    libre=true;
                     break;
-                 }
                 }
-
             }
-            //aqui va
-            if(libre==true)
+            else
             {
-                QPushButton* cuartoo = new QPushButton();
-                cuartoo->setText(numCuarto);
-                cuartoo->setFixedSize(60, 40);
 
-                QSignalMapper *mapper1=new QSignalMapper(this);
-                connect(cuartoo,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
-                mapper1->setMapping(cuartoo,numCuarto);
-                connect(mapper1,SIGNAL(mapped(QString)),this,SLOT(PonerCuarto(QString)));
-                ui->cuartos->addWidget(cuartoo,r,c,1,1);
-                c++;
-                if(c==3)
-                {
-                    r++;
-                    c=0;
-                }
+             if(fin<in)
+             {
+
+                libre=true;
+                break;
+             }
             }
         }
+    }
 }
-
 void MainWindow::on_pushButton_horarioDoc_2_clicked()
 {
      ui->stackedWidget_PerfilStaff->setCurrentIndex(1);
@@ -5192,33 +5095,38 @@ void MainWindow::pagarUrgenciasV(QString folio)
     //parte para generar datos de pdf//
     QSqlQuery user,fecha,doc,usuarionoti,fol,datosacomp;
     QString html,d,nombrePac,fechaPago,nombreDoc,fechaCita,usernoti,id_doc,horaEmer,descripcion,total,nombreacomp,telacomp,
-            parentezcoacomp,direccionacomp;
-    user.exec("select ur.idEmergencia,ur.idDoctor,us.nombre,us.appaterno,us.apmaterno,ur.nombre_pacinete,ur.hora,ur.fecha,ur.Causas from usuario as "
-              "us inner join doctor as doc on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor;");
-    user.next();
+            parentezcoacomp,direccionacomp,estado;
+
     fecha.exec("select CURRENT_DATE()");
     fecha.next();
+
     doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc "
              "on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor ;");
     doc.next();
     datosacomp.exec("select nombre,telefono,parentescos,direcion from acompanante where idEmergencia="+folio+"");
     datosacomp.next();
 
+    fol.exec("select ur.idEmergencia,us.nombre,us.appaterno,us.apmaterno,ur.nombre_pacinete,ur.hora,ur.fecha,ur.Causas from usuario as "
+             "us inner join doctor as doc on us.matricula=doc.idUser inner join urgencias as ur on ur.idEmergencia='"+folio+"'");
+    fol.next();
 
-    nombrePac=user.value(5).toString();
+    folio=fol.value(0).toString();
+
+    nombrePac=fol.value(4).toString();
     fechaPago=fecha.value(0).toString();
-    nombreDoc=doc.value(0).toString();
-    fechaCita=user.value(7).toString();
-    folio=user.value(0).toString();
-    id_doc=user.value(1).toString();
-    horaEmer=user.value(6).toString();
-    descripcion=user.value(8).toString();
+    nombreDoc=fol.value(1).toString() + " " + fol.value(2).toString() + " " + fol.value(3).toString();
+    fechaCita=fol.value(6).toString();
+    horaEmer=fol.value(5).toString();
+    descripcion=fol.value(7).toString();
+
+    estado="1";
     total="15320";
     nombreacomp=datosacomp.value(0).toString();
     telacomp=datosacomp.value(1).toString();
     parentezcoacomp=datosacomp.value(2).toString();
     direccionacomp=datosacomp.value(3).toString();
-    //termina parte de generar datos de pdf//
+
+    qDebug()<<folio;
 
     //inicia parte para actualizar pago y enviar notificacion//
     QMessageBox message(QMessageBox::Question,
@@ -5231,13 +5139,14 @@ void MainWindow::pagarUrgenciasV(QString folio)
     QSqlQuery update,insert,mandarNoti;
     QString mensaj,tipo,cita,user1,notificacion;
 
-    if(insert.exec("insert into pagoUrgencia(fecha,hora,total,nombrePac,idEmergencia) "
-                   "value('"+fechaPago+"','"+horaEmer+"',"+total+",'"+nombrePac+"',"+folio+")"))
+    if(insert.exec("insert into pagoUrgencia(fecha,hora,total,nombrePac,idEmergencia,estadoPago) "
+                   "value('"+fechaPago+"','"+horaEmer+"',"+total+",'"+nombrePac+"',"+folio+","+estado+")"))
     {
             insert.next();
             qDebug()<<folio;
             qDebug()<<"pago efectuado";
-
+            clearLayout(ui->pagosConfirmados);
+            on_radioButton_4_clicked();
 
              //inicia parte para generar pdf de pago"
              QMessageBox message(QMessageBox::Question,
@@ -5365,7 +5274,7 @@ void MainWindow::verSoliEstancia()
 {
     clearLayout(ui->estanciaPa);
     QString folio,idDoc,idPa,fechaInter,idSeQ,SoliEst;
-    SoliEst="select se.idSoli,se.idDoctor,se.idPaciente,se.fechaIntervencion,idCitaQ from CitasQuirofano as cq inner join SoliEstancia as se on cq.idCita=se.idCitaQ where cq.estado='Pendiente'";
+    SoliEst="select * from SoliEstancia;";
     QSqlQuery soli;
     soli.exec(SoliEst);
     int r=0;
@@ -5408,8 +5317,8 @@ void MainWindow::verSoliEstancia()
         folio=soli.value(0).toString();
         idDoc=soli.value(1).toString();
         idPa=soli.value(2).toString();
-        fechaInter=soli.value(3).toString();
-        idSeQ=soli.value(4).toString();
+        fechaInter=soli.value(4).toString();
+        idSeQ=soli.value(6).toString();
 
         QLabel *folio1 = new QLabel;
         folio1->setAlignment(Qt::AlignCenter);
@@ -5515,9 +5424,6 @@ void MainWindow::on_agregarCuarto_clicked()
     QSqlQuery del1;
     del="delete from SoliEstancia where idSoli='"+idSolicitudEstancia+"'; ";
     del1.exec(del);
-    QSqlQuery query2;
-    query2.exec("update CitasQuirofano as cq inner join Estancia as e on cq.idCita=e.idCitaQ set estado='Completa' where cq.idCita='"+idSoliQuirofano+"'");
-    query2.next();
     verSoliEstancia();
     informacion.setWindowTitle("Informacion");
     informacion.setText ("EL proceso se ejecuto correctamente");
@@ -5841,26 +5747,32 @@ void MainWindow::pagarIntervencion(QString folio)
     fecha.exec("select CURRENT_DATE()");
     fecha.next();
 
-    doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc "
-             "on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor ;");
-    doc.next();
-
 
     pago.exec("select inter.idCita,cs.idCitaQ,cs.Subtotal,cs.total,cs.importeIva from citasQuirofano as "
-              "inter inner join CostoServicio as cs on inter.idCita=cs.idCitaQ where idCitaQ="+folio+"");
+              "inter inner join CostoServicio as cs on inter.idCita=cs.idCitaQ where inter.idCita="+folio+"");
     pago.next();
 
+    fol.exec("select inter.idCita,us.matricula,inter.fechaCita,inter.horaInicio,inter.descripcion from usuario as  us inner join paciente as p "
+           "on us.matricula=p.idUser inner join citasQuirofano as inter on inter.idCita='"+folio+"'");
+    fol.next();
 
-    nombredc=user.value(6).toString();
+    doc.exec("select inter.idCita,us.matricula,inter.fechaCita,inter.horaInicio,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as  us "
+             " inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on inter.idCita='"+folio+"'");
+    doc.next();
+
+    nombredc=doc.value(5).toString();
+    fechaCita=fol.value(3).toString();
+    folio=fol.value(0).toString();
     fechaPago=fecha.value(0).toString();
     nombrePac=paciente.value(6).toString();
-    fechaCita=user.value(4).toString();
-    folio=user.value(0).toString();
-    horaEmer=user.value(3).toString();
-    descripcion=user.value(5).toString();
+    horaEmer=fol.value(3).toString();
+    descripcion=fol.value(4).toString();
     total=pago.value(3).toString();
     iva=pago.value(4).toString();
     subtotal=pago.value(2).toString();
+
+
+    qDebug()<<folio;
 
 
     //termina parte de generar datos de pdf//
@@ -5888,6 +5800,9 @@ void MainWindow::pagarIntervencion(QString folio)
              message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
              message.setButtonText(QMessageBox::No, tr("Cancelar"));
              if (message.exec() == QMessageBox::Yes){
+
+
+
 
                  html=
                          "<H1 align=center> Comprobante de pago </H1>"
@@ -5945,6 +5860,8 @@ void MainWindow::pagarIntervencion(QString folio)
 
              //termina parte para generar pdf//
 
+             clearLayout(ui->pagosConfirmados);
+             on_radioButton_2_clicked();
 
         }else
         {
@@ -5954,6 +5871,7 @@ void MainWindow::pagarIntervencion(QString folio)
               }else
                {
             }
+
 }
 
 void MainWindow::actTablaInter()
@@ -5967,57 +5885,10 @@ void MainWindow::actTablaInter()
     on_pushButton_intervenciones_clicked();
 
 }
-
-void MainWindow::cancelarIntervencion(QString folio){
-
-    QSqlQuery query,query2,query3,query4;
-    QString consulta,eliminacion,eliminarSoli,notifi;
-    QMessageBox message(QMessageBox::Question,
-    tr("Information"), tr("¿Estas seguro de Cancelar tu intervenion?"), QMessageBox::Yes | QMessageBox::No);
-    message.setButtonText(QMessageBox::Yes, tr("Aceptar"));
-    message.setButtonText(QMessageBox::No, tr("Cancelar"));
-
-    QMessageBox messag(QMessageBox::Question,
-    tr("Information"), tr("Intervencion cancelada"), QMessageBox::Yes);
-    messag.setButtonText(QMessageBox::Yes, tr("Aceptar"));
-
-    if (message.exec() == QMessageBox::Yes ){
-    eliminacion="update CitasQuirofano set estado='Cancelada' where idCita='"+folio+"'";
-    query2.exec(eliminacion);
-    query2.next();
-    qDebug()<<"folio:"<<folio;
-
-    eliminarSoli="delete from SoliEstancia where idCitaQ='"+folio+"'";
-    query3.exec(eliminarSoli);
-    query3.next();
-
-     if (messag.exec() == QMessageBox::Yes ){
-          clearLayout(ui->pagoIntervenciones);
-          notifi=" select  cq.fechaCita,cq.horaInicio,d.iddoctor from CitasQuirofano as cq inner join  doctor as d on cq.idDoctor=d.iddoctor where cq.idCita='"+folio+"'";
-          query4.exec(notifi);
-          query4.next();
-          QString fech,hor,user1;
-          fech=query.value(0).toString();
-          hor=query.value(1).toString();
-          user1=query.value(3).toString();
-          QString mensaj,tipo;
-          mensaj="Se le informa que su paciente ha cancelado su intervencion del dia: "+fech+" y con horario de: "+hor+" fue CANCELADA.";
-          tipo="0";
-          QString notificacion;
-          notificacion="insert into notificacion(tipo,texto,UserP) values('"+tipo+"','"+mensaj+"','"+user1+"')";
-          query.exec(notificacion);
-          query.next();
-          on_pushButton_intervenciones_clicked();
-         }
-    }
-
-}
-
-
 void MainWindow::on_pushButton_intervenciones_clicked()
 {
     ui->stackedWidget_perfilPaciente->setCurrentIndex(3);
-    //clearLayout(ui->pagoIntervenciones);
+    clearLayout(ui->pagoIntervenciones);
     QString citas,est,pacNom;
     QSqlQuery consulta,consulta2,pac;
     est="1";
@@ -6028,10 +5899,10 @@ void MainWindow::on_pushButton_intervenciones_clicked()
     QString r2,g2,b2;
     r2="221,221,221";
     QString rgb="";
-    QString folio,doctor,fecha,hora,nomDoct,descripc,estado;
+    QString folio,doctor,fecha,hora,nomDoct,descripc;
     //int i=0;
     int l=0;
-    citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno),inter.estado "
+    citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) "
                         "from usuario as us "
                       "inner join doctor as doc "
                       "on us.matricula=doc.idUser "
@@ -6041,12 +5912,9 @@ void MainWindow::on_pushButton_intervenciones_clicked()
                        "on inter.idCita = costo.idCitaQ "
                       "where costo.estado=0";
 
-
     if(!consulta2.exec(citas)) consulta2.lastError().text();
     while(consulta2.next()){
-        estado=consulta2.value(7).toString();
-        //qDebug()<<estado;
-        if(estado!="Cancelada"){
+
         folio=consulta2.value(0).toString();
         doctor=consulta2.value(6).toString();
         descripc=consulta2.value(5).toString();
@@ -6065,12 +5933,14 @@ void MainWindow::on_pushButton_intervenciones_clicked()
 
         QLabel *fol=new QLabel;
         fol->setText(folio);
+        fol->setFixedSize(QSize(100,25));
         fol->setStyleSheet("background-color: rgb("+rgb+")");
         ui->pagoIntervenciones->addWidget(fol,l,0,Qt::AlignTop);
 
 
         QLabel *m=new QLabel;
         m->setText(doctor);
+        m->setFixedSize(QSize(115,25));
         m->setStyleSheet("background-color: rgb("+rgb+")");
         ui->pagoIntervenciones->addWidget(m,l,1,Qt::AlignTop);
 
@@ -6084,43 +5954,38 @@ void MainWindow::on_pushButton_intervenciones_clicked()
         QLabel *r=new QLabel;
         r->setText(fecha);
         r->setStyleSheet("background-color: rgb("+rgb+")");
+        r->setFixedSize(QSize(100,25));
         ui->pagoIntervenciones->addWidget(r,l,3,Qt::AlignTop);
 
 
         QLabel *h=new QLabel;
         h->setText(hora);
+        h->setFixedSize(QSize(100,25));
         h->setStyleSheet("background-color: rgb("+rgb+")");
         ui->pagoIntervenciones->addWidget(h,l,4,Qt::AlignTop);
 
         QLabel *ss=new QLabel;
         ss->setText(" ");
-        //ss->setFixedSize(QSize(40,25));
+        ss->setFixedSize(QSize(40,25));
         ui->pagoIntervenciones->addWidget(ss,l,5,Qt::AlignTop);
-        }
-      if(estado=="Completa"){
+
         QPushButton *p= new QPushButton();
         p->setText("Pagar con Tarjeta");
+        p->setFixedSize(QSize(120,25));
         p->setStyleSheet("background-color: rgb(138,198,242)");
         QSignalMapper *mapper3=new QSignalMapper(this);
         connect(p,SIGNAL(clicked(bool)),mapper3,SLOT(map()));
         mapper3->setMapping(p,folio);
         connect(mapper3,SIGNAL(mapped(QString)),this,SLOT(pagarIntervencionTarjeta(QString)));
         ui->pagoIntervenciones->addWidget(p,l,7,Qt::AlignTop);
-        }
-        if(estado=="Pendiente"){
-        QPushButton *k= new QPushButton();
-        k->setText("Cancelar intervencion");
-        connect(k,&QPushButton::clicked,[=](){emit cancelarIntervencion(folio);});
-        ui->pagoIntervenciones->addWidget(k,l,8,Qt::AlignTop);
-       }
-        l++;
 
+        l++;
     }
 }
 
 void MainWindow::pagarIntervencionTarjeta(QString folio)
 {
-   // clearLayout(ui->pagoIntervenciones);
+    clearLayout(ui->pagoIntervenciones);
     QString consulta;
     QSqlQuery query;
     query.exec("select inter.idCita,us.matricula from usuario as  us inner join paciente as p "
@@ -6150,7 +6015,6 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
         }
         else{
              pagoIntervenciones *pagoIt = new pagoIntervenciones(folio,this);
-             pagoIt->setModal(true);
              pagoIt->show();
              //ocultar=new QTimer(this);
              //connect(ocultar,SIGNAL(timeout()),this,SLOT(actTablaInter()));
@@ -6163,27 +6027,6 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
 }
 
 
-
-void MainWindow::on_pb_agregarUser_clicked()
-{
-    static AgregarUsuario usuario;
-    usuario.show();
-
-}
-
-
-
-void MainWindow::on_pb_modificarUser_clicked()
-{
-    static eliminarUsuarios eliminar;
-    eliminar.show();
-}
-
-void MainWindow::on_pushButton_forgotPass_clicked()
-{
-    CambiarContrasenia* popup = new CambiarContrasenia();
-    popup->show();
-}
 
 void MainWindow::on_pushButton__dirMedico_clicked()
 {
@@ -6544,290 +6387,4 @@ void MainWindow::llenarTDoctores(QString apellido,QString especialidad)
 void MainWindow::on_buscarDoctores_clicked()
 {
     llenarTDoctores(ui->apellidos->text(),ui->especialidades->currentText());
-}
-
-void MainWindow::on_pushButton_6_clicked()
-{
-    PermisoLaboral* permiso = new PermisoLaboral(this,id_staff);
-    permiso->show();
-}
-
-void MainWindow::on_pb_permisosStaff_clicked()
-{
-    clearLayout(ui->layPermisos);
-    QSqlQuery* permisos = new QSqlQuery;
-    permisos->exec("SELECT idPermiso,fechaI,fechaF,estado FROM permisoLaboral WHERE idStaff="+id_staff);
-
-    //Ciclo para poner botones y cosas
-    QLabel* lb;
-    QPushButton* pb;
-    QHBoxLayout* hlay;
-    QString *contenido;
-    while(permisos->next()){
-        hlay = new QHBoxLayout;
-
-        //fechaI
-        contenido = new QString(permisos->value("fechaI").toString());
-        lb = new QLabel(*contenido);
-        hlay->addWidget(lb);
-        //fechaF
-        contenido = new QString(permisos->value("fechaF").toString());
-        lb = new QLabel(*contenido);
-        hlay->addWidget(lb);
-        //estado
-        contenido = new QString(permisos->value("estado").toString());
-        if(*contenido == "0"){
-            *contenido = "En espera";
-        }
-        else{
-            *contenido = "Aceptada";
-        }
-        lb = new QLabel(*contenido);
-        hlay->addWidget(lb);
-
-        //Boton de eliminar sólo si aun no se acepta
-        if(permisos->value("estado").toString() == "0"){
-            pb= new QPushButton(" Cancelar ");
-            qDebug()<<permisos->value("idPermiso").toString();
-            QString* id =new QString(permisos->value("idPermiso").toString());
-            connect(pb,&QPushButton::clicked,[=](){emit eliminarPermisoLaboral(*id);});
-            hlay->addWidget(pb);
-        }
-        else {
-            pb= new QPushButton(" Cancelar ");
-            pb->setEnabled(0);
-            pb->setStyleSheet("background:grey");
-            hlay->addWidget(pb);
-        }
-        ui->layPermisos->addLayout(hlay);
-    }
-    //Cuando termine hay que agregar una barra espaciadora para empujar el contenido
-    QSpacerItem *barraVertical= new QSpacerItem(10,10,QSizePolicy::Ignored,QSizePolicy::Expanding);
-    ui->layPermisos->addSpacerItem(barraVertical);
-    ui->stackedWidget_PerfilStaff->setCurrentIndex(2);
-}
-
-
-void MainWindow::eliminarPermisoLaboral(QString idPermiso){
-    QMessageBox::StandardButton res = QMessageBox::question(this,"Cancelar solicitud","¿Está seguro de cancelar su solicitud?");
-    if(res == QMessageBox::Yes){
-        QSqlQuery* deletear = new QSqlQuery;
-        if( deletear->exec("DELETE FROM permisoLaboral WHERE idPermiso="+idPermiso) ){
-            QMessageBox::information(this, "Éxito","Borrado correctamente.");
-            on_pb_permisosStaff_clicked();
-        }
-        else{
-            qDebug()<<deletear->lastError().text();
-            QMessageBox::critical(this, "Error","Error al borrar.");
-        }
-    }
-}
-
-void MainWindow::on_pb_adminPermisos_clicked()
-{
-    VerPermisosLaborales* permisos = new VerPermisosLaborales(this);
-    permisos->show();
-}
-
-
-void MainWindow::on_pb_notiStaff_clicked()
-{
-    ui->stackedWidget_PerfilStaff->setCurrentIndex(0);
-    if(verNoti==1)
-    {
-        if(ui->notiStaff->text()!="")
-        {
-            ui->notiStaff->hide();
-        }
-        ui->nofi_staff->show();
-        verNoti=0;
-    }
-    else
-    {
-      ui->nofi_staff->hide();
-
-      QString idNoti,id,update1;
-      idNoti="select idNoti from notificacion where UserP="+id_usuario;
-      QSqlQuery upNoti,upNoti1;
-      upNoti.exec(idNoti);
-
-      while(upNoti.next())
-      {
-          id=upNoti.value(0).toString();
-          update1="update notificacion set vista=true where idNoti='"+id+"';";
-          upNoti1.exec(update1);
-            qDebug()<<id;
-            qDebug()<<update1;
-      }
-      verNoti=1;
-    }
-}
-
-void MainWindow::on_pb_bajaPaciente_clicked()
-{
-    QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está seguro de eliminar su cuenta? \nEsto no se puede revertir.");
-    if(res == QMessageBox::Yes){
-        //Hacer proceso de daniel
-        eliminarUsuarios* del = new eliminarUsuarios;
-        del->eliminarPaciente(id_usuario);
-        on_pushButton_salir_clicked();
-        delete del;
-    }
-}
-
-void MainWindow::on_pb_bajaDoctor_clicked()
-{
-    QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está seguro de eliminar su cuenta? \nEsto no se puede revertir.");
-    if(res == QMessageBox::Yes){
-        //Hacer proceso de daniel
-        eliminarUsuarios* del = new eliminarUsuarios;
-        del->eliminarDoc(id_usuario);
-        on_pushButton_salir_clicked();
-        delete del;
-    }
-}
-
-void MainWindow::on_pushButton_5_clicked()
-{
-    QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está segurode eliminar su cuenta? \nEsto no se puede revertir.");
-    if(res == QMessageBox::Yes){
-        //Hacer proceso de daniel
-        eliminarUsuarios* del = new eliminarUsuarios;
-        del->eliminarStaff(id_usuario);
-        on_pushButton_salir_clicked();
-        delete del;
-    }
-}
-
-void MainWindow::info_ser(QString tipo)
-{
-    ui->foto1S->clear();
-    ui->foto2S->clear();
-
-    QString bus,titulo,info1,lema,info2;
-    QSqlQuery bus1;
-
-    bus="select *from Servicios where nombreS='"+tipo+"'; ";
-
-    bus1.exec(bus);
-    bus1.next();
-
-    titulo=bus1.value(1).toString();
-    info1=bus1.value(2).toString();
-    lema=bus1.value(3).toString();
-    info2=bus1.value(4).toString();
-
-    ui->tituloS->setText(titulo);
-    ui->info1->setPlainText(info1);
-    ui->lema->setPlainText(lema);
-    ui->info2->setPlainText(info2);
-
-    QString foto1,foto2;
-
-
-    if(tipo=="URGENCIAS")
-    {
-
-           foto1=":/fotoservi/hospifotos/urgencias1.jpg";
-           foto2=":/fotoservi/hospifotos/urgencias2.jpg";
-            QPixmap f1(foto1);
-            QPixmap f2(foto2);
-
-            int a=ui->foto1S->height();
-            int b=ui->foto1S->width();
-            int a1=ui->foto2S->height();
-            int b1=ui->foto2S->width();
-
-           ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-            ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-
-    }
-    else if(tipo=="QUIROFANOS")
-    {
-
-        foto1=":/fotoservi/hospifotos/quirofano1.jpeg";
-        foto2=":/fotoservi/hospifotos/quirofano2.jpeg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
-    else if(tipo=="TERAPIA INTENSIVA")
-    {
-        foto1=":/fotoservi/hospifotos/terapia1.jpg";
-        foto2=":/fotoservi/hospifotos/terapia2.jpg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
-    else if(tipo=="HOSPITALIZACION")
-    {
-        foto1=":/fotoservi/hospifotos/hospitalizacion1.jpg";
-        foto2=":/fotoservi/hospifotos/hospitalizacion2.jpg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
-    else if(tipo=="HEMODINAMIA")
-    {
-        foto1=":/fotoservi/hospifotos/hemodinamia1.png";
-        foto2=":/fotoservi/hospifotos/hemodinamia2.jpg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
-
-
-
-
-
-}
-
-
-
-void MainWindow::on_cb_servicios_currentTextChanged(const QString &arg1)
-{
-    if(arg1=="SERVICIOS")
-    {
-
-    }
-    else
-    {
-       ui->stackedWidget_principal->setCurrentIndex(6);
-       info_ser(arg1);
-       ui->cb_servicios->setCurrentIndex(0);
-    }
-}
-
-void MainWindow::on_pb_adminServicios_clicked()
-{
-    AdministrarServicios* serv = new AdministrarServicios(this);
-    serv->show();
 }

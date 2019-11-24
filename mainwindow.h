@@ -23,8 +23,8 @@
 #include "mostrarhistoclinico.h"
 #include "agregarUrgencia.h"
 #include <QtPrintSupport/QPrinter>
-#include "agregarusuario.h"
-#include "eliminarusuarios.h"
+
+
 
 namespace Ui {
 class MainWindow;
@@ -205,37 +205,16 @@ private slots:
     void on_pushButton_intervenciones_clicked();
     void pagarCitasEfect(QString);
     void pagarIntervencionTarjeta(QString);
-    void on_pb_agregarUser_clicked();
-    void on_pb_modificarUser_clicked();
-    void on_pushButton_forgotPass_clicked();
+
     void on_pb_remedios_clicked();
+
     void on_pushButton__dirMedico_clicked();
+
     void llenarTablaR(QString);
+
     void on_buscarremedio_clicked();
     void llenarTDoctores(QString,QString);
     void on_buscarDoctores_clicked();
-
-    void on_pushButton_6_clicked();
-
-    void on_pb_permisosStaff_clicked();
-    void eliminarPermisoLaboral(QString idPermiso);
-
-    void on_pb_adminPermisos_clicked();
-
-    void on_pb_notiStaff_clicked();
-
-    void on_pb_bajaPaciente_clicked();
-
-    void on_pb_bajaDoctor_clicked();
-
-    void on_pushButton_5_clicked();
-    void cancelarIntervencion(QString);
-
-    void on_cb_servicios_currentTextChanged(const QString &arg1);
-
-    void info_ser(QString);
-
-    void on_pb_adminServicios_clicked();
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
