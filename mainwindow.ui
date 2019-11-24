@@ -511,7 +511,7 @@ border:none
 </string>
       </property>
       <property name="currentIndex">
-       <number>9</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -4588,8 +4588,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>374</height>
+                    <width>692</width>
+                    <height>115</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -13645,8 +13645,8 @@ border:none;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>866</width>
-             <height>447</height>
+             <width>63</width>
+             <height>46</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_46">
@@ -13791,7 +13791,7 @@ border:none;</string>
              <x>0</x>
              <y>0</y>
              <width>866</width>
-             <height>447</height>
+             <height>398</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_13">
