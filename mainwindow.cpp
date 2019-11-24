@@ -70,6 +70,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tv_listaDocCitas->horizontalHeader()->setHidden(false);
     ui->pb_urg->setHidden(true);
     ui->nofi_2->hide();
+
+
+    ui->cb_servicios->clear();
+    ui->cb_servicios->addItem("SERVICIOS");
+
+    QString ser1;
+    QSqlQuery ser2;
+    ser1="select *from Servicios";
+    ser2.exec(ser1);
+    while(ser2.next())
+    {
+        ui->cb_servicios->addItem(ser2.value(1).toString());
+    }
+
+    ui->stackedWidget_principal->setCurrentIndex(0);
+
+
+
 }
 
 MainWindow::~MainWindow()
@@ -4940,7 +4958,7 @@ void MainWindow::on_btnEstudios_clicked()
 
 void MainWindow::on_pb_inter_clicked()
 {
-    ui->tablaInterProgs->clearContents();
+    ui->tablaInterProgs->setRowCount(0);
     ui->tablaInterProgs->setColumnWidth(1, 100);
     ui->tablaInterProgs->setColumnWidth(2, 60);
     ui->tablaInterProgs->setColumnWidth(3, 80);
@@ -5370,32 +5388,41 @@ void MainWindow::pagarUrgenciasV(QString folio)
     //parte para generar datos de pdf//
     QSqlQuery user,fecha,doc,usuarionoti,fol,datosacomp;
     QString html,d,nombrePac,fechaPago,nombreDoc,fechaCita,usernoti,id_doc,horaEmer,descripcion,total,nombreacomp,telacomp,
-            parentezcoacomp,direccionacomp;
+            parentezcoacomp,direccionacomp,estado;
     user.exec("select ur.idEmergencia,ur.idDoctor,us.nombre,us.appaterno,us.apmaterno,ur.nombre_pacinete,ur.hora,ur.fecha,ur.Causas from usuario as "
               "us inner join doctor as doc on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor;");
     user.next();
+
     fecha.exec("select CURRENT_DATE()");
-    fecha.next();
-    doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc "
-             "on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor ;");
-    doc.next();
-    datosacomp.exec("select nombre,telefono,parentescos,direcion from acompanante where idEmergencia="+folio+"");
-    datosacomp.next();
+       fecha.next();
 
+       doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc "
+                "on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor ;");
+       doc.next();
+       datosacomp.exec("select nombre,telefono,parentescos,direcion from acompanante where idEmergencia="+folio+"");
+       datosacomp.next();
 
-    nombrePac=user.value(5).toString();
-    fechaPago=fecha.value(0).toString();
-    nombreDoc=doc.value(0).toString();
-    fechaCita=user.value(7).toString();
-    folio=user.value(0).toString();
-    id_doc=user.value(1).toString();
-    horaEmer=user.value(6).toString();
-    descripcion=user.value(8).toString();
-    total="15320";
-    nombreacomp=datosacomp.value(0).toString();
-    telacomp=datosacomp.value(1).toString();
-    parentezcoacomp=datosacomp.value(2).toString();
-    direccionacomp=datosacomp.value(3).toString();
+       fol.exec("select ur.idEmergencia,us.nombre,us.appaterno,us.apmaterno,ur.nombre_pacinete,ur.hora,ur.fecha,ur.Causas from usuario as "
+                "us inner join doctor as doc on us.matricula=doc.idUser inner join urgencias as ur on ur.idEmergencia='"+folio+"'");
+       fol.next();
+
+       folio=fol.value(0).toString();
+
+       nombrePac=fol.value(4).toString();
+       fechaPago=fecha.value(0).toString();
+       nombreDoc=fol.value(1).toString() + " " + fol.value(2).toString() + " " + fol.value(3).toString();
+       fechaCita=fol.value(6).toString();
+       horaEmer=fol.value(5).toString();
+       descripcion=fol.value(7).toString();
+
+       estado="1";
+       total="15320";
+       nombreacomp=datosacomp.value(0).toString();
+       telacomp=datosacomp.value(1).toString();
+       parentezcoacomp=datosacomp.value(2).toString();
+       direccionacomp=datosacomp.value(3).toString();
+
+       qDebug()<<folio;
     //termina parte de generar datos de pdf//
 
     //inicia parte para actualizar pago y enviar notificacion//
@@ -5409,8 +5436,8 @@ void MainWindow::pagarUrgenciasV(QString folio)
     QSqlQuery update,insert,mandarNoti;
     QString mensaj,tipo,cita,user1,notificacion;
 
-    if(insert.exec("insert into pagoUrgencia(fecha,hora,total,nombrePac,idEmergencia) "
-                   "value('"+fechaPago+"','"+horaEmer+"',"+total+",'"+nombrePac+"',"+folio+")"))
+    if(insert.exec("insert into pagoUrgencia(fecha,hora,total,nombrePac,idEmergencia,estadoPago) "
+                   "value('"+fechaPago+"','"+horaEmer+"',"+total+",'"+nombrePac+"',"+folio+","+estado+")"))
     {
             insert.next();
             qDebug()<<folio;
@@ -6007,36 +6034,41 @@ void MainWindow::pagarIntervencion(QString folio)
     QString html,d,nombrePac,fechaPago,nombreDoc,fechaCita,usernoti,id_doc,horaEmer,descripcion,total,nombredc,iva,subtotal;
 
     user.exec("select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as "
-              "us inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on doc.iddoctor=inter.idDoctor");
-    user.next();
-    paciente.exec("select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,"
-                  "CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as us inner join paciente as p on "
-                  "us.matricula=p.idUser inner join citasQuirofano as inter on p.idpaciente=inter.idPaciente");
-    paciente.next();
+               "us inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on doc.iddoctor=inter.idDoctor");
+     user.next();
+     paciente.exec("select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,"
+                   "CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as us inner join paciente as p on "
+                   "us.matricula=p.idUser inner join citasQuirofano as inter on p.idpaciente=inter.idPaciente");
+     paciente.next();
 
-    fecha.exec("select CURRENT_DATE()");
-    fecha.next();
-
-    doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc "
-             "on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor ;");
-    doc.next();
+     fecha.exec("select CURRENT_DATE()");
+     fecha.next();
 
 
-    pago.exec("select inter.idCita,cs.idCitaQ,cs.Subtotal,cs.total,cs.importeIva from citasQuirofano as "
-              "inter inner join CostoServicio as cs on inter.idCita=cs.idCitaQ where idCitaQ="+folio+"");
-    pago.next();
+     pago.exec("select inter.idCita,cs.idCitaQ,cs.Subtotal,cs.total,cs.importeIva from citasQuirofano as "
+               "inter inner join CostoServicio as cs on inter.idCita=cs.idCitaQ where inter.idCita="+folio+"");
+     pago.next();
 
+     fol.exec("select inter.idCita,us.matricula,inter.fechaCita,inter.horaInicio,inter.descripcion from usuario as  us inner join paciente as p "
+            "on us.matricula=p.idUser inner join citasQuirofano as inter on inter.idCita='"+folio+"'");
+     fol.next();
 
-    nombredc=user.value(6).toString();
-    fechaPago=fecha.value(0).toString();
-    nombrePac=paciente.value(6).toString();
-    fechaCita=user.value(4).toString();
-    folio=user.value(0).toString();
-    horaEmer=user.value(3).toString();
-    descripcion=user.value(5).toString();
-    total=pago.value(3).toString();
-    iva=pago.value(4).toString();
-    subtotal=pago.value(2).toString();
+     doc.exec("select inter.idCita,us.matricula,inter.fechaCita,inter.horaInicio,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as  us "
+              " inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on inter.idCita='"+folio+"'");
+     doc.next();
+
+     nombredc=doc.value(5).toString();
+     fechaCita=fol.value(3).toString();
+     folio=fol.value(0).toString();
+     fechaPago=fecha.value(0).toString();
+     nombrePac=paciente.value(6).toString();
+     horaEmer=fol.value(3).toString();
+     descripcion=fol.value(4).toString();
+     total=pago.value(3).toString();
+     iva=pago.value(4).toString();
+     subtotal=pago.value(2).toString();
+
+     qDebug()<<folio;
 
 
     //termina parte de generar datos de pdf//
@@ -6192,6 +6224,7 @@ void MainWindow::cancelarIntervencion(QString folio){
 
 void MainWindow::on_pushButton_intervenciones_clicked()
 {
+
     ui->stackedWidget_perfilPaciente->setCurrentIndex(3);
     //clearLayout(ui->pagoIntervenciones);
     QString citas,est,pacNom;
@@ -6896,7 +6929,14 @@ void MainWindow::info_ser(QString tipo)
     ui->foto1S->clear();
     ui->foto2S->clear();
 
+    if(tipo=="SERVICIOS")
+    {
+
+    }else
+    {
+
     QString bus,titulo,info1,lema,info2;
+    QByteArray img1,img2;
     QSqlQuery bus1;
 
     bus="select *from Servicios where nombreS='"+tipo+"'; ";
@@ -6908,22 +6948,18 @@ void MainWindow::info_ser(QString tipo)
     info1=bus1.value(2).toString();
     lema=bus1.value(3).toString();
     info2=bus1.value(4).toString();
+    img1=bus1.value(5).toByteArray();
+    img2=bus1.value(6).toByteArray();
 
     ui->tituloS->setText(titulo);
     ui->info1->setPlainText(info1);
     ui->lema->setPlainText(lema);
     ui->info2->setPlainText(info2);
 
-    QString foto1,foto2;
-
-
-    if(tipo=="URGENCIAS")
-    {
-
-           foto1=":/fotoservi/hospifotos/urgencias1.jpg";
-           foto2=":/fotoservi/hospifotos/urgencias2.jpg";
-            QPixmap f1(foto1);
-            QPixmap f2(foto2);
+            QPixmap f1;
+            QPixmap f2;
+            f1.loadFromData(img1);
+            f2.loadFromData(img2);
 
             int a=ui->foto1S->height();
             int b=ui->foto1S->width();
@@ -6933,73 +6969,9 @@ void MainWindow::info_ser(QString tipo)
            ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
             ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
 
-    }
-    else if(tipo=="QUIROFANOS")
-    {
-
-        foto1=":/fotoservi/hospifotos/quirofano1.jpeg";
-        foto2=":/fotoservi/hospifotos/quirofano2.jpeg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
-    else if(tipo=="TERAPIA INTENSIVA")
-    {
-        foto1=":/fotoservi/hospifotos/terapia1.jpg";
-        foto2=":/fotoservi/hospifotos/terapia2.jpg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
-    else if(tipo=="HOSPITALIZACION")
-    {
-        foto1=":/fotoservi/hospifotos/hospitalizacion1.jpg";
-        foto2=":/fotoservi/hospifotos/hospitalizacion2.jpg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
-    else if(tipo=="HEMODINAMIA")
-    {
-        foto1=":/fotoservi/hospifotos/hemodinamia1.png";
-        foto2=":/fotoservi/hospifotos/hemodinamia2.jpg";
-         QPixmap f1(foto1);
-         QPixmap f2(foto2);
-
-         int a=ui->foto1S->height();
-         int b=ui->foto1S->width();
-         int a1=ui->foto2S->height();
-         int b1=ui->foto2S->width();
-
-        ui->foto1S->setPixmap(f1.scaled(b,a,Qt::AspectRatioMode::IgnoreAspectRatio));
-         ui->foto2S->setPixmap(f2.scaled(b1,a1,Qt::AspectRatioMode::IgnoreAspectRatio));
-    }
 
 
-
-
-
+}
 }
 
 
