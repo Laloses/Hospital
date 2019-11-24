@@ -10959,8 +10959,8 @@ QScrollArea{background:rgba(255,255,255,0.8)}</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>20</width>
-                    <height>20</height>
+                    <width>387</width>
+                    <height>419</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_15">
@@ -12074,8 +12074,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_27">
@@ -12208,8 +12208,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>20</width>
-                          <height>20</height>
+                          <width>24</width>
+                          <height>24</height>
                          </rect>
                         </property>
                         <layout class="QGridLayout" name="gridLayout_25">

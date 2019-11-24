@@ -241,6 +241,7 @@ private slots:
     void on_pb_adminServicios_clicked();
 
     public:
+public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void solicitUsuarios();
