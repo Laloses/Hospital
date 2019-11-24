@@ -4958,7 +4958,7 @@ void MainWindow::on_btnEstudios_clicked()
 
 void MainWindow::on_pb_inter_clicked()
 {
-    ui->tablaInterProgs->clearContents();
+    ui->tablaInterProgs->setRowCount(0);
     ui->tablaInterProgs->setColumnWidth(1, 100);
     ui->tablaInterProgs->setColumnWidth(2, 60);
     ui->tablaInterProgs->setColumnWidth(3, 80);
@@ -6210,6 +6210,7 @@ void MainWindow::cancelarIntervencion(QString folio){
 
 void MainWindow::on_pushButton_intervenciones_clicked()
 {
+
     ui->stackedWidget_perfilPaciente->setCurrentIndex(3);
     //clearLayout(ui->pagoIntervenciones);
     QString citas,est,pacNom;
