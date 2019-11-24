@@ -21,7 +21,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">#central{
-background:white;
+background:rgba(255,255,255,0.8);
 font-size:15pt;
 }</string>
   </property>
@@ -536,7 +536,7 @@ background-color: rgb(203, 207, 255);</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(240, 233, 224);</string>
+         <string notr="true">background-color: rgba(240, 233, 224,0.8);</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
