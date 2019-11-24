@@ -510,7 +510,7 @@ border:none
 }</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_home">
        <property name="styleSheet">
@@ -4597,8 +4597,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>374</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_46">
@@ -4963,7 +4963,7 @@ QPushButton:focus{
 }</string>
           </property>
           <property name="currentIndex">
-           <number>8</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="page_miPerfilDoc">
            <layout class="QGridLayout" name="gridLayout_74">
@@ -5921,11 +5921,11 @@ background -color: red;
               <attribute name="horizontalHeaderCascadingSectionResizes">
                <bool>true</bool>
               </attribute>
-              <attribute name="horizontalHeaderDefaultSectionSize">
-               <number>119</number>
-              </attribute>
               <attribute name="horizontalHeaderMinimumSectionSize">
                <number>30</number>
+              </attribute>
+              <attribute name="horizontalHeaderDefaultSectionSize">
+               <number>119</number>
               </attribute>
               <attribute name="horizontalHeaderStretchLastSection">
                <bool>true</bool>
@@ -6569,8 +6569,8 @@ background-color:transparent;</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>366</height>
+                    <width>45</width>
+                    <height>20</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_37">
@@ -6847,7 +6847,7 @@ background-color:transparent;</string>
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>402</width>
+                     <width>354</width>
                      <height>1114</height>
                     </rect>
                    </property>
@@ -6943,7 +6943,7 @@ background-color:transparent;</string>
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                       </property>
                      </widget>
                     </item>
@@ -7554,7 +7554,7 @@ border:none</string>
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>849</width>
+                 <width>202</width>
                  <height>1092</height>
                 </rect>
                </property>
@@ -7898,8 +7898,8 @@ border:none</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>848</width>
-                    <height>356</height>
+                    <width>180</width>
+                    <height>80</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_52">
@@ -7946,11 +7946,11 @@ border:none</string>
             </item>
             <item>
              <widget class="QTableWidget" name="tablaInterProgs">
-              <attribute name="horizontalHeaderDefaultSectionSize">
-               <number>165</number>
-              </attribute>
               <attribute name="horizontalHeaderMinimumSectionSize">
                <number>50</number>
+              </attribute>
+              <attribute name="horizontalHeaderDefaultSectionSize">
+               <number>165</number>
               </attribute>
               <attribute name="horizontalHeaderStretchLastSection">
                <bool>true</bool>
@@ -8334,7 +8334,7 @@ border:none</string>
         <item row="1" column="0">
          <widget class="QStackedWidget" name="stackedWidget_PerfilStaff">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="perfilStaff">
            <widget class="QWidget" name="layoutWidget">
@@ -13654,8 +13654,8 @@ border:none;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>63</width>
-             <height>46</height>
+             <width>866</width>
+             <height>447</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_46">
@@ -13699,8 +13699,8 @@ border:none;</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>63</width>
-             <height>18</height>
+             <width>866</width>
+             <height>485</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="layInfoHospi"/>
@@ -13800,7 +13800,7 @@ border:none;</string>
              <x>0</x>
              <y>0</y>
              <width>866</width>
-             <height>398</height>
+             <height>447</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_13">
