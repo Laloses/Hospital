@@ -5388,41 +5388,32 @@ void MainWindow::pagarUrgenciasV(QString folio)
     //parte para generar datos de pdf//
     QSqlQuery user,fecha,doc,usuarionoti,fol,datosacomp;
     QString html,d,nombrePac,fechaPago,nombreDoc,fechaCita,usernoti,id_doc,horaEmer,descripcion,total,nombreacomp,telacomp,
-            parentezcoacomp,direccionacomp,estado;
+            parentezcoacomp,direccionacomp;
     user.exec("select ur.idEmergencia,ur.idDoctor,us.nombre,us.appaterno,us.apmaterno,ur.nombre_pacinete,ur.hora,ur.fecha,ur.Causas from usuario as "
               "us inner join doctor as doc on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor;");
     user.next();
-
     fecha.exec("select CURRENT_DATE()");
-       fecha.next();
+    fecha.next();
+    doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc "
+             "on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor ;");
+    doc.next();
+    datosacomp.exec("select nombre,telefono,parentescos,direcion from acompanante where idEmergencia="+folio+"");
+    datosacomp.next();
 
-       doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc "
-                "on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor ;");
-       doc.next();
-       datosacomp.exec("select nombre,telefono,parentescos,direcion from acompanante where idEmergencia="+folio+"");
-       datosacomp.next();
 
-       fol.exec("select ur.idEmergencia,us.nombre,us.appaterno,us.apmaterno,ur.nombre_pacinete,ur.hora,ur.fecha,ur.Causas from usuario as "
-                "us inner join doctor as doc on us.matricula=doc.idUser inner join urgencias as ur on ur.idEmergencia='"+folio+"'");
-       fol.next();
-
-       folio=fol.value(0).toString();
-
-       nombrePac=fol.value(4).toString();
-       fechaPago=fecha.value(0).toString();
-       nombreDoc=fol.value(1).toString() + " " + fol.value(2).toString() + " " + fol.value(3).toString();
-       fechaCita=fol.value(6).toString();
-       horaEmer=fol.value(5).toString();
-       descripcion=fol.value(7).toString();
-
-       estado="1";
-       total="15320";
-       nombreacomp=datosacomp.value(0).toString();
-       telacomp=datosacomp.value(1).toString();
-       parentezcoacomp=datosacomp.value(2).toString();
-       direccionacomp=datosacomp.value(3).toString();
-
-       qDebug()<<folio;
+    nombrePac=user.value(5).toString();
+    fechaPago=fecha.value(0).toString();
+    nombreDoc=doc.value(0).toString();
+    fechaCita=user.value(7).toString();
+    folio=user.value(0).toString();
+    id_doc=user.value(1).toString();
+    horaEmer=user.value(6).toString();
+    descripcion=user.value(8).toString();
+    total="15320";
+    nombreacomp=datosacomp.value(0).toString();
+    telacomp=datosacomp.value(1).toString();
+    parentezcoacomp=datosacomp.value(2).toString();
+    direccionacomp=datosacomp.value(3).toString();
     //termina parte de generar datos de pdf//
 
     //inicia parte para actualizar pago y enviar notificacion//
@@ -5436,8 +5427,8 @@ void MainWindow::pagarUrgenciasV(QString folio)
     QSqlQuery update,insert,mandarNoti;
     QString mensaj,tipo,cita,user1,notificacion;
 
-    if(insert.exec("insert into pagoUrgencia(fecha,hora,total,nombrePac,idEmergencia,estadoPago) "
-                   "value('"+fechaPago+"','"+horaEmer+"',"+total+",'"+nombrePac+"',"+folio+","+estado+")"))
+    if(insert.exec("insert into pagoUrgencia(fecha,hora,total,nombrePac,idEmergencia) "
+                   "value('"+fechaPago+"','"+horaEmer+"',"+total+",'"+nombrePac+"',"+folio+")"))
     {
             insert.next();
             qDebug()<<folio;
@@ -6034,41 +6025,36 @@ void MainWindow::pagarIntervencion(QString folio)
     QString html,d,nombrePac,fechaPago,nombreDoc,fechaCita,usernoti,id_doc,horaEmer,descripcion,total,nombredc,iva,subtotal;
 
     user.exec("select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as "
-               "us inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on doc.iddoctor=inter.idDoctor");
-     user.next();
-     paciente.exec("select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,"
-                   "CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as us inner join paciente as p on "
-                   "us.matricula=p.idUser inner join citasQuirofano as inter on p.idpaciente=inter.idPaciente");
-     paciente.next();
+              "us inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on doc.iddoctor=inter.idDoctor");
+    user.next();
+    paciente.exec("select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,"
+                  "CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as us inner join paciente as p on "
+                  "us.matricula=p.idUser inner join citasQuirofano as inter on p.idpaciente=inter.idPaciente");
+    paciente.next();
 
-     fecha.exec("select CURRENT_DATE()");
-     fecha.next();
+    fecha.exec("select CURRENT_DATE()");
+    fecha.next();
+
+    doc.exec("select CONCAT(' ',us.nombre,' ',us.appaterno,' ',us.apmaterno)from usuario as us inner join doctor as doc "
+             "on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor ;");
+    doc.next();
 
 
-     pago.exec("select inter.idCita,cs.idCitaQ,cs.Subtotal,cs.total,cs.importeIva from citasQuirofano as "
-               "inter inner join CostoServicio as cs on inter.idCita=cs.idCitaQ where inter.idCita="+folio+"");
-     pago.next();
+    pago.exec("select inter.idCita,cs.idCitaQ,cs.Subtotal,cs.total,cs.importeIva from citasQuirofano as "
+              "inter inner join CostoServicio as cs on inter.idCita=cs.idCitaQ where idCitaQ="+folio+"");
+    pago.next();
 
-     fol.exec("select inter.idCita,us.matricula,inter.fechaCita,inter.horaInicio,inter.descripcion from usuario as  us inner join paciente as p "
-            "on us.matricula=p.idUser inner join citasQuirofano as inter on inter.idCita='"+folio+"'");
-     fol.next();
 
-     doc.exec("select inter.idCita,us.matricula,inter.fechaCita,inter.horaInicio,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as  us "
-              " inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on inter.idCita='"+folio+"'");
-     doc.next();
-
-     nombredc=doc.value(5).toString();
-     fechaCita=fol.value(3).toString();
-     folio=fol.value(0).toString();
-     fechaPago=fecha.value(0).toString();
-     nombrePac=paciente.value(6).toString();
-     horaEmer=fol.value(3).toString();
-     descripcion=fol.value(4).toString();
-     total=pago.value(3).toString();
-     iva=pago.value(4).toString();
-     subtotal=pago.value(2).toString();
-
-     qDebug()<<folio;
+    nombredc=user.value(6).toString();
+    fechaPago=fecha.value(0).toString();
+    nombrePac=paciente.value(6).toString();
+    fechaCita=user.value(4).toString();
+    folio=user.value(0).toString();
+    horaEmer=user.value(3).toString();
+    descripcion=user.value(5).toString();
+    total=pago.value(3).toString();
+    iva=pago.value(4).toString();
+    subtotal=pago.value(2).toString();
 
 
     //termina parte de generar datos de pdf//
