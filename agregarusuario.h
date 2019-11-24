@@ -24,6 +24,7 @@ public:
     bool verificarDatosRegistro();
     bool verificarPasswordRegistro();
     QString calcularEdad(QString);
+    void limpiar();
     QByteArray foto;
     QString imgRoute;
 

@@ -256,6 +256,16 @@ void MainWindow::on_pushButton_iniciarSesion_clicked()
          ui->lineEdit_idUsuario->clear();
          ui->lineEdit_passwordLogin->clear();
          cargarCategoria();
+         ui->pushButton_SolicitudesUsuarios->show();
+         ui->pushButton_3->show();
+         ui->pb_agregarUser->show();
+         ui->pb_modificarUser->show();
+         ui->pb_adminPermisos->show();
+         ui->pushButton_tip_2->show();
+         ui->pushButton_agregar_remedio->show();
+         ui->pb_adminServicios->show();
+         ui->pb_addUrgencia->show();
+         ui->btnCitasCanceladas->show();
         }
         else if(tipo==0)
         {
@@ -1341,12 +1351,13 @@ void MainWindow::verficarHorario(){
 
 void MainWindow::on_pushButton_SolicitudesUsuarios_clicked()
 {
-    ui->stackedWidget_admin->setCurrentIndex(1);
-    ui->pushButton_SolicitudesUsuarios->hide();
-    ui->pushButton_tip_2->hide();
-    ui->pushButton_agregar_remedio->hide();
+    ui->radioButton_staffs->setCheckable(false);
+    ui->radioButton_staffs->setCheckable(true);
+    ui->radioButton_doctors->setCheckable(false);
+    ui->radioButton_doctors->setCheckable(true);
+    clearLayout(ui->lista);
+    ui->stackedWidget_admin->setCurrentIndex(1); 
 }
-
 
 //metodo para asignar en el menu dinamico de solicitdes
 void MainWindow::PonerInfo(QString matri)
@@ -1429,7 +1440,6 @@ void MainWindow::PonerInfo(QString matri)
 
 }
 
-//
 void MainWindow::on_pushButton_AceptarSoli_clicked()
 {
    if(ui->radioButton_doctors->isChecked()){
@@ -1643,7 +1653,8 @@ void MainWindow::on_pushButton_rechazarsoli_clicked()
 void MainWindow::on_radioButton_doctors_clicked()
 {
     qDebug()<<"entre:";
-
+    QString estiloBueno;
+    estiloBueno="border-top:none;border-bottom:1px solid #5d80b6;background:transparent;font: 12pt MS Shell Dlg 2;";
     ui->lineEdit_especialidad_solicitud->clear();
     ui->lineEdit_nombre_solicitud->clear();
     ui->lineEdit_cedula_solicitud->clear();
@@ -1673,6 +1684,7 @@ void MainWindow::on_radioButton_doctors_clicked()
 
                 QPushButton *b=new QPushButton();
                 b->setText("Ver Solicitud");
+                b->setStyleSheet(estiloBueno);
                 QLabel *l=new QLabel;
                 l->setText(nombre);
                 b->setFixedSize(QSize(120,40));
@@ -1784,6 +1796,7 @@ void MainWindow::on_pushButton_menu_Pincipal_Adm_clicked()
     ui->pushButton_agregar_remedio->show();
     ui->pushButton_tip_2->show();
     ui->stackedWidget_admin->setCurrentIndex(0);
+
 }
 
 
@@ -3938,6 +3951,7 @@ void MainWindow::mostrarCitas(){
 
     QLabel *fech=new QLabel;
     fech->setText("Fecha");
+    fech->setTextFormat(Qt::AutoText);
     fech->setFixedSize(QSize(100,25));
     fech->setStyleSheet("border: 1px solid rgb(9,9,9)");
     ui->encabezadoCitas_2->addWidget(fech,0,2,Qt::AlignLeft);
@@ -3972,14 +3986,14 @@ void MainWindow::mostrarCitas(){
 
         QLabel *fol=new QLabel;
         fol->setText(folio);
-        fol->setFixedSize(QSize(100,25));
+        //fol->setFixedSize(QSize(100,25));
         fol->setStyleSheet("background-color: rgb("+rgb+")");
         ui->citasLay_2->addWidget(fol,i,0,Qt::AlignTop);
 
 
         QLabel *m=new QLabel;
         m->setText(doctor);
-        m->setFixedSize(QSize(110,25));
+        //m->setFixedSize(QSize(110,25));
         m->setStyleSheet("background-color: rgb("+rgb+")");
         ui->citasLay_2->addWidget(m,i,1,Qt::AlignTop);
 
@@ -3987,24 +4001,24 @@ void MainWindow::mostrarCitas(){
         QLabel *r=new QLabel;
         r->setText(fecha);
         r->setStyleSheet("background-color: rgb("+rgb+")");
-        r->setFixedSize(QSize(100,25));
+        //r->setFixedSize(QSize(100,25));
         ui->citasLay_2->addWidget(r,i,2,Qt::AlignTop);
 
 
         QLabel *h=new QLabel;
         h->setText(hora);
-        h->setFixedSize(QSize(100,25));
+        //h->setFixedSize(QSize(100,25));
         h->setStyleSheet("background-color: rgb("+rgb+")");
         ui->citasLay_2->addWidget(h,i,3,Qt::AlignTop);
 
         QLabel *ss=new QLabel;
         ss->setText(" ");
-        ss->setFixedSize(QSize(40,25));
+        //ss->setFixedSize(QSize(40,25));
         ui->citasLay_2->addWidget(ss,i,4,Qt::AlignTop);
 
         QPushButton *q=new QPushButton();
         q->setText("Cancelar");
-        q->setFixedSize(QSize(100,25));
+        //q->setFixedSize(QSize(100,25));
         q->setStyleSheet("background-color: rgb(138,198,242)");
         QSignalMapper *mapper1=new QSignalMapper(this);
         connect(q,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
@@ -4035,7 +4049,7 @@ void MainWindow::mostrarCitas(){
 
         QLabel *fol=new QLabel;
         fol->setText(folio);
-        fol->setFixedSize(QSize(100,25));
+        //fol->setFixedSize(QSize(100,25));
         fol->setStyleSheet("background-color: rgb("+rgb+")");
         ui->citasLay_2->addWidget(fol,l,0,Qt::AlignTop);
 
@@ -4050,24 +4064,24 @@ void MainWindow::mostrarCitas(){
         QLabel *r=new QLabel;
         r->setText(fecha);
         r->setStyleSheet("background-color: rgb("+rgb+")");
-        r->setFixedSize(QSize(100,25));
+        //r->setFixedSize(QSize(100,25));
         ui->citasLay_2->addWidget(r,l,2,Qt::AlignTop);
 
 
         QLabel *h=new QLabel;
         h->setText(hora);
-        h->setFixedSize(QSize(100,25));
+        //h->setFixedSize(QSize(100,25));
         h->setStyleSheet("background-color: rgb("+rgb+")");
         ui->citasLay_2->addWidget(h,l,3,Qt::AlignTop);
 
         QLabel *ss=new QLabel;
         ss->setText(" ");
-        ss->setFixedSize(QSize(40,25));
+        //ss->setFixedSize(QSize(40,25));
         ui->citasLay_2->addWidget(ss,l,4,Qt::AlignTop);
 
         QPushButton *p= new QPushButton();
         p->setText("Pagar");
-        p->setFixedSize(QSize(100,25));
+        //p->setFixedSize(QSize(100,25));
         p->setStyleSheet("background-color: rgb(138,198,242)");
         QSignalMapper *mapper2=new QSignalMapper(this);
         connect(p,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
@@ -4549,7 +4563,7 @@ void MainWindow::historialClinico(QString idCita){
     cita=consulta.value(0).toString();
     diagnostico=consulta.value(3).toString();
     nombre=consulta.value(4).toString()+" "+consulta.value(5).toString()+" "+consulta.value(6).toString();
-    static MostrarHistoclinico l;
+    static MostrarHistoclinico l(this);
     l.mostrarClinico(cita,diagnostico,nombre,fecha);
     l.show();
 }
@@ -4922,9 +4936,11 @@ void MainWindow::on_btnEstudios_clicked()
     ventanaEstudios->show();
 }
 
+
+
 void MainWindow::on_pb_inter_clicked()
 {
-    ui->tablaInterProgs->clear();
+    ui->tablaInterProgs->clearContents();
     ui->tablaInterProgs->setColumnWidth(1, 100);
     ui->tablaInterProgs->setColumnWidth(2, 60);
     ui->tablaInterProgs->setColumnWidth(3, 80);
@@ -5047,7 +5063,7 @@ void MainWindow::CuartosDisponibles(QDate inicio,QDate fin)
             {
                 QPushButton* cuartoo = new QPushButton();
                 cuartoo->setText(numCuarto);
-                cuartoo->setFixedSize(60, 40);
+                //cuartoo->setFixedSize(60, 40);
 
                 QSignalMapper *mapper1=new QSignalMapper(this);
                 connect(cuartoo,SIGNAL(clicked(bool)),mapper1,SLOT(map()));
@@ -5536,32 +5552,32 @@ void MainWindow::verSoliEstancia()
     QLabel *folio1 = new QLabel;
     folio1->setAlignment(Qt::AlignCenter);
     folio1->setText("Folio de Solicitud");
-    folio1->setFixedSize(130,25);
+    //folio1->setFixedSize(130,25);
    ui->estanciaPa->addWidget(folio1,r,0,1,1);
 
 
     QLabel *iddoc1 = new QLabel;
     iddoc1->setAlignment(Qt::AlignCenter);
     iddoc1->setText("ID Doctor");
-    iddoc1->setFixedSize(80,25);
+    //iddoc1->setFixedSize(80,25);
     ui->estanciaPa->addWidget(iddoc1,r,1,1,1);
 
     QLabel *idpa1 = new QLabel;
     idpa1->setAlignment(Qt::AlignCenter);
     idpa1->setText("ID Paciente");
-    idpa1->setFixedSize(80,25);
+    //idpa1->setFixedSize(80,25);
    ui->estanciaPa->addWidget(idpa1,r,2,1,1);
 
     QLabel *fecha1 = new QLabel;
     fecha1->setAlignment(Qt::AlignCenter);
     fecha1->setText("Fecha Solicitada");
-    fecha1->setFixedSize(130,25);
+    //fecha1->setFixedSize(130,25);
     ui->estanciaPa->addWidget(fecha1,r,3,1,1);
 
     QLabel *idQ = new QLabel;
     idQ->setAlignment(Qt::AlignCenter);
     idQ->setText("ID Cita Quirofano");
-    idQ->setFixedSize(150,25);
+    //idQ->setFixedSize(150,25);
     ui->estanciaPa->addWidget(idQ,r,4,1,1);
 
     while(soli.next())
@@ -5576,46 +5592,44 @@ void MainWindow::verSoliEstancia()
         QLabel *folio1 = new QLabel;
         folio1->setAlignment(Qt::AlignCenter);
         folio1->setText(folio);
-        folio1->setFixedSize(130,25);
+      //  folio1->setFixedSize(130,25);
        ui->estanciaPa->addWidget(folio1,r,0,1,1);
 
 
         QLabel *iddoc1 = new QLabel;
         iddoc1->setAlignment(Qt::AlignCenter);
         iddoc1->setText(idDoc);
-        iddoc1->setFixedSize(80,25);
+        //iddoc1->setFixedSize(80,25);
         ui->estanciaPa->addWidget(iddoc1,r,1,1,1);
 
         QLabel *idpa1 = new QLabel;
         idpa1->setAlignment(Qt::AlignCenter);
         idpa1->setText(idPa);
-        idpa1->setFixedSize(80,25);
+        //idpa1->setFixedSize(80,25);
        ui->estanciaPa->addWidget(idpa1,r,2,1,1);
 
         QLabel *fecha1 = new QLabel;
         fecha1->setAlignment(Qt::AlignCenter);
         fecha1->setText(fechaInter);
-        fecha1->setFixedSize(130,25);
+        //fecha1->setFixedSize(130,25);
         ui->estanciaPa->addWidget(fecha1,r,3,1,1);
 
         QLabel *idQ = new QLabel;
         idQ->setAlignment(Qt::AlignCenter);
         idQ->setText(idSeQ);
-        idQ->setFixedSize(150,25);
+        //idQ->setFixedSize(150,25);
         ui->estanciaPa->addWidget(idQ,r,4,1,1);
 
         QPushButton* Asignar = new QPushButton();
         Asignar->setText("Asignar Cuarto");
         Asignar->setStyleSheet("border:solid 1px #5d80b6;border-radius:5px;background-color: #5d80b6;color: white;font: 11pt 'MS Shell Dlg 2';");
-        Asignar->setFixedSize(130, 30);
+        //Asignar->setFixedSize(130, 30);
         ui->estanciaPa->addWidget(Asignar,r,5,1,1);
 
         QSignalMapper *mapper2=new QSignalMapper(this);
         connect(Asignar,SIGNAL(clicked(bool)),mapper2,SLOT(map()));
         mapper2->setMapping(Asignar,folio);
         connect(mapper2,SIGNAL(mapped(QString)),this,SLOT(AsginarCuartos(QString)));
-
-
 
     }
 
@@ -6328,17 +6342,18 @@ void MainWindow::pagarIntervencionTarjeta(QString folio)
 
 void MainWindow::on_pb_agregarUser_clicked()
 {
-    static AgregarUsuario usuario;
+    static AgregarUsuario usuario(this);
+    usuario.limpiar();
     usuario.show();
-
 }
-
-
 
 void MainWindow::on_pb_modificarUser_clicked()
 {
-    static eliminarUsuarios eliminar;
+    static eliminarUsuarios eliminar(this);
+    eliminar.setModal(true);
+    eliminar.limpiar();
     eliminar.show();
+
 }
 
 void MainWindow::on_pushButton_forgotPass_clicked()
@@ -6380,11 +6395,6 @@ void MainWindow::on_pushButton__dirMedico_clicked()
              completer->setCaseSensitivity(Qt::CaseInsensitive);
 
              ui->apellidos->setCompleter(completer);
-
-
-
-
-
      llenarTDoctores("","Todas");
 }
 
@@ -6483,6 +6493,7 @@ void MainWindow::llenarTDoctores(QString apellido,QString especialidad)
         numcons=idcon.value(0).toString();
 
         DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+        d->setModal(true);
         d->llenarInfoDoc();
         ui->gridDoctores->addWidget(d,cont,0);
         cont++;
@@ -6561,6 +6572,7 @@ void MainWindow::llenarTDoctores(QString apellido,QString especialidad)
                     numcons=idcon.value(0).toString();
 
                     DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+
                     d->llenarInfoDoc();
                     ui->gridDoctores->addWidget(d,cont,0);
                     cont++;
@@ -6593,6 +6605,7 @@ void MainWindow::llenarTDoctores(QString apellido,QString especialidad)
                     numcons=idcon.value(0).toString();
 
                     DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+
                     d->llenarInfoDoc();
                     ui->gridDoctores->addWidget(d,cont,0);
                     cont++;
@@ -6642,6 +6655,7 @@ void MainWindow::llenarTDoctores(QString apellido,QString especialidad)
                     numcons=idcon.value(0).toString();
 
                     DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+                    d->setModal(true);
                     d->llenarInfoDoc();
                     ui->gridDoctores->addWidget(d,cont,0);
                     cont++;
@@ -6674,6 +6688,7 @@ void MainWindow::llenarTDoctores(QString apellido,QString especialidad)
                     numcons=idcon.value(0).toString();
 
                     DialogDoctor *d = new DialogDoctor(nombre,nombreespec,numcons,tel);
+                    d->setModal(true);
                     d->llenarInfoDoc();
                     ui->gridDoctores->addWidget(d,cont,0);
                     cont++;
@@ -6711,6 +6726,7 @@ void MainWindow::on_buscarDoctores_clicked()
 void MainWindow::on_pushButton_6_clicked()
 {
     PermisoLaboral* permiso = new PermisoLaboral(this,id_staff);
+    permiso->setModal(true);
     permiso->show();
 }
 
@@ -6788,6 +6804,7 @@ void MainWindow::eliminarPermisoLaboral(QString idPermiso){
 void MainWindow::on_pb_adminPermisos_clicked()
 {
     VerPermisosLaborales* permisos = new VerPermisosLaborales(this);
+    permisos->setModal(true);
     permisos->show();
 }
 
@@ -6830,7 +6847,8 @@ void MainWindow::on_pb_bajaPaciente_clicked()
     QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está seguro de eliminar su cuenta? \nEsto no se puede revertir.");
     if(res == QMessageBox::Yes){
         //Hacer proceso de daniel
-        eliminarUsuarios* del = new eliminarUsuarios;
+        eliminarUsuarios* del = new eliminarUsuarios(this);
+        del->setModal(true);
         del->eliminarPaciente(id_usuario);
         on_pushButton_salir_clicked();
         delete del;
@@ -6842,7 +6860,8 @@ void MainWindow::on_pb_bajaDoctor_clicked()
     QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está seguro de eliminar su cuenta? \nEsto no se puede revertir.");
     if(res == QMessageBox::Yes){
         //Hacer proceso de daniel
-        eliminarUsuarios* del = new eliminarUsuarios;
+        eliminarUsuarios* del = new eliminarUsuarios(this);
+        del->setModal(true);
         del->eliminarDoc(id_usuario);
         on_pushButton_salir_clicked();
         delete del;
@@ -6854,7 +6873,8 @@ void MainWindow::on_pushButton_5_clicked()
     QMessageBox::StandardButton res = QMessageBox::question(this,"Confirmar","¿Está segurode eliminar su cuenta? \nEsto no se puede revertir.");
     if(res == QMessageBox::Yes){
         //Hacer proceso de daniel
-        eliminarUsuarios* del = new eliminarUsuarios;
+        eliminarUsuarios* del = new eliminarUsuarios(this);
+        del->setModal(true);
         del->eliminarStaff(id_usuario);
         on_pushButton_salir_clicked();
         delete del;

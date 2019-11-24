@@ -9,9 +9,13 @@ eliminarUsuarios::eliminarUsuarios(QWidget *parent) :
     ui->setupUi(this);
 }
 
+
+
 eliminarUsuarios::~eliminarUsuarios()
 {
+    //qDebug()<<"destrullendo";
     delete ui;
+
 }
 
 void clearLayou(QLayout *layout) {
@@ -548,9 +552,16 @@ void eliminarUsuarios::on_pushButton_buscar_clicked()
 
         }
 
-
-
    }
 
 
+void eliminarUsuarios::limpiar(){
 
+    ui->radioButton_doc->setCheckable(false);
+    ui->radioButton_doc->setCheckable(true);
+    ui->radioButton_pac->setCheckable(false);
+    ui->radioButton_pac->setCheckable(true);
+    ui->radioButton_staff->setCheckable(false);
+    ui->radioButton_staff->setCheckable(true);
+    clearLayou(ui->gridLayout_eliminar);
+}

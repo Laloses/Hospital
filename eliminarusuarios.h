@@ -29,6 +29,8 @@ public:
 
     void eliminarPaciente(QString);
 
+    void limpiar();
+
 private slots:
     void on_radioButton_doc_clicked();
 

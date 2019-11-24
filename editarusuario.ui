@@ -71,7 +71,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QWidget" name="layoutWidget">
@@ -80,7 +80,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
         <x>30</x>
         <y>20</y>
         <width>411</width>
-        <height>521</height>
+        <height>531</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -729,7 +729,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
        <rect>
         <x>30</x>
         <y>20</y>
-        <width>420</width>
+        <width>422</width>
         <height>521</height>
        </rect>
       </property>

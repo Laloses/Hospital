@@ -332,3 +332,13 @@ void AgregarUsuario::on_radioButton_staff_toggled(bool checked)
         }
     }
 }
+
+void AgregarUsuario::limpiar(){
+    ui->radioButton_doc->setCheckable(false);
+    ui->radioButton_doc->setCheckable(true);
+    ui->radioButton_staff->setCheckable(false);
+    ui->radioButton_staff->setCheckable(true);
+    ui->radioButton_paciente->setCheckable(false);
+    ui->radioButton_paciente->setCheckable(true);
+
+}
