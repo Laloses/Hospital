@@ -32,10 +32,10 @@
         <file>camera.png</file>
         <file>fondoInfoHospital.jpg</file>
         <file>img_bg_5.jpg</file>
-        <file>img_bg_6.jpg</file>
         <file>bed.png</file>
         <file>first-aid-kit.png</file>
         <file>hospital.png</file>
         <file>picture.png</file>
+        <file>img_bg_6.jpg</file>
     </qresource>
 </RCC>
