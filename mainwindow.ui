@@ -3082,7 +3082,7 @@ background:transparent;
 </string>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_miPerfilPac">
            <property name="styleSheet">
@@ -9323,7 +9323,8 @@ background-color:transparent</string>
                 <item alignment="Qt::AlignHCenter">
                  <widget class="QLabel" name="label_63">
                   <property name="styleSheet">
-                   <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+                   <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
+color: white;</string>
                   </property>
                   <property name="text">
                    <string>Realizar una solicitud</string>
@@ -9529,7 +9530,8 @@ background-color:transparent</string>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
-background:rgba(255,255,255,0.8)</string>
+background:rgba(255,255,255,0.0);
+color: white;</string>
                   </property>
                   <property name="text">
                    <string>Seleccione el tipo de pago correspondiente</string>
@@ -9767,7 +9769,8 @@ border:none;</string>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">font-size:15pt;
-background:rgba(255,255,255,0.8)</string>
+background:rgba(255,255,255,0.0);
+color: white;</string>
                   </property>
                   <property name="text">
                    <string>Solicitudes de Permisos</string>
@@ -10160,7 +10163,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;
 }</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>7</number>
           </property>
           <widget class="QWidget" name="pagePrincipalAdmin">
            <layout class="QGridLayout" name="gridLayout_36">
@@ -10509,15 +10512,15 @@ QGroupBox{
                 <property name="styleSheet">
                  <string notr="true">border:none;
 font: 13pt &quot;MS Shell Dlg 2&quot;;
-color: rgb(68, 94, 134);
-background:rgba(255,255,255,0.8)</string>
+color: white;
+background:rgba(255,255,255,0.0);</string>
                 </property>
                 <property name="text">
                  <string>Menú</string>
                 </property>
                 <property name="icon">
                  <iconset resource="imgs/imgs.qrc">
-                  <normaloff>:/imgs/home.png</normaloff>:/imgs/home.png</iconset>
+                  <normaloff>:/imgs/homeWhite.png</normaloff>:/imgs/homeWhite.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -10933,8 +10936,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                 <property name="styleSheet">
                  <string notr="true">border:none;
 font: 13pt &quot;MS Shell Dlg 2&quot;;
-color: rgb(68, 94, 134);
-background:rgba(255,255,255,0.8)
+color: white;
+background:rgba(255,255,255,0.0);
 </string>
                 </property>
                 <property name="text">
@@ -10942,7 +10945,7 @@ background:rgba(255,255,255,0.8)
                 </property>
                 <property name="icon">
                  <iconset resource="imgs/imgs.qrc">
-                  <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
+                  <normaloff>:/imgs/backArrowWhite.png</normaloff>:/imgs/backArrowWhite.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -11320,8 +11323,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
               <property name="styleSheet">
                <string notr="true">border:none;
 font: 13pt &quot;MS Shell Dlg 2&quot;;
-color: rgb(68, 94, 134);
-background:rgba(255,255,255,0.8)
+color: white;
+background:rgba(255,255,255,0.0)
 </string>
               </property>
               <property name="text">
@@ -11329,7 +11332,7 @@ background:rgba(255,255,255,0.8)
               </property>
               <property name="icon">
                <iconset resource="imgs/imgs.qrc">
-                <normaloff>:/imgs/home.png</normaloff>:/imgs/home.png</iconset>
+                <normaloff>:/imgs/homeWhite.png</normaloff>:/imgs/homeWhite.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -11813,15 +11816,15 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
               <property name="styleSheet">
                <string notr="true">border:none;
 font: 13pt &quot;MS Shell Dlg 2&quot;;
-color: rgb(68, 94, 134);
-background:rgba(255,255,255,0.8)</string>
+color:white;
+background:rgba(255,255,255,0.0)</string>
               </property>
               <property name="text">
                <string>Menu</string>
               </property>
               <property name="icon">
                <iconset resource="imgs/imgs.qrc">
-                <normaloff>:/imgs/home.png</normaloff>:/imgs/home.png</iconset>
+                <normaloff>:/imgs/homeWhite.png</normaloff>:/imgs/homeWhite.png</iconset>
               </property>
               <property name="iconSize">
                <size>
@@ -12695,8 +12698,8 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                 <property name="styleSheet">
                  <string notr="true">border:none;
 font: 13pt &quot;MS Shell Dlg 2&quot;;
-color: rgb(68, 94, 134);
-background:rgba(255,255,255,0.8)
+color:white;
+background:rgba(255,255,255,0.0)
 </string>
                 </property>
                 <property name="text">
@@ -12704,7 +12707,7 @@ background:rgba(255,255,255,0.8)
                 </property>
                 <property name="icon">
                  <iconset resource="imgs/imgs.qrc">
-                  <normaloff>:/imgs/home.png</normaloff>:/imgs/home.png</iconset>
+                  <normaloff>:/imgs/homeWhite.png</normaloff>:/imgs/homeWhite.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -13356,16 +13359,16 @@ font-size:10pt;</string>
               <item>
                <widget class="QPushButton" name="regresarAdmin">
                 <property name="styleSheet">
-                 <string notr="true">background:rgba(255,255,255,0.8);
+                 <string notr="true">background:rgba(255,255,255,0.0);
 border:none;
-color: blue;</string>
+color: white;</string>
                 </property>
                 <property name="text">
                  <string>Regresar</string>
                 </property>
                 <property name="icon">
                  <iconset resource="imgs/imgs.qrc">
-                  <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
+                  <normaloff>:/imgs/backArrowWhite.png</normaloff>:/imgs/backArrowWhite.png</iconset>
                 </property>
                </widget>
               </item>
@@ -13386,7 +13389,8 @@ color: blue;</string>
                <widget class="QLabel" name="label_14">
                 <property name="styleSheet">
                  <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
-background:rgba(255,255,255,0.8)</string>
+background-color:transparent;
+color: white;</string>
                 </property>
                 <property name="text">
                  <string>Solicitudes de Estancia para Pacientes.</string>
@@ -13435,8 +13439,8 @@ border:none;</string>
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>29</width>
-                        <height>20</height>
+                        <width>832</width>
+                        <height>404</height>
                        </rect>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_60">
@@ -13649,8 +13653,8 @@ border:none;</string>
                           <rect>
                            <x>0</x>
                            <y>0</y>
-                           <width>20</width>
-                           <height>20</height>
+                           <width>386</width>
+                           <height>361</height>
                           </rect>
                          </property>
                          <layout class="QGridLayout" name="gridLayout_62">
@@ -13705,7 +13709,8 @@ border:none;
            <widget class="QLabel" name="label_11">
             <property name="styleSheet">
              <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;
-background:rgba(255,255,255,0.8)</string>
+background:rgba(255,255,255,0.0);
+color:white;</string>
             </property>
             <property name="text">
              <string>Servicios</string>

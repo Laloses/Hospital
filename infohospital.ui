@@ -501,6 +501,11 @@ background-color: rgba(203, 207, 255,0.5);</string>
              <height>40</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
            <property name="styleSheet">
             <string notr="true">background-color: rgb(0, 0, 139);</string>
            </property>
@@ -597,6 +602,11 @@ color:brown;</string>
                 <width>500</width>
                 <height>181</height>
                </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
               </property>
               <property name="styleSheet">
                <string notr="true">border:none;

@@ -37,5 +37,7 @@
         <file>hospital.png</file>
         <file>picture.png</file>
         <file>img_bg_6.jpg</file>
+        <file>backArrowWhite.png</file>
+        <file>homeWhite.png</file>
     </qresource>
 </RCC>

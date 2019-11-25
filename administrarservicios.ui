@@ -26,7 +26,11 @@
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Administra los Servicios.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Administra los Servicios.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
@@ -45,17 +49,34 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="ServiciosPrincipal">
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page">
        <widget class="QPushButton" name="nuevoServicio">
         <property name="geometry">
          <rect>
           <x>220</x>
-          <y>370</y>
+          <y>360</y>
           <width>171</width>
-          <height>31</height>
+          <height>35</height>
          </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: white;
+border:1px solid #5D80B6;
+background-color: #5D80B6;
+border-radius:5px;</string>
         </property>
         <property name="text">
          <string>Agregar nuevo Servicio</string>
@@ -67,7 +88,7 @@
           <x>50</x>
           <y>30</y>
           <width>511</width>
-          <height>341</height>
+          <height>321</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
@@ -87,7 +108,7 @@ border:none;</string>
               <x>0</x>
               <y>0</y>
               <width>493</width>
-              <height>323</height>
+              <height>303</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_3">
@@ -103,7 +124,7 @@ border:none;</string>
        <widget class="QLabel" name="label_2">
         <property name="geometry">
          <rect>
-          <x>70</x>
+          <x>60</x>
           <y>0</y>
           <width>231</width>
           <height>31</height>
@@ -118,27 +139,52 @@ border:none;</string>
        <widget class="QPushButton" name="regresarLista">
         <property name="geometry">
          <rect>
-          <x>10</x>
+          <x>0</x>
           <y>10</y>
-          <width>80</width>
-          <height>21</height>
+          <width>75</width>
+          <height>30</height>
          </rect>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #5D80B6;
+border:none;</string>
+        </property>
         <property name="text">
-         <string>Regresar</string>
+         <string>Volver</string>
+        </property>
+        <property name="icon">
+         <iconset resource="imgs/imgs.qrc">
+          <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
         </property>
        </widget>
        <widget class="QLabel" name="label_3">
         <property name="geometry">
          <rect>
-          <x>220</x>
+          <x>260</x>
           <y>10</y>
-          <width>161</width>
-          <height>21</height>
+          <width>95</width>
+          <height>19</height>
          </rect>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Visualización.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Visualización.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QScrollArea" name="scrollArea_2">
@@ -163,7 +209,7 @@ border:none;</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>607</width>
+           <width>604</width>
            <height>730</height>
           </rect>
          </property>
@@ -324,27 +370,58 @@ border:none;</string>
        <widget class="QLabel" name="label_4">
         <property name="geometry">
          <rect>
-          <x>260</x>
-          <y>0</y>
-          <width>111</width>
-          <height>41</height>
+          <x>280</x>
+          <y>10</y>
+          <width>51</width>
+          <height>30</height>
          </rect>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Edición&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Edición&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
        <widget class="QPushButton" name="regresarE">
         <property name="geometry">
          <rect>
-          <x>10</x>
+          <x>0</x>
           <y>10</y>
-          <width>80</width>
-          <height>21</height>
+          <width>75</width>
+          <height>30</height>
          </rect>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #5D80B6;
+border:none;</string>
+        </property>
         <property name="text">
-         <string>Regresar</string>
+         <string>Volver</string>
+        </property>
+        <property name="icon">
+         <iconset resource="imgs/imgs.qrc">
+          <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
         </property>
        </widget>
        <widget class="QScrollArea" name="scrollArea_3">
@@ -363,8 +440,8 @@ border:none;</string>
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-327</y>
-           <width>605</width>
+           <y>0</y>
+           <width>602</width>
            <height>676</height>
           </rect>
          </property>
@@ -660,32 +737,6 @@ border:none;</string>
        </widget>
       </widget>
       <widget class="QWidget" name="page_4">
-       <widget class="QLabel" name="label_11">
-        <property name="geometry">
-         <rect>
-          <x>180</x>
-          <y>10</y>
-          <width>261</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Agrega un nuevo Servicio.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="regresarNuevo">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>30</y>
-          <width>80</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Regresar</string>
-        </property>
-       </widget>
        <widget class="QScrollArea" name="scrollArea_4">
         <property name="geometry">
          <rect>
@@ -703,7 +754,7 @@ border:none;</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>605</width>
+           <width>602</width>
            <height>676</height>
           </rect>
          </property>
@@ -727,12 +778,17 @@ border:none;</string>
               <rect>
                <x>20</x>
                <y>10</y>
-               <width>81</width>
-               <height>16</height>
+               <width>75</width>
+               <height>19</height>
               </rect>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Imagenes:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Imágenes:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
             <widget class="QLabel" name="nfoto1_2">
@@ -907,14 +963,14 @@ border:none;</string>
             <widget class="QLabel" name="label_16">
              <property name="geometry">
               <rect>
-               <x>20</x>
-               <y>10</y>
+               <x>10</x>
+               <y>20</y>
                <width>141</width>
                <height>21</height>
               </rect>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Informacin parte 1:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Información parte 1:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
             <widget class="QLabel" name="label_17">
@@ -927,7 +983,7 @@ border:none;</string>
               </rect>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Informacin parte 2:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Información parte 2:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
             <widget class="QPlainTextEdit" name="infoe_2">
@@ -997,12 +1053,91 @@ border:none;</string>
          </layout>
         </widget>
        </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>551</width>
+          <height>32</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="regresarNuevo">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: #5D80B6;
+border:none;</string>
+           </property>
+           <property name="text">
+            <string>Volver</string>
+           </property>
+           <property name="icon">
+            <iconset resource="imgs/imgs.qrc">
+             <normaloff>:/imgs/backArrow.png</normaloff>:/imgs/backArrow.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Agrega un servicio&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="imgs/imgs.qrc"/>
+ </resources>
  <connections/>
 </ui>
