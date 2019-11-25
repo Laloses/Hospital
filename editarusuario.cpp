@@ -12,7 +12,7 @@ EditarUsuario::EditarUsuario(QString matricula, QString typeU,QWidget *parent) :
 
     mat = matricula;
     tipoUsur = typeU;
-
+/*
     //Conexion a la base de datos
     database= QSqlDatabase::addDatabase("QMYSQL");
     database.setHostName("localhost");
@@ -26,7 +26,7 @@ EditarUsuario::EditarUsuario(QString matricula, QString typeU,QWidget *parent) :
     else {
         qDebug()<<"Base de datos conectada";
     }
-
+*/
     QSqlQuery preguntas;
     preguntas.prepare("select * from pregunta");
     preguntas.exec();
