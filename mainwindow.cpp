@@ -4563,7 +4563,7 @@ void MainWindow::historialClinico(QString idCita){
     cita=consulta.value(0).toString();
     diagnostico=consulta.value(3).toString();
     nombre=consulta.value(4).toString()+" "+consulta.value(5).toString()+" "+consulta.value(6).toString();
-    static MostrarHistoclinico l(this);
+    static MostrarHistoclinico l;
     l.mostrarClinico(cita,diagnostico,nombre,fecha);
     l.show();
 }
@@ -4575,7 +4575,7 @@ void MainWindow::mostrarHistorialClinico(){
     QSqlQuery consulta;
     est="1";
     id_usuario=ui->lineEdit_matriculaMedico->text();
-    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_usuario+"'";
+    citas="select cit.idCita,us.nombre,us.appaterno,us.apmaterno,cit.hora,cit.fecha from usuario as us inner join doctor as doc on us.matricula=doc.idUser inner join cita as cit on doc.iddoctor=cit.doctor where cit.matricula='"+id_usuario+"'and cit.preparada='Completada'";
     if(!consulta.exec(citas)) consulta.lastError().text();
     int f=0;
     int ban=1;
@@ -4609,7 +4609,7 @@ void MainWindow::mostrarHistorialClinico(){
 
         QLabel *m=new QLabel;
         m->setText(doctor);
-        m->setFixedSize(QSize(140,25));
+       // m->setFixedSize(QSize(140,25));
         m->setStyleSheet("background-color: rgb("+rgb+")");
         ui->barraclinico->addWidget(m,i,1,Qt::AlignTop);
 
@@ -4617,21 +4617,15 @@ void MainWindow::mostrarHistorialClinico(){
         QLabel *r=new QLabel;
         r->setText(fecha);
         r->setStyleSheet("background-color: rgb("+rgb+")");
-        r->setFixedSize(QSize(100,25));
+        //r->setFixedSize(QSize(100,25));
         ui->barraclinico->addWidget(r,i,2,Qt::AlignTop);
 
 
         QLabel *h=new QLabel;
         h->setText(hora);
-        h->setFixedSize(QSize(100,25));
+        //h->setFixedSize(QSize(100,25));
         h->setStyleSheet("background-color: rgb("+rgb+")");
         ui->barraclinico->addWidget(h,i,3,Qt::AlignTop);
-
-
-        QLabel *ss=new QLabel;
-        ss->setText(" ");
-        ss->setFixedSize(QSize(120,25));
-        ui->barraclinico->addWidget(ss,i,4,Qt::AlignTop);
 
 
         QPushButton *q=new QPushButton();

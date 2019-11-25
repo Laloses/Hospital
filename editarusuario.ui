@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>472</width>
-    <height>480</height>
+    <width>492</width>
+    <height>523</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -67,11 +67,11 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;
       <x>0</x>
       <y>0</y>
       <width>472</width>
-      <height>481</height>
+      <height>501</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QWidget" name="layoutWidget">

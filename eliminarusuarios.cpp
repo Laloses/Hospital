@@ -278,11 +278,8 @@ void eliminarUsuarios::eliminarStaff(QString matricula){
 }
 void eliminarUsuarios::ModificarUsuario(QString matri, QString tipoUsr){
     qDebug()<<"modificar";
-    EditarUsuario* editarVentana = new EditarUsuario(matri, tipoUsr);
-    editarVentana->show();
-
-    clearLayou(ui->gridLayout_eliminar);
-
+    static EditarUsuario editarVentana(matri, tipoUsr,this);
+    editarVentana.show();
 }
 
 
