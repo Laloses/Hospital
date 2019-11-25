@@ -119,10 +119,12 @@ void MainWindow::on_pushButton_registro_clicked()
     ui->label_cedula->setHidden(true);
     ui->lineEdit_universidad->setHidden(true);
     ui->label_universidad->setHidden(true);
+    ui->frameEspecialidad->setHidden(true);
 
     //Quitamos los datos del staff
     ui->comboBox_puesto->setHidden(true);
     ui->label_puesto->setHidden(true);
+    ui->framePuesto->setHidden(true);
 
     //Cargar de la base de datos los puestos
     QSqlQueryModel *queryPuestos;
@@ -142,6 +144,7 @@ void MainWindow::on_radioButton_doc_toggled(bool checked)
         ui->label_cedula->setHidden(false);
         ui->lineEdit_universidad->setHidden(false);
         ui->label_universidad->setHidden(false);
+        ui->frameEspecialidad->setHidden(0);
 
         //Cargar de la base de datos los puestos
         QSqlQueryModel *queryEspecialidades;
@@ -152,6 +155,7 @@ void MainWindow::on_radioButton_doc_toggled(bool checked)
         //Quitamos los datos del staff
         ui->comboBox_puesto->setHidden(true);
         ui->label_puesto->setHidden(true);
+        ui->framePuesto->setHidden(true);
     }
 }
 
@@ -162,6 +166,7 @@ void MainWindow::on_radioButton_staff_toggled(bool checked)
         //Mostramos los datos del staff
         ui->comboBox_puesto->setHidden(false);
         ui->label_puesto->setHidden(false);
+        ui->framePuesto->setHidden(0);
 
         //Cargar de la base de datos los puestos
         QSqlQueryModel *queryPuestos;
@@ -178,6 +183,7 @@ void MainWindow::on_radioButton_staff_toggled(bool checked)
             ui->label_cedula->setHidden(true);
             ui->lineEdit_universidad->setHidden(true);
             ui->label_universidad->setHidden(true);
+            ui->frameEspecialidad->setHidden(true);
         }
     }
 }
@@ -205,6 +211,7 @@ void MainWindow::on_radioButton_paciente_toggled(bool checked)
         //Quitamos los datos del staff
         ui->comboBox_puesto->setHidden(true);
         ui->label_puesto->setHidden(true);
+        ui->framePuesto->setHidden(1);
 
         //Si estaba marcado el radio button de doctor
         if(ui->comboBox_especiDoc->isVisible()){
@@ -215,6 +222,7 @@ void MainWindow::on_radioButton_paciente_toggled(bool checked)
             ui->label_cedula->setHidden(true);
             ui->lineEdit_universidad->setHidden(true);
             ui->label_universidad->setHidden(true);
+            ui->frameEspecialidad->setHidden(1);
         }
     }
 }
