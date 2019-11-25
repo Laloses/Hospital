@@ -39,5 +39,6 @@
         <file>img_bg_6.jpg</file>
         <file>backArrowWhite.png</file>
         <file>homeWhite.png</file>
+        <file>refreshing.png</file>
     </qresource>
 </RCC>

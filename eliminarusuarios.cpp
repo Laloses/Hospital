@@ -410,11 +410,11 @@ void eliminarUsuarios::on_pushButton_buscar_clicked()
 
 
         QMessageBox messag(QMessageBox::Question,
-        tr("Information"), tr("Usuarion no existente"), QMessageBox::Yes);
+        tr("Information"), tr("Usuario no existente"), QMessageBox::Yes);
         messag.setButtonText(QMessageBox::Yes, tr("Aceptar"));
 
         QMessageBox messaga(QMessageBox::Question,
-        tr("Information"), tr("Escriba la matricula del usuarion"), QMessageBox::Yes);
+        tr("Information"), tr("Escriba la matricula del usuario"), QMessageBox::Yes);
         messaga.setButtonText(QMessageBox::Yes, tr("Aceptar"));
 
         QSqlQuery doctor,staff,paciente,usuarios;

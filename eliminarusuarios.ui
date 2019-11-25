@@ -33,8 +33,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>657</width>
-         <height>347</height>
+         <width>661</width>
+         <height>351</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
@@ -70,7 +70,9 @@
     <item>
      <widget class="QPushButton" name="pushButton_buscar">
       <property name="styleSheet">
-       <string notr="true">border:none</string>
+       <string notr="true">border:none;
+background-color:transparent;
+color: black;</string>
       </property>
       <property name="text">
        <string>Buscar</string>
