@@ -20,7 +20,8 @@ public:
                       QString telefono,
                       QString fotop,
                       QString idpregunta,
-                      QString respuesta);
+                      QString respuesta,
+                      QString sexo);
 private:
     QSqlQuery queryRegistro,queryYear;
     QSqlDatabase database;

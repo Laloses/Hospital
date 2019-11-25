@@ -817,7 +817,8 @@ void MainWindow::on_pushButton_respuesta_clicked()
                               ui->lineEdit_telefono->text(),
                               imgRoute,
                              idPregunta,
-                              ui->lineEdit_respuesta->text());
+                              ui->lineEdit_respuesta->text(),
+                              ui->le_sexo->text());
 
        }
 
@@ -883,6 +884,13 @@ void MainWindow::on_pushButton_respuesta_clicked()
             ui->lineEdit_universidad->setText("");
             ui->lineEdit_password2->setText("");
             ui->lineEdit_password1->setText("");
+            ui->le_sexo->clear();
+            ui->radioButton_doc->setCheckable(false);
+            ui->radioButton_doc->setCheckable(true);
+            ui->radioButton_staff->setCheckable(false);
+            ui->radioButton_staff->setCheckable(true);
+            ui->radioButton_paciente->setCheckable(false);
+            ui->radioButton_paciente->setCheckable(true);
 
         //movemos al usuario al inicio
         on_pushButton_login_clicked();

@@ -40,25 +40,29 @@ QString registroStaff::registrar(QString idPuesto,
                                  QString telefono,
                                  QString fotop,
                                  QString idpregunta,
-                                 QString respuesta){
+                                 QString respuesta,
+                                 QString sexo){
         QString sql, matricula;
 
         //Generar matricula
         matricula=generarMatricula();
 
         //Guardamos los datos en orden como lo pide la base de datos
-        sql="'"+matricula+"','"+clave+"','"+nombre+"','"+apePaterno+"','"+apeMaterno+"','"+fechaN+"','"+edad+"','"+email+"','"+telefono+"',LOAD_FILE('"+fotop+"'),'"+idpregunta+"','"+respuesta+"'";
+        sql="'"+matricula+"','"+clave+"','"+nombre+"','"+apePaterno+"','"+apeMaterno+"','"+fechaN+"','"+edad+"','"+email+"','"+telefono+"',LOAD_FILE('"+fotop+"'),'"+idpregunta+"','"+respuesta+"','ninguno','"+sexo+"'";
 
         //No se ponen explicitamente todos los valores en la parte de "usuario(Valores)" porque sql acepta eso cuando se insertan TODOS los valores
         //Usamos prepare para poder añadir la foto
+
+        qDebug()<<"hola-----"<<sql;
         queryRegistro.prepare("INSERT INTO usuario() VALUE ("+sql+")");
 
         if(queryRegistro.exec()){
             //Si se creo correctamente, agregamos a la tabla staff
             //El estado es 0 porque se tiene que revisar
-            sql="NULL,"+matricula+","+idPuesto+",0";
+            sql="'"+matricula+"','"+idPuesto+"',0";
+            qDebug()<<"------------------------"<<sql;
             //Si lo ejecuta correcto devolvemos su matricula o id de usuario
-            if( queryRegistro.exec("insert into staff() value ("+sql+")") ){
+            if( queryRegistro.exec("insert into staff(idUser,idpuesto,estado)value("+sql+")")){
                 return matricula;
             }
             else qDebug()<< queryRegistro.lastError().text();
