@@ -13,6 +13,17 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QLineEdit{
+border-top:none;
+border-bottom:1px solid #5d80b6;
+background-color:transparent;
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+}
+QLabel{
+	font: 11pt &quot;MS Shell Dlg 2&quot;;
+}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
@@ -64,126 +75,71 @@
     <layout class="QGridLayout" name="gridLayout_5">
      <item row="1" column="0">
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="12">
-        <widget class="QLineEdit" name="lineEdit_cv">
-         <property name="maxLength">
-          <number>3</number>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="14">
-        <spacer name="horizontalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="10">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>CVV:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <spacer name="horizontalSpacer_8">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="11">
-        <spacer name="horizontalSpacer_10">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="4">
-        <spacer name="horizontalSpacer_11">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="13">
-        <spacer name="horizontalSpacer_14">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="2">
+       <item row="0" column="1">
         <widget class="QLineEdit" name="lineEdit_titular">
+         <property name="minimumSize">
+          <size>
+           <width>187</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>187</width>
+           <height>21</height>
+          </size>
+         </property>
          <property name="maxLength">
           <number>100</number>
          </property>
         </widget>
        </item>
-       <item row="0" column="7">
-        <spacer name="horizontalSpacer_15">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+       <item row="0" column="3">
+        <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
          </property>
-         <property name="sizeHint" stdset="0">
+         <property name="text">
+          <string>CVV:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QLineEdit" name="lineEdit_cv">
+         <property name="minimumSize">
           <size>
-           <width>40</width>
-           <height>20</height>
+           <width>43</width>
+           <height>0</height>
           </size>
          </property>
-        </spacer>
-       </item>
-       <item row="0" column="8">
-        <spacer name="horizontalSpacer_16">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
+         <property name="maximumSize">
           <size>
-           <width>40</width>
-           <height>20</height>
+           <width>43</width>
+           <height>21</height>
           </size>
          </property>
-        </spacer>
+         <property name="maxLength">
+          <number>3</number>
+         </property>
+        </widget>
        </item>
-       <item row="0" column="6">
-        <spacer name="horizontalSpacer_13">
+       <item row="0" column="5">
+        <spacer name="horizontalSpacer_14">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
+           <width>94</width>
            <height>20</height>
           </size>
          </property>
@@ -191,45 +147,31 @@
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Ttular de Tarjeta :</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="5">
-        <spacer name="horizontalSpacer_12">
+       <item row="0" column="2">
+        <spacer name="horizontalSpacer_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="9">
-        <spacer name="horizontalSpacer_17">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="1">
-        <spacer name="horizontalSpacer_18">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
+           <width>22</width>
            <height>20</height>
           </size>
          </property>
@@ -241,6 +183,15 @@
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
         <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Folio:</string>
          </property>
@@ -257,54 +208,80 @@
      </item>
      <item row="2" column="0">
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>No. de Tarjeta:</string>
+       <item row="0" column="3">
+        <widget class="QLineEdit" name="dateEditVencimiento">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>0</height>
+          </size>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="5">
-        <widget class="QLabel" name="label_6">
+         <property name="maximumSize">
+          <size>
+           <width>158</width>
+           <height>21</height>
+          </size>
+         </property>
          <property name="text">
-          <string>Fecha Vencimiento:</string>
+          <string/>
+         </property>
+         <property name="maxLength">
+          <number>5</number>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <spacer name="horizontalSpacer_9">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
+        <widget class="QLineEdit" name="lineEdit_noTarjeta">
+         <property name="minimumSize">
           <size>
-           <width>40</width>
-           <height>20</height>
+           <width>142</width>
+           <height>21</height>
           </size>
          </property>
-        </spacer>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLineEdit" name="lineEdit_noTarjeta">
+         <property name="maximumSize">
+          <size>
+           <width>142</width>
+           <height>21</height>
+          </size>
+         </property>
          <property name="maxLength">
           <number>16</number>
          </property>
         </widget>
        </item>
-       <item row="0" column="3">
-        <spacer name="horizontalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_6">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
+         <property name="text">
+          <string>Fecha Vencimiento:</string>
          </property>
-        </spacer>
+        </widget>
        </item>
-       <item row="0" column="7">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>No. de Tarjeta:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
         <spacer name="horizontalSpacer_6">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -316,29 +293,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-       <item row="0" column="4">
-        <spacer name="horizontalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="6">
-        <widget class="QLineEdit" name="dateEditVencimiento">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="maxLength">
-          <number>5</number>
-         </property>
-        </widget>
        </item>
       </layout>
      </item>

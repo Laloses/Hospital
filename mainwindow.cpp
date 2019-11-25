@@ -5303,8 +5303,8 @@ void MainWindow::on_radioButton_4_clicked()
     QString folio,doctor,fecha,hora,nomDoct,nombrePac;
     int i=0;
     int l=0;
-    citas="select ur.idEmergencia,us.nombre,us.appaterno,us.apmaterno,ur.nombre_pacinete,ur.hora,ur.fecha from usuario as "
-          "us inner join doctor as doc on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor";
+    citas="select ur.idEmergencia,us.nombre,us.appaterno,us.apmaterno,ur.nombre_pacinete,ur.hora,ur.fecha,ur.estado from usuario as "
+          "us inner join doctor as doc on us.matricula=doc.idUser inner join urgencias as ur on doc.iddoctor=ur.idDoctor where ur.estado=0";
     if(!consulta2.exec(citas)) consulta2.lastError().text();
     while(consulta2.next()){
         folio=consulta2.value(0).toString();
@@ -5936,8 +5936,15 @@ void MainWindow::on_radioButton_2_clicked()
     QString folio,doctor,fecha,hora,nomDoct,descripc;
     int i=0;
     int l=0;
-    citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno) from usuario as "
-          "us inner join doctor as doc on us.matricula=doc.idUser inner join citasQuirofano as inter on doc.iddoctor=inter.idDoctor";
+    citas="select inter.idCita,inter.idDoctor,inter.idPaciente,inter.horaInicio,inter.fechaCita,inter.descripcion,CONCAT(us.nombre,' ',us.appaterno,' ',us.apmaterno),inter.estado "
+            "from usuario as us "
+            "inner join doctor as doc "
+            "on us.matricula=doc.idUser "
+            "inner join citasQuirofano as inter "
+            "on doc.iddoctor=inter.idDoctor "
+            "inner join CostoServicio as costo "
+            "on inter.idCita = costo.idCitaQ "
+            "where costo.estado=0";
 
     if(!consulta2.exec(citas)) consulta2.lastError().text();
     while(consulta2.next()){
